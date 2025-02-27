@@ -1,0 +1,24 @@
+<div class="container-fluid text-center mt-4 mb-4">
+    <h3 class="text-primary text-primary">Login Page</h3>
+</div>
+
+
+<form class="container-fluid bg bg-light col-5 p-5">
+
+    <div class="form-floating mb-3 ">
+        <input type="email" class="form-control" id="floatingInput"  name="email" placeholder="name@example.com" 
+                                        [(ngModel)]="user.email">
+                                       
+        <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password"
+                                        [(ngModel)]="user.password">
+                                       
+        <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="container-fluid text-center mt-3">
+        <button class="btn btn-primary w-50" (click)="onLogin()" id="floatingPassword" placeholder="Password">Log In</button>
+    </div>
+</form>
