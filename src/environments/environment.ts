@@ -1,0 +1,38 @@
+export const environment = {
+
+    //THIS PAGE CONTAINS ALL THE API's URL.
+
+    // production: false,
+    apiBaseUrl : "http://localhost:8080",
+
+
+    publicEndpoint:{
+        login : "/public/login",
+        signup : "/public/signup"
+    },
+
+    clientEndpoint : {
+        getAllClients : "/api/clients",
+        insertClient : "/api/clients/insert", 
+        updateClient : "/api/clients/update/id/{id}",
+        deleteClient : "/api/clients/delete/id/{id}",
+
+        getClientsBySearchQuery : "/api/clients/search/{searchQuery}",
+        getClientsByPostalCode : "/api/clients/search/postalCode/{postalCode}",
+        getClientsByFirstName : "/api/clients/search/firstName/{firstName}",
+        getClientsByLastName : "/api/clients/search/lastName/{lastName}"
+
+    },
+
+    userEndpoint : {
+        getUserById : "/user/role/{role}",
+        getUserByRole : "/user/id/{id}",
+        getAllUsers : "/user/findAll"
+
+    }
+
+
+
+
+
+}//ends const

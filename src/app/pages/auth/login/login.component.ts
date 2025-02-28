@@ -1,21 +1,22 @@
 import { Component, inject } from '@angular/core';
-import { ApiModule, ApiResponseObject, ApiResponseOptionalUserDto, ApiResponseString, PublicControllerService, UserDto } from '../../../core/api/client-records-api';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserServiceService } from '../../../core/services/user-service.service';
+import { UserAuth } from '../../../core/models/userAuth';
+import { PublicApiServiceService } from '../../../core/services/public-api/public-api-service.service';
 
 @Component({
   selector: 'app-login',
-  imports: [ApiModule, FormsModule],
+  imports: [ FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
 
-  user : UserDto = {email: "" ,
+  user : UserAuth = {email: "" ,
                        password: ""}
 
-  _publicController : PublicControllerService = inject(PublicControllerService);
+  _publicController : PublicApiServiceService = inject(PublicApiServiceService);
   _userService : UserServiceService = inject(UserServiceService); // In this service we store the localStorage KeyName when logging in.
   _router : Router = inject(Router);  
   token : string = "";  
@@ -25,9 +26,16 @@ export class LoginComponent {
 
 onLogin():void{
     this._publicController.userLogin(this.user).subscribe({
-        next : (response:ApiResponseString)=>{
-          this.token = response.data||''; // this is because the token is String||undefined for typescript type safety.
+        next : (response)=>{
+          this.token = response.data;
           localStorage.setItem(this.user.email, this.token);
+
+          /* Here we are setting the _userService.email  
+             because we have set the userEmail as the 
+             key of token in localStorage so to use it in 
+             interceptor to get the specific token and pass
+             it in a header in each request we need this email.
+           */
           this._userService.setEmail(this.user.email);
           this._router.navigateByUrl("user-home");
           console.log(response.data);
