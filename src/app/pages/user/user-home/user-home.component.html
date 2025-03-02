@@ -1,4 +1,35 @@
-<p>user-home works!</p>
+
+
+<!-- <div class="container p-2 text-center"> -->
+<div class="container p-2 text-center mt-2 mb-5">   
+
+    
+        <input class="p-2" type="text" placeholder="Search Clients"  name="searchBox" required #searchBox="ngModel" [(ngModel)]="searchQuery" (change)="searchClientsWithQuery()">
+        <button class="btn btn-success ms-3 p-2 ps-5 pe-5" (click)="searchClientsWithQuery()" name="searchButton" >Search</button>
+        @if (searchBox.errors?.['required'] && searchBox.touched) {
+            <!-- <span class="alert alert-warning">Search box is empty</span> -->
+            <div class="alert alert-warning alert-dismissible fade show w-12" role="alert">
+                <strong>Enter Words</strong> The search field is empty.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+    
+</div>
+
+<!-- This is for Selecting Number Of Client Contents Per Page -->
+<div class="container-fluid bg bg-light mb-2 p-2 text-center">
+    
+        <label class="me-3" for="contentNumber">Content Per Page </label>
+    
+        <select class="col-1 p-1 text-center bg bg-light text-dark" id="contentNumber" [(ngModel)]="clientContentPerPage" (change)="settingContentsPerPage($event)">
+            @for (page of gettingClientsPerPage(); track page ) {
+            <option value={{page}} >{{page}}</option>
+            }
+        </select>
+    
+</div>
+
+
 
 <table class="table table-striped">
 
@@ -9,6 +40,8 @@
             <th>Last-Name</th>
             <th>Date-Of-Birth</th>
             <th>Postal-Code</th>
+            <th>Update</th>
+            <th>Delete</th>
         </tr>
     </thead>
     
@@ -20,9 +53,55 @@
                 <td>{{client.lastName}}</td>
                 <td>{{client.dateOfBirth}}</td>
                 <td>{{client.postalCode}}</td>
+                <td><button class="btn btn-primary" >Update</button></td>
+                <td><button class="btn btn-danger" >Delete</button></td>
             </tr>
         }
     </tbody>
 
 
 </table>
+
+
+
+<div class=" d-flex justify-content-center mt-5">
+    <nav aria-label="...">
+        <ul class="pagination">
+            <li class="page-item" >
+                <a class="page-link" >FirstPage</a>
+            </li>
+        <li class="page-item " >
+            <span class="page-link">Previous</span>
+        </li>
+        <li class="page-item"><a class="page-link" >1</a></li>
+        <li class="page-item active" aria-current="page">
+            <span class="page-link">2</span>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item" >
+            <a class="page-link" >Next</a>
+        </li>
+        <li class="page-item" >
+            <!-- <a class="page-link" (click)="lastPage('last')">Last</a> -->
+        </li>
+        </ul>
+    </nav>
+</div>
+<!-- This is for the pagination -->
+<!-- <div class=" d-flex justify-content-center mt-5">
+    <nav aria-label="...">
+        <ul class="pagination">
+        <li class="page-item " (click)="previousPage()">
+            <span class="page-link">Previous</span>
+        </li>
+        <li class="page-item"><a class="page-link" >1</a></li>
+        <li class="page-item active" aria-current="page">
+            <span class="page-link">2</span>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item" >
+            <a class="page-link" (click)="nextPage()">Next</a>
+        </li>
+        </ul>
+    </nav> -->
+<!-- </div> -->

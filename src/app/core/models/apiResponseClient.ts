@@ -1,25 +1,21 @@
-import { apiLinksModel } from "./apiLinksModel"
+import { ApiLinksModel} from "./apiLinksModel"
 import { ApiPageModel } from "./apiPageModel"
 import { ClientDto } from "./clientDto"
 
-export interface apiResponseClient{
+export interface ApiResponseClient{
 
     
         message : string,
         status : string,
         data : {
-                links:{ //this contains the link of pagination ("currentPage, firstPage, lastPage, nextPage")
-                    linkList : Array<apiLinksModel>
-                },
+                links: Array<ApiLinksModel>,
 
-                content : {
-                    clientList: Array<ClientDto>
-                },
+                content : Array<ClientDto>,
 
-                page:{ // this contains the page info and the total element's details, pages details
-                    pageInfo : ApiPageModel     
-                }
-            }
+                page: ApiPageModel
+                
+                
+        }
 
     
 

@@ -14,10 +14,10 @@ export const environment = {
     clientEndpoint : {
         getAllClients : "/api/clients",
         insertClient : "/api/clients/insert", 
-        updateClient : "/api/clients/update/id/{id}",
-        deleteClient : "/api/clients/delete/id/{id}",
+        updateClient : "/api/clients/update/id",
+        deleteClient : "/api/clients/delete/id",
 
-        getClientsBySearchQuery : "/api/clients/search/{searchQuery}",
+        getClientsBySearchQuery : "/api/clients/search",
         getClientsByPostalCode : "/api/clients/search/postalCode/{postalCode}",
         getClientsByFirstName : "/api/clients/search/firstName/{firstName}",
         getClientsByLastName : "/api/clients/search/lastName/{lastName}"
