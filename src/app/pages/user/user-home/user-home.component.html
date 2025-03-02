@@ -4,7 +4,7 @@
 <div class="container p-2 text-center mt-2 mb-5">   
 
     
-        <input class="p-2" type="text" placeholder="Search Clients"  name="searchBox" required #searchBox="ngModel" [(ngModel)]="searchQuery" (change)="searchClientsWithQuery()">
+        <input class="p-2" type="text" placeholder="Search Clients"  name="searchBox" required #searchBox="ngModel" [(ngModel)]="searchQuery" >
         <button class="btn btn-success ms-3 p-2 ps-5 pe-5" (click)="searchClientsWithQuery()" name="searchButton" >Search</button>
         @if (searchBox.errors?.['required'] && searchBox.touched) {
             <!-- <span class="alert alert-warning">Search box is empty</span> -->
@@ -68,21 +68,22 @@
     <nav aria-label="...">
         <ul class="pagination">
             <li class="page-item" >
-                <a class="page-link" >FirstPage</a>
+                <a class="page-link" (click)="toFirstPage()">FirstPage</a>
             </li>
-        <li class="page-item " >
-            <span class="page-link">Previous</span>
-        </li>
-        <li class="page-item"><a class="page-link" >1</a></li>
-        <li class="page-item active" aria-current="page">
+            
+            <li class="page-item " >
+                <span class="page-link"> < </span>
+            </li>
+         <li class="page-item active"><a class="page-link" (click)="toFirstPage()" > 1 </a></li>
+        <!--<li class="page-item active" aria-current="page">
             <span class="page-link">2</span>
         </li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li> -->
         <li class="page-item" >
-            <a class="page-link" >Next</a>
+            <a class="page-link" (click)="toNextPage()"> > </a>
         </li>
         <li class="page-item" >
-            <!-- <a class="page-link" (click)="lastPage('last')">Last</a> -->
+            <a class="page-link" (click)="toLastPage()">Last</a>
         </li>
         </ul>
     </nav>

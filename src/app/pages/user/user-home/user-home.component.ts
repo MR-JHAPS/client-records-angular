@@ -20,7 +20,7 @@ export class UserHomeComponent implements OnInit {
   private _paginationService: PaginationServiceService = inject(PaginationServiceService);
   private linkList : Array<ApiLinksModel> = [];  //this holds the list of pagination      ----links[{rel,href},{rel,href}].
   private mappedLinks = new Map<string, string>;// this holds the key pair value of Extracted linkList ----links{rel:href, rel:href}.
-  private pageModel : ApiPageModel = new ApiPageModel(); 
+  // private pageModel : ApiPageModel = new ApiPageModel(); 
 
   public searchQuery : string = "";  //this stores the search query.
   public clientList : Array<ClientDto> = []; // this stores the Array of clients obtained from Api.
@@ -35,7 +35,7 @@ export class UserHomeComponent implements OnInit {
   }
 
 
-
+//----------------------------------------------------------------------------------------------------------------------
   getAllClients(page?: number, size?: number, url?: string) : void {
     this._clientService.getAllClients(page, size, url).subscribe({
       next: (apiResponseClient) => {
@@ -55,6 +55,7 @@ export class UserHomeComponent implements OnInit {
     });
   }
 
+ //---------------------------------------------------------------------------------------------------------------------- 
 //getting value from mapped list of Pagination links.
 extractingEachLinks(key:string){
   return this.mappedLinks.get(key); 
@@ -62,15 +63,29 @@ extractingEachLinks(key:string){
 
 toLastPage(){
   let selectedUrl = this.extractingEachLinks("last");
-  this.getAllClients();
+  this.getAllClients(undefined,this.clientContentPerPage, selectedUrl);
 }
 
+toFirstPage(){
+  let selectedUrl = this.extractingEachLinks("first");
+  this.getAllClients(undefined,this.clientContentPerPage, selectedUrl);
+}
+
+toNextPage(){
+  let selectedUrl = this.extractingEachLinks("next");
+  this.getAllClients(undefined,this.clientContentPerPage, selectedUrl);
+}
+
+toPreviousPage(){
+  
+}
+
+ //------------------THIS IS FOR THE NUMBER OF CONTENTS PER PAGE-------------------------------------------------------------------------------------- 
+
+ /*Live changes of contents per page as selected by user*/ 
 settingContentsPerPage(event:Event):void{
- return this.getAllClients(undefined,this.clientContentPerPage, undefined);
+ return this.getAllClients(0,this.clientContentPerPage, undefined);
 }
-
-
-
 
 /*
   This method is to generate the number from 10 to 50 
@@ -84,46 +99,10 @@ gettingClientsPerPage():Array<number>{
   return noOfContents;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 
 
-
-/* firstPage():void{
-
-  this.getAllClients()
-}
- */
-/* lastPage(key:string):void{
-  const pageLink = this.links[key];
-  console.log("page value : " + pageLink);
-  // const pageNumber = (this.pageModel.number =  );
-  const pageSize = (this.pageModel.size = 20);
-  this._clientService.getAllClients(2,pageSize,pageLink)
-  
-} */
-
-
-
-
-
-  //getAllClientsMethod.
-/*   getAllClients(page?: number, size?: number, url?: string) : void {
-    this._clientService.getAllClients(page, size, url).subscribe({
-      next: (apiResponseClient) => {
-        console.log(apiResponseClient.data);
-        this.clientList = apiResponseClient.data.content;
-        // this.linkList = apiResponseClient.data.links;
-          // console.log(this.linkList);    
-          this.paginationLinks = this._paginationService.extractClientLinks(apiResponseClient.data.links);
-      },
-      error: (error) => {
-        console.error("Error while getting all the clients:",error );
-      },
-      complete: () => {
-        console.log("Fetching the list of clients completed successfully.");
-      }
-    });
-  } */
-
+//-------------SEARCHING CLIENTS---------------------------------------------------------------------------------------------------------
 
   searchClientsWithQuery() : void{
     this._clientService.searchQuery(this.searchQuery).subscribe({
@@ -138,8 +117,9 @@ gettingClientsPerPage():Array<number>{
   }
 
 
+//For live search will work on it later:------------------------------------------------------------------------------------
 
-  liveSearchClientsWithQuery(event:Event) : void{
+ /*  liveSearchClientsWithQuery(event:Event) : void{
     this._clientService.searchQuery(this.searchQuery).subscribe({
       next : (apiResponseClient) =>{
         this.clientList = apiResponseClient.data.content;
@@ -149,7 +129,12 @@ gettingClientsPerPage():Array<number>{
       },
       complete : () => {console.log("Searching Clients with Query Completed")}
     })
-  }
+  } */
+
+//----------------------------------------------------------------------------------------------------------------------
+
+
+
  /*  updateClients(){
 
   } */
