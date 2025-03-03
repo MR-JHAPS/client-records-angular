@@ -1,3 +1,21 @@
+@if (registrationStatus) {
+   <!--  <div class="alert alert-success text-center" role="alert">
+      <p>Success! User registered Successfully.</p> <button (click)="closeRegistrationMessage()">close</button> 
+      </div> -->
+
+      <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+        <strong>Success!</strong> User was registered Successfully.{{registrationMessage}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeRegistrationMessage()"></button>
+      </div>
+}@else if (errorStatus) {
+    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+        <strong>Error!</strong> Failed to Register the User.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeRegistrationMessage()"></button>
+      </div>
+}
+
+
+
 <div class="container-fluid text-center mt-4 mb-4">
     <h3 class="text-primary text-primary">Login Page</h3>
 </div>

@@ -5,6 +5,7 @@ import { RegisterComponent } from './pages/auth/register/register.component';
 import { ForbiddenComponent } from './shared/components/forbidden/forbidden.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { UserHomeComponent } from './pages/user/user-home/user-home.component';
+import { ClientUpdateComponent } from './pages/user/client-update/client-update.component';
 
 export const routes: Routes = [
     {path: "",  component: HomeComponent},
@@ -12,6 +13,7 @@ export const routes: Routes = [
     {path: "login", component: LoginComponent},
     {path: "register", component: RegisterComponent},
     {path: "user-home", component: UserHomeComponent},
+    {path: "clientupdate", component: ClientUpdateComponent},
 
 
     {path: "forbidden", component: ForbiddenComponent},

@@ -10,11 +10,15 @@
             <!-- <span class="alert alert-warning">Search box is empty</span> -->
             <div class="alert alert-warning alert-dismissible fade show w-12" role="alert">
                 <strong>Enter Words</strong> The search field is empty.
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="searchBox.reset()"></button>
             </div>
         }
     
 </div>
+<!-- copied search bar -->
+
+
+
 
 <!-- This is for Selecting Number Of Client Contents Per Page -->
 <div class="container-fluid bg bg-light mb-2 p-2 text-center">
@@ -53,7 +57,7 @@
                 <td>{{client.lastName}}</td>
                 <td>{{client.dateOfBirth}}</td>
                 <td>{{client.postalCode}}</td>
-                <td><button class="btn btn-primary" >Update</button></td>
+                <td><button class="btn btn-primary" routerLink="/clientupdate" >Update</button></td>
                 <td><button class="btn btn-danger" >Delete</button></td>
             </tr>
         }
@@ -72,7 +76,7 @@
             </li>
             
             <li class="page-item " >
-                <span class="page-link"> < </span>
+                <a class="page-link" (click)="toPreviousPage()"> < </a>
             </li>
          <li class="page-item active"><a class="page-link" (click)="toFirstPage()" > 1 </a></li>
         <!--<li class="page-item active" aria-current="page">

@@ -7,10 +7,11 @@ import { map, Observable } from 'rxjs';
 import { PaginationServiceService } from '../../../core/services/paginationService/pagination-service.service';
 import { ApiPageModel } from '../../../core/models/class/apiPageModel';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user-home',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './user-home.component.html',
   styleUrl: './user-home.component.css'
 })
@@ -30,14 +31,14 @@ export class UserHomeComponent implements OnInit {
 
   //initializer for this component.
   ngOnInit(): void {
-    this.getAllClients(0, this.clientContentPerPage);
+    this.getAllClients(this.clientContentPerPage, undefined);
     this.gettingClientsPerPage();
   }
 
 
 //----------------------------------------------------------------------------------------------------------------------
-  getAllClients(page?: number, size?: number, url?: string) : void {
-    this._clientService.getAllClients(page, size, url).subscribe({
+  getAllClients(size?: number, url?: string) : void {
+    this._clientService.getAllClients(size, url).subscribe({
       next: (apiResponseClient) => {
         console.log(apiResponseClient.data);
         this.clientList = apiResponseClient.data.content; 
@@ -57,39 +58,50 @@ export class UserHomeComponent implements OnInit {
 
  //---------------------------------------------------------------------------------------------------------------------- 
 //getting value from mapped list of Pagination links.
-extractingEachLinks(key:string){
+extractingEachLinks(key:string): string|undefined{
   return this.mappedLinks.get(key); 
 }
 
 toLastPage(){
   let selectedUrl = this.extractingEachLinks("last");
-  this.getAllClients(undefined,this.clientContentPerPage, selectedUrl);
+  this.getAllClients(this.clientContentPerPage, selectedUrl);
 }
 
 toFirstPage(){
   let selectedUrl = this.extractingEachLinks("first");
-  this.getAllClients(undefined,this.clientContentPerPage, selectedUrl);
+  this.getAllClients(this.clientContentPerPage, selectedUrl);
 }
 
 toNextPage(){
   let selectedUrl = this.extractingEachLinks("next");
-  this.getAllClients(undefined,this.clientContentPerPage, selectedUrl);
+  this.getAllClients(this.clientContentPerPage, selectedUrl);
 }
 
 toPreviousPage(){
-  
+  let currentUrl = this.extractingEachLinks("self");
+  console.log(currentUrl);
+}
+
+toCurrentPage():string|undefined{
+  return this.extractingEachLinks("self");
+  // return currentUrl;
 }
 
  //------------------THIS IS FOR THE NUMBER OF CONTENTS PER PAGE-------------------------------------------------------------------------------------- 
 
  /*Live changes of contents per page as selected by user*/ 
 settingContentsPerPage(event:Event):void{
- return this.getAllClients(0,this.clientContentPerPage, undefined);
+  // console.log("this is the value of this.toCurrentPage() method : " + this.toCurrentPage());
+ /*  const currentUrl = this.extractingEachLinks("self");
+  console.log(currentUrl + " : : THis is the current Url"); */
+ // const urlWithUpdatedSize = this._paginationService.setNewPageSizeByUrl(this.clientContentPerPage, currentUrl);
+  this.getAllClients(this.clientContentPerPage);
+  
 }
 
 /*
   This method is to generate the number from 10 to 50 
-  that represents no of client contents per page
+  that represents/displays in [Select->Option] no of client contents per page
 */
 gettingClientsPerPage():Array<number>{
   const noOfContents: Array<number> = [];

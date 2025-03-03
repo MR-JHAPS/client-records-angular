@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserServiceService } from '../../../core/services/user-service.service';
 import { UserAuth } from '../../../core/models/userAuth';
 import { PublicApiServiceService } from '../../../core/services/public-api/public-api-service.service';
@@ -11,7 +11,8 @@ import { PublicApiServiceService } from '../../../core/services/public-api/publi
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
+  
 
   user : UserAuth = {email: "" ,
                        password: ""}
@@ -19,9 +20,23 @@ export class LoginComponent {
   _publicController : PublicApiServiceService = inject(PublicApiServiceService);
   _userService : UserServiceService = inject(UserServiceService); // In this service we store the localStorage KeyName when logging in.
   _router : Router = inject(Router);  
-  token : string = "";  
-
-
+  token : string = ""; 
+  _activatedRoute :ActivatedRoute = inject(ActivatedRoute);
+  
+  public registrationStatus = false;
+  public registrationMessage ="";
+  public errorStatus = false;
+  
+  //On initialization of this component.  
+  ngOnInit(): void {
+    this._activatedRoute.queryParams.subscribe(
+      (params)=>{
+            this.registrationStatus = params['registrationStatus']==='true';
+            this.registrationMessage = params['registrationMessage'];
+            this.errorStatus = params['error']==='true';
+          }
+    )
+  }//ends ngOnInit
 
 
 onLogin():void{
@@ -52,7 +67,10 @@ onLogin():void{
 }
 
 
-
+closeRegistrationMessage(){
+  this.registrationStatus = false;
+  this.errorStatus = false;
+}
 
 
 

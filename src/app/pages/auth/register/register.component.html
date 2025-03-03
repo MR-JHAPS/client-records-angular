@@ -1,1 +1,32 @@
-<p>register works!</p>
+@if (errorStatus) {
+    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+        <strong>Error!</strong> {{errorMessage}}<!-- Failed to Register the User. -->
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeRegistrationMessage()"></button>
+      </div>
+}
+
+
+<div class="container-fluid text-center mt-4 mb-4">
+    <h3 class="text-primary text-primary">Register User</h3>
+</div>
+
+
+<form class="container-fluid bg bg-light col-5 p-5">
+
+    <div class="form-floating mb-3 ">
+        <input type="email" class="form-control" id="floatingInput"  name="email" placeholder="name@example.com" 
+                                        [(ngModel)]="userObj.email">
+                                       
+        <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password"
+                                        [(ngModel)]="userObj.password">
+                                       
+        <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="container-fluid text-center mt-3">
+        <button class="btn btn-primary w-50" (click)="onRegister()" id="floatingPassword" placeholder="Password">Register</button>
+    </div>
+</form>

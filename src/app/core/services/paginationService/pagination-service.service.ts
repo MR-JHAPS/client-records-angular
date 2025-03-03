@@ -4,6 +4,7 @@ import { environment } from '../../../../environments/environment';
 import { ApiResponseClient } from '../../models/apiResponseClient';
 import { ApiLinksModel } from '../../models/apiLinksModel';
 import { map } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,12 @@ import { map } from 'rxjs';
 export class PaginationServiceService {
 
 
+  _router = inject(Router);
+  _activatedRoute = inject(ActivatedRoute);
   private customMap = new Map<string, string>;
-  // private linkList : Array<ApiLinksModel> = [];
 
 
+  //converting LinkList to HashMap/Map.
   //[{rel:"a",href="aaaaa"},{rel:"b",href:"bbbb"}]    -----> [{rel:a -> href:aaaa},{rel:b -> href:bbb}]
   convertingToHashMap(list: Array<ApiLinksModel> ): Map<string,string>{
     let mappedLink : Map<string, string> =  new Map();  
@@ -27,28 +30,32 @@ export class PaginationServiceService {
 
 
 
+  //getting the current page Content of given url:
+  setNewPageSize(size:string){
+    this._router.navigate([],{
+      relativeTo: this._activatedRoute,
+      queryParams:  {size: size},
+      queryParamsHandling : 'merge'
 
- /* private links : {[key:string]: [string]} = {}; */
+    })
 
- /*  extractClientLinks(linkList: Array<{rel:string; href:string}>) : {[key:string]:[string]}{
-    const links : {[key:string]:[string]} = {};
-    linkList.forEach(link => {
-      links[link.rel] = [link.href];
-    });
-    return links;
-  }  */
+  }
 
-    /* private links : Array<keyPair> = [];
+  setNewPageSizeByUrl(size:number, url: string) : any{
+    
+    const urlObj = new URL(url);
+    const sizeString = size.toString();
+    
+     urlObj.searchParams.set("size", sizeString);
+    // let updatedSize = searchParams.set("size" , sizeString);
+     return urlObj.toString();
+  
 
-    extractLinksFromList(linkList:Array<ApiLinksModel>): {(rel:string) : (href:string)} {
-      linkList.forEach(element => {
-        this.links = {(element.rel) : (element.href)};
-      });
-      return this.links ; // this returns the array objects ---> [{rel, href}]
-      //                                  to key:value type --->{rel : href}  value.
-    }
+  }
 
- */
+
+
+
 
 
 
