@@ -1,5 +1,7 @@
 
-
+<ng-container>
+    <app-client-update #clientUpdateComponent/>
+</ng-container>
 <!-- <div class="container p-2 text-center"> -->
 <div class="container p-2 text-center mt-2 mb-5">   
 
@@ -33,6 +35,8 @@
     
 </div>
 
+<!-- This is to possibly store the modal from the client-update component -->
+<ng-container #modalContainer></ng-container>
 
 
 <table class="table table-striped">
@@ -57,7 +61,8 @@
                 <td>{{client.lastName}}</td>
                 <td>{{client.dateOfBirth}}</td>
                 <td>{{client.postalCode}}</td>
-                <td><button class="btn btn-primary" routerLink="/clientupdate" >Update</button></td>
+                <!-- <td><button class="btn btn-primary" routerLink="/clientupdate" (click)="openModal()">Update</button></td> -->
+                <td><button class="btn btn-primary" (click)="openModal()">Update</button></td>
                 <td><button class="btn btn-danger" >Delete</button></td>
             </tr>
         }

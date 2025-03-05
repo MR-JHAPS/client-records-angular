@@ -1,17 +1,22 @@
-<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">Open modal for fat</button>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Open modal for getbootstrap</button> -->
+
+<!-- <button type="button" class="btn btn-primary"  data-bs-whatever="@mdo" (click)="openModel()">Open Update</button> -->
 
 
 
-i am client Update page<br><hr>
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" (click)="openModel()">Open Update</button>
+<!-- this container is able to display the data of template 
+    only Ng container can hold ng-template and the data of ng-template is passed by [ngTemplateOUtlet]
+-->
+<ng-container *ngIf="isModalOpen$ | async" [ngTemplateOutlet]="updateModal"]></ng-container>
 
 
+
+<!-- This contains all the data inside the template with #modalTemplate as id
+ 
+Template cannot show the data, it can just create a reusable parts for ng-container-->
+<ng-template #updateModal>
 <!-- [ngClass]="{'d-inline-block': isModelOpen}" this is to display the block so that DOM manipulation can take place -->
-
- @if(isModelOpen){
-    <div class="modal fade show" [ngClass]="{'d-inline-block': isModelOpen}"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade show" [ngClass]="{'d-inline-block': isModalOpen$ | async}"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
@@ -39,14 +44,17 @@ i am client Update page<br><hr>
             </form>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Send message</button>
+            <button type="button" class="btn btn-warning me-5" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary">Update</button>
         </div>
         </div>
     </div>
     </div>
- }
 
- @if(isModelOpen){ 
+</ng-template>
+<!-- } -->
+
+
+ @if(isModalOpen$ |async){ 
  <div class="modal-backdrop fade show"></div>
  }

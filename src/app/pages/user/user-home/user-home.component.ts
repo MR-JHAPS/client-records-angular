@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, NgModule, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { ClientDto } from '../../../core/models/clientDto';
 import { ClientApiServiceService } from '../../../core/services/client-api/client-api-service.service';
 import { ApiLinksModel} from '../../../core/models/apiLinksModel';
@@ -6,17 +6,23 @@ import { FormsModule } from '@angular/forms';
 import { map, Observable } from 'rxjs';
 import { PaginationServiceService } from '../../../core/services/paginationService/pagination-service.service';
 import { ApiPageModel } from '../../../core/models/class/apiPageModel';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { ModalServiceService } from '../../../shared/services/modal-service.service';
+import { ClientUpdateComponent } from '../client-update/client-update.component';
 
 @Component({
   selector: 'app-user-home',
-  imports: [FormsModule, CommonModule, RouterLink],
+  imports: [FormsModule, CommonModule, RouterLink, ClientUpdateComponent, NgIf],
   templateUrl: './user-home.component.html',
   styleUrl: './user-home.component.css'
 })
-export class UserHomeComponent implements OnInit {
+export class UserHomeComponent implements OnInit, AfterViewInit {
+ 
+  @ViewChild('clientUpdateComponent') clientUpdateComponent: ClientUpdateComponent;
+  updateTemplate : ElementRef<any>;
 
+  private _modalService = inject(ModalServiceService);
   private _clientService : ClientApiServiceService = inject(ClientApiServiceService);
   private _paginationService: PaginationServiceService = inject(PaginationServiceService);
   private linkList : Array<ApiLinksModel> = [];  //this holds the list of pagination      ----links[{rel,href},{rel,href}].
@@ -34,6 +40,22 @@ export class UserHomeComponent implements OnInit {
     this.getAllClients(this.clientContentPerPage, undefined);
     this.gettingClientsPerPage();
   }
+
+  ngAfterViewInit(): void {
+    this.updateTemplate = this.clientUpdateComponent.getUpdateModal();
+  }
+
+//----------------------------ON UPDATE BUTTON CLICK--------------------------------------------------------------------------------------
+openModal():void{
+  this._modalService.openModal();
+}
+
+closeModal(): void{
+  this._modalService.closeModal();
+}
+
+
+
 
 
 //----------------------------------------------------------------------------------------------------------------------
