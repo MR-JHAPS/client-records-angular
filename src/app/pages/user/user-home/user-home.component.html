@@ -62,7 +62,7 @@
                 <td>{{client.dateOfBirth}}</td>
                 <td>{{client.postalCode}}</td>
                 <!-- <td><button class="btn btn-primary" routerLink="/clientupdate" (click)="openModal()">Update</button></td> -->
-                <td><button class="btn btn-primary" (click)="openModal()">Update</button></td>
+                <td><button class="btn btn-primary" (click)="openUpdate(client.id)">Update</button></td>
                 <td><button class="btn btn-danger" >Delete</button></td>
             </tr>
         }
@@ -97,6 +97,13 @@
         </ul>
     </nav>
 </div>
+
+
+
+
+
+
+
 <!-- This is for the pagination -->
 <!-- <div class=" d-flex justify-content-center mt-5">
     <nav aria-label="...">

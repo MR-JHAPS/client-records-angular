@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, inject, NgModule, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
-import { ClientDto } from '../../../core/models/clientDto';
+import { ClientDto, I_ClientDto } from '../../../core/models/clientDto';
 import { ClientApiServiceService } from '../../../core/services/client-api/client-api-service.service';
 import { ApiLinksModel} from '../../../core/models/apiLinksModel';
 import { FormsModule } from '@angular/forms';
@@ -10,6 +10,7 @@ import { CommonModule, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ModalServiceService } from '../../../shared/services/modal-service.service';
 import { ClientUpdateComponent } from '../client-update/client-update.component';
+import { ApiResponseClient } from '../../../core/models/apiResponseClient';
 
 @Component({
   selector: 'app-user-home',
@@ -18,9 +19,10 @@ import { ClientUpdateComponent } from '../client-update/client-update.component'
   styleUrl: './user-home.component.css'
 })
 export class UserHomeComponent implements OnInit, AfterViewInit {
- 
+ //this is to implement the update-client template from "ClientUpdateComponent".
   @ViewChild('clientUpdateComponent') clientUpdateComponent: ClientUpdateComponent;
   updateTemplate : ElementRef<any>;
+  userId = 0; // this is to get the id of the selected user so that it can be updated or deleted.
 
   private _modalService = inject(ModalServiceService);
   private _clientService : ClientApiServiceService = inject(ClientApiServiceService);
@@ -30,7 +32,13 @@ export class UserHomeComponent implements OnInit, AfterViewInit {
   // private pageModel : ApiPageModel = new ApiPageModel(); 
 
   public searchQuery : string = "";  //this stores the search query.
-  public clientList : Array<ClientDto> = []; // this stores the Array of clients obtained from Api.
+  public clientList : Array<I_ClientDto> = []; // this stores the Array of clients obtained from Api.
+  client:I_ClientDto = {id:0,
+    firstName :"",
+    lastName: "",
+    dateOfBirth : "",
+    postalCode: ""};
+
   public pageNumber:number = 0;
   public clientContentPerPage = 10 ; // hold the number of client-content per page.
 
@@ -39,6 +47,7 @@ export class UserHomeComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.getAllClients(this.clientContentPerPage, undefined);
     this.gettingClientsPerPage();
+    console.log("before Click : " + this.client);
   }
 
   ngAfterViewInit(): void {
@@ -46,25 +55,41 @@ export class UserHomeComponent implements OnInit, AfterViewInit {
   }
 
 //----------------------------ON UPDATE BUTTON CLICK--------------------------------------------------------------------------------------
-openModal():void{
+openUpdate(id:number):void{
   this._modalService.openModal();
+  console.log("This is the id of the client Selected : " + id); //id is showing properly
+  this.getClientById(id);
+  console.log("after click" + this.client)
 }
 
-closeModal(): void{
+closeUpdate(): void{
   this._modalService.closeModal();
 }
 
-
+getClientById(id: number): void{
+  this._clientService.getClientById(id).subscribe({
+    next: (ApiResponseSingleClient) =>{
+      console.log("hello" , ApiResponseSingleClient.data);
+      this.client = ApiResponseSingleClient.data;
+      console.log("updated client" , this.client);
+      
+    },
+    error : (error) =>{
+      console.log("error getting the client by id : " ,error);
+    }
+  })
+}
 
 
 
 //----------------------------------------------------------------------------------------------------------------------
   getAllClients(size?: number, url?: string) : void {
     this._clientService.getAllClients(size, url).subscribe({
-      next: (apiResponseClient) => {
-        console.log(apiResponseClient.data);
-        this.clientList = apiResponseClient.data.content; 
-        this.linkList = apiResponseClient.data.links; //putting the List of all the pagination links  
+      next: (response:ApiResponseClient) => {
+        console.log(response.data);
+        this.clientList = response.data.content; 
+        console.log(this.clientList);
+        this.linkList = response.data.links; //putting the List of all the pagination links  
         this.mappedLinks = this._paginationService.convertingToHashMap(this.linkList); //converting to List of Map<key,value>.
         console.log("links are : " + this._paginationService.convertingToHashMap(this.linkList));
         // console.log("This is the link for the last page : " +this.extractingEachLinks("last"));

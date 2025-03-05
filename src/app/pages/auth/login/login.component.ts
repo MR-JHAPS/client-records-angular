@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserServiceService } from '../../../core/services/user-service.service';
 import { UserAuth } from '../../../core/models/userAuth';
 import { PublicApiServiceService } from '../../../core/services/public-api/public-api-service.service';
+import { ApiResponse } from '../../../core/models/apiResponse';
 
 @Component({
   selector: 'app-login',
@@ -41,7 +42,7 @@ export class LoginComponent implements OnInit{
 
 onLogin():void{
     this._publicController.userLogin(this.user).subscribe({
-        next : (response)=>{
+        next : (response: ApiResponse)=>{
           this.token = response.data;
           localStorage.setItem(this.user.email, this.token);
 
@@ -52,7 +53,10 @@ onLogin():void{
              it in a header in each request we need this email.
            */
           this._userService.setEmail(this.user.email);
-          this._router.navigateByUrl("user-home");
+          setTimeout(()=>{
+            this._router.navigateByUrl("user-home");
+          },300);
+          
           console.log(response.data);
         },   
         error : (error) =>{

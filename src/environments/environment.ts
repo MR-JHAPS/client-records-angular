@@ -3,8 +3,8 @@ export const environment = {
     //THIS PAGE CONTAINS ALL THE API's URL.
 
     // production: false,
-    apiBaseUrl : "http://localhost:8080",
-
+    // apiBaseUrl : "http://localhost:8080",
+    apiBaseUrl : "http://192.168.1.25:8080",
 
     publicEndpoint:{
         login : "/public/login",
@@ -13,6 +13,7 @@ export const environment = {
 
     clientEndpoint : {
         getAllClients : "/api/clients",
+        getClientById : "/api/clients/id",
         insertClient : "/api/clients/insert", 
         updateClient : "/api/clients/update/id",
         deleteClient : "/api/clients/delete/id",

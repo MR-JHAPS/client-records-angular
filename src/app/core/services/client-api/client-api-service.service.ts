@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { Observable } from 'rxjs';
-import { ApiResponseClient } from '../../models/apiResponseClient';
+import { map, Observable } from 'rxjs';
+import { ApiResponseClient, ApiResponseSingleClient } from '../../models/apiResponseClient';
 import { ClientDto } from '../../models/clientDto';
 
 @Injectable({
@@ -23,10 +23,14 @@ export class ClientApiServiceService {
     return this._httpClient.get<ApiResponseClient>(url);
   } */
 
-    getAllClients(size?: number, urlPage?:string): Observable<ApiResponseClient>{
-      const url = urlPage ? urlPage : `${this.apiBaseUrl+this.clientEndpoint.getAllClients}?page=0&size=${size??10}` ;
-      return this._httpClient.get<ApiResponseClient>(url);
-    }
+  getAllClients(size?: number, urlPage?:string): Observable<ApiResponseClient>{
+    const url = urlPage ? urlPage : `${this.apiBaseUrl+this.clientEndpoint.getAllClients}?page=0&size=${size??10}` ;
+    return this._httpClient.get<ApiResponseClient>(url);
+  }
+
+  getClientById(id:number):Observable<ApiResponseSingleClient>{
+    return this._httpClient.get<ApiResponseSingleClient>(`${this.apiBaseUrl+this.clientEndpoint.getClientById}/${id}`);
+  }
 
 
   updateClients(id:number){
