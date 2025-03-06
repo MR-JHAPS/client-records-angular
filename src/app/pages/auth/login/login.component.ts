@@ -44,15 +44,12 @@ onLogin():void{
     this._publicController.userLogin(this.user).subscribe({
         next : (response: ApiResponse)=>{
           this.token = response.data;
-          localStorage.setItem(this.user.email, this.token);
+        
+          /* so that interceptor can know on page reload that which user is active("loggedInUser":userEmail)
+            and which token to use for that active("loggedInUser":userEmail) user. */
+          localStorage.setItem("loggedInUser", this.user.email); //saving logged_userEmail with "loggedInUser"
+          localStorage.setItem(this.user.email, this.token); //saving token with the userEmail as key.
 
-          /* Here we are setting the _userService.email  
-             because we have set the userEmail as the 
-             key of token in localStorage so to use it in 
-             interceptor to get the specific token and pass
-             it in a header in each request we need this email.
-           */
-          this._userService.setEmail(this.user.email);
           setTimeout(()=>{
             this._router.navigateByUrl("user-home");
           },300);

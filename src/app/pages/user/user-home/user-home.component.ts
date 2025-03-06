@@ -11,16 +11,20 @@ import { RouterLink } from '@angular/router';
 import { ModalServiceService } from '../../../shared/services/modal-service.service';
 import { ClientUpdateComponent } from '../client-update/client-update.component';
 import { ApiResponseClient } from '../../../core/models/apiResponseClient';
+import { SelectedClientComponent } from "../selected-client/selected-client.component";
 
 @Component({
   selector: 'app-user-home',
-  imports: [FormsModule, CommonModule, RouterLink, ClientUpdateComponent, NgIf],
+  imports: [FormsModule, CommonModule, RouterLink, ClientUpdateComponent, NgIf, SelectedClientComponent],
   templateUrl: './user-home.component.html',
   styleUrl: './user-home.component.css'
 })
 export class UserHomeComponent implements OnInit, AfterViewInit {
  //this is to implement the update-client template from "ClientUpdateComponent".
-  @ViewChild('clientUpdateComponent') clientUpdateComponent: ClientUpdateComponent;
+  @ViewChild('clientUpdateComponent') clientUpdateComponent: ClientUpdateComponent; // child-app-component in userHome.html
+  @ViewChild("selectedClientComponent") selectedClientComponent : SelectedClientComponent;
+  selectedClientDiv : ElementRef<any>;
+
   updateTemplate : ElementRef<any>;
   userId = 0; // this is to get the id of the selected user so that it can be updated or deleted.
 
@@ -33,11 +37,12 @@ export class UserHomeComponent implements OnInit, AfterViewInit {
 
   public searchQuery : string = "";  //this stores the search query.
   public clientList : Array<I_ClientDto> = []; // this stores the Array of clients obtained from Api.
-  client:I_ClientDto = {id:0,
+ /*  client:I_ClientDto = {id:0,
     firstName :"",
     lastName: "",
     dateOfBirth : "",
-    postalCode: ""};
+    postalCode: ""}; */
+    client:ClientDto = new ClientDto();
 
   public pageNumber:number = 0;
   public clientContentPerPage = 10 ; // hold the number of client-content per page.
@@ -47,30 +52,21 @@ export class UserHomeComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.getAllClients(this.clientContentPerPage, undefined);
     this.gettingClientsPerPage();
-    console.log("before Click : " + this.client);
+    console.log("before Click of client Update: " + this.client);
   }
 
   ngAfterViewInit(): void {
-    this.updateTemplate = this.clientUpdateComponent.getUpdateModal();
+    this.selectedClientDiv = this.selectedClientComponent.selectedClientModal;
   }
 
-//----------------------------ON UPDATE BUTTON CLICK--------------------------------------------------------------------------------------
-openUpdate(id:number):void{
-  this._modalService.openModal();
-  console.log("This is the id of the client Selected : " + id); //id is showing properly
-  this.getClientById(id);
-  console.log("after click" + this.client)
-}
-
-closeUpdate(): void{
-  this._modalService.closeModal();
-}
+//Selected CLient click:
 
 getClientById(id: number): void{
   this._clientService.getClientById(id).subscribe({
     next: (ApiResponseSingleClient) =>{
       console.log("hello" , ApiResponseSingleClient.data);
       this.client = ApiResponseSingleClient.data;
+      this._modalService.setClient(ApiResponseSingleClient.data);
       console.log("updated client" , this.client);
       
     },
@@ -79,6 +75,49 @@ getClientById(id: number): void{
     }
   })
 }
+
+
+
+openSelectedClient(id:number){
+  this.getClientById(id);
+  // debugger
+  this._modalService.getClient();
+  console.log(this._modalService.getClient());
+  this.selectedClientComponent.openSelectedClient();
+  
+  
+}
+
+
+
+
+
+
+
+
+//----------------------------ON UPDATE BUTTON CLICK--------------------------------------------------------------------------------------
+updateClient(id:number){
+
+}
+
+closeUpdate(): void{
+  this._modalService.closeModal();
+}
+/* 
+getClientById(id: number): void{
+  this._clientService.getClientById(id).subscribe({
+    next: (ApiResponseSingleClient) =>{
+      console.log("hello" , ApiResponseSingleClient.data);
+      this.client = ApiResponseSingleClient.data;
+      this._modalService.setClient(ApiResponseSingleClient.data);
+      console.log("updated client" , this.client);
+      
+    },
+    error : (error) =>{
+      console.log("error getting the client by id : " ,error);
+    }
+  })
+} */
 
 
 

@@ -1,7 +1,11 @@
 
+
+
 <ng-container>
-    <app-client-update #clientUpdateComponent/>
+    <app-selected-client #selectedClientComponent/>
 </ng-container>
+
+
 <!-- <div class="container p-2 text-center"> -->
 <div class="container p-2 text-center mt-2 mb-5">   
 
@@ -55,15 +59,17 @@
     
     <tbody>
         @for (client of clientList ; track client.id) {
-            <tr>
+            <tr class="clickable-row" (click)="openSelectedClient(client.id)">
+                
                 <td>{{client.id}}</td>
                 <td>{{client.firstName}}</td>
                 <td>{{client.lastName}}</td>
                 <td>{{client.dateOfBirth}}</td>
                 <td>{{client.postalCode}}</td>
-                <!-- <td><button class="btn btn-primary" routerLink="/clientupdate" (click)="openModal()">Update</button></td> -->
-                <td><button class="btn btn-primary" (click)="openUpdate(client.id)">Update</button></td>
+                   
+                <td><button class="btn btn-primary w-75" (click)="updateClient(client.id); $event.stopPropagation()">Update</button></td>
                 <td><button class="btn btn-danger" >Delete</button></td>
+            
             </tr>
         }
     </tbody>

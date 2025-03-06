@@ -1,61 +1,38 @@
-
-<!-- <button type="button" class="btn btn-primary"  data-bs-whatever="@mdo" (click)="openModel()">Open Update</button> -->
-
-
-
-
-<!-- this container is able to display the data of template 
-    only Ng container can hold ng-template and the data of ng-template is passed by [ngTemplateOUtlet]
--->
-<ng-container *ngIf="isModalOpen$ | async" [ngTemplateOutlet]="updateModal"]></ng-container>
+<div class="container mt-5 text-center text-primary">
+    <h3>Update Client</h3>
+</div>
 
 
+<div class="container mt-3 p-5 text-center bg bg-light ">
 
-<!-- This contains all the data inside the template with #modalTemplate as id
- 
-Template cannot show the data, it can just create a reusable parts for ng-container-->
-<ng-template #updateModal>
-<!-- [ngClass]="{'d-inline-block': isModelOpen}" this is to display the block so that DOM manipulation can take place -->
-    <div class="modal fade show" [ngClass]="{'d-inline-block': isModalOpen$ | async}"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModel()"></button>
-        </div>
-        <div class="modal-body">
-            <form>
-            <div class="mb-3">
-                <label for="firstName" class="col-form-label">First-Name</label>
-                <input type="text" class="form-control" id="firstName">
-            </div>
-            <div class="mb-3">
-                <label for="lastName" class="col-form-label">Last-Name</label>
-                <input type="text" class="form-control" id="lastName">
-            </div>
-            <div class="mb-3">
-                <label for="postalCode" class="col-form-label">Postal-Code</label>
-                <input type="text" class="form-control" id="postalCode">
-            </div>
-            <div class="mb-3">
-                <label for="dateOfBirth" class="col-form-label">Date-Of-Birth</label>
-                <input type="text" class="form-control" id="dateOfBirth">
-            </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-warning me-5" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary">Update</button>
-        </div>
-        </div>
-    </div>
-    </div>
+    
+  <div class="form-floating mb-3 w-25">
+      <input type="text" class="form-control" id="floatingInput" placeholder="Id">
+      <label for="floatingInput">ID</label>
+  </div>
 
-</ng-template>
-<!-- } -->
+  <div class="form-floating mb-3">
+      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <label for="floatingInput">Email address</label>
+  </div>
 
+  <div class="form-floating mb-3 w-50">
+    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+    <label for="floatingPassword">Password</label>
+  </div>
 
-<!-- This is so that the background is partial blurred or blacked when opening the modal -->
- @if(isModalOpen$ |async){ 
- <div class="modal-backdrop fade show"></div>
- }
+  <div class="form-floating mb-3">
+    <input type="date" class="form-control" id="floatingDateOfBirth" placeholder="Date Of Birth">
+    <label for="floatingDateOfBirth">Date Of Birth</label>
+  </div>
+
+  <div class="form-floating mb-3">
+    <input type="number" class="form-control" id="floatingPostalCode" placeholder="Postal Code" min="0">
+    <label for="floatingPostalCode">Postal Code</label>
+  </div>
+
+  <div class="container">
+    <button class="btn btn-primary w-25">Update</button>
+  </div>
+
+</div>
