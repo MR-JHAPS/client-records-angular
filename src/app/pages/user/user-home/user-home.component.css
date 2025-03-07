@@ -33,5 +33,31 @@
 
   .btn.btn-primary:hover{
     background-color: var(--darkBlue);
-    color: var(--mutedOrange);
+   /*  color: var(--secondaryColor); */
   }
+
+
+  /* Pagination------------------------------------------------------------------- */
+
+  .page-item>.page-link{
+    background-color: var(--darkBlue);
+    color: var(--lightShade);
+    cursor: pointer;
+    border: 1px solid var(--lightShade);
+    /* border: 1px solid white; */
+/* 
+    border: 2px solid var(--orange);
+    border-top: none;
+    border-bottom: none; */
+  }
+
+ /*  .page-item>.active>.page-link{
+    background-color: var(--orange);
+  } */
+   .page-item>.one {
+    background-color: var(--orange);
+    /* border-top:none;
+    border-bottom: none; */
+
+    cursor: pointer;
+   }
