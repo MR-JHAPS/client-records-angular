@@ -1,8 +1,36 @@
+
+
+  #background-video {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+  }
+
+
+.videoBackground::before {
+  /* content: 'container'!important; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 1;
+}
+
+  /*-----------------------------------------------------------------------------------------------------------------------------  */
+
+
+
+
 main{
     box-sizing: border-box;
     padding-top:40px;
     margin: 0px;
-    background-color: var(--introBackground);
+    background-color: var(--backgroundColor);
     min-height: 100vh;   
 }
 
@@ -18,6 +46,8 @@ main{
     position: relative; /* Required for positioning the image */
     background-color: var(--darkBlue); /* Background color */
     border-radius: 5px; /* Rounded corners */
+    /* border: 2px solid var(--accentColor); */
+    /* box-shadow: var(--accentColor) 2px 2px 12px; */
 }
 
 .imageContainer img {
@@ -28,35 +58,10 @@ main{
     left: -30px; /* Offset the image */
     border-radius: 5px; /* Rounded corners */
     object-fit: cover; /* Ensure the image covers the area without distortion */
+    /* box-shadow: 20px 20px 10px var(--darkBlue); */
+    border: 4px solid var(--backgroundColor);
 }
 
-/* Media Query for Mobile Devices */
-@media (max-width: 767.98px) {
-   
-.imageContainer {
-    width: 100%; /* Ensure the container takes full width of its parent */
-    max-width: 420px; /* Set a maximum width for the container */
-    margin: 0 auto; /* Center the container */
-}
-
-.imageBorder {
-    width: 100%; /* Make the border take full width of the container */
-    height: 400px; /* Fixed height for the border */
-    position: relative; /* Required for positioning the image */
-    background-color: var(--darkBlue); /* Background color */
-    border-radius: 50%; /* Rounded corners */
-}
-
-.imageContainer img {
-    width: 100% ; /* Adjust width to account for the offset */
-    height: 100% ; /* Adjust height to account for the offset */
-    position: absolute; /* Position the image absolutely within the border */
-    top: 0px; /* Offset the image */
-    left: 0px; /* Offset the image */
-    border-radius: 50%; /* Rounded corners */
-    object-fit: cover; /* Ensure the image covers the area without distortion */
-}
-}
 
 
 
@@ -104,5 +109,49 @@ main{
 
 
 
+/* THIS IS FOR THE IMAGE ANIMATIONS -----------------------------------------------------------------------------------------------*/
+@keyframes slideIn {
+  0% { transform: translateX(-100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+.slide-in, .imageBorder {
+  animation: slideIn 1s ease-out forwards;
+  /* animation: slideIn 1s ease-in backwards; */
+}
+
+/* Media Query for Mobile Devices -----------------------------------------------------------------------------------------------*/
+@media (max-width: 767.98px) {
+   
+  .imageContainer {
+      width: 100%; /* Ensure the container takes full width of its parent */
+      max-width: 420px; /* Set a maximum width for the container */
+      margin: 0 auto; /* Center the container */
+  }
+  
+  .imageBorder {
+      width: 100%; /* Make the border take full width of the container */
+      height: 400px; /* Fixed height for the border */
+      position: relative; /* Required for positioning the image */
+      background-color: var(--introBackground); 
+      border-radius: 50%; /* Rounded corners */
+      opacity: 0.5;
+      
+  }
+  
+  .imageContainer img {
+      width: 100% ; /* Adjust width to account for the offset */
+      height: 100% ; /* Adjust height to account for the offset */
+      position: absolute; /* Position the image absolutely within the border */
+      top: 0px; /* Offset the image */
+      left: 0px; /* Offset the image */
+      border-radius: 50%; /* Rounded corners */
+      object-fit: cover; /* Ensure the image covers the area without distortion */
+      /* box-shadow: var(--darkBlue) 1px 1px 25px; */
+      
+      box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+}
 
 

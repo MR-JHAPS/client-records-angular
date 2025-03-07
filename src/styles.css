@@ -2,9 +2,34 @@
 :root{
     --darkBlue: #112C50;
     --introBackground: #E8E8E8;
-    --orange: #EF6602;
+    --orange: #EF6602;  /* Button links or icons. use minimal */
+    --mutedOrange: #FF8C42;
     --lightBlue: #4B6F8C;
+    --lightShade : #F5F5F5;
+    /* #FF8C42 */
+
+
+    --primaryColor:#112C50;
+    --secondaryColor: #2E5A88;  
+    --accentColor: #EF6602;
+    --backgroundColor:  #F5F5F5;
+    --textColor: #333333;
 }
+
+/* Primary Color: #112C50 (Dark Navy Blue)
+
+Secondary Color: #2E5A88 (Lighter Blue for variety)
+
+Accent Color: #EF6602 (Bright Orange for highlights)
+
+Background Color: #F5F5F5 (Lighter Gray for a cleaner look)
+
+Text Color: #333333 (Dark Gray for readability) */
+
+
+
+
+
 
 
 

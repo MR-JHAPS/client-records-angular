@@ -1,7 +1,24 @@
 #navBar{
-    background-color: var(--orange);
+    background-color: var(--primaryColor);
 }
 
 a,h3{
-    color:whitesmoke;
+    color:var(--backgroundColor);
+}
+
+a:hover{
+    color:var(--mutedOrange);
+}
+
+.active{
+    color: var(--accentColor) !important;
+}
+
+.navbar-toggler{
+    color:var(--accentColor); /* this the button border */
+    background-color: var(--backgroundColor); /* THis is the background of the button container */
+}
+
+.navbar-toggler-icon{
+    background-color: var(--backgroundColor); /* This is the background color of icon */
 }
