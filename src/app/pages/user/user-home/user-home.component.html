@@ -11,7 +11,7 @@
 
     
         <input class="p-2" type="text" placeholder="Search Clients"  name="searchBox" required #searchBox="ngModel" [(ngModel)]="searchQuery" >
-        <button class="btn btn-success ms-3 p-2 ps-5 pe-5" (click)="searchClientsWithQuery()" name="searchButton" >Search</button>
+        <button class="btn ms-3 p-2 ps-5 pe-5" (click)="searchClientsWithQuery()" name="searchButton" >Search</button>
         @if (searchBox.errors?.['required'] && searchBox.touched) {
             <!-- <span class="alert alert-warning">Search box is empty</span> -->
             <div class="alert alert-warning alert-dismissible fade show w-12" role="alert">
@@ -27,7 +27,7 @@
 
 
 <!-- This is for Selecting Number Of Client Contents Per Page -->
-<div class="container-fluid bg bg-light mb-2 p-2 text-center">
+<div class="pageContent container-fluid  mb-2 p-2 text-center">
     
         <label class="me-3" for="contentNumber">Content Per Page </label>
     
@@ -39,8 +39,6 @@
     
 </div>
 
-<!-- This is to possibly store the modal from the client-update component -->
-<ng-container #modalContainer></ng-container>
 
 
 <table class="table table-striped">
@@ -67,7 +65,8 @@
                 <td>{{client.dateOfBirth}}</td>
                 <td>{{client.postalCode}}</td>
                    
-                <td><button class="btn btn-primary w-75" (click)="updateClient(client.id); $event.stopPropagation()">Update</button></td>
+                <!-- <td><button class="btn btn-primary w-75" (click)="updateClient(client.id); $event.stopPropagation()"> Update</button></td> -->
+                <td><button class="btn btn-primary w-75" (click)="navigateToUpdatePage(client.id); $event.stopPropagation()"> Update</button></td>
                 <td><button class="btn btn-danger" >Delete</button></td>
             
             </tr>

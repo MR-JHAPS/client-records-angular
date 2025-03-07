@@ -1,4 +1,69 @@
+
+
+
+
+
+
+
+
+
 <div class="container mt-5 text-center text-primary">
+  <h3>Update Client</h3>
+</div>
+
+
+<div class="container mt-3 p-5 text-center bg bg-light ">
+
+  
+<div class="form-floating mb-3 w-25">
+    <input type="text" class="form-control" id="floatingId" placeholder="Id" [(ngModel)]="client.id">
+    <label for="floatingInput">ID</label>
+</div>
+
+<div class="form-floating mb-3">
+    <input type="text" class="form-control" id="floatingFirstName" placeholder="First Name" [(ngModel)]="client.firstName">
+    <label for="floatingFirstName">First Name</label>
+</div>
+
+<div class="form-floating mb-3 w-50">
+  <input type="text" class="form-control" id="floatingLastName" placeholder="Last Name" [(ngModel)]="client.lastName">
+  <label for="floatingLastName">Last Name</label>
+</div>
+
+<div class="form-floating mb-3">
+  <input type="date" class="form-control" id="floatingDateOfBirth" placeholder="Date Of Birth" [(ngModel)]="client.dateOfBirth">
+  <label for="floatingDateOfBirth">Date Of Birth</label>
+</div>
+
+<div class="form-floating mb-3">
+  <input type="number" class="form-control" id="floatingPostalCode" placeholder="Postal Code" min="0" [(ngModel)]="client.postalCode">
+  <label for="floatingPostalCode">Postal Code</label>
+</div>
+
+<div class="container">
+  <button class="btn btn-primary w-25" (click)="OnUpdateClick()">Update</button>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container mt-5 text-center text-primary">
     <h3>Update Client</h3>
 </div>
 
@@ -7,27 +72,27 @@
 
     
   <div class="form-floating mb-3 w-25">
-      <input type="text" class="form-control" id="floatingInput" placeholder="Id">
+      <input type="text" class="form-control" id="floatingId" placeholder="Id" value="{{client.id}}">
       <label for="floatingInput">ID</label>
   </div>
 
   <div class="form-floating mb-3">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">Email address</label>
+      <input type="text" class="form-control" id="floatingFirstName" placeholder="First Name" value="{{client.firstName}}">
+      <label for="floatingFirstName">First Name</label>
   </div>
 
   <div class="form-floating mb-3 w-50">
-    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-    <label for="floatingPassword">Password</label>
+    <input type="text" class="form-control" id="floatingLastName" placeholder="Last Name" value="{{client.lastName}}">
+    <label for="floatingLastName">Last Name</label>
   </div>
 
   <div class="form-floating mb-3">
-    <input type="date" class="form-control" id="floatingDateOfBirth" placeholder="Date Of Birth">
+    <input type="date" class="form-control" id="floatingDateOfBirth" placeholder="Date Of Birth" value="{{client.dateOfBirth}}">
     <label for="floatingDateOfBirth">Date Of Birth</label>
   </div>
 
   <div class="form-floating mb-3">
-    <input type="number" class="form-control" id="floatingPostalCode" placeholder="Postal Code" min="0">
+    <input type="number" class="form-control" id="floatingPostalCode" placeholder="Postal Code" min="0" value="{{client.postalCode}}">
     <label for="floatingPostalCode">Postal Code</label>
   </div>
 
@@ -35,4 +100,4 @@
     <button class="btn btn-primary w-25">Update</button>
   </div>
 
-</div>
+</div> -->

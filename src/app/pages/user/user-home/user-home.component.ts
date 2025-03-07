@@ -7,7 +7,7 @@ import { map, Observable } from 'rxjs';
 import { PaginationServiceService } from '../../../core/services/paginationService/pagination-service.service';
 import { ApiPageModel } from '../../../core/models/class/apiPageModel';
 import { CommonModule, NgIf } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ModalServiceService } from '../../../shared/services/modal-service.service';
 import { ClientUpdateComponent } from '../client-update/client-update.component';
 import { ApiResponseClient } from '../../../core/models/apiResponseClient';
@@ -28,6 +28,7 @@ export class UserHomeComponent implements OnInit, AfterViewInit {
   updateTemplate : ElementRef<any>;
   userId = 0; // this is to get the id of the selected user so that it can be updated or deleted.
 
+  private _router = inject(Router);
   private _modalService = inject(ModalServiceService);
   private _clientService : ClientApiServiceService = inject(ClientApiServiceService);
   private _paginationService: PaginationServiceService = inject(PaginationServiceService);
@@ -37,12 +38,7 @@ export class UserHomeComponent implements OnInit, AfterViewInit {
 
   public searchQuery : string = "";  //this stores the search query.
   public clientList : Array<I_ClientDto> = []; // this stores the Array of clients obtained from Api.
- /*  client:I_ClientDto = {id:0,
-    firstName :"",
-    lastName: "",
-    dateOfBirth : "",
-    postalCode: ""}; */
-    client:ClientDto = new ClientDto();
+
 
   public pageNumber:number = 0;
   public clientContentPerPage = 10 ; // hold the number of client-content per page.
@@ -52,7 +48,7 @@ export class UserHomeComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.getAllClients(this.clientContentPerPage, undefined);
     this.gettingClientsPerPage();
-    console.log("before Click of client Update: " + this.client);
+    // console.log("before Click of client Update: " + this.client);
   }
 
   ngAfterViewInit(): void {
@@ -65,9 +61,9 @@ getClientById(id: number): void{
   this._clientService.getClientById(id).subscribe({
     next: (ApiResponseSingleClient) =>{
       console.log("checking if the api contains the client from given id in user Homepage" , ApiResponseSingleClient.data);
-      this.client = ApiResponseSingleClient.data;
+      // this.client = ApiResponseSingleClient.data;
       this._modalService.setClient(ApiResponseSingleClient.data);
-      console.log("Selected client is sent to ModalService from UserHome " , this.client);
+      console.log("Selected client is sent to ModalService from UserHome " , ApiResponseSingleClient.data);
       
     },
     error : (error) =>{
@@ -80,8 +76,7 @@ getClientById(id: number): void{
 
 openSelectedClient(id:number){
   this.getClientById(id);
-  // debugger
-  this._modalService.getClient();
+  this._modalService.getClient(); // when li of client is clicked modal is triggered
   console.log(this._modalService.getClient());
   this.selectedClientComponent.openSelectedClient();
   
@@ -96,28 +91,18 @@ openSelectedClient(id:number){
 
 
 //----------------------------ON UPDATE BUTTON CLICK--------------------------------------------------------------------------------------
-updateClient(id:number){
-
+navigateToUpdatePage(id:number){
+  this._router.navigate(["/client-update"], {queryParams:{id : id} } )
 }
 
-closeUpdate(): void{
+
+
+
+
+/* closeUpdate(): void{
   this._modalService.closeModal();
-}
-/* 
-getClientById(id: number): void{
-  this._clientService.getClientById(id).subscribe({
-    next: (ApiResponseSingleClient) =>{
-      console.log("hello" , ApiResponseSingleClient.data);
-      this.client = ApiResponseSingleClient.data;
-      this._modalService.setClient(ApiResponseSingleClient.data);
-      console.log("updated client" , this.client);
-      
-    },
-    error : (error) =>{
-      console.log("error getting the client by id : " ,error);
-    }
-  })
 } */
+
 
 
 
@@ -214,55 +199,6 @@ gettingClientsPerPage():Array<number>{
     })
   }
 
-
-//For live search will work on it later:------------------------------------------------------------------------------------
-
- /*  liveSearchClientsWithQuery(event:Event) : void{
-    this._clientService.searchQuery(this.searchQuery).subscribe({
-      next : (apiResponseClient) =>{
-        this.clientList = apiResponseClient.data.content;
-      },
-      error : (error)=>{
-        console.log("error searching client with query " ,error)
-      },
-      complete : () => {console.log("Searching Clients with Query Completed")}
-    })
-  } */
-
-//----------------------------------------------------------------------------------------------------------------------
-
-
-
- /*  updateClients(){
-
-  } */
-
-/* 
-   // Navigate to a specific page using HATEOAS links
-   navigateToPage(linkKey: string): void {
-    const url = this.paginationLinks[linkKey];
-    if (url && url.length>0) {
-      this.getAllClients(undefined, undefined, url[0]);
-    }
-  }
-
-  // Helper methods for UI navigation
-  nextPage(): void {
-    this.navigateToPage('next');
-  }
-
-  previousPage(): void {
-    this.navigateToPage('prev');
-  }
-
-  firstPage(): void {
-    this.navigateToPage('first');
-  }
-
-  lastPage(): void {
-    this.navigateToPage('last');
-  }
- */
 
 
 
