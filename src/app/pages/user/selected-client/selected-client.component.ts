@@ -22,7 +22,10 @@ export class SelectedClientComponent implements AfterViewInit, OnInit {
   public client : ClientDto = this._modalservice.getClient();
 
   ngOnInit(): void {
+     /* this component is child component of UserHomeComponent so when we are
+        in userHome this component is already initialized */
     console.log("OnInit of the Seleceted-Client-Component this is inside the selected client component : ",this.client)
+   
   }
 
   ngAfterViewInit(): void {
@@ -30,17 +33,16 @@ export class SelectedClientComponent implements AfterViewInit, OnInit {
   }
 
   getClientData(): void {
+    // this.client = this._modalservice.getClient();
     setTimeout(()=>{ this.client = this._modalservice.getClient(); // Retrieves the current client data
       console.log("Delayed : " , this.client)},
-    200);
-    // this.client = this._modalservice.getClient(); // Retrieves the current client data
-    //   console.log("Delayed : ",this.client)
-   
+    200);   
   }
 
   openSelectedClient() {
     this.modalObj.show(); // this is the function of Modal Class from Bootstrap.
     this.getClientData();
+    console.log(this.client);
    
   }
 

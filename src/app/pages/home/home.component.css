@@ -1,0 +1,108 @@
+main{
+    box-sizing: border-box;
+    padding-top:40px;
+    margin: 0px;
+    background-color: var(--introBackground);
+    min-height: 100vh;   
+}
+
+.imageContainer {
+    width: 100%; /* Ensure the container takes full width of its parent */
+    max-width: 420px; /* Set a maximum width for the container */
+    margin: 0 auto; /* Center the container */
+}
+
+.imageBorder {
+    width: 100%; /* Make the border take full width of the container */
+    height: 480px; /* Fixed height for the border */
+    position: relative; /* Required for positioning the image */
+    background-color: var(--darkBlue); /* Background color */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.imageContainer img {
+    width: calc(100% + 2px); /* Adjust width to account for the offset */
+    height: calc(100% + 2px); /* Adjust height to account for the offset */
+    position: absolute; /* Position the image absolutely within the border */
+    top: -30px; /* Offset the image */
+    left: -30px; /* Offset the image */
+    border-radius: 5px; /* Rounded corners */
+    object-fit: cover; /* Ensure the image covers the area without distortion */
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 767.98px) {
+   
+.imageContainer {
+    width: 100%; /* Ensure the container takes full width of its parent */
+    max-width: 420px; /* Set a maximum width for the container */
+    margin: 0 auto; /* Center the container */
+}
+
+.imageBorder {
+    width: 100%; /* Make the border take full width of the container */
+    height: 400px; /* Fixed height for the border */
+    position: relative; /* Required for positioning the image */
+    background-color: var(--darkBlue); /* Background color */
+    border-radius: 50%; /* Rounded corners */
+}
+
+.imageContainer img {
+    width: 100% ; /* Adjust width to account for the offset */
+    height: 100% ; /* Adjust height to account for the offset */
+    position: absolute; /* Position the image absolutely within the border */
+    top: 0px; /* Offset the image */
+    left: 0px; /* Offset the image */
+    border-radius: 50%; /* Rounded corners */
+    object-fit: cover; /* Ensure the image covers the area without distortion */
+}
+}
+
+
+
+
+  .language {
+    grid-area: language;
+     text-align: right;
+     /* background-color: red; */
+    }
+
+  .language>h5{
+    color: var(--darkBlue);
+    font-weight: 600;
+    
+    }
+  
+
+  .profession {
+    grid-area: profession;
+     /* background-color: red; */
+    }
+
+  .profession>h1{
+    color: var(--orange);
+    font-weight: bolder;
+    }  
+
+
+  
+  .description {
+     grid-area: description;
+    }
+
+   .description>p{
+    color: var(--darkBlue);
+   } 
+  
+
+
+  .aboutMe { 
+    grid-area: aboutMe;
+    /* background-color: red; */
+ }
+  
+
+
+
+
+

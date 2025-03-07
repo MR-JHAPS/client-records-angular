@@ -1,10 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserServiceService } from '../../../core/services/user-service.service';
 import { UserAuth } from '../../../core/models/userAuth';
 import { PublicApiServiceService } from '../../../core/services/public-api/public-api-service.service';
 import { ApiResponse } from '../../../core/models/apiResponse';
+import { AuthServiceService } from '../../../core/services/AuthService/auth-service.service';
 
 @Component({
   selector: 'app-login',
@@ -17,9 +17,8 @@ export class LoginComponent implements OnInit{
 
   user : UserAuth = {email: "" ,
                        password: ""}
-
+  _authService = inject(AuthServiceService);//this is to handle the menu depending on logged in or logged out.
   _publicController : PublicApiServiceService = inject(PublicApiServiceService);
-  _userService : UserServiceService = inject(UserServiceService); // In this service we store the localStorage KeyName when logging in.
   _router : Router = inject(Router);  
   token : string = ""; 
   _activatedRoute :ActivatedRoute = inject(ActivatedRoute);
@@ -49,7 +48,7 @@ onLogin():void{
             and which token to use for that active("loggedInUser":userEmail) user. */
           localStorage.setItem("loggedInUser", this.user.email); //saving logged_userEmail with "loggedInUser"
           localStorage.setItem(this.user.email, this.token); //saving token with the userEmail as key.
-
+          this._authService.loggedIn();
           setTimeout(()=>{
             this._router.navigateByUrl("user-home");
           },300);

@@ -1,5 +1,4 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-import { UserServiceService } from '../services/user-service.service';
 import { inject } from '@angular/core';
 import { LoginComponent } from '../../pages/auth/login/login.component';
 

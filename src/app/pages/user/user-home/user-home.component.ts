@@ -64,10 +64,10 @@ export class UserHomeComponent implements OnInit, AfterViewInit {
 getClientById(id: number): void{
   this._clientService.getClientById(id).subscribe({
     next: (ApiResponseSingleClient) =>{
-      console.log("hello" , ApiResponseSingleClient.data);
+      console.log("checking if the api contains the client from given id in user Homepage" , ApiResponseSingleClient.data);
       this.client = ApiResponseSingleClient.data;
       this._modalService.setClient(ApiResponseSingleClient.data);
-      console.log("updated client" , this.client);
+      console.log("Selected client is sent to ModalService from UserHome " , this.client);
       
     },
     error : (error) =>{
