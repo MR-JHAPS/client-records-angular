@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { EnvironmentInjector, inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { environment } from '../../../../environments/environment';
-import { UserAuth } from '../../models/userAuth';
+import { inject, Injectable } from '@angular/core';
+import { API_ENDPOINTS } from '../../api/constants/apiEndpoints.const';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +8,8 @@ import { UserAuth } from '../../models/userAuth';
 export class UserApiServiceService {
 
   _httpClient : HttpClient = inject(HttpClient);
-  private apiBaseUrl = environment.apiBaseUrl; //this is the base url
-  private userEndpoints = environment.userEndpoint; //this contains the api of users
+  private apiBaseUrl = API_ENDPOINTS.apiBaseUrl; //this is the base url
+  private userEndpoints = API_ENDPOINTS.userApi; //this contains the api of users
  
   
 

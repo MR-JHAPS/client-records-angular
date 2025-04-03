@@ -2,8 +2,6 @@ export const environment = {
 
     //THIS PAGE CONTAINS ALL THE API's URL.
 
-    // production: false,
-    // apiBaseUrl : "http://localhost:8080",
     apiBaseUrl : "http://192.168.1.25:8080",
 
     publicEndpoint:{
@@ -29,6 +27,11 @@ export const environment = {
         getUserById : "/user/role/{role}",
         getUserByRole : "/user/id/{id}",
         getAllUsers : "/user/findAll"
+
+    },
+
+    adminEndpoint : {
+
 
     }
 

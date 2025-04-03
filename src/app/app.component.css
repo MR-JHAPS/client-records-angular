@@ -3,6 +3,17 @@
     margin: 0;
 }
 
+body{
+    padding: 0;
+    margin: 0;
+}
+
 #router-outlet{
-    min-height:  90vh;
+    /* min-height:  100vh; */
+}
+
+#router{
+    background-color: black;
+    padding: 0;
+    margin: 0;
 }

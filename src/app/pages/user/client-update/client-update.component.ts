@@ -23,6 +23,8 @@ export class ClientUpdateComponent implements OnInit{
   public id: number ; //id is passed from  getIdFromURL() which is initialized in ngOnInit so it loads when page loads. 
   public client : ClientDto = new ClientDto();  
 
+  public isUpdated:boolean = false;
+  public hasError: boolean = false;
   public message : string;
 
 
@@ -65,11 +67,15 @@ export class ClientUpdateComponent implements OnInit{
   updateClient(id:number, client: ClientDto){
     console.log(client);
       this._clientService.updateClients(id, client).subscribe({
-      next : (response )=>{
+      next : (response : ApiResponse )=>{
         console.log(response)
+        this.isUpdated=true;
+        this.message= response.data;
       },
       error : (error) => {
         console.log("error udpating the client : ", error);
+        this.hasError = true;
+        this.message = "Error! unable to Update Client";
       }
     })
   }
@@ -81,7 +87,10 @@ export class ClientUpdateComponent implements OnInit{
 
   
 
-  
+  closeMessage(){
+    this.hasError = false;
+    this.isUpdated = false;
+  }
 
 
 

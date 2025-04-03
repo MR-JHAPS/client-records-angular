@@ -5,6 +5,8 @@ import { map, Observable } from 'rxjs';
 import { ApiResponseClient, ApiResponseSingleClient } from '../../models/apiResponseClient';
 import { ClientDto } from '../../models/clientDto';
 import { ModalServiceService } from '../../../shared/services/modal-service.service';
+import { ApiResponse } from '../../models/apiResponse';
+import { API_ENDPOINTS } from '../../api/constants/apiEndpoints.const';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +15,8 @@ export class ClientApiServiceService {
 
   _httpClient : HttpClient = inject(HttpClient);
   _modalService = inject(ModalServiceService);
-  private apiBaseUrl = environment.apiBaseUrl;          // contains the base Url of API. 
-  private clientEndpoint = environment.clientEndpoint; // contains all the client's API's
+  private apiBaseUrl = API_ENDPOINTS.apiBaseUrl;          // contains the base Url of API. 
+  private clientEndpoint = API_ENDPOINTS.clientApi; // contains all the client's API's
 
   private clientObj : ClientDto;
 
@@ -25,8 +27,11 @@ export class ClientApiServiceService {
     return this._httpClient.get<ApiResponseClient>(url);
   } */
 
+
+    
+
   getAllClients(size?: number, urlPage?:string): Observable<ApiResponseClient>{
-    const url = urlPage ? urlPage : `${this.apiBaseUrl+this.clientEndpoint.getAllClients}?page=0&size=${size??10}` ;
+    const url = urlPage ? urlPage : `${this.apiBaseUrl+this.clientEndpoint.getAllClients}?pageNumber=0&pageSize=${size??10}` ;
     return this._httpClient.get<ApiResponseClient>(url);
   }
 
@@ -35,13 +40,13 @@ export class ClientApiServiceService {
   }
 
 
-  updateClients(id:number, clientInfo:ClientDto){
-    const url = `${this.apiBaseUrl}${this.clientEndpoint.updateClient}/${id}`;
-    return this._httpClient.put(url, clientInfo);
+  updateClients(id:number, clientInfo:ClientDto):Observable<ApiResponse>{
+    const url = `${this.apiBaseUrl}${this.clientEndpoint.updateClientById}/${id}`;
+    return this._httpClient.put<ApiResponse>(url, clientInfo);
   }
 
   searchQuery(query:string):Observable<ApiResponseClient>{
-    const url = `${this.apiBaseUrl}${this.clientEndpoint.getClientsBySearchQuery}/${query}`;
+    const url = `${this.apiBaseUrl}${this.clientEndpoint.searchClients}/${query}`;
     return this._httpClient.get<ApiResponseClient>(url);
   }
 

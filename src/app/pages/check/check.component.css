@@ -1,0 +1,76 @@
+
+.container-fluid{
+
+    border: 2px solid red;
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(2, minmax(2fr, 400px));
+  
+}
+
+
+.column{
+    background-color: azure;
+    border: 2px solid green;
+}
+
+
+
+
+
+
+/* *{
+    padding: 0;
+    margin: 0;
+}
+
+.container-fluid { 
+
+    border: 2px solid red;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    grid-template-rows: repeat(1, minmax(400px, 1fr));
+    
+    gap: 10px 10px;
+
+    grid-template-areas:
+      "imageContainer language"
+      "imageContainer profession"
+      "imageContainer profession"
+      "imageContainer description"
+      "imageContainer aboutMe"
+      "imageContainer aboutMe";
+  }
+  
+  .imageContainer {
+     grid-area: imageContainer;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     background-color: antiquewhite;
+     }
+     img{
+        width: 90%;
+     }
+  
+  .language { 
+    grid-area: language;
+    background-color: azure;
+    }
+  
+  .profession { 
+    grid-area: profession;
+    background-color: aqua;
+     }
+  
+  .description { 
+    grid-area: description;
+    background-color: cadetblue;
+    }
+  
+  .aboutMe { 
+    grid-area: aboutMe; 
+    background-color: coral;
+    }
+   */

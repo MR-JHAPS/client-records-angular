@@ -1,7 +1,21 @@
 
 
 
+@if (isUpdated) {
+  <!--  <div class="alert alert-success text-center" role="alert">
+     <p>Success! User registered Successfully.</p> <button (click)="closeRegistrationMessage()">close</button> 
+     </div> -->
 
+     <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+       <strong>Success!</strong> User was registered Successfully.{{message}}
+       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeMessage()"></button>
+     </div>
+}@else if (hasError) {
+   <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+       <strong>Error!</strong> {{message}}
+       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeMessage()"></button>
+     </div>
+}
 
 
 

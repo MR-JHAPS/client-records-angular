@@ -6,10 +6,9 @@
 </ng-container>
 
 
-<!-- <div class="container p-2 text-center"> -->
-<div class="container p-2 text-center mt-2 mb-5">   
-
-    
+<section class="container p-2 text-center mt-2 mb-5">   
+    <!-- This is the search Box -->
+    <div>
         <input class="p-2" type="text" placeholder="Search Clients"  name="searchBox" required #searchBox="ngModel" [(ngModel)]="searchQuery" >
         <button class="btn ms-3 p-2 ps-5 pe-5" (click)="searchClientsWithQuery()" name="searchButton" >Search</button>
         @if (searchBox.errors?.['required'] && searchBox.touched) {
@@ -19,15 +18,28 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="searchBox.reset()"></button>
             </div>
         }
-    
-</div>
-<!-- copied search bar -->
-
+    </div>
+    <!-- This is the radio button for SearchBy FieldNames. -->
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="firstName">
+            <label for="firstName">FirstName</label>
+            <input type="radio" name="searchBy" id="firstName">
+        </div>
+        <div class="lastName">
+            <label for="lastName">LastName</label>
+            <input type="radio" name="searchBy" id="lastName">
+        </div>
+        <div class="postalCode">
+            <label for="firstName">PostalCode</label>
+            <input type="radio" name="searchBy" id="postalCode">
+        </div>  
+    </div> 
+</section>  
 
 
 
 <!-- This is for Selecting Number Of Client Contents Per Page -->
-<div class="pageContent container-fluid  mb-2 p-2 text-center">
+<section class="pageContent container-fluid  mb-2 p-2 text-center">
     
         <label class="me-3" for="contentNumber">Content Per Page </label>
     
@@ -37,7 +49,7 @@
             }
         </select>
     
-</div>
+</section>
 
 
 
@@ -65,7 +77,6 @@
                 <td>{{client.dateOfBirth}}</td>
                 <td>{{client.postalCode}}</td>
                    
-                <!-- <td><button class="btn btn-primary w-75" (click)="updateClient(client.id); $event.stopPropagation()"> Update</button></td> -->
                 <td><button class="btn btn-primary w-75" (click)="navigateToUpdatePage(client.id); $event.stopPropagation()"> Update</button></td>
                 <td><button class="btn btn-danger" >Delete</button></td>
             
