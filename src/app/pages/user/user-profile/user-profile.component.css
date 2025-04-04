@@ -1,0 +1,41 @@
+.container {  display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "imageContainer detailsContainer";
+  }
+  
+  .imageContainer {  display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "title title title"
+      "details details details"
+      "update button update button update button"
+      "updatedDetails updatedDetails updatedDetails";
+  }
+  
+  .title { grid-area: title; }
+  
+  .details { grid-area: details; }
+  
+  .update button { grid-area: update button; }
+  
+  .updatedDetails { 
+    grid-area: updatedDetails; 
+    background-color: coral;
+}
+
+  
+
+  .imageContainer { 
+    grid-area: imageContainer; 
+    background-color: bisque;
+}
+  
+  .detailsContainer { grid-area: detailsContainer; }
+  

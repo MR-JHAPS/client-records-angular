@@ -8,6 +8,7 @@ import { UserHomeComponent } from './pages/user/user-home/user-home.component';
 import { ClientUpdateComponent } from './pages/user/client-update/client-update.component';
 import { SelectedClientComponent } from './pages/user/selected-client/selected-client.component';
 import { CheckComponent } from './pages/check/check.component';
+import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
 
 export const routes: Routes = [
     {path: "",  component: HomeComponent},
@@ -15,6 +16,7 @@ export const routes: Routes = [
     {path: "login", component: LoginComponent},
     {path: "register", component: RegisterComponent},
     {path: "user-home", component: UserHomeComponent},
+    {path: "user-profile", component: UserProfileComponent},
     {path: "client-update", component: ClientUpdateComponent},
     {path: "selected-client", component: SelectedClientComponent},
     {path: "check", component:CheckComponent},
