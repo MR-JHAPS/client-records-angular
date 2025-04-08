@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, Inject, inject, OnInit } from '@angular/core';
 import { UserApiServiceService } from '../../../core/services/user-api/user-api-service.service';
 import { ApiResponse } from '../../../core/models/apiResponse';
 import { UserGeneralResponse } from '../../../core/api/models/interface/responses/userGeneralResponse';
@@ -7,6 +7,7 @@ import { I_ApiResponseModel } from '../../../core/api/models/interface/responses
 import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserUpdateRequest } from '../../../core/api/models/interface/requests/userUpdateRequest';
+import { CustomDateConverterService } from '../../../shared/customDateConverter';
 
 @Component({
   selector: 'app-user-profile',
@@ -16,22 +17,30 @@ import { UserUpdateRequest } from '../../../core/api/models/interface/requests/u
 })
 export class UserProfileComponent implements OnInit{
 
-  ngOnInit(): void {
-    this.getCurrentUser();  
-  }
   isLoading = true;
-  _httpClient = inject(HttpClient);
-  _userApiService = inject(UserApiServiceService);
-  // currentUser : any ;
   currentUser : UserGeneralResponse;
-  userUpdateData : UserUpdateRequest ;
+  formattedCreatedOn : string ;
+  formattedUpdatedOn : string;
+
+  private _httpClient = inject(HttpClient);
+  private _userApiService = inject(UserApiServiceService); 
+  private _dateConverter = inject(CustomDateConverterService);
+ 
+
 
   
+ngOnInit(): void {
+  this.getCurrentUser();  
+}             
 
 getCurrentUser():void{
   this._userApiService.getCurrentUser().subscribe({
-    next : (response : I_ApiResponseModel) => { this.currentUser = response.data;
-                          console.log(response)},
+    next : (response : I_ApiResponseModel<UserGeneralResponse>) => { this.currentUser = response.data;
+          this.formattedCreatedOn = this._dateConverter.formatLocalDateTime(response.data.createdOn);
+          this.formattedUpdatedOn = this._dateConverter.formatLocalDateTime(response.data.updatedOn);
+          console.log(this.formattedCreatedOn);              
+          console.log(response)
+                        },
     error : (error) => {console.log("error getting current user :", error)},
     complete : () => {console.log("get Current User successfull."); this.isLoading=false;}
   })

@@ -11,6 +11,9 @@ body{
 #router-outlet{
     /* min-height:  100vh; */
 }
+main{
+    min-height: 80vh;
+}
 
 #router{
     background-color: black;

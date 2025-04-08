@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MenuComponent } from "./shared/components/menu/menu.component";
 import { FooterComponent } from "./shared/components/footer/footer.component";
+import { AuthServiceService } from './core/services/AuthService/auth-service.service';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +11,10 @@ import { FooterComponent } from "./shared/components/footer/footer.component";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+  // ngOnInit(): void {
+  //   this._authService;
+  // }
+
+  // private _authService = inject(AuthServiceService);
   title = 'clientRecords';
 }

@@ -22,8 +22,8 @@ export class UserApiServiceService {
     return this._httpClient.post<UserAuth>(this.apiBaseUrl+this.publicEndpoints.login, credentials);
   } */
 
-  getCurrentUser():Observable<I_ApiResponseModel>{
-   return this._httpClient.get<I_ApiResponseModel>(`${this.apiBaseUrl}${this.userEndpoints.getCurrentUser}`);
+  getCurrentUser():Observable<I_ApiResponseModel<UserGeneralResponse>>{
+   return this._httpClient.get<I_ApiResponseModel<UserGeneralResponse>>(`${this.apiBaseUrl}${this.userEndpoints.getCurrentUser}`);
   }
 
   updateCurrentUser(userDetails : UserUpdateRequest){
@@ -36,7 +36,7 @@ export class UserApiServiceService {
   }
 
   deleteCurrentAccount(){
-
+    
   }
 
 

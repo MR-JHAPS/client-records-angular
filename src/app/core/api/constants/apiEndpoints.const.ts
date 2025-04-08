@@ -4,7 +4,8 @@ export const API_ENDPOINTS= {
 
     publicApi: {
        login : "/public/login",
-       signup: "public/signup"
+       signup: "/public/signup",
+       validateToken : "/public/validate-token"
     },
 
     

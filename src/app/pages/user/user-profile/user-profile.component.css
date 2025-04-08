@@ -1,41 +1,204 @@
-.container {  display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
-    grid-template-rows: 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-      "imageContainer detailsContainer";
-  }
-  
-  .imageContainer {  display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-      "title title title"
-      "details details details"
-      "update button update button update button"
-      "updatedDetails updatedDetails updatedDetails";
-  }
-  
-  .title { grid-area: title; }
-  
-  .details { grid-area: details; }
-  
-  .update button { grid-area: update button; }
-  
-  .updatedDetails { 
-    grid-area: updatedDetails; 
-    background-color: coral;
+
+main{
+  min-height: 100vh;
 }
 
-  
+.mainContainer{
+  padding:10px;
+  padding-top:40px;
 
-  .imageContainer { 
-    grid-area: imageContainer; 
-    background-color: bisque;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* grid-template-rows: 1fr; */
+  grid-template-areas: "imageContainer detailsContainer";
+}
+
+.imageContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+ /*  border: 10px solid darkgray;
+  border-radius: 50%; */
+ 
+
+}
+img{
+  max-width: 400px;
+  /* border: 0.5px solid var(--orange); */
+  /* border-radius: 50%; */
+  /* box-shadow: 3px 1px 7px rgb(170, 170, 170); */
+}
+
+
+.detailsContainer{
+  padding-top: 40px;
+  display: grid;
+  grid-template-rows: 0.5fr 1fr 0.5fr 0.5fr;
+  grid-template-areas: "detailsHeader"
+  "details"
+  "updateButton"
+  "updatedOn";
+}
+
+.detailsHeader{
+  text-align: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  text-shadow: 2px 1px 4px rgb(170, 170, 170);
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+/* This is the detail part */
+.details{
+  margin:auto;
+}
+
+/* .email{
+  padding-bottom:10px;
+} */
+.createdOn{
+  padding-top:10px;
+}
+
+
+.details .label{
+  font-weight: bold;
+  color: rgb(136, 134, 134);
+  font-size: 20px;
+}
+
+.details .contents{
+  color: rgb(97, 96, 96);
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.updateButton{
+  margin: auto;
+}
+
+.updateButton .btn{
+  border: none;
+  border-radius: 20px;
+  background-color: var(--secondaryColor);
+  color: var(--lightShade);
+  box-shadow: 0.5px 2px 3px var(--mutedOrange);
+}
+
+.updateButton .btn:hover{
+  border: none;
+  border-radius: 20px;
+  background-color: var(--darkBlue);
+  color: var(--lightShade);
+  box-shadow: 0.5px 2px 3px var(--orange);
+}
+
+.updatedOn{
+  margin:auto;
+  margin-top: 20px;
+  color: rgb(131, 129, 129);
+  font-weight: 400;
+}
+
+
+
+
+
+/* MEDIA QUERY FOR RESPONSIVE GRID.------------------------------------ */
+
+@media(max-width : 650px) {
+
+  .mainContainer{
+    padding-top:40px;
+    display: grid;
+    grid-template-rows: 1fr 0.5fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: "imageContainer"
+    " detailsContainer";
+  }
+
+
+  img{
+    max-width: 360px;
+    border: 0.5px solid var(--orange);
+    border-radius: 50%;
+    box-shadow: none;
+  }
+
+  
+.detailsContainer{
+  margin-top: 10px;
+  /* background-color: darkgrey; */
+  display: grid;
+  grid-template-rows: 0.5fr 1fr 0.5fr 0.5fr;
+  grid-template-areas: "detailsHeader"
+  "details"
+  "updateButton"
+  "updatedOn";
 }
   
-  .detailsContainer { grid-area: detailsContainer; }
-  
+/* Header */
+  .detailsHeader{
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-shadow: 1px 0.4px 2px rgb(170, 170, 170);
+    letter-spacing: 2px;
+    font-weight: 800;
+    color:rgb(101, 101, 101);
+  }
+    
+
+
+/* details content */
+  .details{
+    margin: auto;
+  }
+  .createdOn{
+    padding-top:0;
+  }
+
+  .details .label{
+    font-weight: 600;
+    color: rgb(136, 134, 134);
+    font-size: 16px;
+  }
+  .details .contents{
+    color: rgb(136, 134, 134);
+    font-weight: 400;
+    font-size: 16px;
+    font-family: sans-serif;
+    letter-spacing: 0.5px;
+  }
+
+
+  .updateButton{
+    margin:auto;
+    margin-top:20px;
+  }
+
+  .updateButton .btn{
+    border: none;
+    border-radius: 20px;
+    background-color: var(--secondaryColor);
+    color: var(--lightShade);
+    box-shadow: 0.5px 2px 3px var(--orange);
+  }
+
+  .updatedOn{
+    margin:auto;
+    margin-top: 20px;
+    color: rgb(131, 129, 129);
+    font-weight: 400;
+  }
+
+
+
+}
+
+
+
+
+
+
+
+

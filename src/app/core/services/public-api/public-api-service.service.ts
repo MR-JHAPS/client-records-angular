@@ -1,9 +1,11 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserAuth } from '../../models/userAuth';
 import { Observable } from 'rxjs';
 import { API_ENDPOINTS } from '../../api/constants/apiEndpoints.const';
+import { I_ApiResponseModel } from '../../api/models/interface/responses/apiResponseModel';
+import { TokenValidateRequest } from '../../api/models/interface/requests/tokenValidateRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +26,12 @@ export class PublicApiServiceService {
     return this._httpClient.post(this.apiBaseUrl+this.publicApi.signup, userObj);
  }
  
+ validateToken(tokenRequest: TokenValidateRequest) : Observable<I_ApiResponseModel<string>>{
+  const url = this.apiBaseUrl+this.publicApi.validateToken;
+  return this._httpClient.post<I_ApiResponseModel<string>>(url, tokenRequest);
+ }
+
+
  
   /* constructor() { } */
 
