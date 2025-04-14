@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { ApiResponseClient } from '../../models/apiResponseClient';
-import { ApiLinksModel } from '../../models/apiLinksModel';
+import { ApiLinksModel } from '../../api/models/response/responseModel/apiLinksDetails';
 import { map } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 

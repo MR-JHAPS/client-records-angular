@@ -1,5 +1,5 @@
-import { ApiLinksModel} from "./apiLinksModel"
-import { ApiPageModel } from "./apiPageModel"
+import { ApiLinksModel} from "../api/models/response/responseModel/apiLinksDetails"
+import { ApiPageModel } from "../api/models/response/responseModel/apiPageDetails"
 import { ClientDto, I_ClientDto } from "./clientDto"
 
 export interface ApiResponseClient{

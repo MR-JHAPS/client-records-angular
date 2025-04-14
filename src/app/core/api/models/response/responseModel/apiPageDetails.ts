@@ -1,4 +1,4 @@
-export interface ApiPageModel{
+export interface ApiPageDetails{
 
     size: number,           //per page size
     number: number,             //page number

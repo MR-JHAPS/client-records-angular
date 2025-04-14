@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, inject, NgModule, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { ClientDto, I_ClientDto } from '../../../core/models/clientDto';
 import { ClientApiServiceService } from '../../../core/services/client-api/client-api-service.service';
-import { ApiLinksModel} from '../../../core/models/apiLinksModel';
+import { ApiLinksModel} from '../../../core/api/models/response/responseModel/apiLinksDetails';
 import { FormsModule } from '@angular/forms';
 import { map, Observable } from 'rxjs';
 import { PaginationServiceService } from '../../../core/services/paginationService/pagination-service.service';
