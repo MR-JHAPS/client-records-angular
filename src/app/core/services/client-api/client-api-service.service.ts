@@ -1,53 +1,69 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { map, Observable } from 'rxjs';
-import { ApiResponseClient, ApiResponseSingleClient } from '../../models/apiResponseClient';
-import { ClientDto } from '../../models/clientDto';
 import { ModalServiceService } from '../../../shared/services/modal-service.service';
-import { ApiResponse } from '../../models/apiResponse';
 import { API_ENDPOINTS } from '../../api/constants/apiEndpoints.const';
+import { ApiResponseModelPaginated } from '../../api/models/response/responseModel/apiResponseModelPaginated';
+import { ClientResponse } from '../../api/models/response/clientResponse';
+import { ApiResponseModel } from '../../api/models/response/responseModel/apiResponseModel';
+import { ClientRequest } from '../../api/models/request/clientRequest';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientApiServiceService {
 
-  _httpClient : HttpClient = inject(HttpClient);
+  _httpClient = inject(HttpClient);
+  _httpParam = inject(HttpParams);
   _modalService = inject(ModalServiceService);
   private apiBaseUrl = API_ENDPOINTS.apiBaseUrl;          // contains the base Url of API. 
   private clientEndpoint = API_ENDPOINTS.clientApi; // contains all the client's API's
 
-  private clientObj : ClientDto;
-
-
-  //page info in parameter.
- /*  getAllClients(page?: number, size?: number, urlPage?:string): Observable<ApiResponseClient>{
-    const url = urlPage ? urlPage : `${this.apiBaseUrl+this.clientEndpoint.getAllClients}?page=${page??0}&size=${size??10}` ;
-    return this._httpClient.get<ApiResponseClient>(url);
-  } */
-
-
     
 
-  getAllClients(size?: number, urlPage?:string): Observable<ApiResponseClient>{
+  getAllClients(size?: number, urlPage?:string): Observable<ApiResponseModelPaginated<ClientResponse>>{
+    const params = new HttpParams()
+    .set('pageNumber' , pageNumber)
+    .set('pageSize' , pageSize)
+    .set('sortBy' , sortBy)
+    .set('direction' , direction)
     const url = urlPage ? urlPage : `${this.apiBaseUrl+this.clientEndpoint.getAllClients}?pageNumber=0&pageSize=${size??10}` ;
-    return this._httpClient.get<ApiResponseClient>(url);
+    return this._httpClient.get<ApiResponseModelPaginated<ClientResponse>>(url);
   }
 
-  getClientById(id:number):Observable<ApiResponseSingleClient>{
-    return this._httpClient.get<ApiResponseSingleClient>(`${this.apiBaseUrl+this.clientEndpoint.getClientById}/${id}`);
+  getClientById(id:number):Observable<ApiResponseModel<ClientResponse>>{
+    const url = `${this.apiBaseUrl}${this.clientEndpoint.getClientById(id)}`;
+    return this._httpClient.get<ApiResponseModel<ClientResponse>>(url);
   }
 
 
-  updateClients(id:number, clientInfo:ClientDto):Observable<ApiResponse>{
+  updateClients(id:number, clientInfo:ClientRequest):Observable<ApiResponseModel<string>>{
     const url = `${this.apiBaseUrl}${this.clientEndpoint.updateClientById}/${id}`;
-    return this._httpClient.put<ApiResponse>(url, clientInfo);
+    return this._httpClient.put<ApiResponseModel<string>>(url, clientInfo);
   }
 
-  searchQuery(query:string):Observable<ApiResponseClient>{
-    const url = `${this.apiBaseUrl}${this.clientEndpoint.searchClients}/${query}`;
-    return this._httpClient.get<ApiResponseClient>(url);
+
+  saveClient(client: ClientRequest) : Observable<ApiResponseModel<string>>{
+    const url = `${this.apiBaseUrl}${this.clientEndpoint.saveNewClient}`;
+    return this._httpClient.post<ApiResponseModel<string>>(url, client);
+  }
+
+
+
+  searchQuery(query: string, pageNumber: number,
+              pageSize: number, sortBy: string,
+              direction: string ):Observable<ApiResponseModelPaginated<ClientResponse>>{
+    /*setting parameters of the Http-Request. (httpParam is immutable so i need to set in the same instance that is declared.
+                rather than doing param.set(....) we directly use the first instance of the httpParam.
+    */
+    const params = new HttpParams()
+      .set('pageNumber' , pageNumber)
+      .set('pageSize' , pageSize)
+      .set('sortBy' , sortBy)
+      .set('direction' , direction)
+    const url = `${this.apiBaseUrl}${this.clientEndpoint.searchClients}`;
+    return this._httpClient.get<ApiResponseModelPaginated<ClientResponse>>(url,{ params });
   }
 
 

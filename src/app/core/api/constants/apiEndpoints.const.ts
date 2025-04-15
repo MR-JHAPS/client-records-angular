@@ -11,54 +11,54 @@ export const API_ENDPOINTS= {
     
     userApi: {
         getCurrentUser: "/user/me",
-        updateCurrentUser: "/user/update/me",
-        updateProfilePicture: "/user/image/save",
-        deleteCurrentUser: "/user/delete/me"
+        updateCurrentUser: "/user/me",
+        updateProfilePicture: "/user/me/image",
+        deleteCurrentUser: "/user/me",
+        removeProfilePicture: "/user/me/image"
     },
 
     adminApi: {
-        getUserById: "/admin/user/",
-        getAllUsers: "/admin/user/find-all",
-        getUsersByRole: "/admin/search-by/role",
-        searchUserByEmail: "/admin/search-by/email",
-        updateUserRole: "/admin/user/update-role/",
-        updateCurrentAdmin: "/admin/update/me",
-        deleteUserById: "/admin/delete/"
+        getUserById:(id:number) => `/admin/users/${id}`,
+        getAllUsers: "/admin/users",
+        getUsersByRole: "/admin/users/by-role",
+        searchUserByEmail: "/admin/users/search",
+        updateUserRole:(id: number) => `/admin/users/${id}/roles`,
+        updateCurrentAdmin: "/admin/me",
+        deleteUserById: (id: number) => `/admin/users/${id}`
     },
 
     roleApi: { 
-        saveNewRole: "roles/save",
+        saveNewRole: "/roles",
         getAllRoles: "/roles",
-        deleteRole: "roles/delete/"
-
+        deleteRole:(id: number) => `/roles/${id}`
     },
 
     clientApi:{
-        getAllClients: "/clients/getAll",
-        getClientById: "/clients/get/",
-        saveNewClient: "/clients/insert",
-        updateClientById: "/clients/update/",
+        getAllClients: "/clients",
+        getClientById: (id: number) => `/clients/${id}`,
+        saveNewClient: "/clients",
+        updateClientById:(id: number) => `/clients/${id}`,
         searchClients: "/clients/search",
-        deleteClientById: "/clients/delete/"
+        deleteClientById:(id: number) => `/clients/${id}`
     },
 
     clientBinApi: {
-        getAllClientBin: "/client-bin/getAll",
-        restoreFromClientBin: "/client-bin/restore/",
-        deleteFromClientBin: "/client-bin/delete/"
+        getAllClientBin: "/client-bins",
+        restoreFromClientBin:(id: number) => `/client-bins/${id}/restore`,
+        deleteFromClientBin:(id: number) => `/client-bins/${id}/delete/`
     },
 
     clientLogApi: {
-        getAllClientLog: "/clientLog/getAll",
-        getClientLogById: "/clientLog/get/"
+        getAllClientLog: "/client-logs",
+        getClientLogById:(id: number) => `/client-logs/${id}`
     },
 
     imageApi: {
-        getImageById: "/images/",
-        getAllImagesOfAuthenticatedUser: "/images/current-user/get-all",
-        uploadImageForAuthenticatedUser: "/images/insert",
-        deleteImageById: "/images/delete/",
-        deleteMultipleImageById: "/images/delete/multiple"
+        getImageById:(imageId: number) => `/images/${imageId}`,
+        getAllImagesOfAuthenticatedUser: "/images/me",
+        uploadImageForAuthenticatedUser: "/images",
+        deleteImageById:(imageId: number) => `/images/${imageId}`,
+        deleteMultipleImageById: "/images" // the imageID's are passed through params.
     }
 
 

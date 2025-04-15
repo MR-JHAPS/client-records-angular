@@ -1,17 +1,16 @@
 import { AfterViewInit, Component, ElementRef, inject, NgModule, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
-import { ClientDto, I_ClientDto } from '../../../core/models/clientDto';
 import { ClientApiServiceService } from '../../../core/services/client-api/client-api-service.service';
-import { ApiLinksModel} from '../../../core/api/models/response/responseModel/apiLinksDetails';
+import { ApiLinksDetails} from '../../../core/api/models/response/responseModel/apiLinksDetails';
 import { FormsModule } from '@angular/forms';
 import { map, Observable } from 'rxjs';
 import { PaginationServiceService } from '../../../core/services/paginationService/pagination-service.service';
-import { ApiPageModel } from '../../../core/models/class/apiPageModel';
 import { CommonModule, NgIf } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { ModalServiceService } from '../../../shared/services/modal-service.service';
 import { ClientUpdateComponent } from '../client-update/client-update.component';
-import { ApiResponseClient } from '../../../core/models/apiResponseClient';
 import { SelectedClientComponent } from "../selected-client/selected-client.component";
+import { ClientResponse } from '../../../core/api/models/response/clientResponse';
+import { ApiResponseModelPaginated } from '../../../core/api/models/response/responseModel/apiResponseModelPaginated';
 
 @Component({
   selector: 'app-user-home',
@@ -33,12 +32,12 @@ export class UserHomeComponent implements OnInit, AfterViewInit {
   private _modalService = inject(ModalServiceService);
   private _clientService : ClientApiServiceService = inject(ClientApiServiceService);
   private _paginationService: PaginationServiceService = inject(PaginationServiceService);
-  private linkList : Array<ApiLinksModel> = [];  //this holds the list of pagination      ----links[{rel,href},{rel,href}].
+  private linkList : Array<ApiLinksDetails> = [];  //this holds the list of pagination      ----links[{rel,href},{rel,href}].
   private mappedLinks = new Map<string, string>;// this holds the key pair value of Extracted linkList ----links{rel:href, rel:href}.
   // private pageModel : ApiPageModel = new ApiPageModel(); 
 
   public searchQuery : string = "";  //this stores the search query.
-  public clientList : Array<I_ClientDto> = []; // this stores the Array of clients obtained from Api.
+  public clientList : Array<ClientResponse> = []; // this stores the Array of clients obtained from Api.
 
 
   public pageNumber:number = 0;
@@ -97,7 +96,7 @@ export class UserHomeComponent implements OnInit, AfterViewInit {
   //----------------------------------------------------------------------------------------------------------------------
     getAllClients(size?: number, url?: string) : void {
       this._clientService.getAllClients(size, url).subscribe({
-        next: (response:ApiResponseClient) => {
+        next: (response:ApiResponseModelPaginated<ClientResponse>) => {
           console.log(response.data);
           this.clientList = response.data.content; 
           console.log(this.clientList);

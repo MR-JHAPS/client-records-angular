@@ -1,9 +1,9 @@
 export class TokenValidateRequest{
-    token : string;
+    
 
-    constructor(){
-        this.token;
-    }
+    constructor(
+        public token : string
+    ){}
 
 
     setTokenName(token : string):void{

@@ -10,12 +10,14 @@ import { SelectedClientComponent } from './pages/user/selected-client/selected-c
 import { CheckComponent } from './pages/check/check.component';
 import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
 import { AuthGuard } from './core/guards/authGuard';
+import { ClientTableComponent } from './shared/components/clientTable/client-table/client-table.component';
 
 export const routes: Routes = [
     {path: "",  component: HomeComponent},
     {path: "home", component: HomeComponent},
     {path: "login", component: LoginComponent},
     {path: "register", component: RegisterComponent},
+   
     {path: "check", component:CheckComponent},
 
     /* Here I am creating a children paths so that I can implement AuthGuard in one parentPath instead of each children class. */
@@ -27,6 +29,7 @@ export const routes: Routes = [
             {path: "user-profile", component: UserProfileComponent},
             {path: "client-update", component: ClientUpdateComponent},
             {path: "selected-client", component: SelectedClientComponent},
+            {path: "clientTable", component: ClientTableComponent},
             
         ]
     },

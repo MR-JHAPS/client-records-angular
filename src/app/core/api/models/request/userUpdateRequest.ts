@@ -1,9 +1,11 @@
-export interface UserUpdateRequest{
+export class UserUpdateRequest{
 
-    email : string,
-    currentPassword: string,
-    newPassword: string,
-    confirmPassword : string
+    constructor(
+        public email : string,
+        public currentPassword: string,
+        public newPassword: string,
+        public confirmPassword : string
+    ){}
 
 
 }
