@@ -1,8 +1,8 @@
 export class UserAuthRequest{
 
     constructor(
-        public email: string,
-        public password: string
+        public email: string = "",
+        public password: string = ""
     ){}
     
 

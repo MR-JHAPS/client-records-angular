@@ -1,9 +1,7 @@
 import { inject, Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
 import { PublicApiServiceService } from '../public-api/public-api-service.service';
-import { I_ApiResponseModel } from '../../api/models/interface/responses/apiResponseModel';
 import { errorContext } from 'rxjs/internal/util/errorContext';
-import { TokenValidateRequest } from '../../api/models/interface/requests/tokenValidateRequest';
 import { Router } from '@angular/router';
 
 @Injectable({

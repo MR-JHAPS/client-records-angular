@@ -1,10 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserAuth } from '../../../core/models/userAuth';
 import { PublicApiServiceService } from '../../../core/services/public-api/public-api-service.service';
-import { ApiResponse } from '../../../core/models/apiResponse';
 import { AuthServiceService } from '../../../core/services/AuthService/auth-service.service';
+import { UserAuthRequest } from '../../../core/api/models/request/userAuthRequest';
+import { ApiResponseModel } from '../../../core/api/models/response/responseModel/apiResponseModel';
 
 @Component({
   selector: 'app-login',
@@ -13,15 +13,12 @@ import { AuthServiceService } from '../../../core/services/AuthService/auth-serv
   styleUrl: './login.component.css'
 })
 export class LoginComponent /* implements OnInit */{
-  
 
-  user : UserAuth = {email: "" ,
-                       password: ""}
-  _authService = inject(AuthServiceService);//this is to handle the menu depending on logged in or logged out.
-  _publicController : PublicApiServiceService = inject(PublicApiServiceService);
-  _router : Router = inject(Router);  
-  token : string = ""; 
-  // _activatedRoute :ActivatedRoute = inject(ActivatedRoute);
+  private _authService = inject(AuthServiceService);//this is to handle the menu depending on logged in or logged out.
+  private _publicController : PublicApiServiceService = inject(PublicApiServiceService);
+  private _router : Router = inject(Router);  
+  token : string = "";  // this is placeholder for token response.
+  user : UserAuthRequest = new UserAuthRequest();
   
   public registrationStatus = false;
   public registrationMessage ="";
@@ -43,7 +40,7 @@ export class LoginComponent /* implements OnInit */{
 
 onLogin():void{
     this._publicController.userLogin(this.user).subscribe({
-        next : (response: ApiResponse)=>{
+        next : (response: ApiResponseModel<string>)=>{
           this.token = response.data;
         
           /* so that interceptor can know on page reload that which user is active("loggedInUser":userEmail)

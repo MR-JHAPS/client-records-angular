@@ -25,7 +25,7 @@ export class ClientApiServiceService {
   getAllClients(size?: number, urlPage?:string): Observable<ApiResponseModelPaginated<ClientResponse>>{
     const params = new HttpParams()
     .set('pageNumber' , pageNumber)
-    .set('pageSize' , pageSize)
+    .set('pageSize' , pageSize) 
     .set('sortBy' , sortBy)
     .set('direction' , direction)
     const url = urlPage ? urlPage : `${this.apiBaseUrl+this.clientEndpoint.getAllClients}?pageNumber=0&pageSize=${size??10}` ;
