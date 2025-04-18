@@ -1,8 +1,11 @@
 import { inject, Injectable, OnInit } from '@angular/core';
-import { BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { PublicApiServiceService } from '../public-api/public-api-service.service';
 import { errorContext } from 'rxjs/internal/util/errorContext';
 import { Router } from '@angular/router';
+import { TokenValidateRequest } from '../../api/models/request/tokenValidateRequest';
+import { ApiResponseModel } from '../../api/models/response/responseModel/apiResponseModel';
+import { JwtServiceService } from '../jwtService/jwt-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,28 +13,39 @@ import { Router } from '@angular/router';
 export class AuthServiceService   {  
 
   private _publicService = inject(PublicApiServiceService);
+  private _jwtService = inject(JwtServiceService);
+  private _route = inject(Router);
   tokenRequestDto : TokenValidateRequest = new TokenValidateRequest() ;
-  _route = inject(Router);
-  constructor(){
-    this.initializeAuthState();
-  }
-
+ 
   /* Auth state subject */
   isLoggedIn : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isTokenValid : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
+  isRoleAdmin : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   /* Public Observables. */
   isLoggedIn$ = this.isLoggedIn.asObservable(); 
   isTokenValid$ = this.isTokenValid.asObservable();
+  isRoleAdmin$ = this.isRoleAdmin.asObservable();
+
+  constructor(){
+    this.initializeAuthState();
+  }
 
 
 initializeAuthState(){
   console.log("I am inside the initializeAuthState() in authService")
   const token = this.getToken();
   if(token){
+    let roles : Array<string> = this.getRoleFromtoken(token);
+    if(roles.includes("admin")){
+      this.isRoleAdmin.next(true);
+    }
     this.isLoggedIn.next(true);
     this.tokenRequestDto.setTokenName(token);
     this.validateToken(this.tokenRequestDto);
+  }
+  /* This condition fixed the issue of automatic validation when app start even without being logged in.*/
+  else if(token==null){ 
+    console.log("no token found");
   }else{
     this.clearAuthState();
   }
@@ -55,6 +69,12 @@ getToken(): string | null{
   return localStorage.getItem(loggedInUser);
 }
 
+getRoleFromtoken(token: string): Array<string> | null{
+  return this._jwtService.getRole(token);
+}
+
+
+
 /* If the currentUserExist then then remove them from the localStorage and set the logged in status as false. */
 clearAuthState():void{
   console.log("Clearing AuthState.");
@@ -70,9 +90,9 @@ clearAuthState():void{
 
 /* Validating token. calling the validateToken api to check if the token is valid and
    user is logged in using valid token. */
-validateToken(token : TokenValidateRequest){
-  this._publicService.validateToken(token).subscribe({
-    next : ( response : I_ApiResponseModel<string>) => {
+validateToken(tokenRequest : TokenValidateRequest): void{
+  this._publicService.validateToken(tokenRequest).subscribe({
+    next : ( response : ApiResponseModel<string>) => {
       this.isLoggedIn.next(true);
       this.isTokenValid.next(true);
       console.log("validating token : " , response);

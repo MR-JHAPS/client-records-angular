@@ -1,12 +1,12 @@
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthServiceService } from '../../../core/services/AuthService/auth-service.service';
 import { CommonModule, NgIf } from '@angular/common';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
-  imports: [RouterLink, NgIf, CommonModule],
+  imports: [RouterLink, NgIf, CommonModule, RouterLinkActive],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css'
 })
@@ -45,11 +45,11 @@ export class MenuComponent implements OnInit{
    
   }
 
-
+/* 
   closeNavBar(){
     const navBar =this.navBarCollapse.nativeElement;
     navBar.classList.remove("show");
-  }
+  } */
 
  /*  navigateAndClose(route: string) {
     this._router.navigate([route]);

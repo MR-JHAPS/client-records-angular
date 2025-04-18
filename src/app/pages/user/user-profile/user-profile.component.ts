@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, inject, OnInit } from '@angular/core';
 import { UserApiServiceService } from '../../../core/services/user-api/user-api-service.service';
-import { ApiResponse } from '../../../core/models/apiResponse';
-import { UserGeneralResponse } from '../../../core/api/models/interface/responses/userGeneralResponse';
-import { I_ApiResponseModel } from '../../../core/api/models/interface/responses/apiResponseModel';
 import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { UserUpdateRequest } from '../../../core/api/models/interface/requests/userUpdateRequest';
 import { CustomDateConverterService } from '../../../shared/customDateConverter';
+import { ApiResponseModel } from '../../../core/api/models/response/responseModel/apiResponseModel';
+import { UserGeneralResponse } from '../../../core/api/models/response/userGeneralResponse';
+import { UserUpdateRequest } from '../../../core/api/models/request/userUpdateRequest';
 
 @Component({
   selector: 'app-user-profile',
@@ -35,7 +34,7 @@ ngOnInit(): void {
 
 getCurrentUser():void{
   this._userApiService.getCurrentUser().subscribe({
-    next : (response : I_ApiResponseModel<UserGeneralResponse>) => { this.currentUser = response.data;
+    next : (response : ApiResponseModel<UserGeneralResponse>) => { this.currentUser = response.data;
           this.formattedCreatedOn = this._dateConverter.formatLocalDateTime(response.data.createdOn);
           this.formattedUpdatedOn = this._dateConverter.formatLocalDateTime(response.data.updatedOn);
           console.log(this.formattedCreatedOn);              

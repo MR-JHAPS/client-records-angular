@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { API_ENDPOINTS } from '../../api/constants/apiEndpoints.const';
-import { UserGeneralResponse } from '../../api/models/interface/responses/userGeneralResponse';
 import { Observable } from 'rxjs';
-import { I_ApiResponseModel } from '../../api/models/interface/responses/apiResponseModel';
-import { UserUpdateRequest } from '../../api/models/interface/requests/userUpdateRequest';
+import { ApiResponseModel } from '../../api/models/response/responseModel/apiResponseModel';
+import { UserGeneralResponse } from '../../api/models/response/userGeneralResponse';
+import { UserUpdateRequest } from '../../api/models/request/userUpdateRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +22,8 @@ export class UserApiServiceService {
     return this._httpClient.post<UserAuth>(this.apiBaseUrl+this.publicEndpoints.login, credentials);
   } */
 
-  getCurrentUser():Observable<I_ApiResponseModel<UserGeneralResponse>>{
-   return this._httpClient.get<I_ApiResponseModel<UserGeneralResponse>>(`${this.apiBaseUrl}${this.userEndpoints.getCurrentUser}`);
+  getCurrentUser():Observable<ApiResponseModel<UserGeneralResponse>>{
+   return this._httpClient.get<ApiResponseModel<UserGeneralResponse>>(`${this.apiBaseUrl}${this.userEndpoints.getCurrentUser}`);
   }
 
   updateCurrentUser(userDetails : UserUpdateRequest){

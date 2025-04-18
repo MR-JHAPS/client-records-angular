@@ -2,7 +2,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { Modal } from 'bootstrap';
 import { ModalServiceService } from '../../../shared/services/modal-service.service';
-import { ClientDto, I_ClientDto } from '../../../core/models/clientDto';
+import { ClientRequest } from '../../../core/api/models/request/clientRequest';
 
 @Component({
   selector: 'app-selected-client',
@@ -19,7 +19,7 @@ export class SelectedClientComponent implements AfterViewInit, OnInit {
 
 
   private _modalservice = inject(ModalServiceService);
-  public client : ClientDto = this._modalservice.getClient();
+  public client : ClientRequest = this._modalservice.getClient();
 
   ngOnInit(): void {
      /* this component is child component of UserHomeComponent so when we are

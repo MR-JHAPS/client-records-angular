@@ -6,6 +6,7 @@ import { API_ENDPOINTS } from '../../api/constants/apiEndpoints.const';
 import { ApiResponseModel } from '../../api/models/response/responseModel/apiResponseModel';
 import { UserAuthRequest } from '../../api/models/request/userAuthRequest';
 import { UserRegisterRequest } from '../../api/models/request/userRegisterRequest';
+import { TokenValidateRequest } from '../../api/models/request/tokenValidateRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,7 @@ export class PublicApiServiceService {
  }
  
  // Token-Validation Method:
- validateToken(token: string) : Observable<ApiResponseModel<string>>{
+ validateToken(token: TokenValidateRequest) : Observable<ApiResponseModel<string>>{
   const url = this.apiBaseUrl+this.publicApi.validateToken;
   return this._httpClient.post<ApiResponseModel<string>>(url, token);
  }

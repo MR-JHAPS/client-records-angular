@@ -1,10 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+/* import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { ApiResponseClient } from '../../models/apiResponseClient';
-import { ApiLinksModel } from '../../api/models/response/responseModel/apiLinksDetails';
 import { map } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ApiLinksDetails } from '../../api/models/response/responseModel/apiLinksDetails';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +18,7 @@ export class PaginationServiceService {
 
   //converting LinkList to HashMap/Map.
   //[{rel:"a",href="aaaaa"},{rel:"b",href:"bbbb"}]    -----> [{rel:a -> href:aaaa},{rel:b -> href:bbb}]
-  convertingToHashMap(list: Array<ApiLinksModel> ): Map<string,string>{
+  convertingToHashMap(list: Array<ApiLinksDetails> ): Map<string,string>{
     let mappedLink : Map<string, string> =  new Map();  
     list.forEach(element => {
       mappedLink.set(element.rel, element.href);
@@ -60,3 +59,4 @@ export class PaginationServiceService {
 
 
 }//ends class
+ */

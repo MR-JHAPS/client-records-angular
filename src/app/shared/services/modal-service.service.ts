@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { ClientDto, I_ClientDto } from '../../core/models/clientDto';
+import { ClientRequest } from '../../core/api/models/request/clientRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +8,10 @@ import { ClientDto, I_ClientDto } from '../../core/models/clientDto';
 export class ModalServiceService {
 
 
-private client = new BehaviorSubject<ClientDto>(new ClientDto());
+private client = new BehaviorSubject<ClientRequest>(new ClientRequest());
 client$ = this.client.asObservable();
 
-setClient(client :ClientDto){
+setClient(client :ClientRequest){
   this.client.next(client);
 }
 

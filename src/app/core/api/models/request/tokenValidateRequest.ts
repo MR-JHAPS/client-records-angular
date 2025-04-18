@@ -2,7 +2,7 @@ export class TokenValidateRequest{
     
 
     constructor(
-        public token : string
+        public token : string = ""
     ){}
 
 

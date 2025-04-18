@@ -23,40 +23,26 @@ export class LoginComponent /* implements OnInit */{
   public registrationStatus = false;
   public registrationMessage ="";
   public errorStatus = false;
-  
-  //On initialization of this component.  
-  // ngOnInit(): void {
-  //   this._activatedRoute.queryParams.subscribe(
-  //     (params)=>{
-  //           this.registrationStatus = params['registrationStatus']==='true';
-  //           this.registrationMessage = params['registrationMessage'];
-  //           this.errorStatus = params['error']==='true';
-  //         }
-  //   )
-  // }//ends ngOnInit
+    
 
-
-  
-
-onLogin():void{
+  onLogin():void{
     this._publicController.userLogin(this.user).subscribe({
         next : (response: ApiResponseModel<string>)=>{
           this.token = response.data;
-        
           /* so that interceptor can know on page reload that which user is active("loggedInUser":userEmail)
             and which token to use for that active("loggedInUser":userEmail) user. */
-          localStorage.setItem("loggedInUser", this.user.email); //saving logged_userEmail with "loggedInUser"
-          localStorage.setItem(this.user.email, this.token); //saving token with the userEmail as key.
-          // this._authService.loggedIn();
-        this._authService.loggedIn();
+          localStorage.setItem("loggedInUser", this.user.email); //saving logged_userEmail with the "loggedInUser" as key.
+          localStorage.setItem(this.user.email, this.token);    //saving token with the userEmail as key.
+          this._authService.loggedIn();
+          console.log("User logged in successfully.", response.data);
+          /* Adding time delay to route to the user home.*/
           setTimeout(()=>{
             this._router.navigateByUrl("/user/user-home");
           },300);
-          
-          console.log(response.data);
         },   
         error : (error) =>{
           console.log("something went wrong : " + error)
+          this.errorStatus=true;
         },
         complete : () => {
           console.log("completed")
@@ -64,7 +50,7 @@ onLogin():void{
 
 
     })
-}
+  }
 
 
 closeRegistrationMessage(){

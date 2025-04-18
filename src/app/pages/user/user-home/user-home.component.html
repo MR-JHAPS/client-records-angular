@@ -1,26 +1,29 @@
 
-
+<!-- 
 
 <ng-container>
     <app-selected-client #selectedClientComponent/>
-</ng-container>
+</ng-container> -->
 
 
-<section class="container p-2 text-center mt-2 mb-5">   
+<app-client-table/>
+
+
+<!-- <section class="container p-2 text-center mt-2 mb-5">    -->
     <!-- This is the search Box -->
-    <div>
+    <!-- <div>
         <input class="p-2" type="text" placeholder="Search Clients"  name="searchBox" required #searchBox="ngModel" [(ngModel)]="searchQuery" >
         <button class="btn btn-light ms-3 p-2 ps-5 pe-5" (click)="searchClientsWithQuery()" name="searchButton" >Search</button>
         @if (searchBox.errors?.['required'] && searchBox.touched) {
-            <!-- <span class="alert alert-warning">Search box is empty</span> -->
             <div class="alert alert-warning alert-dismissible fade show w-12" role="alert">
                 <strong>Enter Words</strong> The search field is empty.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="searchBox.reset()"></button>
             </div>
         }
-    </div>
+    </div> -->
+    
     <!-- This is the radio button for SearchBy FieldNames. -->
-    <div class="d-flex justify-content-center align-items-center">
+    <!-- <div class="d-flex justify-content-center align-items-center">
         <div class="firstName">
             <label for="firstName">FirstName</label>
             <input type="radio" name="searchBy" id="firstName">
@@ -39,7 +42,7 @@
 
 
 <!-- This is for Selecting Number Of Client Contents Per Page -->
-<section class="pageContent container-fluid  mb-2 p-2 text-center">
+<!-- <section class="pageContent container-fluid  mb-2 p-2 text-center">
     
         <label class="me-3" for="contentNumber">Content Per Page </label>
     
@@ -49,11 +52,11 @@
             }
         </select>
     
-</section>
+</section> -->
 
 
 
-<table class="table table-striped">
+<!-- <table class="table table-striped">
 
     <thead>
         <tr>
@@ -85,11 +88,11 @@
     </tbody>
 
 
-</table>
+</table> --> 
 
 
 
-<div class=" d-flex justify-content-center mt-5">
+<!-- <div class=" d-flex justify-content-center mt-5">
     <nav aria-label="...">
         <ul class="pagination">
             <li class="page-item" >
@@ -100,10 +103,7 @@
                 <a class="page-link" (click)="toPreviousPage()"> < </a>
             </li>
          <li class="page-item active"><a class="one page-link" (click)="toFirstPage()" > 1 </a></li>
-        <!--<li class="page-item active" aria-current="page">
-            <span class="page-link">2</span>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+      
         <li class="page-item" >
             <a class="page-link" (click)="toNextPage()"> > </a>
         </li>
@@ -113,7 +113,7 @@
         </ul>
     </nav>
 </div>
-
+ -->
 
 
 

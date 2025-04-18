@@ -4,10 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { ModalServiceService } from '../../../shared/services/modal-service.service';
 import { ClientApiServiceService } from '../../../core/services/client-api/client-api-service.service';
 import { ActivatedRoute, Router, ROUTES } from '@angular/router';
-import { ApiResponseSingleClient } from '../../../core/models/apiResponseClient';
-import { ClientDto } from '../../../core/models/clientDto';
 import { timeout } from 'rxjs';
-import { ApiResponse } from '../../../core/models/apiResponse';
+import { ApiResponseModel } from '../../../core/api/models/response/responseModel/apiResponseModel';
+import { ClientResponse } from '../../../core/api/models/response/clientResponse';
+import { ClientRequest } from '../../../core/api/models/request/clientRequest';
 
 @Component({
   selector: 'app-client-update',
@@ -21,7 +21,7 @@ export class ClientUpdateComponent implements OnInit{
   private _activatedRoute = inject(ActivatedRoute);
 
   public id: number ; //id is passed from  getIdFromURL() which is initialized in ngOnInit so it loads when page loads. 
-  public client : ClientDto = new ClientDto();  
+  public client : ClientRequest = new ClientRequest();  
 
   public isUpdated:boolean = false;
   public hasError: boolean = false;
@@ -53,7 +53,7 @@ export class ClientUpdateComponent implements OnInit{
   /* Getting client by id  */
   getClientById(id:number):void{
     this._clientService.getClientById(id).subscribe({
-      next : (response : ApiResponseSingleClient )=>{
+      next : (response : ApiResponseModel<ClientResponse> ) => {
           this.client = response.data;
       },
       error: (error)=>{
@@ -64,13 +64,13 @@ export class ClientUpdateComponent implements OnInit{
 
 
   /* Updating Client */
-  updateClient(id:number, client: ClientDto){
+  updateClient(id:number, client: ClientRequest){
     console.log(client);
       this._clientService.updateClients(id, client).subscribe({
-      next : (response : ApiResponse )=>{
+      next : (response : ApiResponseModel<string> )=>{
         console.log(response)
         this.isUpdated=true;
-        this.message= response.data;
+        this.message= response.message;
       },
       error : (error) => {
         console.log("error udpating the client : ", error);
