@@ -1,8 +1,8 @@
-import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthServiceService } from '../../../core/auth/services/auth-service.service';
 import { CommonModule, NgIf } from '@angular/common';
-import { Observable } from 'rxjs';
+import { filter, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
@@ -10,18 +10,25 @@ import { Observable } from 'rxjs';
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css'
 })
-export class MenuComponent implements OnInit{
+export class MenuComponent implements OnInit, OnDestroy {
 
   private _authService = inject(AuthServiceService);
   private _router = inject(Router);
+  private routerSub!: Subscription;
    isRoleUser$ = this._authService.isRoleUser$
    isRoleAdmin$ = this._authService.isRoleAdmin$;
 
-
   ngOnInit(): void {
-  //  this._isLoggedIn = this._authService.isLoggedIn$;
     this._authService.initializeAuthState();
+
+    this.routerSub =  this._router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      // Force menu refresh on route change (including back button)
+      this._authService.initializeAuthState(); 
+    });
   }
+
 
 
 
@@ -30,21 +37,17 @@ export class MenuComponent implements OnInit{
   if user has logged in and is true then user menu is shown.
   This variable is called in menu.component.html
    in *ngIf condition */
-  _isLoggedIn! : Observable<boolean>;  
+/*   _isLoggedIn! : Observable<boolean>;  */ 
   
 
 
   logOut(){
-    const user = localStorage.getItem("loggedInUser");
-    console.log(user);
-    user?localStorage.removeItem(user):null;
-    localStorage.removeItem("loggedInUser");
-    this._router.navigateByUrl("home");
-    this._authService.loggedOut(); //calling the logout function of authService to change the menu contents.
-   
+    this._authService.loggedOut(); 
   }
 
-
+  ngOnDestroy(): void {
+    this.routerSub?.unsubscribe(); // Prevent memory leaks
+  }
 
 
 }//ends class

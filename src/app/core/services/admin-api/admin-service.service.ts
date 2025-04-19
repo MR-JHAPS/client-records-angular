@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { API_ENDPOINTS } from '../../constants/apiEndpoints.const';
 import { Observable } from 'rxjs';
-import { I_ApiResponseModel } from '../../api/models/interface/responses/apiResponseModel';
-import { UserAdminResponse } from '../../api/models/interface/responses/userAdminResponse';
 import { HttpClient } from '@angular/common/http';
+import { ApiResponseModel } from '../../models/responseModel/apiResponseModel';
+import { UserAdminResponse } from '../../models/response/userAdminResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +16,9 @@ export class AdminServiceService {
 
 
   /* This will contain the response of user with roles .*/
-getUserById(id : number) : Observable<I_ApiResponseModel<UserAdminResponse>>{
+getUserById(id : number) : Observable<ApiResponseModel<UserAdminResponse>>{
   const url = `${this.baseUrl}${this.adminApi.getUserById}/${id}`;
-  return this._httpClient.get<I_ApiResponseModel<UserAdminResponse>>(url);
+  return this._httpClient.get<ApiResponseModel<UserAdminResponse>>(url);
 }
 
 /* Response will be with pagination and data(contents:Array<T(userAdmin)>, links, page)*/

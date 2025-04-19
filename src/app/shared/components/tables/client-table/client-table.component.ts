@@ -7,10 +7,11 @@ import { FormsModule } from '@angular/forms';
 import { PaginationParams } from '../../../../core/models/request/paginationParams';
 import { ApiLinksDetails } from '../../../../core/models/responseModel/apiLinksDetails';
 import { ApiResponseModelPaginated } from '../../../../core/models/responseModel/apiResponseModelPaginated';
+import { ClientSearchComponent } from "../../search/client-search/client-search.component";
 
 @Component({
   selector: 'app-client-table',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ClientSearchComponent],
   templateUrl: './client-table.component.html',
   styleUrl: './client-table.component.css'
 })

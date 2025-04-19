@@ -34,49 +34,31 @@ export class AuthServiceService   {
 
 
   initializeAuthState() {
-    const token = this.getToken();
-    if (token) {
-      this.tokenValidateRequest.setTokenName(token);
-      this.validateToken(this.tokenValidateRequest);
-    } else {
-      this.clearAuthState();
-    }
+  const token = this.getToken();
+  if (token) {
+    const roles = this.getRoleFromtoken(token);
+    this.isRoleAdmin.next(roles.includes("admin"));
+    this.isRoleUser.next(roles.includes("user"));
+    this.isTokenValid.next(true); // Assume valid until proven otherwise
+    this.tokenValidateRequest.setTokenName(token);
+    this.validateToken(this.tokenValidateRequest); // Secondary check
+  } else {
+    this.clearAuthState();
   }
+}
 
-
-// initializeAuthState(){
-//   console.log("I am inside the initializeAuthState() in authService")
-//   const token = this.getToken();
-//   if(token){
-//       const roles = this.getRoleFromtoken(token);
-//       if(roles.includes("admin")){
-//         this.isRoleAdmin.next(true);
-//       }
-//       else {
-//         this.isRoleUser.next(true);
-//       }
-    
-//     this.tokenValidateRequest.setTokenName(token);
-//     this.validateToken(this.tokenValidateRequest);
-//   }
-//   /* This condition fixed the issue of automatic validation when app start even without being logged in.*/
-//   else if(token==null){ 
-//     console.log("no token found");
-//   }else{
-//     this.clearAuthState();
-//   }
-
-// }
 
 
 
 // In AuthService
 updateAuthState(token: string): void {
   const roles = this.getRoleFromtoken(token);
-  this.isRoleAdmin.next(roles.includes("admin"));
-  this.isRoleUser.next(roles.includes("user") || !roles.includes("admin"));
   this.isTokenValid.next(true);
   this.tokenValidateRequest.setTokenName(token);
+
+  this.isRoleAdmin.next(roles.includes("admin"));
+  this.isRoleUser.next(roles.includes("user"));
+  
   this.validateToken(this.tokenValidateRequest);
 }
 
@@ -124,29 +106,18 @@ updateAuthState(token: string): void {
   /*------------------------------Token Validation REQUEST-----------------------------------------------*/
   /* Validating token. calling the validateToken api to check if the token is valid and
     user is logged in using valid token. */
-  validateToken(tokenRequest : TokenValidateRequest): void{
-    this._publicService.validateToken(tokenRequest).subscribe({
-      next : ( response : ApiResponseModel<string>) => {
-        if(this.getRoleFromtoken(tokenRequest.getTokenName()).includes("admin")){
-          this.isRoleAdmin.next(true);
-        }else{
-          this.isRoleUser.next(true);
-        }
-
-        // this.isLoggedIn.next(true);
-        this.isTokenValid.next(true);
-        console.log("validating token : " , response);
-      },
-      error : (error) =>{
-        this.clearAuthState();
-        console.log("error validating the token. Redirecting to login Page.", error);
+    validateToken(tokenRequest: TokenValidateRequest): void {
+      this._publicService.validateToken(tokenRequest).subscribe({
+        next: (response: ApiResponseModel<string>) => {
+          console.log("Token valid, maintaining current roles.");
+          this.isTokenValid.next(true); // Only update token state
+        },
+        error: (error) => {
+          this.clearAuthState();
           this._route.navigateByUrl("login");
-      },
-      complete : () =>{
-        console.log("Token validation complete.");
-      }
-    })//ends-subscribe
-  }
+        }
+      });
+    }
 
 
 
@@ -159,6 +130,8 @@ updateAuthState(token: string): void {
     // this.isLoggedIn.next(false);
     this.isRoleUser.next(false);
     this.isRoleAdmin.next(false);
+    this.clearAuthState();
+    window.location.href = '/login'; 
   }
 
 

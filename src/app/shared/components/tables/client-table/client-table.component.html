@@ -1,34 +1,21 @@
 
 
 
-<!-- This is for Selecting Number Of Client Contents Per Page -->
-<section class="pageContent container-fluid  mb-2 p-2 text-center">
-    
-        <label class="me-3" for="contentNumber">Content Per Page </label>
-    
-        <select class="col-1 p-1 text-center bg bg-light text-dark" id="contentNumber" [(ngModel)]="contentSize"
-        (change)="setContentPerPage($event)">  
-           <!-- generateContentSize is a method that generates the value for content size. it return array of number. -->
-            @for (size of generateContentSize(); track size ) {
-            <option value={{size}} > {{size}} </option>
-            }
-        </select>
-    
-<!-- </section> -->
+<app-client-search/>
 
 
 
 <table class="table table-striped">
 
     <thead>
-        <tr>
-            <th>Id</th>
-            <th>First-Name</th>
-            <th>Last-Name</th>
-            <th>Date-Of-Birth</th>
-            <th>Postal-Code</th>
-            <th>Update</th>
-            <th>Delete</th>
+        <tr >
+            <th><b>Id</b></th>
+            <th><b>First-Name</b></th>
+            <th><b>Last-Name</b></th>
+            <th><b>Date-Of-Birth</b></th>
+            <th><b>Postal-Code</b></th>
+            <th><b>Action</b></th>
+            <!-- <th>Delete</th> -->
         </tr>
     </thead>
     
@@ -42,12 +29,19 @@
                 <td>{{client.lastName}}</td>
                 <td>{{client.dateOfBirth}}</td>
                 <td>{{client.postalCode}}</td>
-                   
+
+                <td class="text-center">
+                    <div class="d-flex gap-3 justify-content-start">
+                        <button class="btn btn-primary w-25" (click)="navigateToUpdatePage(client.id); $event.stopPropagation()"> Update</button>
+
+                        <button class="btn btn-danger" >Delete</button>
+                    </div> 
+                </td>
 <!--                 <td><button class="btn btn-primary w-75" (click)="navigateToUpdatePage(client.id); $event.stopPropagation()"> Update</button></td>
  -->  
- <td><button class="btn btn-primary w-75" (click)="navigateToUpdatePage(client.id); $event.stopPropagation()"> Update</button></td>
+ <!-- <td><button class="btn btn-primary w-75" (click)="navigateToUpdatePage(client.id); $event.stopPropagation()"> Update</button></td>
 
- <td><button class="btn btn-danger" >Delete</button></td>
+ <td><button class="btn btn-danger" >Delete</button></td> -->
             
             </tr>
         }
@@ -56,8 +50,12 @@
 
 </table>
 
-<!-- <button (click)="toNextPage()">Next Page</button> -->
 
+
+
+
+
+<!-- This is the PAGINATION COMPONENT -->
 <div class=" d-flex justify-content-center mt-5">
     <nav aria-label="...">
         <ul class="pagination">
@@ -66,12 +64,12 @@
             </li>
             
             <li class="page-item " >
-                <a class="page-link" (click)="toSpecificPage('prev')"> < </a>
+                <a class="page-link" (click)="toSpecificPage('prev')"> &laquo; </a>
             </li>
          <li class="page-item active"><a class="one page-link" (click)="toSpecificPage('first')" > 1 </a></li>
        
         <li class="page-item" >
-            <a class="page-link" (click)="toSpecificPage('next')"> > </a>
+            <a class="page-link" (click)="toSpecificPage('next')">  &raquo; </a>
         </li>
         <li class="page-item" >
             <a class="page-link" (click)="toSpecificPage('last')">Last</a>
@@ -79,3 +77,19 @@
         </ul>
     </nav>
 </div>
+
+
+<!-- This is for Selecting Number Of Client Contents Per Page -->
+<section class="pageContent container-fluid  mb-2 p-2 text-center">
+    
+    <label class="me-3" for="contentNumber">Content Per Page </label>
+
+    <select class="col-1 p-1 text-center bg bg-light text-dark" id="contentNumber" [(ngModel)]="contentSize"
+    (change)="setContentPerPage($event)">  
+       <!-- generateContentSize is a method that generates the value for content size. it return array of number. -->
+        @for (size of generateContentSize(); track size ) {
+        <option value={{size}} > {{size}} </option>
+        }
+    </select>
+
+</section>
