@@ -5,9 +5,9 @@ import { ModalServiceService } from '../../../shared/services/modal-service.serv
 import { ClientApiServiceService } from '../../../core/services/client-api/client-api-service.service';
 import { ActivatedRoute, Router, ROUTES } from '@angular/router';
 import { timeout } from 'rxjs';
-import { ApiResponseModel } from '../../../core/api/models/response/responseModel/apiResponseModel';
-import { ClientResponse } from '../../../core/api/models/response/clientResponse';
-import { ClientRequest } from '../../../core/api/models/request/clientRequest';
+import { ClientResponse } from '../../../core/models/response/clientResponse';
+import { ClientRequest } from '../../../core/models/request/clientRequest';
+import { ApiResponseModel } from '../../../core/models/responseModel/apiResponseModel';
 
 @Component({
   selector: 'app-client-update',

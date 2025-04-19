@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { API_ENDPOINTS } from '../../api/constants/apiEndpoints.const';
+import { API_ENDPOINTS } from '../../constants/apiEndpoints.const';
 import { Observable } from 'rxjs';
-import { ApiResponseModel } from '../../api/models/response/responseModel/apiResponseModel';
-import { UserGeneralResponse } from '../../api/models/response/userGeneralResponse';
-import { UserUpdateRequest } from '../../api/models/request/userUpdateRequest';
+import { UserGeneralResponse } from '../../models/response/userGeneralResponse';
+import { UserUpdateRequest } from '../../models/request/userUpdateRequest';
+import { ApiResponseModel } from '../../models/responseModel/apiResponseModel';
 
 @Injectable({
   providedIn: 'root'

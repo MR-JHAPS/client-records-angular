@@ -1,12 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ClientApiServiceService } from '../../../../core/services/client-api/client-api-service.service';
-import { ApiResponseModelPaginated } from '../../../../core/api/models/response/responseModel/apiResponseModelPaginated';
-import { ApiLinksDetails } from '../../../../core/api/models/response/responseModel/apiLinksDetails';
-import { ClientResponse } from '../../../../core/api/models/response/clientResponse';
+import { ClientResponse } from '../../../../core/models/response/clientResponse';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { PaginationParams } from '../../../../core/api/models/request/paginationParams';
+import { PaginationParams } from '../../../../core/models/request/paginationParams';
+import { ApiLinksDetails } from '../../../../core/models/responseModel/apiLinksDetails';
+import { ApiResponseModelPaginated } from '../../../../core/models/responseModel/apiResponseModelPaginated';
 
 @Component({
   selector: 'app-client-table',

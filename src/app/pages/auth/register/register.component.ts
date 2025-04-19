@@ -3,8 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { UserApiServiceService } from '../../../core/services/user-api/user-api-service.service';
 import { PublicApiServiceService } from '../../../core/services/public-api/public-api-service.service';
 import { Router } from '@angular/router';
-import { UserRegisterRequest } from '../../../core/api/models/request/userRegisterRequest';
-import { ApiResponseModel } from '../../../core/api/models/response/responseModel/apiResponseModel';
+import { UserRegisterRequest } from '../../../core/models/request/userRegisterRequest';
+import { ApiResponseModel } from '../../../core/models/responseModel/apiResponseModel';
 
 @Component({
   selector: 'app-register',

@@ -2,7 +2,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { Modal } from 'bootstrap';
 import { ModalServiceService } from '../../../shared/services/modal-service.service';
-import { ClientRequest } from '../../../core/api/models/request/clientRequest';
+import { ClientRequest } from '../../../core/models/request/clientRequest';
 
 @Component({
   selector: 'app-selected-client',

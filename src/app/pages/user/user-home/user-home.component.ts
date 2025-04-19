@@ -1,19 +1,17 @@
 import { AfterViewInit, Component, ElementRef, inject, NgModule, OnInit, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
-import { ClientApiServiceService } from '../../../core/services/client-api/client-api-service.service';
-import { ApiLinksDetails} from '../../../core/api/models/response/responseModel/apiLinksDetails';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, NgIf } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { ModalServiceService } from '../../../shared/services/modal-service.service';
 import { ClientUpdateComponent } from '../client-update/client-update.component';
 import { SelectedClientComponent } from "../selected-client/selected-client.component";
-import { ClientResponse } from '../../../core/api/models/response/clientResponse';
-import { ApiResponseModelPaginated } from '../../../core/api/models/response/responseModel/apiResponseModelPaginated';
-import { ClientTableComponent } from "../../../shared/components/clientTable/client-table/client-table.component";
+import { ClientResponse } from '../../../core/models/response/clientResponse';
+import { ClientTableComponent } from "../../../shared/components/tables/client-table/client-table.component";
+import { ApiLinksDetails } from '../../../core/models/responseModel/apiLinksDetails';
 
 @Component({
   selector: 'app-user-home',
-  imports: [FormsModule, CommonModule, RouterLink, ClientUpdateComponent, NgIf, SelectedClientComponent, ClientTableComponent],
+  imports: [FormsModule, CommonModule, RouterLink, ClientTableComponent],
   templateUrl: './user-home.component.html',
   styleUrl: './user-home.component.css'
 })

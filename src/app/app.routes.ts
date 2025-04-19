@@ -9,8 +9,11 @@ import { ClientUpdateComponent } from './pages/user/client-update/client-update.
 import { SelectedClientComponent } from './pages/user/selected-client/selected-client.component';
 import { CheckComponent } from './pages/check/check.component';
 import { UserProfileComponent } from './pages/user/user-profile/user-profile.component';
-import { AuthGuard } from './core/guards/authGuard';
-import { ClientTableComponent } from './shared/components/clientTable/client-table/client-table.component';
+import { ClientTableComponent } from './shared/components/tables/client-table/client-table.component';
+import { adminGuardGuard } from './core/auth/guards/adminGuard/admin-guard.guard';
+import { userGuardGuard } from './core/auth/guards/userGuard/user-guard.guard';
+import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
+import { AdminProfileComponent } from './pages/admin/admin-profile/admin-profile.component';
 
 export const routes: Routes = [
     {path: "",  component: HomeComponent},
@@ -23,7 +26,8 @@ export const routes: Routes = [
     /* Here I am creating a children paths so that I can implement AuthGuard in one parentPath instead of each children class. */
     {
      path: "user",
-     canActivateChild : [AuthGuard], /* Calling a AuthGuard class. */
+     canActivate : [userGuardGuard],
+     canActivateChild : [userGuardGuard], /* Calling a AuthGuard class. */
      children : [ 
             {path: "user-home", component: UserHomeComponent},
             {path: "user-profile", component: UserProfileComponent},
@@ -34,6 +38,19 @@ export const routes: Routes = [
         ]
     },
    
+    {
+        path: "admin",
+        canActivate : [adminGuardGuard],
+        canActivateChild : [adminGuardGuard], /* Calling a AuthGuard class. */
+        children : [ 
+               {path: "admin-home", component: AdminHomeComponent},
+               {path: "admin-profile", component: AdminProfileComponent},
+              /*  {path: "client-update", component: ClientUpdateComponent},
+               {path: "selected-client", component: SelectedClientComponent},
+               {path: "clientTable", component: ClientTableComponent}, */
+               
+           ]
+       },
 
     {path: "forbidden", component: ForbiddenComponent},
     {path: "error", component: ErrorComponent},/* This should always be in the end */

@@ -4,9 +4,9 @@ import { UserApiServiceService } from '../../../core/services/user-api/user-api-
 import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CustomDateConverterService } from '../../../shared/customDateConverter';
-import { ApiResponseModel } from '../../../core/api/models/response/responseModel/apiResponseModel';
-import { UserGeneralResponse } from '../../../core/api/models/response/userGeneralResponse';
-import { UserUpdateRequest } from '../../../core/api/models/request/userUpdateRequest';
+import { UserGeneralResponse } from '../../../core/models/response/userGeneralResponse';
+import { UserUpdateRequest } from '../../../core/models/request/userUpdateRequest';
+import { ApiResponseModel } from '../../../core/models/responseModel/apiResponseModel';
 
 @Component({
   selector: 'app-user-profile',

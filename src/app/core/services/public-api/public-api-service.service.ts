@@ -2,11 +2,11 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { API_ENDPOINTS } from '../../api/constants/apiEndpoints.const';
-import { ApiResponseModel } from '../../api/models/response/responseModel/apiResponseModel';
-import { UserAuthRequest } from '../../api/models/request/userAuthRequest';
-import { UserRegisterRequest } from '../../api/models/request/userRegisterRequest';
-import { TokenValidateRequest } from '../../api/models/request/tokenValidateRequest';
+import { API_ENDPOINTS } from '../../constants/apiEndpoints.const';
+import { UserAuthRequest } from '../../models/request/userAuthRequest';
+import { UserRegisterRequest } from '../../models/request/userRegisterRequest';
+import { TokenValidateRequest } from '../../models/request/tokenValidateRequest';
+import { ApiResponseModel } from '../../models/responseModel/apiResponseModel';
 
 @Injectable({
   providedIn: 'root'

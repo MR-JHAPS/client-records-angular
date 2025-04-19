@@ -1,15 +1,13 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { environment } from '../../../../environments/environment';
-import { map, Observable, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { ModalServiceService } from '../../../shared/services/modal-service.service';
-import { API_ENDPOINTS } from '../../api/constants/apiEndpoints.const';
-import { ApiResponseModelPaginated } from '../../api/models/response/responseModel/apiResponseModelPaginated';
-import { ClientResponse } from '../../api/models/response/clientResponse';
-import { ApiResponseModel } from '../../api/models/response/responseModel/apiResponseModel';
-import { ClientRequest } from '../../api/models/request/clientRequest';
-import { PaginationParams } from '../../api/models/request/paginationParams';
-import { ApiLinksDetails } from '../../api/models/response/responseModel/apiLinksDetails';
+import { API_ENDPOINTS } from '../../constants/apiEndpoints.const';
+import { ClientResponse } from '../../models/response/clientResponse';
+import { ClientRequest } from '../../models/request/clientRequest';
+import { ApiResponseModelPaginated } from '../../models/responseModel/apiResponseModelPaginated';
+import { ApiLinksDetails } from '../../models/responseModel/apiLinksDetails';
+import { ApiResponseModel } from '../../models/responseModel/apiResponseModel';
 
 type clientSearchCriteria = {
   type: 'searchQuery' | 'firstName' | 'lastName' | 'postalCode';

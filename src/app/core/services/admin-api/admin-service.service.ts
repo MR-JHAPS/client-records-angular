@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { API_ENDPOINTS } from '../../api/constants/apiEndpoints.const';
+import { API_ENDPOINTS } from '../../constants/apiEndpoints.const';
 import { Observable } from 'rxjs';
 import { I_ApiResponseModel } from '../../api/models/interface/responses/apiResponseModel';
 import { UserAdminResponse } from '../../api/models/interface/responses/userAdminResponse';

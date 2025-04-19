@@ -1,6 +1,6 @@
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { AuthServiceService } from '../../../core/services/AuthService/auth-service.service';
+import { AuthServiceService } from '../../../core/auth/services/auth-service.service';
 import { CommonModule, NgIf } from '@angular/common';
 import { Observable } from 'rxjs';
 
@@ -13,18 +13,17 @@ import { Observable } from 'rxjs';
 export class MenuComponent implements OnInit{
 
   private _authService = inject(AuthServiceService);
+  private _router = inject(Router);
+   isRoleUser$ = this._authService.isRoleUser$
+   isRoleAdmin$ = this._authService.isRoleAdmin$;
+
 
   ngOnInit(): void {
-   this._isLoggedIn = this._authService.isLoggedIn$;
-    // this._authService;
-    console.log("menu component initiated")
-    console.log("is Logged In Status : " + this._isLoggedIn);
+  //  this._isLoggedIn = this._authService.isLoggedIn$;
+    this._authService.initializeAuthState();
   }
 
-  // private _authService = inject(AuthServiceService);
-  private _router = inject(Router);
 
-  @ViewChild("navBarCollapse") navBarCollapse !: ElementRef;
 
 
 /* default is false. public menu is displayed.
@@ -44,17 +43,6 @@ export class MenuComponent implements OnInit{
     this._authService.loggedOut(); //calling the logout function of authService to change the menu contents.
    
   }
-
-/* 
-  closeNavBar(){
-    const navBar =this.navBarCollapse.nativeElement;
-    navBar.classList.remove("show");
-  } */
-
- /*  navigateAndClose(route: string) {
-    this._router.navigate([route]);
-    this.closeNavBar();
-  } */
 
 
 
