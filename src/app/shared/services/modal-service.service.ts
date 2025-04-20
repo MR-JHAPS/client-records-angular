@@ -1,43 +1,25 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { ClientRequest } from '../../core/models/request/clientRequest';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ModalServiceService {
+@Injectable({ providedIn: 'root' })
+export class ModalService {
+  private modals = new Map<string, BsModalRef>(); // Track modals by ID
 
+  constructor(private modalService: BsModalService) {}
 
-private client = new BehaviorSubject<ClientRequest>(new ClientRequest());
-client$ = this.client.asObservable();
+  open(modalId: string, template: any) {
+    const modalRef = this.modalService.show(template);
+    this.modals.set(modalId, modalRef);
+    return modalRef;
+  }
 
-setClient(client :ClientRequest){
-  this.client.next(client);
-}
+  close(modalId: string) {
+    this.modals.get(modalId)?.hide();
+    this.modals.delete(modalId);
+  }
 
-getClient(){
-  return this.client.getValue();
-}
-
-
-
-
-
-
- private isModalOpen : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
- isModalOpen$ = this.isModalOpen.asObservable(); //what does this $ does??
-
-
- openModal():void{
-    this.isModalOpen.next(true); // beacause for behaviour subject BS_variable.next("new value");
-    // this.isModalOpen$=true;
- }
-
- closeModal():void{
-  this.isModalOpen.next(false);
- }
-
-
-
-  /* constructor() { } */
+  closeAll() {
+    this.modals.forEach(modalRef => modalRef.hide());
+    this.modals.clear();
+  }
 }

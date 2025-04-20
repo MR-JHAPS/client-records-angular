@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { ModalServiceService } from '../../../shared/services/modal-service.service';
 import { API_ENDPOINTS } from '../../constants/apiEndpoints.const';
 import { ClientResponse } from '../../models/response/clientResponse';
 import { ClientRequest } from '../../models/request/clientRequest';
@@ -31,7 +30,6 @@ export class ClientApiServiceService {
 
   _httpClient = inject(HttpClient);
 
-  _modalService = inject(ModalServiceService);
   private apiBaseUrl = API_ENDPOINTS.apiBaseUrl;          // contains the base Url of API. 
   private clientEndpoint = API_ENDPOINTS.clientApi; // contains all the client's API's
 
@@ -52,88 +50,9 @@ export class ClientApiServiceService {
       return this._httpClient.get<ApiResponseModelPaginated<ClientResponse>>(url, { params });  
   }
 
-  //GENERIC TRIAL:
-   // In this method we can directly pass the APiModelPaginated and get the next, prev, current page from links.
-   getRequiredPage(pageLinks : Array<ApiLinksDetails>, action: string): Observable<ApiResponseModelPaginated<ClientResponse>>{
-    //we need to get the url from the pageLinks. we want to take out the href(url) of rel(next).
-   if(!pageLinks || pageLinks.length ===0){
-    return throwError(() => new Error('No pagination links provided'));
-   }
-    const actionPageLink = pageLinks.find(link => link.rel === action); // finding the rel with name "next".
-    if(!actionPageLink?.href){
-      return throwError(()=> new Error(`${action} page link not found or invalid`))
-    }
-    return this._httpClient.get<ApiResponseModelPaginated<ClientResponse>>(actionPageLink.href);
-  }
-
-
-
-
-  // In this method we can directly pass the APiModelPaginated and get the next, prev, current page from links.
-  getNextPage(pageLinks : Array<ApiLinksDetails>): Observable<ApiResponseModelPaginated<ClientResponse>>{
-    //we need to get the url from the pageLinks. we want to take out the href(url) of rel(next).
-   if(!pageLinks || pageLinks.length ===0){
-    return throwError(() => new Error('No pagination links provided'));
-   }
-    const nextPageLink = pageLinks.find(link => link.rel === "next"); // finding the rel with name "next".
-    if(!nextPageLink?.href){
-      return throwError(()=> new Error('Next page link not found or invalid'))
-    }
-    return this._httpClient.get<ApiResponseModelPaginated<ClientResponse>>(nextPageLink.href);
-  }
-
-
-  getCurrentPage(pageLinks : Array<ApiLinksDetails>): Observable<ApiResponseModelPaginated<ClientResponse>>{
-    //we need to get the url from the pageLinks. we want to take out the href(url) of rel(current).
-   if(!pageLinks || pageLinks.length ===0){
-    return throwError(() => new Error('No pagination links provided'));
-   }
-    const nextPageLink = pageLinks.find(link => link.rel === "self"); // finding the rel with name "current".
-    if(!nextPageLink?.href){
-      return throwError(()=> new Error('Next page link not found or invalid'))
-    }
-    return this._httpClient.get<ApiResponseModelPaginated<ClientResponse>>(nextPageLink.href);
-  }
-
-
-  getPreviousPage(pageLinks : Array<ApiLinksDetails>) : Observable<ApiResponseModelPaginated<ClientResponse>>{
-
-    if(!pageLinks || pageLinks.length ===0){
-      return throwError(() => new Error('No pagination links provided'));
-     }
-      const nextPageLink = pageLinks.find(link => link.rel === "prev"); // finding the rel with name "prev".
-      if(!nextPageLink?.href){
-        return throwError(()=> new Error('Next page link not found or invalid'))
-      }
-      return this._httpClient.get<ApiResponseModelPaginated<ClientResponse>>(nextPageLink.href);
-    }
   
 
-  getFirstPage(pageLinks : Array<ApiLinksDetails>) : Observable<ApiResponseModelPaginated<ClientResponse>>{
-    if(!pageLinks || pageLinks.length ===0){
-      return throwError(() => new Error('No pagination links provided'));
-     }
-      const nextPageLink = pageLinks.find(link => link.rel === "first"); // finding the rel with name "first".
-      if(!nextPageLink?.href){
-        return throwError(()=> new Error('Next page link not found or invalid'))
-      }
-      return this._httpClient.get<ApiResponseModelPaginated<ClientResponse>>(nextPageLink.href);
-  }
-  
-  
 
-  getLastPage(pageLinks : Array<ApiLinksDetails>) : Observable<ApiResponseModelPaginated<ClientResponse>>{
-    if(!pageLinks || pageLinks.length ===0){
-      return throwError(() => new Error('No pagination links provided'));
-     }
-      const nextPageLink = pageLinks.find(link => link.rel === "last"); // finding the rel with name "last".
-      if(!nextPageLink?.href){
-        return throwError(()=> new Error('Next page link not found or invalid'))
-      }
-      return this._httpClient.get<ApiResponseModelPaginated<ClientResponse>>(nextPageLink.href);
-  }
-  
-  
 
 
 
@@ -192,6 +111,26 @@ export class ClientApiServiceService {
     const url = `${this.apiBaseUrl}${this.clientEndpoint.searchClients}`;
     return this._httpClient.get<ApiResponseModelPaginated<ClientResponse>>(url,{ params });
   }
+
+
+
+
+/*----------------------------------------PAGINATION ----------------------------------------------------------*/
+
+//GENERIC TRIAL: Works fine @param is passed in pagination in html .
+   // In this method we can directly pass the APiModelPaginated and get the next, prev, current page from links.
+   getRequiredPage(pageLinks : Array<ApiLinksDetails>, action: string): Observable<ApiResponseModelPaginated<ClientResponse>>{
+    //we need to get the url from the pageLinks. we want to take out the href(url) of rel(next).
+   if(!pageLinks || pageLinks.length ===0){
+    return throwError(() => new Error('No pagination links provided'));
+   }
+    const actionPageLink = pageLinks.find(link => link.rel === action); // finding the rel with name "next".
+    if(!actionPageLink?.href){
+      return throwError(()=> new Error(`${action} page link not found or invalid`))
+    }
+    return this._httpClient.get<ApiResponseModelPaginated<ClientResponse>>(actionPageLink.href);
+  }
+
 
 
 

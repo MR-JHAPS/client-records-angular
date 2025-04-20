@@ -1,7 +1,6 @@
 import { CommonModule, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, TemplateRef, ViewChild, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ModalServiceService } from '../../../shared/services/modal-service.service';
 import { ClientApiServiceService } from '../../../core/services/client-api/client-api-service.service';
 import { ActivatedRoute, Router, ROUTES } from '@angular/router';
 import { timeout } from 'rxjs';

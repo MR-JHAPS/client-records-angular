@@ -2,10 +2,10 @@ import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { ModalServiceService } from '../../../shared/services/modal-service.service';
 import { SelectedClientComponent } from "../selected-client/selected-client.component";
 import { ClientTableComponent } from "../../../shared/components/tables/client-table/client-table.component";
 import { ApiLinksDetails } from '../../../core/models/responseModel/apiLinksDetails';
+import { ModalService } from '../../../shared/services/modal-service.service';
 
 @Component({
   selector: 'app-user-home',
@@ -24,7 +24,7 @@ export class UserHomeComponent  {
   updateTemplate : ElementRef<any>;
  
   private _router = inject(Router);
-  private _modalService = inject(ModalServiceService);
+  // private _modalService = inject(ModalService);
   private linkList : Array<ApiLinksDetails> = [];  //this holds the list of pagination      ----links[{rel,href},{rel,href}].
   private mappedLinks = new Map<string, string>;// this holds the key pair value of Extracted linkList ----links{rel:href, rel:href}.
   // private pageModel : ApiPageModel = new ApiPageModel(); 

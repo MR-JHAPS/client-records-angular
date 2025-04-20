@@ -1,23 +1,39 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, NgModule, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ClientApiServiceService } from '../../../../core/services/client-api/client-api-service.service';
 import { ClientResponse } from '../../../../core/models/response/clientResponse';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { CommonModule, NgComponentOutlet } from '@angular/common';
+import { FormsModule, NgModel } from '@angular/forms';
 import { PaginationParams } from '../../../../core/models/request/paginationParams';
 import { ApiLinksDetails } from '../../../../core/models/responseModel/apiLinksDetails';
 import { ApiResponseModelPaginated } from '../../../../core/models/responseModel/apiResponseModelPaginated';
 import { ClientSearchComponent } from "../../search/client-search/client-search.component";
+import { InsertClientModalComponent } from "../../modals/insert-client-modal/insert-client-modal.component";
+import { ModalService } from '../../../services/modal-service.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { AlertModule } from 'ngx-bootstrap/alert';
+
 
 @Component({
   selector: 'app-client-table',
-  imports: [CommonModule, FormsModule, ClientSearchComponent],
+  standalone: true,
+  imports: [CommonModule, FormsModule, ClientSearchComponent, InsertClientModalComponent, AlertModule ],
   templateUrl: './client-table.component.html',
-  styleUrl: './client-table.component.css'
+  styleUrl: './client-table.component.css',
+  providers: [BsModalService]
 })
 export class ClientTableComponent implements OnInit {
+ 
+  
+
+  isClientInserted : boolean | null = null;
+
+  bsModalRef?: BsModalRef;
+
   private _clientService = inject(ClientApiServiceService);
   private _router = inject(Router);
+  private _modalService = inject(BsModalService);
+
   clientList : Array<ClientResponse>;
   pageLinks : Array<ApiLinksDetails>;
   contentSize =10;
@@ -28,7 +44,7 @@ export class ClientTableComponent implements OnInit {
     this.getAllClients();
     this.pageLinks;
   }
-
+ 
 
   getAllClients(pageNumber?:number, pageSize?: number,
     sortBy?: string, direction?: string ) : void {
@@ -78,23 +94,6 @@ export class ClientTableComponent implements OnInit {
 
    /*------------------- This is for the Pagination.--------------------------------------------------------------- */
 
-
-  toNextPage(): void {
-    //passing the list of pagination Links to the service layer.
-    this._clientService.getNextPage(this.pageLinks).subscribe({
-      next : (response: ApiResponseModelPaginated<ClientResponse>) => {
-        this.clientList = response.data.content;
-        //saving the list of (next, previous, last, first) page links in a variable.
-        this.pageLinks = response.data.links; 
-        console.log(response.data);
-      },
-      error : (error)=> {
-        console.log("Error occured while getting all the clients.", error);
-      },
-      complete : () => { console.log("All client obtained Successfully.")}
-    })
-  }
-
   toSpecificPage(action: string): void {
     //passing the list of pagination Links to the service layer.
     this._clientService.getRequiredPage(this.pageLinks, action).subscribe({
@@ -113,6 +112,30 @@ export class ClientTableComponent implements OnInit {
 
   
 
+
+
+/*-----------------INSERT CLIENT (MODAL)----------------------------*/
+
+openInsertClientModal(): void {
+  const initialState = {};
+  this.bsModalRef = this._modalService.show(InsertClientModalComponent, { initialState });
+  
+  this.bsModalRef.content.clientInserted.subscribe((newClient : any) => {  
+    this.handleNewClient(newClient);
+  });
+}
+
+private handleNewClient(clientData: any): void {
+  // Format date if needed
+  if(success){
+    this.isClientInserted = true;
+  }else{
+    this.isClientInserted = false;
+  }
+  if (clientData.dateOfBirth) {
+    clientData.dateOfBirth = new Date(clientData.dateOfBirth);
+  }
+}
 
 
 

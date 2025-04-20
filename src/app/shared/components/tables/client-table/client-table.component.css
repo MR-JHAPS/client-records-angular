@@ -22,18 +22,41 @@
   background-color: green;
 }
 
+/* This is for the Insert Client button ------------------------------------------------------------*/
+
+.insertButtonContainer{
+  padding:4px;
+}
+
+.insertButtonContainer>button{
+  display: block;
+  width: 200px;
+  margin: auto;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--mutedOrange);
+  color: var(--lightShade);
+  padding: 4px;
+}
+.insertButtonContainer>button:hover{
+  background-color: var(--orange);
+  color: var(--lightShade);
+}
+
+
 
 /* This is for the update button ------------------------------------------------------------*/
-  .btn.btn-primary{
-    background-color: var(--secondaryColor);
+  .updateButton{
+    /* background-color: var(--secondaryColor); */
     border: none;
-    border-radius: 30px;
-    box-shadow: 1px 3px 3px var(--secondaryColor);
+    border-radius: 4px;
+    /* box-shadow: 1px 3px 3px var(--secondaryColor); */
     color: var(--lightShade);
+    
     
   }
 
-  .btn.btn-primary:hover{
+  .updateButton:hover{
     transition-duration: 0.2s;
     background-color: var(--darkBlue);
     box-shadow: 2px 0.8px 5px var(--orange);
@@ -41,14 +64,13 @@
 
 
 /* This is for the Delete button ------------------------------------------------------------*/
-  .btn.btn-danger{
-   /*  background-color: rgb(192, 77, 77); */
+  .deleteButton{
     border: none;
-    border-radius: 10px;
-    box-shadow: 2px 0.8px 5px rgb(231, 129, 129);    
+    border-radius: 4px;
+    /* box-shadow: 2px 0.8px 5px rgb(231, 129, 129);     */
   }
 
-  .btn.btn-danger:hover{
+  .deleteButton:hover{
     transition-duration: 0.2s;
     box-shadow: 2px 0.8px 5px  rgb(169, 76, 76);
   }
@@ -86,4 +108,23 @@
     border-bottom: none; */
 
     cursor: pointer;
+   }
+
+
+
+   /* ----sideBar Header */
+
+   .sidebarButton{
+    background-color: aliceblue ;
+    border: none;
+    box-shadow: 0.6px 1px 1px rgb(60, 55, 64);
+   }
+
+   .sidebarHeader{
+    background-color: var(--orange) !important;
+
+   }
+
+   .sideBarCloseButton{
+    color: green !important;
    }

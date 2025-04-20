@@ -1,0 +1,53 @@
+<!-- insert-client-modal.component.html -->
+<div class="modal-header">
+  <h4 class="modal-title">Add New Client</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="onCancel()"></button>
+</div>
+
+<div class="modal-body">
+ <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="firstName" class="form-label">First Name</label>
+      <input type="text" class="form-control" id="firstName" formControlName="firstName">
+      <div *ngIf="clientForm.get('firstName')?.invalid && clientForm.get('firstName')?.touched" class="text-danger">
+        First name is required (max 50 chars)
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Last Name</label>
+      <input type="text" class="form-control" id="lastName" formControlName="lastName">
+      <div *ngIf="clientForm.get('lastName')?.invalid && clientForm.get('lastName')?.touched" class="text-danger">
+        Last name is required (max 50 chars)
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="postalCode" class="form-label">Postal Code</label>
+      <input type="text" class="form-control" id="postalCode" formControlName="postalCode">
+      <div *ngIf="clientForm.get('postalCode')?.invalid && clientForm.get('postalCode')?.touched" class="text-danger">
+        Valid postal code required (4-10 digits)
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="dateOfBirth" class="form-label">Date of Birth</label>
+      <input type="date" class="form-control" id="dateOfBirth" formControlName="dateOfBirth">
+      <div *ngIf="clientForm.get('dateOfBirth')?.invalid && clientForm.get('dateOfBirth')?.touched" class="text-danger">
+        Date of birth is required
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary" 
+          [disabled]="clientForm.invalid || isLoading">
+        <span *ngIf="!isLoading">Insert</span>
+        <span *ngIf="isLoading">
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          Processing...
+        </span>
+      </button>
+    </div>
+    
+  </form>
+</div>
