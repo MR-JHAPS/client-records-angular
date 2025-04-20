@@ -37,18 +37,7 @@
 
 <app-client-search/>
 
-@if (isClientInserted) {
-  <alert type="success">
-    <strong>Well done!</strong> Client Inserted Successfully.
-  </alert>
-}
 
-@if (!isClientInserted) {
-    <alert type="danger">
-        <strong>Oh snap!</strong> Client not Inserted and try submitting again.
-      </alert>
-
-}
 
 <div class="insertButtonContainer">
     <button type="button" class="button" (click)="openInsertClientModal()">

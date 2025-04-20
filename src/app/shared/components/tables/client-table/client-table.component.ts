@@ -1,23 +1,22 @@
-import { Component, inject, NgModule, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ClientApiServiceService } from '../../../../core/services/client-api/client-api-service.service';
 import { ClientResponse } from '../../../../core/models/response/clientResponse';
 import { Router } from '@angular/router';
-import { CommonModule, NgComponentOutlet } from '@angular/common';
-import { FormsModule, NgModel } from '@angular/forms';
-import { PaginationParams } from '../../../../core/models/request/paginationParams';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ApiLinksDetails } from '../../../../core/models/responseModel/apiLinksDetails';
 import { ApiResponseModelPaginated } from '../../../../core/models/responseModel/apiResponseModelPaginated';
 import { ClientSearchComponent } from "../../search/client-search/client-search.component";
 import { InsertClientModalComponent } from "../../modals/insert-client-modal/insert-client-modal.component";
-import { ModalService } from '../../../services/modal-service.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import {ToastrModule, ToastrService} from 'ngx-toastr';
 
 
 @Component({
   selector: 'app-client-table',
   standalone: true,
-  imports: [CommonModule, FormsModule, ClientSearchComponent, InsertClientModalComponent, AlertModule ],
+  imports: [CommonModule, FormsModule, ClientSearchComponent, AlertModule],
   templateUrl: './client-table.component.html',
   styleUrl: './client-table.component.css',
   providers: [BsModalService]
@@ -30,6 +29,7 @@ export class ClientTableComponent implements OnInit {
 
   bsModalRef?: BsModalRef;
 
+  private _toastrService = inject(ToastrService);
   private _clientService = inject(ClientApiServiceService);
   private _router = inject(Router);
   private _modalService = inject(BsModalService);
@@ -117,24 +117,17 @@ export class ClientTableComponent implements OnInit {
 /*-----------------INSERT CLIENT (MODAL)----------------------------*/
 
 openInsertClientModal(): void {
-  const initialState = {};
-  this.bsModalRef = this._modalService.show(InsertClientModalComponent, { initialState });
+  this.bsModalRef = this._modalService.show(InsertClientModalComponent);
+  this.bsModalRef.content.isClientInserted.subscribe((success : boolean)=>{
+      if(success){
+        this._toastrService.success("Client created Successfully.");
+        this.getAllClients();
+        this._modalService.hide();
+      }else{
+        this._toastrService.error("Error! Unable to Save the Client.")
+      }
+  })
   
-  this.bsModalRef.content.clientInserted.subscribe((newClient : any) => {  
-    this.handleNewClient(newClient);
-  });
-}
-
-private handleNewClient(clientData: any): void {
-  // Format date if needed
-  if(success){
-    this.isClientInserted = true;
-  }else{
-    this.isClientInserted = false;
-  }
-  if (clientData.dateOfBirth) {
-    clientData.dateOfBirth = new Date(clientData.dateOfBirth);
-  }
 }
 
 
@@ -144,4 +137,5 @@ private handleNewClient(clientData: any): void {
 
 
 
-}
+
+}//ends class.

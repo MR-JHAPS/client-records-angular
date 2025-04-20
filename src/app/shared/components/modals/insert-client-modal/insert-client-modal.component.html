@@ -5,35 +5,43 @@
 </div>
 
 <div class="modal-body">
- <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+ <form #clientForm ="ngForm" (ngSubmit)="onSubmit(clientForm)">
     <div class="mb-3">
-      <label for="firstName" class="form-label">First Name</label>
-      <input type="text" class="form-control" id="firstName" formControlName="firstName">
-      <div *ngIf="clientForm.get('firstName')?.invalid && clientForm.get('firstName')?.touched" class="text-danger">
+      <label for="firstName" class="form-label" >First Name</label>
+      <input type="text" class="form-control" id="firstName" name="firstName" required="required" maxlength="50" minlength="2"
+        [(ngModel)] = "clientObject.firstName"
+        #firstName = ngModel>
+      <div *ngIf="(firstName?.invalid && firstName?.touched)|| (formSubmitted && firstName?.invalid)" class="text-danger">
         First name is required (max 50 chars)
       </div>
     </div>
 
     <div class="mb-3">
       <label for="lastName" class="form-label">Last Name</label>
-      <input type="text" class="form-control" id="lastName" formControlName="lastName">
-      <div *ngIf="clientForm.get('lastName')?.invalid && clientForm.get('lastName')?.touched" class="text-danger">
+      <input type="text" class="form-control" id="lastName" name="lastName" required="required" maxlength="50" minlength="2"
+        [(ngModel)] = "clientObject.lastName"
+        #lastName = ngModel>
+      <div *ngIf="(lastName?.invalid && lastName?.touched)|| (formSubmitted && lastName?.invalid)" class="text-danger">
         Last name is required (max 50 chars)
       </div>
     </div>
 
     <div class="mb-3">
       <label for="postalCode" class="form-label">Postal Code</label>
-      <input type="text" class="form-control" id="postalCode" formControlName="postalCode">
-      <div *ngIf="clientForm.get('postalCode')?.invalid && clientForm.get('postalCode')?.touched" class="text-danger">
+      <input type="text" class="form-control" id="postalCode" name="postalCode" required="required" maxlength="8" minlength="2"
+        [(ngModel)]= "clientObject.postalCode" 
+        #postalCode = ngModel >
+      <div *ngIf="(postalCode?.invalid && postalCode?.touched)|| (formSubmitted && postalCode?.invalid)" class="text-danger">
         Valid postal code required (4-10 digits)
       </div>
     </div>
 
     <div class="mb-3">
       <label for="dateOfBirth" class="form-label">Date of Birth</label>
-      <input type="date" class="form-control" id="dateOfBirth" formControlName="dateOfBirth">
-      <div *ngIf="clientForm.get('dateOfBirth')?.invalid && clientForm.get('dateOfBirth')?.touched" class="text-danger">
+      <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth"
+        [(ngModel)] = "clientObject.dateOfBirth"
+        #dateOfBirth=ngModel >
+      <div *ngIf="(dateOfBirth?.invalid && dateOfBirth?.touched)|| (formSubmitted && dateOfBirth?.invalid)" class="text-danger">
         Date of birth is required
       </div>
     </div>
@@ -48,6 +56,6 @@
         </span>
       </button>
     </div>
-    
+
   </form>
 </div>

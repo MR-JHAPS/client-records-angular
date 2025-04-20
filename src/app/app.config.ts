@@ -4,11 +4,24 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { HttpClient, JsonpInterceptor, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptorInterceptor } from './core/interceptors/auth-interceptor.interceptor';
+import { provideToastr } from 'ngx-toastr';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
                provideRouter(routes),
               importProvidersFrom(HttpClient),  //this is to allow the usage of HttpClient in the project.
-              provideHttpClient(withInterceptors([authInterceptorInterceptor])) // this is for the token interceptor.
+              provideHttpClient(withInterceptors([authInterceptorInterceptor])), // this is for the token interceptor.
+              provideAnimations(),
+              provideToastr({
+                timeOut: 6000,
+                positionClass: 'toast-top-right',
+                preventDuplicates: true,
+                progressBar: true,
+                closeButton: true,
+                tapToDismiss: false
+              }),
               ]
 };
+
+

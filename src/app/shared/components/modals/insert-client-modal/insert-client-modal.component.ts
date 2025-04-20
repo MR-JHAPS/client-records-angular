@@ -1,84 +1,73 @@
 
-import { Component, EventEmitter, inject, Output } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { Component, EventEmitter, inject, Output, output } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
 import { ClientApiServiceService } from '../../../../core/services/client-api/client-api-service.service';
 import { ClientRequest } from '../../../../core/models/request/clientRequest';
 import { CommonModule } from '@angular/common';
+import { ApiResponseModel } from '../../../../core/models/responseModel/apiResponseModel';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-insert-client-modal',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, ],
   templateUrl: './insert-client-modal.component.html',
   styleUrl: './insert-client-modal.component.css'
 })
 export class InsertClientModalComponent {
 
+
   private _clientService = inject(ClientApiServiceService);
-  /* clientObject : ClientRequest = new ClientRequest(); */
+  public bsModalRef?: BsModalRef;
+  clientObject : ClientRequest = new ClientRequest();
 
-
-  @Output() clientInserted = new EventEmitter<any>();
   isLoading = false;
-  clientForm: FormGroup;
-  bsModalRef?: BsModalRef;
-  //This is for the local use in this component.
-  isInserted :boolean;
+  formSubmitted = false;
 
-  //sending to clientTable to inform if the client is inserted or not.
-  @Output() isClientInserted = new EventEmitter<boolean | null>();
-    
+  @Output() isClientInserted = new EventEmitter<boolean>();
 
-  constructor(private fb: FormBuilder) {
-    this.clientForm = this.fb.group({
-      firstName: ['', [Validators.required, Validators.maxLength(50)]],
-      lastName: ['', [Validators.required, Validators.maxLength(50)]],
-      postalCode: ['', [Validators.required, Validators.pattern(/^\d{4,10}$/)]],
-      dateOfBirth: ['', [Validators.required]]
-    });
-  }
 
-  onSubmit(): void {
-    if (this.clientForm.valid && !this.isLoading) {
+  onSubmit(form : NgForm){
+    this.formSubmitted = true; 
+    if(form.valid && !this.isLoading){
       this.isLoading = true;
-      const clientObj : ClientRequest = {
-        firstName : this.clientForm.value.firstName,
-        lastName :this.clientForm.value.firstName,
-        postalCode : this.clientForm.value.postalCode,
-        dateOfBirth : new Date(this.clientForm.value.dateOfBirth)
-      };
-      this._clientService.saveClient(clientObj).subscribe({
-        next: () => {
-          this.bsModalRef?.hide();
-          this.isInserted = true;
-          this.isClientInserted.emit(true);
-          // Optionally emit event to parent if needed
-        },
-        error: (err) => {
-          console.error('Insert failed', err);
-          this.isInserted = false;
-          this.isLoading = false;
-          this.isClientInserted.emit(false);
-        },
-        complete: () => this.isLoading = false
-      });
+      this.saveClient(this.clientObject);
+      this.onCancel(); // close the box
     }
-
-     /*  this.clientInserted.emit(this.clientForm.value);
-      this.bsModalRef?.hide(); */
     
   }
 
-  onCancel(): void {
-    this.bsModalRef?.hide();
+
+  saveClient(clientObj: ClientRequest) : void{
+     this._clientService.saveClient(clientObj).subscribe({
+      next : 
+        (response : ApiResponseModel<string>) => {
+          this.isClientInserted.emit(true);
+          this.isLoading= true; //it will keep on loading 
+          setTimeout(()=> {  // after 2 sec it will change to false and stop loading.
+            this.isLoading = false
+          }, 2000)
+          
+         
+          
+          
+          this.bsModalRef?.hide();
+          console.log("Client Inserted Successfully");
+        },
+      error : 
+        (error)=> { console.log("Error inserting new client." , error);
+         this.isClientInserted.emit(false);
+      }
+     })
   }
+  
 
 
 
 
 
-
-
+onCancel(){
+  this.bsModalRef?.hide();
+}
 
 
 }

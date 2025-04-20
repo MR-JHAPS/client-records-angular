@@ -1,12 +1,14 @@
 export class ClientRequest{
 
     constructor(
-       /*  public id : number = 0, */
+        public id ?: number,
         public firstName: string = "",
         public lastName: string = "",
         public dateOfBirth: Date = new Date() ,
         public postalCode: string = ""
     ){}
+
+    
 
 
 }

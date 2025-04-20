@@ -21,6 +21,7 @@ export class ClientUpdateComponent implements OnInit{
 
   public id: number ; //id is passed from  getIdFromURL() which is initialized in ngOnInit so it loads when page loads. 
   public client : ClientRequest = new ClientRequest();  
+  // public client : ClientResponse;
 
   public isUpdated:boolean = false;
   public hasError: boolean = false;
