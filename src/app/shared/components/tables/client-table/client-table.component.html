@@ -37,18 +37,18 @@
 
 <app-client-search/>
 
-<button (click)="printCheckBoxNumbers()">Print</button>
+<!-- <button (click)="printCheckBoxNumbers()">Print</button> -->
 
-<div class="insertButtonContainer">
+<div class="insertButtonContainer mb-3">
     <button type="button" class="button" (click)="openInsertClientModal()">
         <i class="fas fa-plus"></i> Insert
     </button>
 </div>
 <div class="clientTable">
-    <table class="table table-striped">
+    <table class="table table-hover">
 
-        <thead>
-            <tr >
+        <thead class="header">
+            <tr>
                 <th></th>
                 <th><b>Id</b></th>
                 <th><b>First-Name</b></th>
@@ -66,7 +66,7 @@
                     <tr class="clickable-row">
                     <td>
                         <input type="checkbox" 
-                        [checked]="selectedClients.includes(client.id)"
+                        [checked]="selectedClients.includesClientId(client.id)"
                          (change)="toggleClientSelection(client.id)">
                     </td>
                     <td>{{client.id}}</td>
@@ -80,8 +80,8 @@
                             <button class="updateButton btn btn-primary" (click)="navigateToUpdatePage(client.id); $event.stopPropagation()">
                                 <i class="fa-solid fa-pen me-2"></i> Update</button>
 
-                            <button class="deleteButton btn btn-danger" >
-                                <i class="fa-solid fa-trash me-2"></i>Delete</button>
+                            <button class="deleteButton btn btn-danger" (click)="deleteClientModal(client.id)">
+                                <i class="fa-solid fa-trash me-2" ></i>Delete</button>
                         </div> 
                     </td>
                 

@@ -7,6 +7,7 @@ import { ClientRequest } from '../../models/request/clientRequest';
 import { ApiResponseModelPaginated } from '../../models/responseModel/apiResponseModelPaginated';
 import { ApiLinksDetails } from '../../models/responseModel/apiLinksDetails';
 import { ApiResponseModel } from '../../models/responseModel/apiResponseModel';
+import { BulkClientDeleteRequest } from '../../models/request/bulkClientDeleteRequest';
 
 type clientSearchCriteria = {
   type: 'searchQuery' | 'firstName' | 'lastName' | 'postalCode';
@@ -50,25 +51,6 @@ export class ClientApiServiceService {
       return this._httpClient.get<ApiResponseModelPaginated<ClientResponse>>(url, { params });  
   }
 
-  
-
-
-
-
-
-
-
-    
-/*   // Method: Get All Clients.
-  getAllClients(params : PaginationParams): Observable<ApiResponseModelPaginated<ClientResponse>>{
-    const params = new HttpParams()
-    .set('pageNumber' , pageNumber? pageNumber : 0)
-    .set('pageSize' , pageSize? pageSize : 10) 
-    .set('sortBy' , sortBy ? sortBy : "")
-    .set('direction' , direction ? direction: "")
-    const url = urlPage ? urlPage : `${this.apiBaseUrl+this.clientEndpoint.getAllClients}` ;
-    return this._httpClient.get<ApiResponseModelPaginated<ClientResponse>>(url);
-  } */
 
   // Method: Get Client By ID.
   getClientById(id:number):Observable<ApiResponseModel<ClientResponse>>{
@@ -77,17 +59,29 @@ export class ClientApiServiceService {
   }
 
 
+   // Method: Save Client.
+   saveClient(client: ClientRequest) : Observable<ApiResponseModel<string>>{
+    const url = `${this.apiBaseUrl}${this.clientEndpoint.saveNewClient}`;
+    return this._httpClient.post<ApiResponseModel<string>>(url, client);
+  }
+
   // Method: UpdateClient.
   updateClients(id:number, clientInfo:ClientRequest):Observable<ApiResponseModel<string>>{
     const url = `${this.apiBaseUrl}${this.clientEndpoint.updateClientById(id)}`;
     return this._httpClient.put<ApiResponseModel<string>>(url, clientInfo);
   }
 
-  // Method: Save Client.
-  saveClient(client: ClientRequest) : Observable<ApiResponseModel<string>>{
-    const url = `${this.apiBaseUrl}${this.clientEndpoint.saveNewClient}`;
-    return this._httpClient.post<ApiResponseModel<string>>(url, client);
-  }
+ //Method: DeleteClient (SINGLE).
+ deleteClient(clientId : number) : Observable<ApiResponseModel<string>>{
+    const url = `${this.apiBaseUrl}${this.clientEndpoint.deleteClientById(clientId)}`;
+    return this._httpClient.delete<ApiResponseModel<string>>(url);
+ }
+ 
+ //Method: DeleteClients (MULTIPLE).
+ deleteMultipleClients(clientIdList : BulkClientDeleteRequest) : Observable<ApiResponseModel<string>>{
+  const url = `${this.apiBaseUrl}${this.clientEndpoint.deleteMultipleClientsByIdList}`;
+  return this._httpClient.delete<ApiResponseModel<string>>(url, {body : clientIdList});
+}
 
 
   // Method: Search Clients
@@ -115,6 +109,11 @@ export class ClientApiServiceService {
 
 
 
+
+
+
+
+
 /*----------------------------------------PAGINATION ----------------------------------------------------------*/
 
 //GENERIC TRIAL: Works fine @param is passed in pagination in html .
@@ -124,6 +123,7 @@ export class ClientApiServiceService {
    if(!pageLinks || pageLinks.length ===0){
     return throwError(() => new Error('No pagination links provided'));
    }
+   //@param: action  is "prev", "next", "self", "first", "last"
     const actionPageLink = pageLinks.find(link => link.rel === action); // finding the rel with name "next".
     if(!actionPageLink?.href){
       return throwError(()=> new Error(`${action} page link not found or invalid`))

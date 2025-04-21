@@ -26,6 +26,10 @@
   max-width: 100%;
 }
 
+.header{
+  background-color: var(--primaryColor) !important;
+}
+
 
 
 
@@ -43,16 +47,16 @@
 
 .insertButtonContainer>button{
   display: block;
-  width: 200px;
+  width: 50%;
   margin: auto;
   border: none;
   border-radius: 4px;
-  background-color: var(--mutedOrange);
+  background-color: var(--orange);
   color: var(--lightShade);
   padding: 4px;
 }
 .insertButtonContainer>button:hover{
-  background-color: var(--orange);
+  background-color: var(--mutedOrange);
   color: var(--lightShade);
 }
 
@@ -60,7 +64,7 @@
 
 /* This is for the update button ------------------------------------------------------------*/
   .updateButton{
-    /* background-color: var(--secondaryColor); */
+    background-color: var(--secondaryColor);
     border: none;
     border-radius: 4px;
     /* box-shadow: 1px 3px 3px var(--secondaryColor); */

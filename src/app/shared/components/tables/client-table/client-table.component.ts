@@ -10,7 +10,10 @@ import { ClientSearchComponent } from "../../search/client-search/client-search.
 import { InsertClientModalComponent } from "../../modals/insert-client-modal/insert-client-modal.component";
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AlertModule } from 'ngx-bootstrap/alert';
-import {ToastrModule, ToastrService} from 'ngx-toastr';
+import { ToastrService} from 'ngx-toastr';
+import { BulkClientDeleteRequest } from '../../../../core/models/request/bulkClientDeleteRequest';
+import { ApiResponseModel } from '../../../../core/models/responseModel/apiResponseModel';
+import { DeleteClientModalComponent } from '../../modals/delete-client-modal/delete-client-modal.component';
 
 
 @Component({
@@ -38,7 +41,7 @@ export class ClientTableComponent implements OnInit {
   pageLinks : Array<ApiLinksDetails>;
   contentSize =10;//number of clientContent to show per page
   // selectedContentSize: number; 
-  selectedClients : Array<number> = new Array<number>;
+  selectedClients :BulkClientDeleteRequest = new BulkClientDeleteRequest();
 
 
   ngOnInit(): void {
@@ -57,7 +60,6 @@ export class ClientTableComponent implements OnInit {
         this.pageLinks = response.data.links; 
         console.log(response.data);
       },
-
       error : (error)=> {
         console.log("Error occured while getting all the clients.", error);
       },
@@ -70,7 +72,7 @@ export class ClientTableComponent implements OnInit {
 
 
 
-  // Method: Navigate to Update-Client-Page.
+  /*---------------- Method: Navigate to Update-Client-Page.---------------------------------------------- */
   navigateToUpdatePage(clientId: number):void{
     //redirects to clientUpdate page with user id.
     this._router.navigate(["user/client-update", clientId] );
@@ -85,17 +87,51 @@ export class ClientTableComponent implements OnInit {
   }
 
 
+
+  /*-------------------MULTIPLE CLIENTS DELETION | CHECKBOX TOGGLE-------------------------------------*/
+
   //This works. It is to delete multiple clients.
   toggleClientSelection(clientId: number){
-    if(this.selectedClients.includes(clientId)){
-      //removing the number if exists(toggling)
-      //filters and keeps all the id's that does not matches the clientId
-      this.selectedClients = this.selectedClients.filter(id => id!==clientId);
-    }else{
-      //adding if not selected previously
-      this.selectedClients.push(clientId);
-    }
+    this.selectedClients = this.selectedClients.includesClientId(clientId) 
+                          ? this.selectedClients.removeClientId(clientId) 
+                          : this.selectedClients.addClientId(clientId);
   }
+
+  deleteMultipleclients(clientIdList : BulkClientDeleteRequest): void{
+    this._clientService.deleteMultipleClients(clientIdList).subscribe({
+      next : (response : ApiResponseModel<string>) => {
+        this._toastrService.success("Multiple Clients Deleted Successfully."); //notification alert
+        console.log(response.message, response.data);
+      },
+      error : (error) => {
+        this._toastrService.error("Error! Unable to Delete the Multiple Clients.")//notification alert
+        console.log("Error! Failed Deleting  multiple Clients", error);
+      },
+      complete : () => {
+        console.log("Multiple Client Deletion Successfull");
+      }
+    })
+  }
+
+
+/* -----------------DELETE CLIENT By ID -----------------------------------*/
+
+/* deleteClient(clientId : number):void{
+  this._clientService.deleteClient(clientId).subscribe({
+    next : (response : ApiResponseModel<string>) =>{
+      this._toastrService.success("Client Deleted Successfully."); //notification alert
+        console.log(response.message, response.data);
+      },
+      error : (error) => {
+        this._toastrService.error("Error! Unable to Delete the Selected Client.")//notification alert
+        console.log("Error! Failed Deleting Client", error);
+      },
+      complete : () => {
+        console.log("Client Deletion Successfull");
+      }
+  })
+} */
+
 
 
    
@@ -121,17 +157,39 @@ openInsertClientModal(): void {
       }
   })
 
-  // Handle manual close
+  // Handle manualmodal close
   this.bsModalRef.content.closeInsertClient.subscribe(() => {
     this._modalService.hide();
   });
   
 }
 
+/*-----------------DELETE CLIENT CONFIRM (MODAL)----------------------------*/
+
+  deleteClientModal(clientId : number):void{
+    this.bsModalRef = this._modalService.show(DeleteClientModalComponent,{
+          initialState : {
+                       clientId : clientId //passing the id to the deleteModalComponent. (modalVariable : paramId)
+            } 
+          });
+    this.bsModalRef.content.isClientDeleted.subscribe((isDeleted : boolean)=>{
+      if(isDeleted){
+        this._toastrService.success("Client Deleted Successfully");
+        this.getAllClients();
+      }else{
+        this._toastrService.error("Error! Unable To Delete Client")
+      }
+    })       
+  }
+
+
+
+
 
 
 /*------------------- This is for the Pagination.--------------------------------------------------------------- */
 
+//@param: action  is "prev", "next", "self", "first", "last"
 toSpecificPage(action: string): void {
   //passing the list of pagination Links to the service layer.
   this._clientService.getRequiredPage(this.pageLinks, action).subscribe({
@@ -150,6 +208,7 @@ toSpecificPage(action: string): void {
 
 
  /*------------------- This is for the Content Size of the page.--------------------------------------------------------------- */
+
  generateContentSize() : Array<number>{
   const contentSize : Array<number> = [];
   for(let i = 10; i<=40; i+=5){
@@ -158,6 +217,7 @@ toSpecificPage(action: string): void {
   return contentSize;
 }
 
+//when selected in html it calls "GetAllClients" with new contentSize.
 setContentPerPage(event : Event) : void{
   this.getAllClients(0, this.contentSize);
 }

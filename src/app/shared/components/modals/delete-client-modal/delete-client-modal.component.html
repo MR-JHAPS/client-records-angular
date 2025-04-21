@@ -1,1 +1,18 @@
-<p>delete-client-modal works!</p>
+<div class="modal-container">
+    <div class="modal-header">
+      <i class="bi bi-exclamation-triangle warning-icon"></i>
+      <h2>Confirm Deletion</h2>
+    </div>
+    
+    <div class="modal-content">
+      <p>Are you sure you want to delete {{ clientCount > 1 ? 'these ' + clientCount + ' clients' : 'this client' }}?</p>
+      <p class="warning-message">This action cannot be undone.</p>
+    </div>
+    
+    <div class="modal-actions">
+      <button type="button" class="btn btn-outline-secondary cancel-btn" (click)="decline()">Cancel</button>
+      <button type="button" class="btn btn-danger confirm-btn" (click)="confirm()">
+        Delete {{ clientCount > 1 ? 'All' : '' }}
+      </button>
+    </div>
+  </div>

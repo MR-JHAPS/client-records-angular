@@ -1,0 +1,13 @@
+.searchButton{
+    background-color: var(--secondaryColor ) !important;
+    border: none;
+}
+
+.searchButton:hover{
+    background-color: var(--primaryColor) !important;
+}
+
+
+.searchContainer{
+    background-color: var(--lightShade) !important;
+}

@@ -39,7 +39,8 @@ export const API_ENDPOINTS= {
         saveNewClient: "/clients",
         updateClientById:(id: number) => `/clients/${id}`,
         searchClients: "/clients/search",
-        deleteClientById:(id: number) => `/clients/${id}`
+        deleteClientById:(id: number) => `/clients/${id}`,
+        deleteMultipleClientsByIdList: "/clients"
     },
 
     clientBinApi: {

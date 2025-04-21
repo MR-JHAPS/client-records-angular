@@ -61,9 +61,9 @@ updateProfilePicture(event: Event){
     //generating unique fileName.
     const uniqueFileName = `profile_${Date.now()}.${fileExtension}`;
 
-    this.saveImageLocally(file, uniqueFileName).then(()=>{
-      this.uploadImageBackEnd()
-    })
+    // this.saveImageLocally(file, uniqueFileName).then(()=>{
+    //   this.uploadImageBackEnd()
+    // })
 
   }
 }
@@ -77,22 +77,67 @@ uploadImageBackEnd(file: File,  fileName: string){
 
 
 /*-------------------- Saving image locally------------------------------------------------------*/
-  private saveImageLocally(file: File, fileName: string): Promise<void> {
-    return new Promise((resolve, reject) => {
-      // Create a local copy in browser's IndexedDB or localStorage
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        try {
-          // Save to browser storage (alternative: save to assets folder during development)
-          localStorage.setItem(`profile_${fileName}`, e.target.result);
-          resolve();
-        } catch (err) {
-          reject(err);
-        }
-      };
-      reader.readAsDataURL(file);
-    });
-  }
+  // private saveImageLocally(file: File, fileName: string): Promise<void> {
+  //   return new Promise((resolve, reject) => {
+  //     // Create a local copy in browser's IndexedDB or localStorage
+  //     const reader = new FileReader();
+  //     reader.onload = (e: any) => {
+  //       try {
+  //         // Save to browser storage (alternative: save to assets folder during development)
+  //         localStorage.setItem(`profile_${fileName}`, e.target.result);
+  //         resolve();
+  //       } catch (err) {
+  //         reject(err);
+  //       }
+  //     };
+  //     reader.readAsDataURL(file);
+  //   });
+  // }
 
 
-}
+
+
+  // /* NEED TO STUDY THIS FURTHER : */
+  // private saveImageLocally(file: File, userEmail: string, fileName: string): Promise<void> {
+  //   return new Promise((resolve, reject) => {
+  //     const reader = new FileReader();
+  //     reader.onload = (e: any) => {
+  //       try {
+  //         // Create user directory if not exists
+  //         const userDir = `${environment.publicAssetsPath}/users/${userEmail}`;
+  //         if (!window.require('fs').existsSync(userDir)) {
+  //           window.require('fs').mkdirSync(userDir, { recursive: true });
+  //         }
+
+  //         // Save file
+  //         const fs = window.require('fs');
+  //         const path = window.require('path');
+  //         const filePath = path.join(userDir, fileName);
+          
+  //         const buffer = Buffer.from(e.target.result.split(',')[1], 'base64');
+  //         fs.writeFile(filePath, buffer, (err: any) => {
+  //           if (err) reject(err);
+  //           else {
+  //             this.currentUser.image = fileName;
+  //             this.getCurrentUser();
+  //             resolve();
+  //           }
+  //         });
+  //       } catch (err) {
+  //         reject(err);
+  //       }
+  //     };
+  //     reader.readAsDataURL(file);
+  //   });
+  // }
+
+
+
+
+
+
+
+}// ends class.
+
+
+
