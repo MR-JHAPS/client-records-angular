@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ClientApiServiceService } from '../../../../core/services/client-api/client-api-service.service';
 import { ClientResponse } from '../../../../core/models/response/clientResponse';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiLinksDetails } from '../../../../core/models/responseModel/apiLinksDetails';
 import { ApiResponseModelPaginated } from '../../../../core/models/responseModel/apiResponseModelPaginated';
@@ -22,13 +22,13 @@ import { DeleteClientModalComponent } from '../../modals/delete-client-modal/del
   imports: [CommonModule, FormsModule, ClientSearchComponent, AlertModule],
   templateUrl: './client-table.component.html',
   styleUrl: './client-table.component.css',
-  providers: [BsModalService]
+  providers: [BsModalService, NgIf]
 })
 export class ClientTableComponent implements OnInit {
  
   
 
-  isClientInserted : boolean | null = null;
+  // isClientInserted : boolean | null = null;
 
   bsModalRef?: BsModalRef;
 
@@ -40,8 +40,8 @@ export class ClientTableComponent implements OnInit {
   clientList : Array<ClientResponse>;
   pageLinks : Array<ApiLinksDetails>;
   contentSize =10;//number of clientContent to show per page
-  // selectedContentSize: number; 
   selectedClients :BulkClientDeleteRequest = new BulkClientDeleteRequest();
+  isCheckBoxChecked = false; //for the dynamic insert/delete button.
 
 
   ngOnInit(): void {
@@ -68,10 +68,6 @@ export class ClientTableComponent implements OnInit {
   }
 
 
-
-
-
-
   /*---------------- Method: Navigate to Update-Client-Page.---------------------------------------------- */
   navigateToUpdatePage(clientId: number):void{
     //redirects to clientUpdate page with user id.
@@ -82,22 +78,57 @@ export class ClientTableComponent implements OnInit {
 
 /* This method is to handle the multiple selection of the clients by id checkBox*/
   printCheckBoxNumbers(){
-    const items = this.selectedClients;
+    const items = this.selectedClients.getClientIdList();
     console.log(items);
   }
 
 
 
   /*-------------------MULTIPLE CLIENTS DELETION | CHECKBOX TOGGLE-------------------------------------*/
+  // removes all the selected clients ID's .
+  public resetCheckBox(){
+    this.selectedClients.resetClientIdList();
+    this.isCheckBoxChecked = false;
+  }
+
 
   //This works. It is to delete multiple clients.
   toggleClientSelection(clientId: number){
     this.selectedClients = this.selectedClients.includesClientId(clientId) 
-                          ? this.selectedClients.removeClientId(clientId) 
-                          : this.selectedClients.addClientId(clientId);
+      ? this.selectedClients.removeClientId(clientId) 
+      : this.selectedClients.addClientId(clientId);
+    
+    /* If selectedClients object contains client id , then checkBox is checked  */
+    if(this.selectedClients.getClientIdList().length > 0 ){
+      this.isCheckBoxChecked=true;
+    }else{
+      this.isCheckBoxChecked = false;
+    }
+
   }
 
-  deleteMultipleclients(clientIdList : BulkClientDeleteRequest): void{
+
+  openDeleteMultipleClientModal(selectedClients : BulkClientDeleteRequest) : void {
+    this.bsModalRef = this._modalService.show(DeleteClientModalComponent, 
+        {initialState: { selectedClients : selectedClients/*@param*/ ,
+          isDeleteBulkClients : true
+        }});
+      this.bsModalRef.content.isClientDeleted.subscribe(( isDeleted : boolean ) =>{
+        if(isDeleted){
+          this._toastrService.success(`Multiple Clients(${selectedClients.getClientIdList().length}) Deleted Successfully`);
+          this.getAllClients();
+        }else{
+          this._toastrService.error("Error! Unable To Delete Multiple Clients")
+        }
+      })      
+      //In case of cancelling delete with cancel button
+      this.bsModalRef.content.clientDeleteCancelled.subscribe(()=>{
+        this._toastrService.warning("Multiple Client Deletion cancelled");
+      })
+  }
+
+
+  /* deleteMultipleclients(clientIdList : BulkClientDeleteRequest): void{
     this._clientService.deleteMultipleClients(clientIdList).subscribe({
       next : (response : ApiResponseModel<string>) => {
         this._toastrService.success("Multiple Clients Deleted Successfully."); //notification alert
@@ -111,34 +142,7 @@ export class ClientTableComponent implements OnInit {
         console.log("Multiple Client Deletion Successfull");
       }
     })
-  }
-
-
-/* -----------------DELETE CLIENT By ID -----------------------------------*/
-
-/* deleteClient(clientId : number):void{
-  this._clientService.deleteClient(clientId).subscribe({
-    next : (response : ApiResponseModel<string>) =>{
-      this._toastrService.success("Client Deleted Successfully."); //notification alert
-        console.log(response.message, response.data);
-      },
-      error : (error) => {
-        this._toastrService.error("Error! Unable to Delete the Selected Client.")//notification alert
-        console.log("Error! Failed Deleting Client", error);
-      },
-      complete : () => {
-        console.log("Client Deletion Successfull");
-      }
-  })
-} */
-
-
-
-   
-
-  
-
-
+  } */
 
 
 
@@ -164,12 +168,13 @@ openInsertClientModal(): void {
   
 }
 
-/*-----------------DELETE CLIENT CONFIRM (MODAL)----------------------------*/
+/*-----------------DELETE CLIENT BY ID  (CONFIRM MODAL)----------------------------*/
 
-  deleteClientModal(clientId : number):void{
+  openDeleteSingleClientModal(clientId : number):void{
     this.bsModalRef = this._modalService.show(DeleteClientModalComponent,{
           initialState : {
-                       clientId : clientId //passing the id to the deleteModalComponent. (modalVariable : paramId)
+                       clientId : clientId , //passing the id to the deleteModalComponent. (modalVariable : paramId)
+                       isDeleteSingleClient : true
             } 
           });
      //IF DELETED OR FAILED TO DELETE      
@@ -181,7 +186,6 @@ openInsertClientModal(): void {
         this._toastrService.error("Error! Unable To Delete Client")
       }
     })      
-    
     //In case of cancelling delete with cancel button
     this.bsModalRef.content.clientDeleteCancelled.subscribe(()=>{
       this._toastrService.warning("Client Delete cancelled");

@@ -26,4 +26,9 @@ export class BulkClientDeleteRequest {
        return new BulkClientDeleteRequest( this.idList.filter(id => id!==clientId));
     }
 
+    public resetClientIdList():BulkClientDeleteRequest{
+      this.idList=[];
+      return new BulkClientDeleteRequest([]);
+    }
+
 }

@@ -1,4 +1,8 @@
-<div class="modal-container">
+
+
+<!----------------------------------- DELETE SINGLE CLIENT MODAL TEMPLATE----------------------------------->
+
+<div *ngIf="isDeleteSingleClient" class="modal-container">
     <div class="modal-header">
       <i class="bi bi-exclamation-triangle warning-icon"></i>
       <h2>Confirm Deletion</h2>
@@ -14,8 +18,35 @@
     
     <div class="modal-actions">
       <button type="button" class="btn btn-outline-secondary cancel-btn" (click)="decline()">Cancel</button>
-      <button type="button" class="btn btn-danger confirm-btn" (click)="confirm()">
-        Delete {{ clientCount > 1 ? 'All' : '' }}
+      <button type="button" class="btn btn-danger confirm-btn" (click)="confirmSingleDelete()">
+        Delete
+      </button>
+    </div>
+  </div>
+
+
+
+
+
+<!----------------------------------- DELETE MULTIPLE CLIENTS MODAL TEMPLATE----------------------------------->
+  <div *ngIf="isDeleteBulkClients" class="modal-container">
+    <div class="modal-header">
+      <i class="bi bi-exclamation-triangle warning-icon"></i>
+      <h2>Confirm Deletion</h2>
+    </div>
+    
+    <div class="modal-content">
+      <!-- <p>Are you sure you want to delete {{ clientCount > 1 ? 'these ' + clientCount + ' clients' : 'this client' }}?</p> -->
+      <p>Are you sure you want to delete Clients?</p>
+      <p class="warning-message"> 
+        <span class="text-danger"><b>Number of Clients Selected : {{selectedClients.getClientIdList().length  }}</b></span>
+         <br> This action cannot be undone.</p>
+    </div>
+    
+    <div class="modal-actions">
+      <button type="button" class="btn btn-outline-secondary cancel-btn" (click)="decline()">Cancel</button>
+      <button type="button" class="btn btn-danger confirm-btn" (click)="confirmBulkDelete()">
+        Delete
       </button>
     </div>
   </div>
