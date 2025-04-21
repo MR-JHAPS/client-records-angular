@@ -31,7 +31,7 @@ export const routes: Routes = [
      children : [ 
             {path: "user-home", component: UserHomeComponent},
             {path: "user-profile", component: UserProfileComponent},
-            {path: "client-update", component: ClientUpdateComponent},
+            {path: "client-update/:id", component: ClientUpdateComponent},
             {path: "selected-client", component: SelectedClientComponent},
             {path: "clientTable", component: ClientTableComponent},
             

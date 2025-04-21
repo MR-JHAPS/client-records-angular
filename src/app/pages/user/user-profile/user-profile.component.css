@@ -6,27 +6,52 @@ main{
 .mainContainer{
   padding:10px;
   padding-top:40px;
-
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  /* grid-template-rows: 1fr; */
+  grid-template-columns: 0.2fr 1fr;
   grid-template-areas: "imageContainer detailsContainer";
 }
 
 .imageContainer{
-  display: flex;
+ /*  display: flex;
   flex-direction: row;
-  justify-content: space-around;
- /*  border: 10px solid darkgray;
-  border-radius: 50%; */
- 
+  justify-content: space-around; */
+  overflow: hidden;
+  position: relative;
+  width: 250px; /* Adjust as needed */
+  height: 250px;
+  border-radius: 50%; 
 
 }
 img{
-  max-width: 400px;
-  /* border: 0.5px solid var(--orange); */
+  max-width: 100%;
+}
+
+.imageUpload{
+  background-color: green;
+  position: absolute;
+  top: 190px;
+  left: 160px;
+  background: rgba(255, 255, 255, 0.742);
+  width: 50px;
+  height: 50px;
   /* border-radius: 50%; */
-  /* box-shadow: 3px 1px 7px rgb(170, 170, 170); */
+  border-top-right-radius: 50%;
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+  border: 1px solid var(--lightShade);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.imageUploadLabel{
+  cursor: pointer;
+}
+
+.imageUpload:hover{
+  background: rgba(207, 206, 206, 0.5);
+
 }
 
 
@@ -119,7 +144,7 @@ img{
 
 
   img{
-    max-width: 328px;
+    max-width: 100%;
     border: 0.5px solid var(--orange);
     border-radius: 50%;
     box-shadow: none;

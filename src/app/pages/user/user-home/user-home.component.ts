@@ -5,11 +5,10 @@ import { Router, RouterLink } from '@angular/router';
 import { SelectedClientComponent } from "../selected-client/selected-client.component";
 import { ClientTableComponent } from "../../../shared/components/tables/client-table/client-table.component";
 import { ApiLinksDetails } from '../../../core/models/responseModel/apiLinksDetails';
-import { ModalService } from '../../../shared/services/modal-service.service';
 
 @Component({
   selector: 'app-user-home',
-  imports: [FormsModule, CommonModule, RouterLink, ClientTableComponent],
+  imports: [FormsModule, CommonModule, ClientTableComponent],
   templateUrl: './user-home.component.html',
   styleUrl: './user-home.component.css'
 })

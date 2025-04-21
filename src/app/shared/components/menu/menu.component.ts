@@ -29,6 +29,8 @@ export class MenuComponent implements OnInit, OnDestroy {
     });
   }
 
+  // isCollapsed = false;
+
 
 
 

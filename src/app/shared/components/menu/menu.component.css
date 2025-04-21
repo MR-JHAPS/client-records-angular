@@ -2,6 +2,11 @@
     background-color: var(--primaryColor);
 }
 
+.brand{
+    background-color: var(--orange);
+}
+
+
 a,h3{
     color:var(--backgroundColor);
 }

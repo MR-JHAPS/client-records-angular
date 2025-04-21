@@ -40,9 +40,9 @@ export class ClientUpdateComponent implements OnInit{
   
   /* Extracting string|null type id-value from URL and parsing it to INT */
   getIdFromURL(){
-    const optionalParam = this._activatedRoute.snapshot.queryParamMap.get("id");
-    if(optionalParam!=null){
-      this.id = parseInt(optionalParam); 
+    const routeParam = this._activatedRoute.snapshot.paramMap.get("id");
+    if(routeParam!=null){
+      this.id = parseInt(routeParam); 
     }
     console.log("This is in number : " + this.id)
   }

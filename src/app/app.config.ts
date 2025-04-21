@@ -6,12 +6,14 @@ import { HttpClient, JsonpInterceptor, provideHttpClient, withInterceptors } fro
 import { authInterceptorInterceptor } from './core/interceptors/auth-interceptor.interceptor';
 import { provideToastr } from 'ngx-toastr';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
                provideRouter(routes),
               importProvidersFrom(HttpClient),  //this is to allow the usage of HttpClient in the project.
               provideHttpClient(withInterceptors([authInterceptorInterceptor])), // this is for the token interceptor.
+              BsModalService,
               provideAnimations(),
               provideToastr({
                 timeOut: 6000,

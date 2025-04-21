@@ -36,8 +36,9 @@ export class ClientTableComponent implements OnInit {
 
   clientList : Array<ClientResponse>;
   pageLinks : Array<ApiLinksDetails>;
-  contentSize =10;
-  selectedContentSize: number;
+  contentSize =10;//number of clientContent to show per page
+  // selectedContentSize: number; 
+  selectedClients : Array<number> = new Array<number>;
 
 
   ngOnInit(): void {
@@ -77,40 +78,32 @@ export class ClientTableComponent implements OnInit {
 
 
 
+/* This method is to handle the multiple selection of the clients by id checkBox*/
+  printCheckBoxNumbers(){
+    const items = this.selectedClients;
+    console.log(items);
+  }
 
- /*------------------- This is for the Content Size of the page.--------------------------------------------------------------- */
-  generateContentSize() : Array<number>{
-    const contentSize : Array<number> = [];
-    for(let i = 10; i<=40; i+=5){
-      contentSize.push(i);
+
+  //This works. It is to delete multiple clients.
+  toggleClientSelection(clientId: number){
+    if(this.selectedClients.includes(clientId)){
+      //removing the number if exists(toggling)
+      //filters and keeps all the id's that does not matches the clientId
+      this.selectedClients = this.selectedClients.filter(id => id!==clientId);
+    }else{
+      //adding if not selected previously
+      this.selectedClients.push(clientId);
     }
-    return contentSize;
-  }
-
-  setContentPerPage(event : Event) : void{
-    this.getAllClients(0, this.contentSize);
   }
 
 
-   /*------------------- This is for the Pagination.--------------------------------------------------------------- */
-
-  toSpecificPage(action: string): void {
-    //passing the list of pagination Links to the service layer.
-    this._clientService.getRequiredPage(this.pageLinks, action).subscribe({
-      next : (response: ApiResponseModelPaginated<ClientResponse>) => {
-        this.clientList = response.data.content;
-        //saving the list of (next, previous, last, first) page links in a variable.
-        this.pageLinks = response.data.links; 
-        console.log(response.data);
-      },
-      error : (error)=> {
-        console.log("Error occured while getting all the clients.", error);
-      },
-      complete : () => { console.log("All client obtained Successfully.")}
-    })
-  }
+   
 
   
+
+
+
 
 
 
@@ -127,11 +120,47 @@ openInsertClientModal(): void {
         this._toastrService.error("Error! Unable to Save the Client.")
       }
   })
+
+  // Handle manual close
+  this.bsModalRef.content.closeInsertClient.subscribe(() => {
+    this._modalService.hide();
+  });
   
 }
 
 
 
+/*------------------- This is for the Pagination.--------------------------------------------------------------- */
+
+toSpecificPage(action: string): void {
+  //passing the list of pagination Links to the service layer.
+  this._clientService.getRequiredPage(this.pageLinks, action).subscribe({
+    next : (response: ApiResponseModelPaginated<ClientResponse>) => {
+      this.clientList = response.data.content;
+      //saving the list of (next, previous, last, first) page links in a variable.
+      this.pageLinks = response.data.links; 
+      console.log(response.data);
+    },
+    error : (error)=> {
+      console.log("Error occured while getting all the clients.", error);
+    },
+    complete : () => { console.log("All client obtained Successfully.")}
+  })
+}
+
+
+ /*------------------- This is for the Content Size of the page.--------------------------------------------------------------- */
+ generateContentSize() : Array<number>{
+  const contentSize : Array<number> = [];
+  for(let i = 10; i<=40; i+=5){
+    contentSize.push(i);
+  }
+  return contentSize;
+}
+
+setContentPerPage(event : Event) : void{
+  this.getAllClients(0, this.contentSize);
+}
 
 
 

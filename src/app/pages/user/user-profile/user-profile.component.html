@@ -10,6 +10,20 @@
 
                 <div class="imageContainer bg bg-light">
                     <img src="/assets/images/{{currentUser.image}}" alt="profile picture">
+
+                    <div class="imageUpload">
+                        <label class="imageUploadLabel" for="profileImageUpload">
+                          <i class="fas fa-camera"></i> <!-- Font Awesome icon -->
+                        </label>
+                          <input 
+                            id="profileImageUpload" 
+                            type="file" 
+                            accept="image/*" 
+                            (change)="updateProfilePicture($event)"
+                            style="display: none;"
+                          >
+                        
+                      </div>
                 </div>
             
                 <div class="detailsContainer bg bg-light">

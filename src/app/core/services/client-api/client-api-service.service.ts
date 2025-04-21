@@ -79,7 +79,7 @@ export class ClientApiServiceService {
 
   // Method: UpdateClient.
   updateClients(id:number, clientInfo:ClientRequest):Observable<ApiResponseModel<string>>{
-    const url = `${this.apiBaseUrl}${this.clientEndpoint.updateClientById}/${id}`;
+    const url = `${this.apiBaseUrl}${this.clientEndpoint.updateClientById(id)}`;
     return this._httpClient.put<ApiResponseModel<string>>(url, clientInfo);
   }
 

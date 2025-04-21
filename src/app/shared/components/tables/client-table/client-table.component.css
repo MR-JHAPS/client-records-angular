@@ -5,6 +5,10 @@
     background-color: #f1f1f1;
   }
 
+
+
+
+  
 /* This is for the search container ------------------------------------------------------------*/
 .container>.btn{
   background-color: var(--mutedOrange);
@@ -16,11 +20,20 @@
   background-color: var(--orange);
 }
 
-
-
-.pageContent>.container-fluid{
-  background-color: green;
+/* This is for the table. */
+.clientTable {
+  overflow-x: auto;
+  max-width: 100%;
 }
+
+
+
+
+
+
+
+
+
 
 /* This is for the Insert Client button ------------------------------------------------------------*/
 
@@ -104,12 +117,13 @@
   } */
    .page-item>.one {
     background-color: var(--orange);
-    /* border-top:none;
-    border-bottom: none; */
-
     cursor: pointer;
    }
 
+   /* This is for the page contents*/
+  .pageContent>.container-fluid{
+    background-color: green;
+    }
 
 
    /* ----sideBar Header */
