@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ClientApiServiceService } from '../../../../core/services/client-api/client-api-service.service';
 import { ClientResponse } from '../../../../core/models/response/clientResponse';
 import { Router } from '@angular/router';
@@ -14,17 +14,21 @@ import { ToastrService} from 'ngx-toastr';
 import { BulkClientDeleteRequest } from '../../../../core/models/request/bulkClientDeleteRequest';
 import { ApiResponseModel } from '../../../../core/models/responseModel/apiResponseModel';
 import { DeleteClientModalComponent } from '../../modals/delete-client-modal/delete-client-modal.component';
+import { ClientUpdateComponent } from "../../../../pages/user/client-update/client-update.component";
+import { CommunicationServiceService } from '../../../services/communication-service.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
   selector: 'app-client-table',
   standalone: true,
-  imports: [CommonModule, FormsModule, ClientSearchComponent, AlertModule],
+  imports: [CommonModule, FormsModule, ClientSearchComponent, AlertModule, ClientUpdateComponent],
   templateUrl: './client-table.component.html',
   styleUrl: './client-table.component.css',
   providers: [BsModalService, NgIf]
 })
-export class ClientTableComponent implements OnInit {
+export class ClientTableComponent implements OnInit, OnDestroy {
+  
  
   
 
@@ -36,19 +40,36 @@ export class ClientTableComponent implements OnInit {
   private _clientService = inject(ClientApiServiceService);
   private _router = inject(Router);
   private _modalService = inject(BsModalService);
+  private _communicationService = inject(CommunicationServiceService); // for  update message if client update successful.
 
   clientList : Array<ClientResponse>;
   pageLinks : Array<ApiLinksDetails>;
   contentSize =10;//number of clientContent to show per page
   selectedClients :BulkClientDeleteRequest = new BulkClientDeleteRequest();
   isCheckBoxChecked = false; //for the dynamic insert/delete button.
-
+  updateSubscription : Subscription;
 
   ngOnInit(): void {
     this.getAllClients();
     this.pageLinks;
+
+    /* suscribing to the communicationService behaviour subj to see if client is updated and display alert accordingly.*/
+    this.updateSubscription = this._communicationService.isClientUpdated$.subscribe(
+      (isUpdated: boolean) => {
+        if (isUpdated) {
+          this._toastrService.success("Client updated successfully");
+        }
+      }
+    );
   }
- 
+
+
+  //Destroying the clientUpdate Subscription to prevent memory leak.
+  ngOnDestroy(): void {
+    if (this.updateSubscription) {
+      this.updateSubscription.unsubscribe();
+    }
+  }
 
   getAllClients(pageNumber?:number, pageSize?: number,
     sortBy?: string, direction?: string ) : void {
@@ -128,21 +149,7 @@ export class ClientTableComponent implements OnInit {
   }
 
 
-  /* deleteMultipleclients(clientIdList : BulkClientDeleteRequest): void{
-    this._clientService.deleteMultipleClients(clientIdList).subscribe({
-      next : (response : ApiResponseModel<string>) => {
-        this._toastrService.success("Multiple Clients Deleted Successfully."); //notification alert
-        console.log(response.message, response.data);
-      },
-      error : (error) => {
-        this._toastrService.error("Error! Unable to Delete the Multiple Clients.")//notification alert
-        console.log("Error! Failed Deleting  multiple Clients", error);
-      },
-      complete : () => {
-        console.log("Multiple Client Deletion Successfull");
-      }
-    })
-  } */
+
 
 
 
