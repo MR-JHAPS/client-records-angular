@@ -172,6 +172,7 @@ openInsertClientModal(): void {
                        clientId : clientId //passing the id to the deleteModalComponent. (modalVariable : paramId)
             } 
           });
+     //IF DELETED OR FAILED TO DELETE      
     this.bsModalRef.content.isClientDeleted.subscribe((isDeleted : boolean)=>{
       if(isDeleted){
         this._toastrService.success("Client Deleted Successfully");
@@ -179,7 +180,13 @@ openInsertClientModal(): void {
       }else{
         this._toastrService.error("Error! Unable To Delete Client")
       }
-    })       
+    })      
+    
+    //In case of cancelling delete with cancel button
+    this.bsModalRef.content.clientDeleteCancelled.subscribe(()=>{
+      this._toastrService.warning("Client Delete cancelled");
+    })
+
   }
 
 

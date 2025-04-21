@@ -14,6 +14,7 @@ export class DeleteClientModalComponent {
   private _clientService = inject(ClientApiServiceService);
 
   @Output() isClientDeleted = new EventEmitter<boolean>();
+  @Output() clientDeleteCancelled = new EventEmitter<void>();
 
   clientId : number ;
 
@@ -27,6 +28,7 @@ export class DeleteClientModalComponent {
   
 
   decline(): void {
+    this.clientDeleteCancelled.emit();
     this.bsModalRef.hide();
   }
 

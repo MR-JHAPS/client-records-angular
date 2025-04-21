@@ -16,7 +16,7 @@ export const appConfig: ApplicationConfig = {
               BsModalService,
               provideAnimations(),
               provideToastr({
-                timeOut: 6000,
+                timeOut: 5000,
                 positionClass: 'toast-top-right',
                 preventDuplicates: true,
                 progressBar: true,
