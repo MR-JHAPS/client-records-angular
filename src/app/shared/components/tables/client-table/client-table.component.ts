@@ -89,23 +89,62 @@ export class ClientTableComponent implements OnInit, OnDestroy {
   }
 
 
-  /*---------------- Method: Navigate to Update-Client-Page.---------------------------------------------- */
-  navigateToUpdatePage(clientId: number):void{
-    //redirects to clientUpdate page with user id.
-    this._router.navigate(["user/client-update", clientId] );
+ 
+ /*------------------------- Method: Navigate to Update-Client-Page.------------------------------------------------------- */
+
+ navigateToUpdatePage(clientId: number):void{
+  this._router.navigate(["user/client-update", clientId] ); //redirects to clientUpdate page with user id.
+}
+
+/*-----------------------------------INSERT CLIENT (MODAL)----------------------------------------------------------------------*/
+
+openInsertClientModal(): void {
+  this.bsModalRef = this._modalService.show(InsertClientModalComponent);
+  this.bsModalRef.content.isClientInserted.subscribe((success : boolean)=>{
+      if(success){
+        this._toastrService.success("Client created Successfully.");
+        this.getAllClients();
+        this._modalService.hide();
+      }else{
+        this._toastrService.error("Error! Unable to Save the Client.")
+      }
+  })
+
+  // Handle manualmodal close
+  this.bsModalRef.content.closeInsertClient.subscribe(() => {
+    this._modalService.hide();
+  });
+  
+}
+
+/*-----------------DELETE SINGLE CLIENT BY ID  (CONFIRM MODAL)----------------------------------------------------------------------*/
+
+  openDeleteSingleClientModal(clientId : number):void{
+    this.bsModalRef = this._modalService.show(DeleteClientModalComponent,{
+          initialState : {
+                       clientId : clientId , //passing the id to the deleteModalComponent. (modalVariable : paramId)
+                       isDeleteSingleClient : true
+            } 
+          });
+     //IF DELETED OR FAILED TO DELETE      
+    this.bsModalRef.content.isClientDeleted.subscribe((isDeleted : boolean)=>{
+      if(isDeleted){
+        this._toastrService.success("Client Deleted Successfully");
+        this.getAllClients();
+      }else{
+        this._toastrService.error("Error! Unable To Delete Client")
+      }
+    })      
+    //In case of cancelling delete with cancel button
+    this.bsModalRef.content.clientDeleteCancelled.subscribe(()=>{
+      this._toastrService.warning("Client Delete cancelled");
+    })
+
   }
 
 
+  /*-------------------------MULTIPLE CLIENTS DELETION | CHECKBOX TOGGLE-------------------------------------------------------*/
 
-/* This method is to handle the multiple selection of the clients by id checkBox*/
-  printCheckBoxNumbers(){
-    const items = this.selectedClients.getClientIdList();
-    console.log(items);
-  }
-
-
-
-  /*-------------------MULTIPLE CLIENTS DELETION | CHECKBOX TOGGLE-------------------------------------*/
   // removes all the selected clients ID's .
   public resetCheckBox(){
     this.selectedClients.resetClientIdList();
@@ -152,60 +191,7 @@ export class ClientTableComponent implements OnInit, OnDestroy {
 
 
 
-
-
-/*-----------------INSERT CLIENT (MODAL)----------------------------*/
-
-openInsertClientModal(): void {
-  this.bsModalRef = this._modalService.show(InsertClientModalComponent);
-  this.bsModalRef.content.isClientInserted.subscribe((success : boolean)=>{
-      if(success){
-        this._toastrService.success("Client created Successfully.");
-        this.getAllClients();
-        this._modalService.hide();
-      }else{
-        this._toastrService.error("Error! Unable to Save the Client.")
-      }
-  })
-
-  // Handle manualmodal close
-  this.bsModalRef.content.closeInsertClient.subscribe(() => {
-    this._modalService.hide();
-  });
-  
-}
-
-/*-----------------DELETE CLIENT BY ID  (CONFIRM MODAL)----------------------------*/
-
-  openDeleteSingleClientModal(clientId : number):void{
-    this.bsModalRef = this._modalService.show(DeleteClientModalComponent,{
-          initialState : {
-                       clientId : clientId , //passing the id to the deleteModalComponent. (modalVariable : paramId)
-                       isDeleteSingleClient : true
-            } 
-          });
-     //IF DELETED OR FAILED TO DELETE      
-    this.bsModalRef.content.isClientDeleted.subscribe((isDeleted : boolean)=>{
-      if(isDeleted){
-        this._toastrService.success("Client Deleted Successfully");
-        this.getAllClients();
-      }else{
-        this._toastrService.error("Error! Unable To Delete Client")
-      }
-    })      
-    //In case of cancelling delete with cancel button
-    this.bsModalRef.content.clientDeleteCancelled.subscribe(()=>{
-      this._toastrService.warning("Client Delete cancelled");
-    })
-
-  }
-
-
-
-
-
-
-/*------------------- This is for the Pagination.--------------------------------------------------------------- */
+/*------------------------- This is for the Pagination.--------------------------------------------------------------------- */
 
 //@param: action  is "prev", "next", "self", "first", "last"
 toSpecificPage(action: string): void {
