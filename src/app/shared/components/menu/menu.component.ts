@@ -3,6 +3,7 @@ import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } fro
 import { AuthServiceService } from '../../../core/auth/services/auth-service.service';
 import { CommonModule, NgIf } from '@angular/common';
 import { filter, Observable, Subscription } from 'rxjs';
+import { UserMenuCommunicationService } from '../../services/userMenuCommunication/user-menu-communication.service';
 
 @Component({
   selector: 'app-menu',
@@ -14,6 +15,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   private _authService = inject(AuthServiceService);
   private _router = inject(Router);
+  private _userMenuCommService = inject(UserMenuCommunicationService);
   private routerSub!: Subscription;
    isRoleUser$ = this._authService.isRoleUser$
    isRoleAdmin$ = this._authService.isRoleAdmin$;
@@ -29,7 +31,19 @@ export class MenuComponent implements OnInit, OnDestroy {
     });
   }
 
-  // isCollapsed = false;
+  
+
+
+
+    /* openSideBar(){
+      console.log("button on menu component clicked.")
+      this._userMenuCommService.openMenuSideBar();
+    } */
+
+    toggleSideBar(){
+      console.log("button on menu component clicked.")
+      this._userMenuCommService.toggleMenuSideBar();
+    }
 
 
 

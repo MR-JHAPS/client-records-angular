@@ -1,0 +1,20 @@
+  /* ---------------------------------------------------------Pagination------------------------------------------------------------------- */
+
+  .page-item>.page-link{
+    background-color: var(--darkBlue);
+    color: var(--lightShade);
+    cursor: pointer;
+    border: 1px solid var(--lightShade);
+  }
+
+   .page-item>.one {
+    background-color: var(--orange);
+    cursor: pointer;
+   }
+
+
+   /* -------------------------------------- Number Of Contents Per Page ---------------------------------------------------------*/
+  .pageContent>.container-fluid{
+    background-color: green;
+    }
+

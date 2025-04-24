@@ -14,6 +14,7 @@ import { adminGuardGuard } from './core/auth/guards/adminGuard/admin-guard.guard
 import { userGuardGuard } from './core/auth/guards/userGuard/user-guard.guard';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 import { AdminProfileComponent } from './pages/admin/admin-profile/admin-profile.component';
+import { ClientLogTableComponent } from './shared/components/tables/client-log-table/client-log-table.component';
 
 export const routes: Routes = [
     {path: "",  component: HomeComponent},
@@ -29,11 +30,19 @@ export const routes: Routes = [
      canActivate : [userGuardGuard],
      canActivateChild : [userGuardGuard], /* Calling a AuthGuard class. */
      children : [ 
-            {path: "user-home", component: UserHomeComponent},
+            {path: "user-home",
+                 component: UserHomeComponent,
+                children: [
+                    {path: "clientTable", component: ClientTableComponent},
+                    {path: "clientLogTable", component: ClientLogTableComponent},
+                ]},
+
             {path: "user-profile", component: UserProfileComponent},
             {path: "client-update/:id", component: ClientUpdateComponent},
             {path: "selected-client", component: SelectedClientComponent},
             {path: "clientTable", component: ClientTableComponent},
+            {path: "clientLogTable", component: ClientLogTableComponent},
+
             
         ]
     },

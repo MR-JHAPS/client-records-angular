@@ -1,106 +1,74 @@
-import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnDestroy, OnInit, viewChild, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { CommonModule, NgIf } from '@angular/common';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { SelectedClientComponent } from "../selected-client/selected-client.component";
 import { ClientTableComponent } from "../../../shared/components/tables/client-table/client-table.component";
 import { ApiLinksDetails } from '../../../core/models/responseModel/apiLinksDetails';
+import { UserMenuCommunicationService } from '../../../shared/services/userMenuCommunication/user-menu-communication.service';
+import { debounceTime, Observable, Subscription } from 'rxjs';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import {MatButtonModule} from '@angular/material/button';
+import {MatSelectModule} from '@angular/material/select';
+import {MatListModule} from '@angular/material/list';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDrawer, MatSidenavModule} from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-user-home',
-  imports: [FormsModule, CommonModule, ClientTableComponent],
+  imports: [FormsModule, CommonModule,RouterOutlet, RouterLink, ClientTableComponent, 
+    NgIf, MatSidenavModule, MatFormFieldModule, MatSelectModule, MatButtonModule, MatListModule],
   templateUrl: './user-home.component.html',
   styleUrl: './user-home.component.css'
 })
 
-export class UserHomeComponent  {
+export class UserHomeComponent implements OnInit, OnDestroy  {
 
   
- //this is to implement the update-client template from "ClientUpdateComponent".
-  @ViewChild("selectedClientComponent") selectedClientComponent : SelectedClientComponent;
-  selectedClientDiv : ElementRef<any>;
-
-  updateTemplate : ElementRef<any>;
- 
   private _router = inject(Router);
-  // private _modalService = inject(ModalService);
   private linkList : Array<ApiLinksDetails> = [];  //this holds the list of pagination      ----links[{rel,href},{rel,href}].
   private mappedLinks = new Map<string, string>;// this holds the key pair value of Extracted linkList ----links{rel:href, rel:href}.
-  // private pageModel : ApiPageModel = new ApiPageModel(); 
+  private menuSubscription : Subscription;
+  private _userMenuCommService = inject(UserMenuCommunicationService);
+  isMenuSideBarOpen$ : Observable<boolean> = this._userMenuCommService.isMenuSideBarOpen$;
 
-  // public searchQuery : string = "";  //this stores the search query.
-  // public clientList : Array<ClientResponse> = []; // this stores the Array of clients obtained from Api.
-
-
-  // public pageNumber:number = 0;
-  // public clientContentPerPage = 10 ; // hold the number of client-content per page.
+  @ViewChild("drawer") drawer!: MatDrawer; 
+  
 
 
-  //initializer for this component.
-  // ngOnInit(): void {
-    /* this.getAllClients(this.clientContentPerPage, undefined);
-    this.gettingClientsPerPage();
-    // console.log("before Click of client Update: " + this.client); */
-  // }
-
-  // ngAfterViewInit(): void {
-  //   this.selectedClientDiv = this.selectedClientComponent.selectedClientModal;
-  // }
-
-  //Selected CLient click:------------------------------------------------------------------------------- 
-
-/*   getClientById(id: number): void{
-    this._clientService.getClientById(id).subscribe({
-      next: (ApiResponseSingleClient) =>{
-        console.log("checking if the api contains the client from given id in user Homepage" , ApiResponseSingleClient.data);
-        // this.client = ApiResponseSingleClient.data;
-        this._modalService.setClient(ApiResponseSingleClient.data);
-        console.log("Selected client is sent to ModalService from UserHome " , ApiResponseSingleClient.data);
-        
-      },
-      error : (error) =>{
-        console.log("error getting the client by id : " ,error);
-      }
-    })
-  } */
+  ngOnInit(): void {
+    this.menuSubscription = this._userMenuCommService.isMenuSideBarOpen$.subscribe(
+      (isOpen)=> {
+        if(isOpen){
+        this.drawer.open();
+        }else{
+          this.drawer.close();
+        }
+      } 
+      
+    ) // Adjust time as needed
+  }
 
 
+  closeSideBar(){
+    this._userMenuCommService.closeMenuSideBar();
+  }
 
-/*   openSelectedClient(id:number){
-    this.getClientById(id);
-    this._modalService.getClient(); // when li of client is clicked modal is triggered
-    console.log(this._modalService.getClient());
-    this.selectedClientComponent.openSelectedClient(); 
-  } */
+  toClientLog(){
+    console.log("navigating to clientLogTable.")
+    this._router.navigateByUrl("user/clientLogTable");
+  }
 
-
-
-
-
-
-
-
-  //----------------------------ON UPDATE BUTTON CLICK--------------------------------------------------------------------------------------
-  /* navigateToUpdatePage(id:number){
-    this._router.navigate(["/client-update"], {queryParams:{id : id} } )
-  } */
-
-  //-------------SEARCHING CLIENTS---------------------------------------------------------------------------------------------------------
-
-  /*   searchClientsWithQuery() : void{
-      this._clientService.searchQuery(this.searchQuery).subscribe({
-        next : (apiResponseClient) =>{
-          this.clientList = apiResponseClient.data.content;
-        },
-        error : (error)=>{
-          console.log("error searching client with query " ,error)
-        },
-        complete : () => {console.log("Searching Clients with Query Completed")}
-      })
-    }
- */
+  ngOnDestroy(): void {
+    this.menuSubscription.unsubscribe();
+  }
 
 
+  
+
+  toggleSideBar(){
+    this.drawer.toggle();
+  }
 
 
 

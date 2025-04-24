@@ -118,21 +118,36 @@ export class ClientApiServiceService {
 
 //GENERIC TRIAL: Works fine @param is passed in pagination in html .
    // In this method we can directly pass the APiModelPaginated and get the next, prev, current page from links.
-   getRequiredPage(pageLinks : Array<ApiLinksDetails>, action: string): Observable<ApiResponseModelPaginated<ClientResponse>>{
-    //we need to get the url from the pageLinks. we want to take out the href(url) of rel(next).
-   if(!pageLinks || pageLinks.length ===0){
-    return throwError(() => new Error('No pagination links provided'));
-   }
-   //@param: action  is "prev", "next", "self", "first", "last"
-    const actionPageLink = pageLinks.find(link => link.rel === action); // finding the rel with name "next".
-    if(!actionPageLink?.href){
-      return throwError(()=> new Error(`${action} page link not found or invalid`))
-    }
-    return this._httpClient.get<ApiResponseModelPaginated<ClientResponse>>(actionPageLink.href);
+  //  getRequiredPage(pageLinks? : Array<ApiLinksDetails>, rel?: string, pageHref?: string): Observable<ApiResponseModelPaginated<ClientResponse>>{
+  //   //we need to get the url from the pageLinks. we want to take out the href(url) of rel(next).
+  //  if(!pageLinks || pageLinks.length ===0){
+  //   return throwError(() => new Error('No pagination links provided'));
+  //  }
+  //  /* If the  */
+  //  if(pageLinks){
+  //   const actionPageLink = pageLinks.find(link => link.rel === rel); // finding the rel with name "next/prev/self/first/last".
+  //   if(!actionPageLink?.href){
+  //     return throwError(()=> new Error(`${rel} page link not found or invalid`))
+  //   }
+  //   return this._httpClient.get<ApiResponseModelPaginated<ClientResponse>>(actionPageLink.href);
+  //  }
+  //  /* if the url is provided directly */
+  //  if(pageHref){
+  //       return this._httpClient.get<ApiResponseModelPaginated<ClientResponse>>(pageHref);
+  //   }
+    
+    
+   
+  // }
+
+
+  getRequiredPage(pageHref: string): Observable<ApiResponseModelPaginated<ClientResponse>>{
+   /* if the url is provided directly */
+   /* if(!pageHref){
+       return throwError(()=> new Error("Error Unable to find the pageHref: url"))
+    } */
+    return this._httpClient.get<ApiResponseModelPaginated<ClientResponse>>(pageHref);
   }
-
-
-
 
 
 
