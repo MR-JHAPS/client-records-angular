@@ -1,0 +1,75 @@
+
+
+<mat-toolbar-row class="header">
+  <ng-container *ngIf="(isRoleUser$ | async) || (isRoleAdmin$ |async)" class="ngContainer" >
+    <button mat-icon-button (click)="menuToggle.emit()" [ngStyle]="[{'background-color': 'green' , 'padding':'30px'}]" >
+      <mat-icon>menu</mat-icon>
+    </button>
+  </ng-container>
+    ClientRecords
+    
+</mat-toolbar-row>
+
+
+
+<mat-toolbar color="primary" >  
+
+  <!-- for Public -->
+    <ng-container *ngIf="!(isRoleUser$ | async) && !(isRoleAdmin$ |async)" class="ngContainer">
+      <button mat-button routerLink="home"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }">
+        Home 
+      </button>
+      <button mat-button routerLink="login"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }">
+        Login
+      </button>
+      <button mat-button routerLink="register"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }">
+        Register
+      </button>
+    </ng-container>
+
+
+
+   
+    <!-- For user -->
+    <ng-container *ngIf="(isRoleUser$ | async) && !(isRoleAdmin$ |async)" class="ngContainer">
+        <mat-toolbar-row>
+          <!-- BUTTON  -->
+          <!-- Emitting value from here when sidebar button is pressed -->
+         
+
+          <div class="menuItems">
+            
+            <a mat-button routerLink="user/user-home" 
+              routerLinkActive="active-link"
+              [routerLinkActiveOptions]="{ exact: true }">
+              <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+              User Home
+            </a>
+            <a mat-button routerLink="user/user-profile"
+              routerLinkActive="active-link"
+              [routerLinkActiveOptions]="{ exact: true }">
+              Profile
+            </a>
+            <a mat-button (click)="logout()">
+              Logout
+            </a>
+          </div>
+        </mat-toolbar-row>
+    </ng-container>
+
+
+    
+    <!-- for Admin -->
+    <ng-container *ngIf="isRoleAdmin$ |async">
+      <button mat-button routerLink="/home">Admin Dashboard</button>
+      <button mat-button routerLink="/profile">Admin-Profile</button>
+      <button mat-button (click)="logout()">Logout</button>
+    </ng-container>
+  </mat-toolbar>
+  

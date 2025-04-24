@@ -6,24 +6,35 @@ import { SelectedClientComponent } from "../selected-client/selected-client.comp
 import { ClientTableComponent } from "../../../shared/components/tables/client-table/client-table.component";
 import { ApiLinksDetails } from '../../../core/models/responseModel/apiLinksDetails';
 import { UserMenuCommunicationService } from '../../../shared/services/userMenuCommunication/user-menu-communication.service';
-import { debounceTime, Observable, Subscription } from 'rxjs';
+import { debounceTime, map, Observable, shareReplay, Subscription } from 'rxjs';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatListModule} from '@angular/material/list';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDrawer, MatSidenavModule} from '@angular/material/sidenav';
+import { MaterialModules } from '../../../material';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MenuComponent } from "../../../shared/components/menu/menu.component";
 
 @Component({
   selector: 'app-user-home',
-  imports: [FormsModule, CommonModule,RouterOutlet, RouterLink, ClientTableComponent, 
-    NgIf, MatSidenavModule, MatFormFieldModule, MatSelectModule, MatButtonModule, MatListModule],
+  imports: [FormsModule, CommonModule, RouterOutlet, RouterLink, ClientTableComponent,
+    NgIf, MatSidenavModule, MatFormFieldModule, MatSelectModule, MatButtonModule, MatListModule, MaterialModules, MenuComponent],
   templateUrl: './user-home.component.html',
   styleUrl: './user-home.component.css'
 })
 
 export class UserHomeComponent implements OnInit, OnDestroy  {
 
+
+  private breakpointObserver = inject(BreakpointObserver);
+
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
   
   private _router = inject(Router);
   private linkList : Array<ApiLinksDetails> = [];  //this holds the list of pagination      ----links[{rel,href},{rel,href}].

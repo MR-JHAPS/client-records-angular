@@ -1,0 +1,32 @@
+.active-link {
+    background-color: var(--orange) !important;
+    color: var(--lightShade) !important;
+    font-weight: bold !important;
+  }
+
+.menuItems{
+    margin: auto;
+}
+
+
+  
+  .header{
+    font-size: larger;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+    color: var(--darkBlue)
+  }
+  
+
+  @media(max-width: 600px) {
+      mat-toolbar {
+        margin-bottom: 50px;
+       }
+
+       /* Contains userHome, profile, logout */
+       .menuItems{
+        margin: 0;
+    }
+
+
+  }

@@ -2,16 +2,20 @@ import { Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@an
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthServiceService } from '../../../core/auth/services/auth-service.service';
 import { CommonModule, NgIf } from '@angular/common';
-import { filter, Observable, Subscription } from 'rxjs';
+import { filter, map, Observable, shareReplay, Subscription } from 'rxjs';
 import { UserMenuCommunicationService } from '../../services/userMenuCommunication/user-menu-communication.service';
+import { MaterialModules } from '../../../material';
+import { MatSidenav } from '@angular/material/sidenav';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+
 
 @Component({
   selector: 'app-menu',
-  imports: [RouterLink, NgIf, CommonModule, RouterLinkActive],
+  imports: [RouterLink, NgIf, CommonModule, RouterLinkActive, MaterialModules, RouterOutlet],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css'
 })
-export class MenuComponent implements OnInit, OnDestroy {
+export class MenuComponent implements OnInit {
 
   private _authService = inject(AuthServiceService);
   private _router = inject(Router);
@@ -19,6 +23,9 @@ export class MenuComponent implements OnInit, OnDestroy {
   private routerSub!: Subscription;
    isRoleUser$ = this._authService.isRoleUser$
    isRoleAdmin$ = this._authService.isRoleAdmin$;
+
+   showMobileMenu = false;
+   @ViewChild('mobileMenu') mobileMenu!: MatSidenav;
 
   ngOnInit(): void {
     this._authService.initializeAuthState();
@@ -31,7 +38,18 @@ export class MenuComponent implements OnInit, OnDestroy {
     });
   }
 
-  
+  toggleMenu() {
+    this.mobileMenu.toggle();
+  }
+
+
+  private breakpointObserver = inject(BreakpointObserver);
+
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
 
 
 
@@ -40,11 +58,15 @@ export class MenuComponent implements OnInit, OnDestroy {
       this._userMenuCommService.openMenuSideBar();
     } */
 
-    toggleSideBar(){
+   /*  toggleSideBar(){
       console.log("button on menu component clicked.")
       this._userMenuCommService.toggleMenuSideBar();
     }
 
+
+    toggleMobileMenu(){
+      this.showMobileMenu = !this.showMobileMenu;
+    } */
 
 
 
@@ -60,10 +82,10 @@ export class MenuComponent implements OnInit, OnDestroy {
   logOut(){
     this._authService.loggedOut(); 
   }
-
+/* 
   ngOnDestroy(): void {
     this.routerSub?.unsubscribe(); // Prevent memory leaks
   }
-
+ */
 
 }//ends class
