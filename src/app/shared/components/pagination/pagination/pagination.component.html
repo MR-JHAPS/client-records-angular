@@ -10,11 +10,11 @@
                 <a class="page-link" (click)="changingRelToUrl('prev')"> &laquo; </a>
             </li>
 
-            <li *ngFor="let page of pageNumbers"
+           <!--  <li *ngFor="let page of pageNumbers"
                 (click)="goToPage(page)"
                 [class.active]="page === currentPage" class="page-item active">
                 <a class="one page-link" (click)="changingRelToUrl('first')" > {{ page }} </a>
-            </li>
+            </li> -->
        
             <li class="page-item" >
                 <a class="page-link" (click)="changingRelToUrl('next')">  &raquo; </a>

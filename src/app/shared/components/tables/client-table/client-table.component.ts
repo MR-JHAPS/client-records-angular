@@ -18,6 +18,7 @@ import { ClientUpdateComponent } from "../../../../pages/user/client-update/clie
 import { CommunicationServiceService } from '../../../services/communication-service.service';
 import { Subscription } from 'rxjs';
 import { PaginationComponent } from "../../pagination/pagination/pagination.component";
+import { ClientSearchRequest } from '../../../../core/models/request/clientSearchRequest';
 
 
 @Component({
@@ -48,6 +49,7 @@ export class ClientTableComponent implements OnInit, OnDestroy {
   selectedClients :BulkClientDeleteRequest = new BulkClientDeleteRequest();
   isCheckBoxChecked = false; //for the dynamic insert/delete button.
   updateSubscription : Subscription;
+  searchRequest : ClientSearchRequest;
 
   ngOnInit(): void {
     this.getAllClients();
@@ -87,6 +89,28 @@ export class ClientTableComponent implements OnInit, OnDestroy {
       complete : () => { console.log("All client obtained Successfully.")}
     })
   }
+
+/* -----------------------------Searching Clients -------------------------------------------*/
+
+    searchClients(searchRequest: ClientSearchRequest ){
+      this._clientService.searchQuery(searchRequest).subscribe({
+        next : (response : ApiResponseModelPaginated<ClientResponse>)=>{
+          this.clientList = response.data.content;
+          console.log(this.clientList);
+          // this._toastrService.success("Search Complete.")
+        },
+        error : error => {
+          this._toastrService.error("Error! Search failed.")
+        },
+        complete : ()=>{
+          console.log("Search done successfully.")
+        }
+      })
+    }
+
+
+
+
 
 
  

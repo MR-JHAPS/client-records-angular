@@ -3,10 +3,11 @@ import { ApiLinksDetails } from '../../../../core/models/responseModel/apiLinksD
 import { FormsModule } from '@angular/forms';
 import { NgFor } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { PageEvent,MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-pagination',
-  imports: [FormsModule, NgFor],
+  imports: [FormsModule, NgFor, MatPaginator],
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.css'
 })
@@ -20,6 +21,37 @@ export class PaginationComponent {
 
   /*dynamicContentSize variable that is only used within this component. */
   contentSizeSelf = 10;
+
+
+
+
+  length = 50;
+  pageSize = 10;
+  pageIndex = 0;
+  pageSizeOptions = [5, 10, 25];
+
+  hidePageSize = false;
+  showPageSizeOptions = true;
+  showFirstLastButtons = true;
+  disabled = false;
+
+  pageEvent: PageEvent;
+
+  handlePageEvent(e: PageEvent) {
+    this.pageEvent = e;
+    this.length = e.length;
+    this.pageSize = e.pageSize;
+    this.pageIndex = e.pageIndex;
+  }
+
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    if (setPageSizeOptionsInput) {
+      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+    }
+  }
+
+
+
 
 
   //getting the total number of pages from the apiResponsePaginatedLinks.

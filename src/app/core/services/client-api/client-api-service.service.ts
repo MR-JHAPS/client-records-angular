@@ -8,6 +8,7 @@ import { ApiResponseModelPaginated } from '../../models/responseModel/apiRespons
 import { ApiLinksDetails } from '../../models/responseModel/apiLinksDetails';
 import { ApiResponseModel } from '../../models/responseModel/apiResponseModel';
 import { BulkClientDeleteRequest } from '../../models/request/bulkClientDeleteRequest';
+import { ClientSearchRequest } from '../../models/request/clientSearchRequest';
 
 type clientSearchCriteria = {
   type: 'searchQuery' | 'firstName' | 'lastName' | 'postalCode';
@@ -84,32 +85,55 @@ export class ClientApiServiceService {
 }
 
 
-  // Method: Search Clients
-  searchQuery(criteria: clientSearchCriteria) : Observable<ApiResponseModelPaginated<ClientResponse>> {
-    /*setting parameters of the Http-Request. (httpParam is immutable so i need to set in the same instance that is declared.
-                rather than doing param.set(....) we directly use the first instance of the httpParam.
-    */
-    let params = new HttpParams()
-    .set('pageNumber', criteria.pagination?.pageNumber?.toString()??'0') 
-    .set('pageSize', criteria.pagination?.pageSize?.toString()??'10');
+  // // Method: Search Clients
+  // searchQuery(criteria: clientSearchCriteria) : Observable<ApiResponseModelPaginated<ClientResponse>> {
+  //   /*setting parameters of the Http-Request. (httpParam is immutable so i need to set in the same instance that is declared.
+  //               rather than doing param.set(....) we directly use the first instance of the httpParam.
+  //   */
+  //   let params = new HttpParams()
+  //   .set('pageNumber', criteria.pagination?.pageNumber?.toString()??'0') 
+  //   .set('pageSize', criteria.pagination?.pageSize?.toString()??'10');
 
-    //setting the selected search parameter.(radio button confirms only one is selected).
-    params = params.set(criteria.type, criteria.value);
+  //   //setting the selected search parameter.(radio button confirms only one is selected).
+  //   params = params.set(criteria.type, criteria.value);
     
-    if(criteria.sorting?.sortBy){
-      params = params.set('sortBy', criteria.sorting.sortBy);
-    }
-    if(criteria.sorting?.direction){
-      params = params.set('direction', criteria.sorting.direction);
-    }
-    const url = `${this.apiBaseUrl}${this.clientEndpoint.searchClients}`;
-    return this._httpClient.get<ApiResponseModelPaginated<ClientResponse>>(url,{ params });
+  //   if(criteria.sorting?.sortBy){
+  //     params = params.set('sortBy', criteria.sorting.sortBy);
+  //   }
+  //   if(criteria.sorting?.direction){
+  //     params = params.set('direction', criteria.sorting.direction);
+  //   }
+  //   const url = `${this.apiBaseUrl}${this.clientEndpoint.searchClients}`;
+  //   return this._httpClient.get<ApiResponseModelPaginated<ClientResponse>>(url,{ params });
+  // }
+
+
+
+
+ // Method: Search Clients
+ searchQuery(searchRequest: ClientSearchRequest, pageNumber?: number, pageSize?: number, sortBy?:string, direction?: string) : Observable<ApiResponseModelPaginated<ClientResponse>> {
+  /*setting parameters of the Http-Request. (httpParam is immutable so i need to set in the same instance that is declared.
+              rather than doing param.set(....) we directly use the first instance of the httpParam.
+  */
+  let params = new HttpParams()
+  .set('page', pageNumber?.toString()??'0') 
+  .set('size', pageSize?.toString()??'10');
+
+  //setting the selected search parameter.(radio button confirms only one is selected).
+  params = params.set(searchRequest.searchBy, searchRequest.searchQuery);
+  
+  if(sortBy){
+    params = params.set('sortBy', sortBy);
   }
+  if(direction){
+    params = params.set('direction', direction);
+  }
+  const url = `${this.apiBaseUrl}${this.clientEndpoint.searchClients}`;
+  return this._httpClient.get<ApiResponseModelPaginated<ClientResponse>>(url,{ params });
+}
 
 
-
-
-
+  
 
 
 
