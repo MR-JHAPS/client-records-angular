@@ -11,7 +11,7 @@
            [(ngModel)]="clientSearchRequest.searchQuery"
           
           >
-          <button class="searchButton btn btn-primary px-4" type="button" >
+          <button class="searchButton btn btn-primary px-4" type="button" (click)="emitClientSearch()" >
             <i class="bi bi-search me-2"></i> Search
           </button>
         </div>

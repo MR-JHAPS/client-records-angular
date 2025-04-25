@@ -1,3 +1,4 @@
 .container-fluid{
-    background-color: var(--introBackground);
+    background-color: var(--secondaryColor);
+    color:var(--lightShade)
 }

@@ -5,6 +5,8 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class CommunicationServiceService {
+  /* CLIENT UPDATE COMMUNICATION SERVICE */
+
 
   isClientUpdated = new BehaviorSubject<boolean>(false);
   isClientUpdated$ = this.isClientUpdated.asObservable();

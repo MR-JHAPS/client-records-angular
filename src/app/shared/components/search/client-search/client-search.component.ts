@@ -1,7 +1,4 @@
 import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
-import { ClientApiServiceService } from '../../../../core/services/client-api/client-api-service.service';
-import { ClientSearchCommunicationService } from '../../../services/clientSearchCommunication/client-search-communication.service';
-import { ClientRequest } from '../../../../core/models/request/clientRequest';
 import { ClientSearchRequest } from '../../../../core/models/request/clientSearchRequest';
 import { FormControl, FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -15,19 +12,19 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
   styleUrl: './client-search.component.css'
 })
 export class ClientSearchComponent implements OnInit {
-/* Emits event to ClientTable */
+  
+  /* Emits event to ClientTable */
   @Output() clientSearch = new EventEmitter<ClientSearchRequest>();
 
-
-/* Reactive form component */
+  /* Reactive form component */
   searchControl = new FormControl("");
 
   clientSearchRequest : ClientSearchRequest = {
-    searchBy : "searchQuery",
-    searchQuery : ""
-  }
+        searchBy : "searchQuery",
+        searchQuery : ""
+      }
 
-
+      /*Reactive Search*/
   ngOnInit(): void {
     this.searchControl.valueChanges
     .pipe(
@@ -40,7 +37,7 @@ export class ClientSearchComponent implements OnInit {
   }
 
 
-
+  /*emits the searchQuery and search by*/
   emitClientSearch(){
     this.clientSearch.emit(this.clientSearchRequest);
   }
