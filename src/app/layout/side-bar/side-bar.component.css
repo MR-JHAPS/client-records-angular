@@ -1,0 +1,29 @@
+
+mat-list-item:hover{
+    background-color:var(--orange);
+    span{
+        color:var(--lightShade);
+    }
+    transition-duration: 0.5s;
+}
+
+
+  .active-link {
+    background-color: var(--mutedOrange) !important;
+    font-weight: bold !important;
+    span{
+        color:white;
+    }
+  }
+
+  span{
+    color: var(--darkBlue);
+  }
+
+  .title{
+    color: var(--darkBlue);
+    font-weight: bold;
+    font-size: large;
+    letter-spacing: 0.5;
+    font-family:  'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }

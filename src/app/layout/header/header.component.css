@@ -4,18 +4,32 @@
     font-weight: bold !important;
   }
 
-.menuItems{
-    margin: auto;
-}
 
-
-  
+  /* This is the header of the menu like ClientList and side-bar Toggler */
   .header{
     font-size: larger;
     font-weight: bold;
     letter-spacing: 0.8px;
-    color: var(--darkBlue)
+    color: var(--lightShade);
+    background-color: var(--darkBlue);
   }
+  
+
+  /* This is the menu userHome, logout, userProfile */
+  .menu{
+    background-color: var(--lightShade);
+  }
+
+  .menuItems{
+    margin: auto;
+}
+
+/* This is the sideBar toggler */
+.button{
+  color:white;
+  font-weight: bold;
+
+}
   
 
   @media(max-width: 600px) {

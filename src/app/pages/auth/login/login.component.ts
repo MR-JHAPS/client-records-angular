@@ -37,7 +37,7 @@ export class LoginComponent /* implements OnInit */{
           // setTimeout(()=>{
           const roles = this._authService.getRoleFromtoken(this.token);
             if(roles.includes("admin")){
-              this._router.navigateByUrl("admin/admin-home");
+              this._router.navigateByUrl("admin");
             }else{
               this._router.navigateByUrl("user/user-home");
             }

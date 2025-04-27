@@ -1,19 +1,22 @@
 
 
 <mat-toolbar-row class="header">
-  <ng-container *ngIf="(isRoleUser$ | async) || (isRoleAdmin$ |async)" class="ngContainer" >
-    <button mat-icon-button (click)="menuToggle.emit()" [ngStyle]="[{'background-color': 'green' , 'padding':'30px'}]" >
+  <ng-container *ngIf="(isRoleUser$ | async) || (isRoleAdmin$ |async)" class="ngContainer" id="buttons">
+    <button mat-icon-button (click)="menuToggle.emit()" class="button" >
       <mat-icon>menu</mat-icon>
+      ClientRecords
     </button>
   </ng-container>
-    ClientRecords
     
+    <ng-container *ngIf="!(isRoleUser$ | async) && !(isRoleAdmin$ |async)" class="ngContainer" id="buttons">
+      ClientRecords
+    </ng-container>
 </mat-toolbar-row>
 
 
 
-<mat-toolbar color="primary" >  
-
+<mat-toolbar color="primary" class="menu" >  
+    
     <!-------------------------------------- For Public -------------------------------------------------------------------------->
     <ng-container *ngIf="!(isRoleUser$ | async) && !(isRoleAdmin$ |async)" class="ngContainer">
       <button mat-button routerLink=""
@@ -69,7 +72,7 @@
     <ng-container *ngIf="isRoleAdmin$ | async" class="ngContainer">
       <mat-toolbar-row>
         <div class="menuItems">
-          <a mat-button routerLink="admin/admin-home"
+          <a mat-button routerLink="admin/clientTable"
             routerLinkActive="active-link"
             [routerLinkActiveOptions]="{ exact: true }">
               Admin Dashboard

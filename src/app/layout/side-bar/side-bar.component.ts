@@ -2,12 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MaterialModules } from '../../material';
 import { AuthServiceService } from '../../core/auth/services/auth-service.service';
 import { filter, Subscription } from 'rxjs';
-import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-side-bar',
-  imports: [MaterialModules, NgIf, CommonModule, RouterLink],
+  imports: [MaterialModules, NgIf, CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './side-bar.component.html',
   styleUrl: './side-bar.component.css'
 })

@@ -44,14 +44,21 @@ export const routes: Routes = [
             canActivate : [adminGuardGuard],
             canActivateChild : [adminGuardGuard], /* Calling a AuthGuard class. */
             children : [ 
-                    {path: "", component: AdminHomeComponent},
-                    {path: "admin-home", component: AdminHomeComponent},
+                    {path: "",
+                     component: AdminHomeComponent,
+                     children : [
+                            {path:"clientTable", component:ClientTableComponent},
+                            {path:"userTable", component:UserTableComponent},
+                            {path: "clientLogTable", component: ClientLogTableComponent},
+                            {path: "", redirectTo: "clientTable", pathMatch: "full" }
+                        ]
+                    },
+                    {path: "admin-home", redirectTo: "" , pathMatch: "full"},
                     {path: "admin-profile", component: AdminProfileComponent},
-                    // {path: "", component: ClientTableComponent},
-                    {path: "clientTable", component: ClientTableComponent},
-                    {path: "clientLogTable", component: ClientLogTableComponent},
+                    // {path: "clientTable", component: ClientTableComponent},
+                    // {path: "clientLogTable", component: ClientLogTableComponent},
                     {path: "client-update/:id", component: ClientUpdateComponent},
-                    {path: "userTable", component: UserTableComponent}
+                    // {path: "userTable", component: UserTableComponent}
                    ]
             },
 
