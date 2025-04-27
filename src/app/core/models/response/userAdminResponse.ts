@@ -1,7 +1,7 @@
 export interface UserAdminResponse{
 
     id: number,
-    firstName: string,
+    email: string,
     roles : string[],
     createdOn: Date,
     updatedOn: Date

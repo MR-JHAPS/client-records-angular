@@ -16,6 +16,7 @@ import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.componen
 import { AdminProfileComponent } from './pages/admin/admin-profile/admin-profile.component';
 import { ClientLogTableComponent } from './shared/components/tables/client-log-table/client-log-table.component';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
+import { UserTableComponent } from './shared/components/tables/user-table/user-table.component';
 
 export const routes: Routes = [
     {path: "", component : MainLayoutComponent,
@@ -30,14 +31,7 @@ export const routes: Routes = [
             canActivate : [userGuardGuard],
             canActivateChild : [userGuardGuard], /* Calling a AuthGuard class. */
             children : [ 
-                    {path: "user-home",component: UserHomeComponent,
-                        children: [
-                            {path: "", component: ClientTableComponent},
-                            {path: "clientTable", component: ClientTableComponent},
-                            {path: "clientLogTable", component: ClientLogTableComponent},
-                        ]
-                    },
-                    
+                    {path: "user-home",component: UserHomeComponent},
                     {path: "user-profile", component: UserProfileComponent},
                     {path: "client-update/:id", component: ClientUpdateComponent},
                     {path: "selected-client", component: SelectedClientComponent},
@@ -45,19 +39,23 @@ export const routes: Routes = [
                     {path: "clientLogTable", component: ClientLogTableComponent},    
                    ]
             },
+
             {path: "admin",
             canActivate : [adminGuardGuard],
             canActivateChild : [adminGuardGuard], /* Calling a AuthGuard class. */
-            component : MainLayoutComponent,
             children : [ 
+                    {path: "", component: AdminHomeComponent},
                     {path: "admin-home", component: AdminHomeComponent},
                     {path: "admin-profile", component: AdminProfileComponent},
-                    /*  {path: "client-update", component: ClientUpdateComponent},
-                    {path: "selected-client", component: SelectedClientComponent},
-                    {path: "clientTable", component: ClientTableComponent}, */
-                    
-                ]
+                    // {path: "", component: ClientTableComponent},
+                    {path: "clientTable", component: ClientTableComponent},
+                    {path: "clientLogTable", component: ClientLogTableComponent},
+                    {path: "client-update/:id", component: ClientUpdateComponent},
+                    {path: "userTable", component: UserTableComponent}
+                   ]
             },
+
+
             {path: "forbidden", component: ForbiddenComponent},
             {path: "error", component: ErrorComponent},/* This should always be in the end */
             {path: "**", component: ErrorComponent}

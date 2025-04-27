@@ -1,5 +1,5 @@
 import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
-import { ClientSearchRequest } from '../../../../core/models/request/clientSearchRequest';
+import { SearchRequest } from '../../../../core/models/request/searchRequest';
 import { FormControl, FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
@@ -14,15 +14,18 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 export class ClientSearchComponent implements OnInit {
   
   /* Emits event to ClientTable */
-  @Output() clientSearch = new EventEmitter<ClientSearchRequest>();
+  @Output() clientSearch = new EventEmitter<SearchRequest>();
 
   /* Reactive form component */
   searchControl = new FormControl("");
 
-  clientSearchRequest : ClientSearchRequest = {
+  clientSearchRequest : SearchRequest = {
         searchBy : "searchQuery",
         searchQuery : ""
       }
+
+
+  
 
       /*Reactive Search*/
   ngOnInit(): void {

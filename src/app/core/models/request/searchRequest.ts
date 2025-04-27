@@ -1,4 +1,4 @@
-export interface ClientSearchRequest{
+export interface SearchRequest{
 
     searchBy : string;
     searchQuery: string;

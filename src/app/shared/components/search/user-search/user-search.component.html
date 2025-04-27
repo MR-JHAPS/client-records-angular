@@ -1,1 +1,110 @@
-<p>user-search works!</p>
+<!-- <section class="searchContainer container-fluid my-5 w-75">
+    <div class="row justify-content-center bg bg-light pt-5 ">
+      <div class="col-md-8">
+     
+        <div class="input-group mb-3 shadow-sm">
+          <input type="text"
+            [formControl]="searchControl"
+            class="form-control form-control-lg" 
+            placeholder="Search clients..." 
+            aria-label="Search">
+          <button class="searchButton btn btn-primary px-4" type="button" (click)="emitUserSearch()">
+            <i class="bi bi-search me-2"></i> Search
+          </button>
+        </div>
+        
+      
+        <div class="bg-light p-3 rounded-3 mb-4">
+          <div class="d-flex flex-wrap align-items-center justify-content-between">
+            <span class="text-muted small mb-2 mb-md-0">Filter by:</span>
+            <div class="filter-options">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="filterOptions" id="email" 
+                  [checked]="userSearchRequest.searchBy === 'email'"
+                  (change)="updateSearchBy('email')">
+                <label class="form-check-label" for="email">Email</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="filterOptions" id="id" 
+                  [checked]="userSearchRequest.searchBy === 'id'"
+                  (change)="updateSearchBy('id')">
+                <label class="form-check-label" for="id">Id</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="filterOptions" id="roles" 
+                  [checked]="userSearchRequest.searchBy === 'roles'"
+                  (change)="updateSearchBy('roles')">
+                <label class="form-check-label" for="roles">Roles</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+
+
+
+
+
+
+
+<section class="searchContainer container-fluid my-5 w-75">
+    <div class="row justify-content-center bg bg-light pt-5 ">
+      <div class="col-md-8">
+     
+        <div class="input-group mb-3 shadow-sm">
+          <input type="text"
+          (input)="emitUserSearch()"
+          [(ngModel)]="userSearchRequest.searchQuery" 
+           class="form-control form-control-lg" placeholder="Search clients..." aria-label="Search" 
+           
+          
+          >
+          <button class="searchButton btn btn-primary px-4" type="button" (click)="emitUserSearch()" >
+            <i class="bi bi-search me-2"></i> Search
+          </button>
+        </div>
+        
+
+        <div class="bg-light p-3 rounded-3 mb-4">
+
+          <div class="d-flex flex-wrap align-items-center justify-content-between">
+            <span class="text-muted small mb-2 mb-md-0">Filter by:</span>
+            <div class="filter-options">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="filterOptions" id="all" value="email" 
+                [(ngModel)]="userSearchRequest.searchBy" checked>
+                <label class="form-check-label" for="all">Email</label>
+              </div>
+             
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="filterOptions" id="lastName" value="role"
+                [(ngModel)]="userSearchRequest.searchBy">
+                <label class="form-check-label" for="lastName">Roles</label>
+              </div>
+             
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+

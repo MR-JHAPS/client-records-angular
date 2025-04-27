@@ -8,7 +8,7 @@ import { ApiResponseModelPaginated } from '../../models/responseModel/apiRespons
 import { ApiLinksDetails } from '../../models/responseModel/apiLinksDetails';
 import { ApiResponseModel } from '../../models/responseModel/apiResponseModel';
 import { BulkClientDeleteRequest } from '../../models/request/bulkClientDeleteRequest';
-import { ClientSearchRequest } from '../../models/request/clientSearchRequest';
+import { SearchRequest } from '../../models/request/searchRequest';
 
 type clientSearchCriteria = {
   type: 'searchQuery' | 'firstName' | 'lastName' | 'postalCode';
@@ -111,7 +111,7 @@ export class ClientApiServiceService {
 
 
  // Method: Search Clients
- searchQuery(searchRequest: ClientSearchRequest, pageNumber?: number, pageSize?: number, sortBy?:string, direction?: string) : Observable<ApiResponseModelPaginated<ClientResponse>> {
+ searchQuery(searchRequest: SearchRequest, pageNumber?: number, pageSize?: number, sortBy?:string, direction?: string) : Observable<ApiResponseModelPaginated<ClientResponse>> {
   /*setting parameters of the Http-Request. (httpParam is immutable so i need to set in the same instance that is declared.
               rather than doing param.set(....) we directly use the first instance of the httpParam.
   */

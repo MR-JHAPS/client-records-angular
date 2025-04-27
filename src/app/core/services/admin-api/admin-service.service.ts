@@ -1,9 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { API_ENDPOINTS } from '../../constants/apiEndpoints.const';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { ApiResponseModel } from '../../models/responseModel/apiResponseModel';
 import { UserAdminResponse } from '../../models/response/userAdminResponse';
+import { ApiResponseModelPaginated } from '../../models/responseModel/apiResponseModelPaginated';
+import { SearchRequest } from '../../models/request/searchRequest';
+import { errorContext } from 'rxjs/internal/util/errorContext';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +25,9 @@ getUserById(id : number) : Observable<ApiResponseModel<UserAdminResponse>>{
 }
 
 /* Response will be with pagination and data(contents:Array<T(userAdmin)>, links, page)*/
-getAllUsers(){
-
+getAllUsers() : Observable<ApiResponseModelPaginated<UserAdminResponse>>{
+  const url = `${this.baseUrl+ this.adminApi.getAllUsers}`;
+  return this._httpClient.get<ApiResponseModelPaginated<UserAdminResponse>>(url);
 }
 
 /* We pass the name of the role and we get the list of the user's with that role.*/
@@ -31,11 +35,37 @@ getUsersByRole(){
 
 }
 
-/* Searching the user using the email. Email is uniqueKey in UserDatabase so it will return only one user. */
-/* For this we don't need Pagination so the return type can be of I_ApiResponseModel that don't contain the pagination details.*/
-searchUserByEmail(){
 
-}
+
+/* I put "<any>" in return type because the response in dynamic paginated and non-paginated Response. */
+searchUserByRole(searchRequest : SearchRequest, pageNumber? :number, pageSize?: number) : Observable<any>{
+  /* if the searchBy is not "email" and "role" then throw error. */
+  if(searchRequest.searchBy !== "role"){
+    throwError(()=> new Error(`User search param invalid. Expected 'role', got ${searchRequest.searchBy}`));
+  }
+  let params = new HttpParams()
+              .set('role', searchRequest.searchQuery)
+              .set('page', pageNumber?.toString()??'0') 
+              .set('size', pageSize?.toString()??'10');
+  /* If the searchBy is ROLE then give the paginated Response */
+     const url = `${this.baseUrl+this.adminApi.getUsersByRole}`;
+     
+    return this._httpClient.get<ApiResponseModelPaginated<UserAdminResponse>>(url,{params})
+  
+}//ends method
+
+searchUserByEmail(searchRequest : SearchRequest) : Observable<ApiResponseModel<UserAdminResponse>>{
+  /* if the searchBy is not "email" and "role" then throw error. */
+  if(searchRequest.searchBy !== "email" ){
+    throwError(()=> new Error(`User search param invalid. Expected 'email', got ${searchRequest.searchBy}`));
+  }
+  /* Else the searchBy is EMAIL then give the non-paginated Response */
+    let params = new HttpParams()
+    const url = `${this.baseUrl+this.adminApi.searchUserByEmail}`;
+    params = params.set('email', searchRequest.searchQuery);
+   return this._httpClient.get<ApiResponseModel<UserAdminResponse>>(url, {params})
+}//ends method
+
 
 updateUserRole(){
 

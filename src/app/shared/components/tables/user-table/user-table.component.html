@@ -1,1 +1,80 @@
-<p>user-table works!</p>
+
+
+<app-user-search
+    (userSearch)="searchUser($event)"
+/>
+
+
+<div class="clientTable">
+    <table class="table table-hover">
+
+        <thead >
+            <tr class="header">
+                
+                <th><b>Id</b></th>
+                <th><b>Email</b></th>
+                <th><b>Roles</b></th>
+                <th><b>Created On</b></th>
+                <th><b>Updated On</b></th>
+                <th><b>Action</b></th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            @for (user of userList ; track user.id) {
+                <!-- <tr class="clickable-row" (click)="openSelectedClient(client.id)"> -->
+                    <tr class="clickable-row">
+                    
+                    <td>{{user.id}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.roles}}</td>
+                    <td>{{user.createdOn}}</td>
+                    <td>{{user.updatedOn}}</td>
+
+
+                    <td class="text-center">
+                        <div class="d-flex gap-3 justify-content-start">
+                            <button class="updateButton btn btn-primary" >
+                                Update  <i class="fa-solid fa-pen ms-2"></i></button>
+
+                            <button class="deleteButton btn btn-danger">
+                                Delete <i class="fa-solid fa-trash ms-2" ></i></button>
+                        </div> 
+                    </td>
+                
+                </tr>
+
+
+
+                    <!-- <td class="text-center">
+                        <div class="d-flex gap-3 justify-content-start">
+                            <button class="updateButton btn btn-primary" (click)="navigateToUpdatePage(client.id); $event.stopPropagation()">
+                                Update  <i class="fa-solid fa-pen ms-2"></i></button>
+
+                            <button class="deleteButton btn btn-danger" (click)="openDeleteSingleClientModal(client.id)">
+                                Delete <i class="fa-solid fa-trash ms-2" ></i></button>
+                        </div> 
+                    </td>
+                
+                </tr> -->
+            }
+        </tbody>
+
+
+    </table>
+</div>
+
+
+
+<!---- (contentSize --emitts number--) is the @Output Emitted from PaginationComponent.
+        [pageLinks]="pageLinks" sending to childClass.
+
+------------->
+<!-- <app-pagination
+[pageLinks]="pageLinks" 
+(contentSize)="setContentPerPage($event)"
+(pageChange)="toSpecificPage($event)"
+/>
+ -->
+
+

@@ -14,7 +14,7 @@
 
 <mat-toolbar color="primary" >  
 
-  <!-- for Public -->
+    <!-------------------------------------- For Public -------------------------------------------------------------------------->
     <ng-container *ngIf="!(isRoleUser$ | async) && !(isRoleAdmin$ |async)" class="ngContainer">
       <button mat-button routerLink=""
         routerLinkActive="active-link"
@@ -35,14 +35,14 @@
 
 
 
+
    
-    <!-- For user -->
+    <!--------------------------------------For User----------------------------------------------------------------------- -->
+
     <ng-container *ngIf="(isRoleUser$ | async) && !(isRoleAdmin$ |async)" class="ngContainer">
         <mat-toolbar-row>
           <!-- BUTTON  -->
           <!-- Emitting value from here when sidebar button is pressed -->
-         
-
           <div class="menuItems">
             
             <a mat-button routerLink="user/user-home" 
@@ -65,11 +65,30 @@
 
 
     
-    <!-- for Admin -->
-    <ng-container *ngIf="isRoleAdmin$ |async">
-      <button mat-button routerLink="/home">Admin Dashboard</button>
-      <button mat-button routerLink="/profile">Admin-Profile</button>
-      <button mat-button (click)="logout()">Logout</button>
+    <!---------------------------------------- For Admin ---------------------------------------------------------------------->
+    <ng-container *ngIf="isRoleAdmin$ | async" class="ngContainer">
+      <mat-toolbar-row>
+        <div class="menuItems">
+          <a mat-button routerLink="admin/admin-home"
+            routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{ exact: true }">
+              Admin Dashboard
+          </a>
+          <a mat-button routerLink="admin/admin-profile"
+            routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{ exact: true }">
+              Admin-Profile
+          </a>
+          <a mat-button (click)="logout()"
+            routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{ exact: true }">
+              Logout
+          </a>
+        </div>
+      </mat-toolbar-row>
     </ng-container>
-  </mat-toolbar>
+
+
+
+</mat-toolbar>
   

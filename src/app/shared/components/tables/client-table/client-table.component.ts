@@ -12,13 +12,12 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { ToastrService} from 'ngx-toastr';
 import { BulkClientDeleteRequest } from '../../../../core/models/request/bulkClientDeleteRequest';
-import { ApiResponseModel } from '../../../../core/models/responseModel/apiResponseModel';
 import { DeleteClientModalComponent } from '../../modals/delete-client-modal/delete-client-modal.component';
 import { ClientUpdateComponent } from "../../../../pages/user/client-update/client-update.component";
 import { CommunicationServiceService } from '../../../services/communication-service.service';
 import { Subscription } from 'rxjs';
 import { PaginationComponent } from "../../pagination/pagination/pagination.component";
-import { ClientSearchRequest } from '../../../../core/models/request/clientSearchRequest';
+import { SearchRequest } from '../../../../core/models/request/searchRequest';
 
 
 @Component({
@@ -49,7 +48,7 @@ export class ClientTableComponent implements OnInit, OnDestroy {
   selectedClients :BulkClientDeleteRequest = new BulkClientDeleteRequest();
   isCheckBoxChecked = false; //for the dynamic insert/delete button.
   updateSubscription : Subscription;
-  searchRequest : ClientSearchRequest;
+  searchRequest : SearchRequest;
 
   ngOnInit(): void {
     this.getAllClients();
@@ -92,7 +91,7 @@ export class ClientTableComponent implements OnInit, OnDestroy {
 
 /* -----------------------------Searching Clients -------------------------------------------*/
 
-    searchClients(searchRequest: ClientSearchRequest ){
+    searchClients(searchRequest: SearchRequest ){
       this._clientService.searchQuery(searchRequest).subscribe({
         next : (response : ApiResponseModelPaginated<ClientResponse>)=>{
           this.clientList = response.data.content;
