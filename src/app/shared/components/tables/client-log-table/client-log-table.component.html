@@ -1,1 +1,38 @@
-<p>client-log-table works!</p>
+<div class="mainContainer mt-5">
+    <table class="table table-borderless table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Postal Code</th>
+                <th>DOB</th>
+                <th class="modType">Modification Type</th>
+                <th>Mod By</th>
+                <th>Logged On</th>
+                
+            </tr>
+        </thead>
+
+    
+        <tbody>
+            @for (client of clientLogList; track client.id) {
+                <tr>
+                    <td> {{client.id}} </td>
+                    <td> {{client.firstName}} </td>
+                    <td> {{client.lastName}} </td>
+                    <td> {{client.postalCode}} </td>
+                    <td> {{client.dateOfBirth}} </td>
+                    <td class="modType"> {{client.modificationType}} </td>
+                    <td>{{client.userEmail}}</td>
+                    <td>{{client.updatedAt}}</td>
+                </tr>
+            }
+        </tbody>
+    </table>  
+</div>
+<app-pagination
+    [pageLinks]="apiPageLink"
+    (pageUrl)="toSpecificPage($event)"
+    (contentSize)="setContentPerPage($event)"
+/>

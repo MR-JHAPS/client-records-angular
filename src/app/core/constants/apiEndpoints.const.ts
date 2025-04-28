@@ -46,7 +46,7 @@ export const API_ENDPOINTS= {
     clientBinApi: {
         getAllClientBin: "/client-bins",
         restoreFromClientBin:(id: number) => `/client-bins/${id}/restore`,
-        deleteFromClientBin:(id: number) => `/client-bins/${id}/delete/`
+        deleteFromClientBin:(id: number) => `/client-bins/${id}/delete`
     },
 
     clientLogApi: {

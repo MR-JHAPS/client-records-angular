@@ -35,7 +35,7 @@
     <label class="me-3" for="contentNumber">Content Per Page </label>
 
     <select class="col-1 p-1 text-center bg bg-light text-dark" id="contentNumber" [(ngModel)]="contentSizeSelf"
-    (change)="onContentSizeChange($event)">  
+    (change)="onContentSizeChange()">  
        <!-- generateContentSize is a method that generates the value for content size. it return array of number. -->
         @for (size of getcontentSize(); track size ) {
         <option value={{size}} > {{size}} </option>

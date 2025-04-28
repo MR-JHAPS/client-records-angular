@@ -76,12 +76,30 @@
               </a>
             </li>
 
-            <li class="nav-item">
+           <!--  <li class="nav-item">
               <a class="nav-link pe-4" aria-current="page" 
-                routerLink="user/clientTable" 
+                routerLink="user/user-home/clientTable" 
                 routerLinkActive="active-link"
                 [routerLinkActiveOptions]="{exact: true}">
                 <i class="fa-solid fa-house me-2"></i>Client-Table
+              </a>
+            </li> -->
+
+            <li class="nav-item">
+              <a class="nav-link pe-4" aria-current="page" 
+                routerLink="user/clientLogTable" 
+                routerLinkActive="active-link"
+                [routerLinkActiveOptions]="{exact: true}">
+                <i class="fa-solid fa-file me-2"></i>Client-Log
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link pe-4" aria-current="page" 
+                routerLink="user/clientBinTable" 
+                routerLinkActive="active-link"
+                [routerLinkActiveOptions]="{exact: true}">
+                <i class="fa-solid fa-trash me-2"></i>Client-Bin
               </a>
             </li>
 
@@ -129,6 +147,24 @@
               routerLinkActive="active-link" 
               [routerLinkActiveOptions]="{exact: true}">
               <i class="fa-solid fa-house me-2"></i>Admin DashBoard
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link pe-4" aria-current="page" 
+              routerLink="admin/clientLogTable" 
+              routerLinkActive="active-link"
+              [routerLinkActiveOptions]="{exact: true}">
+              <i class="fa-solid fa-file me-2"></i>Client-Log
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link pe-4" aria-current="page" 
+              routerLink="admin/clientBinTable" 
+              routerLinkActive="active-link"
+              [routerLinkActiveOptions]="{exact: true}">
+              <i class="fa-solid fa-trash me-2"></i>Client-Bin
             </a>
           </li>
 

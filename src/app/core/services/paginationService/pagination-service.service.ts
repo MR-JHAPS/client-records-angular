@@ -1,9 +1,9 @@
-/* import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiLinksDetails } from '../../api/models/response/responseModel/apiLinksDetails';
+import { ApiResponseModelPaginated } from '../../models/responseModel/apiResponseModelPaginated';
 
 @Injectable({
   providedIn: 'root'
@@ -13,50 +13,19 @@ export class PaginationServiceService {
 
   _router = inject(Router);
   _activatedRoute = inject(ActivatedRoute);
-  private customMap = new Map<string, string>;
+  _httpClient = inject(HttpClient);
 
 
-  //converting LinkList to HashMap/Map.
-  //[{rel:"a",href="aaaaa"},{rel:"b",href:"bbbb"}]    -----> [{rel:a -> href:aaaa},{rel:b -> href:bbb}]
-  convertingToHashMap(list: Array<ApiLinksDetails> ): Map<string,string>{
-    let mappedLink : Map<string, string> =  new Map();  
-    list.forEach(element => {
-      mappedLink.set(element.rel, element.href);
-    });
-    return mappedLink;
-
-  }
-
-
-
-  //getting the current page Content of given url:
-  setNewPageSize(size:string){
-    this._router.navigate([],{
-      relativeTo: this._activatedRoute,
-      queryParams:  {size: size},
-      queryParamsHandling : 'merge'
-
-    })
-
-  }
-
-  setNewPageSizeByUrl(size:number, url: string) : any{
-    
-    const urlObj = new URL(url);
-    const sizeString = size.toString();
-    
-     urlObj.searchParams.set("size", sizeString);
-    // let updatedSize = searchParams.set("size" , sizeString);
-     return urlObj.toString();
-  
-
-  }
-
-
+   getRequiredPage(pageHref: string): Observable<ApiResponseModelPaginated<any>>{
+     /* if the url is provided directly */
+     /* if(!pageHref){
+         return throwError(()=> new Error("Error Unable to find the pageHref: url"))
+      } */
+      return this._httpClient.get<ApiResponseModelPaginated<any>>(pageHref);
+    }
 
 
 
 
 
 }//ends class
- */

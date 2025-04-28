@@ -17,6 +17,7 @@ import { AdminProfileComponent } from './pages/admin/admin-profile/admin-profile
 import { ClientLogTableComponent } from './shared/components/tables/client-log-table/client-log-table.component';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { UserTableComponent } from './shared/components/tables/user-table/user-table.component';
+import { ClientBinComponent } from './shared/components/tables/client-bin/client-bin.component';
 
 export const routes: Routes = [
     {path: "", component : MainLayoutComponent,
@@ -37,10 +38,11 @@ export const routes: Routes = [
                             {path: "", redirectTo: "clientTable", pathMatch: "full" }
                         ]
                     },
+                    {path: "", redirectTo: "user-home", pathMatch: "full" },
                     {path: "user-profile", component: UserProfileComponent},
                     {path: "client-update/:id", component: ClientUpdateComponent},
                     {path: "selected-client", component: SelectedClientComponent},
-                    {path: "clientTable", component: ClientTableComponent},
+                    {path: "clientBinTable", component: ClientBinComponent},
                     {path: "clientLogTable", component: ClientLogTableComponent},    
                    ]
             },
@@ -54,17 +56,14 @@ export const routes: Routes = [
                      children : [
                             {path:"clientTable", component:ClientTableComponent},
                             {path:"userTable", component:UserTableComponent},
-                            {path: "clientLogTable", component: ClientLogTableComponent},
                             {path: "", redirectTo: "clientTable", pathMatch: "full" }
                         ]
                     },
                     {path: "", redirectTo: "admin-home", pathMatch: "full" },
-                    // {path: "admin-home", redirectTo: "" , pathMatch: "full"},
+                    {path: "clientLogTable", component: ClientLogTableComponent},
+                    {path: "clientBinTable", component: ClientBinComponent},
                     {path: "admin-profile", component: AdminProfileComponent},
-                    // {path: "clientTable", component: ClientTableComponent},
-                    // {path: "clientLogTable", component: ClientLogTableComponent},
                     {path: "client-update/:id", component: ClientUpdateComponent},
-                    // {path: "userTable", component: UserTableComponent}
                    ]
             },
 

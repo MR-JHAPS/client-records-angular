@@ -1,0 +1,41 @@
+<div class="mainContainer mt-5">   
+   <table class="table table-borderless table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <!-- <th>Client-Id</th> -->
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Postal Code</th>
+            <th>DOB</th>
+            <th>Restore</th>
+                <th *ngIf="(isRoleAdmin$ | async)">Delete</th>            
+        </tr>
+    </thead>
+
+
+    <tbody>
+        @for (clientBin of clientBinList; track clientBin.id) {
+            <tr>
+                <td> {{clientBin.id}} </td>
+                <td> {{clientBin.firstName}} </td>
+                <td> {{clientBin.lastName}} </td>
+                <td> {{clientBin.postalCode}} </td>
+                <td> {{clientBin.dateOfBirth}} </td>
+                <td> 
+                    <button type="button" class="deleteButton btn btn-success" (click)="restoreFromClientBin(clientBin.id)">Restore</button>
+                </td>
+                <td *ngIf="(isRoleAdmin$ | async)"> 
+                    <button type="button" class="deleteButton btn btn-danger" (click)="deleteFromClientBin(clientBin.id)">Delete Permanently</button>
+                 </td>
+            </tr>
+        }
+    </tbody>
+    </table>
+</div>
+
+<app-pagination
+   [pageLinks]="apiPageLink"
+   (contentSize)="setContentPerPage($event)"
+   (pageUrl)="toSpecificPage($event)" 
+/>

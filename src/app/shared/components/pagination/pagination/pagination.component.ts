@@ -13,9 +13,9 @@ import { PageEvent,MatPaginator } from '@angular/material/paginator';
 })
 export class PaginationComponent {
 
-  @Input() pageLinks : ApiLinksDetails[] = []; 
-  @Output() pageChange =  new EventEmitter<string>();
-  @Output() contentSize = new EventEmitter<number>();
+  @Input() pageLinks : ApiLinksDetails[] = []; //Gets the apiLinks from the parentClass.
+  @Output() pageUrl =  new EventEmitter<string>(); //Emits the URL of pagination.
+  @Output() contentSize = new EventEmitter<number>(); //Emits the ContentSize.
 
   toastrService = inject(ToastrService);
 
@@ -24,92 +24,23 @@ export class PaginationComponent {
 
 
 
-
-  length = 50;
-  pageSize = 10;
-  pageIndex = 0;
-  pageSizeOptions = [5, 10, 25];
-
-  hidePageSize = false;
-  showPageSizeOptions = true;
-  showFirstLastButtons = true;
-  disabled = false;
-
-  pageEvent: PageEvent;
-
-  handlePageEvent(e: PageEvent) {
-    this.pageEvent = e;
-    this.length = e.length;
-    this.pageSize = e.pageSize;
-    this.pageIndex = e.pageIndex;
-  }
-
-  setPageSizeOptions(setPageSizeOptionsInput: string) {
-    if (setPageSizeOptionsInput) {
-      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
-    }
-  }
-
-
-
-
-
-  //getting the total number of pages from the apiResponsePaginatedLinks.
-  get totalPages() : number{
-    if (!this.pageLinks) return 1; // Guard clause
-    const lastPageLink =  this.pageLinks.find((links)=> links.rel === "last");
-    if(!lastPageLink)return 1;
-      const url = new URL(lastPageLink.href);  
-      const lastPageNumber = url.searchParams.get("page");
-      return lastPageNumber? parseInt(lastPageNumber) : 1 ;
-  }
-
-
-  get currentPage(): number {
-    if (!this.pageLinks) return 1; // Guard clause
-    const selfLink = this.pageLinks.find(link => link.rel === 'self');
-    if (!selfLink) return 1;
-    const url = new URL(selfLink.href);
-    const pageParam = url.searchParams.get('page');
-    return pageParam ? parseInt(pageParam) + 1 : 1; // Convert 0-based to 1-based
-  }
-
-  //Generates Array of pageNumbers for html.
-  get pageNumbers():number[]{
-    const range = 2; // How many pages to show around the current page
-    const start = Math.max(1, this.currentPage - range);
-    const end = Math.min(this.totalPages, this.currentPage + range);
-    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
-  }
-
-  // Get the URL for a specific page
-  getPageUrl(page: number): string | null {
-    const selfLink = this.pageLinks.find(link => link.rel === 'self');
-    if (!selfLink) return null;
-    const url = new URL(selfLink.href);
-    url.searchParams.set('page', String(page - 1)); // Convert to 0-based
-    return url.toString();
-  }
-
-  goToPage(page: number) {
-    const url = this.getPageUrl(page);
-    if (url) this.pageChange.emit(url);
-  }
-
     /*changing "self","first", "last" ..... to proper url .*/
     changingRelToUrl(rel: string){
+      console.log(`button clicked on the pagination on ${rel}`);
       const singleLink = this.pageLinks.find(link=> link.rel===rel);
       if(!singleLink){
         this.toastrService.warning(`${rel} Page Not Found.`)
+        console.log(`rel : ${rel} not found in the given pagination request param. paginationComponent.ts`);
       }else{
-      const url = singleLink.href;
-      this.toSpecificPage(url);
+        const url = singleLink.href;
+        this.toSpecificPage(url);
       }
     }
 
 
     toSpecificPage(url : string){
-      this.pageChange.emit(url);
+      console.log(`Emitting the url ${url} from pagination component.`)
+      this.pageUrl.emit(url);
     }
 
 
@@ -126,10 +57,86 @@ export class PaginationComponent {
   }
 
   //when the user selects the content size it is emmited.
-  onContentSizeChange(event : Event){
-    const contentSize = parseInt((event.target as HTMLSelectElement).value);
-    this.contentSize.emit(contentSize);
+  onContentSizeChange(){
+    // const contentSize = parseInt((event.target as HTMLSelectElement).value);
+    // const content = this.contentSize;
+    this.contentSize.emit(this.contentSizeSelf);
+    console.log(`Emitting ${this.contentSizeSelf} content per page from pagination Component`);
   }
+
+
+
+  // length = 50;
+  // pageSize = 10;
+  // pageIndex = 0;
+  // pageSizeOptions = [5, 10, 25];
+
+  // hidePageSize = false;
+  // showPageSizeOptions = true;
+  // showFirstLastButtons = true;
+  // disabled = false;
+
+  // pageEvent: PageEvent;
+
+  // handlePageEvent(e: PageEvent) {
+  //   this.pageEvent = e;
+  //   this.length = e.length;
+  //   this.pageSize = e.pageSize;
+  //   this.pageIndex = e.pageIndex;
+  // }
+
+  // setPageSizeOptions(setPageSizeOptionsInput: string) {
+  //   if (setPageSizeOptionsInput) {
+  //     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+  //   }
+  // }
+
+
+
+
+
+  // //getting the total number of pages from the apiResponsePaginatedLinks.
+  // get totalPages() : number{
+  //   if (!this.pageLinks) return 1; // Guard clause
+  //   const lastPageLink =  this.pageLinks.find((links)=> links.rel === "last");
+  //   if(!lastPageLink)return 1;
+  //     const url = new URL(lastPageLink.href);  
+  //     const lastPageNumber = url.searchParams.get("page");
+  //     return lastPageNumber? parseInt(lastPageNumber) : 1 ;
+  // }
+
+
+  // get currentPage(): number {
+  //   if (!this.pageLinks) return 1; // Guard clause
+  //   const selfLink = this.pageLinks.find(link => link.rel === 'self');
+  //   if (!selfLink) return 1;
+  //   const url = new URL(selfLink.href);
+  //   const pageParam = url.searchParams.get('page');
+  //   return pageParam ? parseInt(pageParam) + 1 : 1; // Convert 0-based to 1-based
+  // }
+
+  // //Generates Array of pageNumbers for html.
+  // get pageNumbers():number[]{
+  //   const range = 2; // How many pages to show around the current page
+  //   const start = Math.max(1, this.currentPage - range);
+  //   const end = Math.min(this.totalPages, this.currentPage + range);
+  //   return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+  // }
+
+  // // Get the URL for a specific page
+  // getPageUrl(page: number): string | null {
+  //   const selfLink = this.pageLinks.find(link => link.rel === 'self');
+  //   if (!selfLink) return null;
+  //   const url = new URL(selfLink.href);
+  //   url.searchParams.set('page', String(page - 1)); // Convert to 0-based
+  //   return url.toString();
+  // }
+
+  // goToPage(page: number) {
+  //   const url = this.getPageUrl(page);
+  //   if (url) this.pageChange.emit(url);
+  // }
+
 
 
 

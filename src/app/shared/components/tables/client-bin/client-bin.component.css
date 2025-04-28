@@ -6,14 +6,4 @@ th{
     background-color: var(--lightShade);
     font-weight: bold;
     letter-spacing: 0.5;
-    /* text-align: center; */
-}
-
-/* td{
-    text-align: center;
-}
- */
-.modType{
-    background-color: var(--lightShade);
-    text-align: center;
 }
