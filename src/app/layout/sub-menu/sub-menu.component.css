@@ -1,0 +1,12 @@
+.active-link{
+    color:var(--lightShade);
+    background-color: var(--orange);
+}
+
+a{
+    color: var(--secondaryColor)
+}
+
+li{
+    background-color: var(--lightShade);
+}

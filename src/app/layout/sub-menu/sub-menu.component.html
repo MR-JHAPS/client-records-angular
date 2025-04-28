@@ -1,0 +1,47 @@
+
+<!-- For Admin -->
+    <div *ngIf="(isRoleAdmin$ | async)"  class="container">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" 
+                    routerLink="/admin/admin-home/clientTable"
+                    routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{ exact: false }">
+                    Manage Clients
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                    routerLink="/admin/admin-home/userTable"
+                    routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{ exact: false }">
+                    Manage Users
+                </a>
+            </li>
+    </ul>
+    </div>
+
+
+
+  <!-- For User -->
+  <!--  <div *ngIf="!(isRoleAdmin$ | async) && (isRoleUser$ | async)" class="conatiner">
+        <ul  class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page"
+                    routerLink="/admin/admin-home/clientTable"
+                    routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{ exact: false }">
+                    Client Table
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" 
+                    routerLink="/admin/admin-home/clientLog"
+                    routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{ exact: false }">
+                    Client Log
+                </a>
+            </li>
+        </ul>
+    </div> -->

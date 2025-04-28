@@ -31,7 +31,12 @@ export const routes: Routes = [
             canActivate : [userGuardGuard],
             canActivateChild : [userGuardGuard], /* Calling a AuthGuard class. */
             children : [ 
-                    {path: "user-home",component: UserHomeComponent},
+                    {path: "user-home",component: UserHomeComponent,
+                        children : [
+                            {path:"clientTable", component:ClientTableComponent},
+                            {path: "", redirectTo: "clientTable", pathMatch: "full" }
+                        ]
+                    },
                     {path: "user-profile", component: UserProfileComponent},
                     {path: "client-update/:id", component: ClientUpdateComponent},
                     {path: "selected-client", component: SelectedClientComponent},
@@ -44,7 +49,7 @@ export const routes: Routes = [
             canActivate : [adminGuardGuard],
             canActivateChild : [adminGuardGuard], /* Calling a AuthGuard class. */
             children : [ 
-                    {path: "",
+                    {path: "admin-home",
                      component: AdminHomeComponent,
                      children : [
                             {path:"clientTable", component:ClientTableComponent},
@@ -53,7 +58,8 @@ export const routes: Routes = [
                             {path: "", redirectTo: "clientTable", pathMatch: "full" }
                         ]
                     },
-                    {path: "admin-home", redirectTo: "" , pathMatch: "full"},
+                    {path: "", redirectTo: "admin-home", pathMatch: "full" },
+                    // {path: "admin-home", redirectTo: "" , pathMatch: "full"},
                     {path: "admin-profile", component: AdminProfileComponent},
                     // {path: "clientTable", component: ClientTableComponent},
                     // {path: "clientLogTable", component: ClientLogTableComponent},

@@ -1,46 +1,42 @@
-.active-link {
-    background-color: var(--orange) !important;
-    color: var(--lightShade) !important;
-    font-weight: bold !important;
-  }
+.active-link{
+  color:var(--lightShade);
+  background-color: var(--orange);
+  border-radius: 10px !important;
+}
+
+a{
+  color: var(--secondaryColor);
+  border-radius: 10px !important;
+}
+
+.headerContainer{
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+a:hover{
+  color: var(--darkBlue);
+}
+
+.active-link:hover{
+  color: var(--lightShade);
+}
 
 
-  /* This is the header of the menu like ClientList and side-bar Toggler */
-  .header{
-    font-size: larger;
-    font-weight: bold;
-    letter-spacing: 0.8px;
-    color: var(--lightShade);
-    background-color: var(--darkBlue);
-  }
-  
 
-  /* This is the menu userHome, logout, userProfile */
-  .menu{
+/* When the menu is compacted in small screen */
+@media (max-width : 900px) {
+
+  li:hover{
     background-color: var(--lightShade);
+    transition-duration: 0.5s;
+    border-radius: 10px !important;
   }
 
-  .menuItems{
-    margin: auto;
-}
-
-/* This is the sideBar toggler */
-.button{
-  color:white;
-  font-weight: bold;
-
-}
-  
-
-  @media(max-width: 600px) {
-      mat-toolbar {
-        margin-bottom: 50px;
-       }
-
-       /* Contains userHome, profile, logout */
-       .menuItems{
-        margin: 0;
-    }
-
-
+  a{
+    color: var(--secondaryColor);
+    border-radius: 10px !important;
+    padding-left:20px;
   }
+
+
+}
