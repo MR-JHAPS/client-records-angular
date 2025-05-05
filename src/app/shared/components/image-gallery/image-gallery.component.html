@@ -1,0 +1,26 @@
+
+<div class="header ">
+    <h4> Image Gallery</h4>
+</div>
+
+
+<main class="mainContainer  shadow m-3 mt-0">
+
+   
+
+    <section class="gridContainer">
+        
+        @for (image of imageResponseList; track image.id) {
+        <div class="gridContent">
+            <div class="imageWrapper">
+                <input type="checkbox" class="imageCheckbox">
+                <img [src]="imageBaseUrl + image.imageUrl" alt="image">
+              </div>
+        </div>
+    }
+
+
+
+    </section>     
+    
+</main>

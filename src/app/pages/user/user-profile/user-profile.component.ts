@@ -12,10 +12,11 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { API_ENDPOINTS } from '../../../core/constants/apiEndpoints.const';
 import { SafeUrl } from '@angular/platform-browser';
 import { MatButton } from '@angular/material/button';
+import { ImageGalleryComponent } from '../../../shared/components/image-gallery/image-gallery.component';
 
 @Component({
   selector: 'app-user-profile',
-  imports: [CommonModule, FormsModule, MatButton],
+  imports: [CommonModule, FormsModule, MatButton, ImageGalleryComponent],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.css'
 })
