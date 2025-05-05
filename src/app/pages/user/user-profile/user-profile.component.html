@@ -1,15 +1,41 @@
 <main >
     @if(isLoading){
         <div> CurrentUser is still loading.</div>
+        <!-- <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div> -->
+
+
+          <section class="mainContainer bg bg-light shadow m-3 mt-0">
+
+            <div class="imageContainer bg bg-light">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+            </div>
+        
+            <!-- <div class="detailsContainer "> -->
+                <div class="detailsContainer card bg bg-light" >
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                   
+                </div>  
+        </section>
     }
+
+
+
+
     <!-- Once the currentUser variable is filled with apiUserResponseData only then it will load this -->
 
 
         @else if(!isLoading) {
-            <section class="mainContainer bg bg-light shadow m-3">
+            <h5 class="detailsHeader ">Profile Details</h5>
+            <section class="mainContainer bg bg-light shadow m-3 mt-0">
 
                 <div class="imageContainer bg bg-light">
-                    <img src="/assets/images/{{currentUser.image}}" alt="profile picture">
+                    <img [src]="completeImageUrl" alt="profile picture">
 
                     <div class="imageUpload">
                         <label class="imageUploadLabel" for="profileImageUpload">
@@ -27,8 +53,38 @@
                       </div>
                 </div>
             
-                <div class="detailsContainer bg bg-light">
-                    <div class="detailsHeader">
+                <!-- <div class="detailsContainer "> -->
+
+                    <div class="detailsContainer card bg bg-light" >
+                        
+                        <div class="card-body">
+                          
+                        </div>
+                        <ul class="details list-group list-group-flush ">
+                          <li class="list-group-item bg bg-light" > <span class="label">Email :</span><span class="contents"> {{currentUser.email}}</span></li>
+                          <li class="list-group-item bg bg-light"><span class="label">Created On :</span><span class="contents"> {{formattedCreatedOn}}</span></li>
+                          
+                        </ul>
+                        <div class="updateButton  card-body">
+                            <!-- <button class="btn ">Update User</button> -->
+                            <button mat-raised-button class="btn">Update User</button>
+                          
+                        </div>
+
+                        <div class="updatedOn">
+                            <ul class="details list-group list-group-flush">
+                                <li class="list-group-item  bg bg-light">
+                                    <span class="updatedOn">
+                                        Last Updated on {{formattedUpdatedOn}}
+                                    </span>
+                                </li>
+                            </ul>    
+                          </div>
+                      </div>  
+
+
+
+                    <!-- <div class="detailsHeader">
                         <h3>Profile Details</h3>
                     </div>
             
@@ -48,8 +104,8 @@
                     <div class="updatedOn">
                         <p>Updated on {{formattedUpdatedOn}}</p>
                     </div>
-            
-                </div>
+             -->
+                <!-- </div> -->
             
             
             

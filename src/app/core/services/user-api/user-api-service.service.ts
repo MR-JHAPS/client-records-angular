@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { UserGeneralResponse } from '../../models/response/userGeneralResponse';
 import { UserUpdateRequest } from '../../models/request/userUpdateRequest';
 import { ApiResponseModel } from '../../models/responseModel/apiResponseModel';
+import { UserImageUploadRequest } from '../../models/request/userImageUploadRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -18,25 +19,34 @@ export class UserApiServiceService {
   
 
 
- /*  userLogin(credentials:{email:string, password:string}):Observable<any>{
-    return this._httpClient.post<UserAuth>(this.apiBaseUrl+this.publicEndpoints.login, credentials);
-  } */
 
   getCurrentUser():Observable<ApiResponseModel<UserGeneralResponse>>{
    return this._httpClient.get<ApiResponseModel<UserGeneralResponse>>(`${this.apiBaseUrl}${this.userEndpoints.getCurrentUser}`);
   }
 
-  updateCurrentUser(userDetails : UserUpdateRequest){
+  updateCurrentUser(userDetails : UserUpdateRequest) : Observable<ApiResponseModel<string>>{
     const url = `${this.apiBaseUrl}${this.userEndpoints.updateCurrentUser}`;
-    return this._httpClient.put(url, userDetails);
+    return this._httpClient.put<ApiResponseModel<string>>(url, userDetails);
   }
 
-  updateProfilePicture(){
-    
+  updateProfilePicture(imageRequest : UserImageUploadRequest) : Observable<ApiResponseModel<string>>{
+    // Appending the file (key matches backend's `ImageRequest field` name)
+    const formData = new FormData();
+    formData.append("imageFile", imageRequest.imageFile);
+    formData.append("imageName", imageRequest.imageName);
+
+    const url = `${this.apiBaseUrl+this.userEndpoints.updateProfilePicture}`;
+    return this._httpClient.post<ApiResponseModel<string>>(url, formData);
   }
 
-  deleteCurrentAccount(){
-    
+  removeProfilePicture() : Observable<ApiResponseModel<string>>{
+    const url = `${this.apiBaseUrl+this.userEndpoints.removeProfilePicture}`;
+    return this._httpClient.delete<ApiResponseModel<string>>(url);
+  }
+
+  deleteCurrentAccount(): Observable<ApiResponseModel<string>>{
+    const url = `${this.apiBaseUrl+this.userEndpoints.deleteCurrentUser}`;
+    return this._httpClient.delete<ApiResponseModel<string>>(url);
   }
 
 
@@ -44,6 +54,4 @@ export class UserApiServiceService {
 
     
 
-
-  constructor() { }
-}
+}//ends class

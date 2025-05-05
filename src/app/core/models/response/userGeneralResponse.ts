@@ -1,7 +1,7 @@
 export interface UserGeneralResponse{
 
     id : number,
-    image : string,
+    imageUrl : string,
     email : string,
     createdOn : Date,
     updatedOn : Date

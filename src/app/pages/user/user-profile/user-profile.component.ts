@@ -7,10 +7,15 @@ import { CustomDateConverterService } from '../../../shared/customDateConverter'
 import { UserGeneralResponse } from '../../../core/models/response/userGeneralResponse';
 import { UserUpdateRequest } from '../../../core/models/request/userUpdateRequest';
 import { ApiResponseModel } from '../../../core/models/responseModel/apiResponseModel';
+import { UserImageUploadRequest } from '../../../core/models/request/userImageUploadRequest';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { API_ENDPOINTS } from '../../../core/constants/apiEndpoints.const';
+import { SafeUrl } from '@angular/platform-browser';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-user-profile',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatButton],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.css'
 })
@@ -21,9 +26,15 @@ export class UserProfileComponent implements OnInit{
   formattedCreatedOn : string ;
   formattedUpdatedOn : string;
 
+
+
+  baseUrl = API_ENDPOINTS.imageBaseUrl;
   private _httpClient = inject(HttpClient);
   private _userApiService = inject(UserApiServiceService); 
   private _dateConverter = inject(CustomDateConverterService);
+  private _toastrService = inject(ToastrService);
+  userProfileImageRequest = new UserImageUploadRequest();
+  completeImageUrl : string ="";
  
 
 
@@ -32,11 +43,19 @@ ngOnInit(): void {
   this.getCurrentUser();  
 }             
 
+
+
+
+
+
+
 getCurrentUser():void{
   this._userApiService.getCurrentUser().subscribe({
-    next : (response : ApiResponseModel<UserGeneralResponse>) => { this.currentUser = response.data;
+    next : (response : ApiResponseModel<UserGeneralResponse>) => { 
+          this.currentUser = response.data;
           this.formattedCreatedOn = this._dateConverter.formatLocalDateTime(response.data.createdOn);
           this.formattedUpdatedOn = this._dateConverter.formatLocalDateTime(response.data.updatedOn);
+          this.completeImageUrl = `${this.baseUrl}${response.data.imageUrl}`;
           console.log(this.formattedCreatedOn);              
           console.log(response)
                         },
@@ -56,14 +75,23 @@ updateProfilePicture(event: Event){
   if(input.files && input.files.length > 0){
     const file = input.files[0];
     const fileName = file.name;
-    const fileExtension = fileName.split(".").pop();
+    this.userProfileImageRequest.imageName = fileName;
+    this.userProfileImageRequest.imageFile = file;
 
-    //generating unique fileName.
-    const uniqueFileName = `profile_${Date.now()}.${fileExtension}`;
+    this._userApiService.updateProfilePicture(this.userProfileImageRequest).subscribe({
+      next : (response : ApiResponseModel<string>)=>{
+        this.getCurrentUser();
+        this._toastrService.success("Profile Image Updated Successfully");
+      },
+      error : (error)=>{
+        console.log("Error updating the profile Picture", error);
+        this._toastrService.error(error);
+      },
+      complete : ()=>{
+        console.log("Successfuly updated profile image");
+      }
+    })
 
-    // this.saveImageLocally(file, uniqueFileName).then(()=>{
-    //   this.uploadImageBackEnd()
-    // })
 
   }
 }

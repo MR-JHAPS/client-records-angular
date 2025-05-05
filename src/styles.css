@@ -8,7 +8,8 @@
     --lightShade : #F5F5F5;
     /* #FF8C42 */
 
-
+	--uploadHover:  #faebdd;
+	--uploadBackground:   #fdf9f2; 
     --primaryColor:#112C50;
     --secondaryColor: #2E5A88;  
     --accentColor: #EF6602;

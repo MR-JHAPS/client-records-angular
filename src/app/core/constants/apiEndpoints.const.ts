@@ -1,6 +1,7 @@
 export const API_ENDPOINTS= {
 
     apiBaseUrl : "http://localhost:8080/api",
+    imageBaseUrl : "http://localhost:8080",
 
     publicApi: {
        login : "/public/login",

@@ -42,7 +42,7 @@ export class AuthServiceService   {
     this.isTokenValid.next(true); // Assume valid until proven otherwise
     this.tokenValidateRequest.setTokenName(token);
     this.validateToken(this.tokenValidateRequest); // Secondary check
-  } else {
+  }  else{
     this.clearAuthState();
   }
 }
@@ -114,7 +114,7 @@ updateAuthState(token: string): void {
         },
         error: (error) => {
           this.clearAuthState();
-          this._route.navigateByUrl("login");
+          this._route.navigateByUrl("home");
         }
       });
     }
