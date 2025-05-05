@@ -5,6 +5,9 @@ import { ApiResponseModelPaginated } from '../../../core/models/responseModel/ap
 import { ApiResponseModel } from '../../../core/models/responseModel/apiResponseModel';
 import { NgFor } from '@angular/common';
 import { API_ENDPOINTS } from '../../../core/constants/apiEndpoints.const';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { SelectedImageComponent } from '../modals/selected-image/selected-image.component';
+
 
 @Component({
   selector: 'app-image-gallery',
@@ -22,11 +25,16 @@ export class ImageGalleryComponent implements OnInit {
   isLoading = true;
   /* This is the message if images are not found */
   errorMessage = ""; 
+  bsModalref?: BsModalRef;
+  _modalService = inject(BsModalService);
 
 
   ngOnInit(): void {
     this.getAllImagesOfCurrentUser();
   }
+
+
+
 
   getAllImagesOfCurrentUser() :void {
     this._imageService.getAllImagesOfUser().subscribe({
@@ -65,6 +73,17 @@ export class ImageGalleryComponent implements OnInit {
 
 
 
+  openImage( selectedImageUrl : string, imageName: string) : void{
+    console.log("opening Image modal from imageGallery.");
+    this.bsModalref = this._modalService.show(SelectedImageComponent,{
+      initialState : {
+        isImageOpened : true,
+        imageUrl : selectedImageUrl,
+        imageName : imageName
+      }
+    })
+  }//ends method
+  
 
 
 

@@ -1,7 +1,7 @@
 export class BulkImageDeleteRequest{
 
     constructor(
-        public idList : Array<number>
+        public idList : Array<number> = []
     ){}
 
 }

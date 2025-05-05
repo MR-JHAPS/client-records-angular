@@ -31,7 +31,11 @@ export const API_ENDPOINTS= {
     roleApi: { 
         saveNewRole: "/roles",
         getAllRoles: "/roles",
-        deleteRole:(id: number) => `/roles/${id}`
+        /*  
+            NOT SURE IF I WANT THIS TO PREVENT ISSUES FOR ACCIDENTAL DELETION OF ADMIN/USER .
+            WHICH COULD CAUSE WHOLE APPLICATION AUTHORIZATION FAILURE.
+         */
+        // deleteRole:(id: number) => `/roles/${id}` 
     },
 
     clientApi:{

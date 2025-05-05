@@ -11,7 +11,7 @@
     <section class="gridContainer">
         
         @for (image of imageResponseList; track image.id) {
-        <div class="gridContent">
+        <div class="gridContent" (click)="openImage(imageBaseUrl + image.imageUrl, image.imageName)">
             <div class="imageWrapper">
                 <input type="checkbox" class="imageCheckbox">
                 <img [src]="imageBaseUrl + image.imageUrl" alt="image">
