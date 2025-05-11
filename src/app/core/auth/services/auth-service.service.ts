@@ -131,7 +131,8 @@ updateAuthState(token: string): void {
     this.isRoleUser.next(false);
     this.isRoleAdmin.next(false);
     this.clearAuthState();
-    window.location.href = '/login'; 
+    // window.location.href = '/login'; 
+    this._route.navigateByUrl("login");
   }
 
 
