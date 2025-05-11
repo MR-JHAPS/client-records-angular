@@ -23,7 +23,7 @@ import { ImageRequest } from '../../../core/models/request/imageRequest';
 export class ImageGalleryComponent implements OnInit {
 
   private _imageService = inject(ImageApiService);
-  imageBaseUrl = API_ENDPOINTS.imageBaseUrl;
+  // imageBaseUrl = API_ENDPOINTS.imageBaseUrl;
   _toastrService = inject(ToastrService);
   imageResponseList : Array<ImageResponse>  = [];
   imageResponseSingle : ImageResponse;
