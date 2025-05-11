@@ -20,7 +20,7 @@ export class AdminServiceService {
 
   /* This will contain the response of user with roles .*/
 getUserById(id : number) : Observable<ApiResponseModel<UserAdminResponse>>{
-  const url = `${this.baseUrl}${this.adminApi.getUserById}/${id}`;
+  const url = `${this.baseUrl}${this.adminApi.getUserById(id)}`;
   return this._httpClient.get<ApiResponseModel<UserAdminResponse>>(url);
 }
 
