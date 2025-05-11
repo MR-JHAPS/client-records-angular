@@ -1,26 +1,47 @@
 
-<div class="header ">
+<!-- <div class="header ">
     <h4> Image Gallery</h4>
-</div>
+</div> -->
 
-
-<main class="mainContainer  shadow m-3 mt-0">
-
-   
-
-    <section class="gridContainer">
-        
-        @for (image of imageResponseList; track image.id) {
-        <div class="gridContent" (click)="openImage(imageBaseUrl + image.imageUrl, image.imageName)">
-            <div class="imageWrapper">
-                <input type="checkbox" class="imageCheckbox">
-                <img [src]="imageBaseUrl + image.imageUrl" alt="image">
-              </div>
-        </div>
-    }
-
-
-
-    </section>     
+<!-- <ng-container *ngIf="imageResponseList!.length > 0; else noImages"> -->
+    <!-- <main  class="mainCosntainer  "> -->
+    <main>
     
-</main>
+
+        <section class="gridContainer">
+            <div class="gridContent">
+                <label class="imageUploadLabel" for="imageUpload">
+                    <i class="fa-solid fa-camera fa-xl" style="color: #ff8000;"></i>
+                </label>
+                <input 
+                    id="imageUpload" 
+                    type="file" 
+                    accept="image/*" 
+                    (change)="uploadNewImage($event)"
+                    style="display: none;"
+                >
+            </div>
+            @for (image of imageResponseList; track image.id) {
+            <div class="gridContent" >
+                <div class="imageWrapper">
+                    <input type="checkbox" class="imageCheckbox" 
+                    [checked]="checkedImages.idList.includes(image.id)" (change)="toggleCheckBox(image.id)">
+                    <img [src]="image.imageUrl" alt="image" (click)="openImage(image.imageUrl, image.imageName)">
+                </div>
+            </div>
+            
+        }
+        
+        </section>    
+        
+            <section *ngIf="isImageSelected" class="actionBar sticky-bottom text-center mt-4">
+                <button class="btn delete" (click)="deleteSelectedImages()">
+                    <i class="fa-solid fa-trash fa-beat fa-2xl" style="color: #d11b3f;"></i>
+                </button>
+                <button class="btn reset" (click)="resetSelectedImages()">
+                    <i class="fa-solid fa-ban fa-2xl" style="color: #74C0FC;"></i>
+                </button>
+            </section>
+      
+    
+    </main> 

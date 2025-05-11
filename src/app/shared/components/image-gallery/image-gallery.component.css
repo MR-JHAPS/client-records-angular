@@ -16,15 +16,15 @@
 }
 
 .mainContainer{
-    padding:20px;
-    margin-bottom: 30vh;
+    /* padding:20px;
+    margin-bottom: 30vh; */
 }
 
 
 .gridContainer {
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
     justify-content: center;
     grid-template-areas: "gridContent";
     
@@ -38,6 +38,7 @@
     justify-content: center;
     align-items: center;
     background-color: #f0f0f0;
+    transition: transform 0.3s ease; /* Smooth animation */
 
   }
   
@@ -68,12 +69,109 @@
 
 
   .gridContainer:hover>.gridContent:not(:hover){
-    filter: brightness(0.6);
-    opacity: 0.9; /* optional, to keep it slightly faded */
-    transition: filter 0.2s ease, opacity 0.2s ease;
+    /* filter: brightness(0.6); */
+    /* optional, to keep it slightly faded */
+    /* opacity: 0.9;  */
+    /* transition: filter 0.2s ease, opacity 0.2s ease; */
   }
 
   .gridContent:hover{
     cursor: pointer;
+    transform: scale(1.05); /* Slightly grow */
+    z-index: 3;
+    overflow: auto;
   }
   
+
+  .action-bar.sticky-bottom {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    display: flex;
+    gap: 10px;
+    
+  }
+
+  .action-bar{
+    
+  }
+
+  .btn{
+    /* background-color: var(--lightShade); */
+    background-color: white;
+    border-radius: 0px;
+    padding: 16px;
+    opacity: 0.95;
+    border: 2px solid var(--lightShade);
+    
+  }
+
+
+
+  .btn.reset:hover{
+    background-color:rgb(233, 233, 233);
+    color: white;
+    opacity: 1;
+  }
+  .btn.delete:hover{
+    background-color: rgb(233, 233, 233);
+    color: white;
+    opacity: 1;
+  }
+
+
+  @media(max-width:700px) {
+
+
+    /* Fixed size grid content for smaller screen */
+    .gridContainer {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 100px));
+      justify-content: center;
+      grid-template-areas: "gridContent";
+      
+    }
+    
+    .gridContainer > .gridContent {
+      overflow: hidden;
+      border: 1px solid #ccc;
+      border-radius: 8px; /* optional for a softer look */
+      display: flex;
+      justify-content: center ;
+      background-color: #f0f0f0;
+      transition: transform 0.3s ease; /* Smooth animation */
+    }
+    
+    .imageWrapper {
+      position: relative;
+      width: max-content;
+      height: max-content;
+    }
+  
+    .imageWrapper>img{
+      width: 100px;
+      height: 100px;
+      object-fit: cover; /* This crops and fills like Facebook */
+      object-position: center; /* Keeps the image centered */
+    }
+
+     /* Checkbox positioned at top-left */
+  .imageCheckbox {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    z-index: 2;
+    transform: scale(1.05); /* optional to make it more visible */
+    background: white;
+    padding: 1px;
+    border-radius: 8px;
+  }
+
+  }

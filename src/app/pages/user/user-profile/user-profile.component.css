@@ -4,7 +4,7 @@
 
 main{
   min-height: 100vh;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 }
 
 
@@ -119,20 +119,20 @@ img{
 }
 
 .updateButton{
-  margin-top: 20px;
-  text-align: left;
+  /* margin-top: 20px; */
+  /* text-align: center; */
+  border: none;
 }
 
 .updateButton .btn{
   border: none;
-  /* border-radius: 20px; */
   background-color: var(--secondaryColor);
   color: var(--lightShade);
 }
 
 .updateButton .btn:hover{
   background-color: var(--darkBlue);
-  box-shadow: 1px 1px 6px var(--mutedOrange);
+  /* box-shadow: 1px 1px 6px var(--mutedOrange); */
 }
 
 .updatedOn{
@@ -145,6 +145,34 @@ img{
 }
 
 
+
+/* THIS IS THE CONTAINER FOR THE IMAGE-GALLERY */
+
+.galleryContainer{
+  padding:10px;
+  padding-top:10px;
+  min-height: 30vh;
+  margin-top: 20px;
+
+}
+
+.emptyState{
+  font-size: larger;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-align: center;
+  color: var(--secondaryColor);
+  text-shadow: 1px 2.5px 2px darkgrey;
+  position: relative;
+  min-height: 30vh;
+}
+
+.emptyState p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 
 
@@ -161,9 +189,10 @@ img{
   }
 
   .mainContainer{
+    overflow: hidden;
     padding-top:40px;
     display: grid;
-    grid-template-rows: 0.5fr 0.5fr;
+    grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr;
     grid-template-areas: "imageContainer"
     " detailsContainer";
@@ -173,8 +202,8 @@ img{
   
   .imageContainer{
     margin: auto;
-    width: 390px;
-    height: 390px;
+    width: 350px;
+    height: 350px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -182,14 +211,11 @@ img{
     /* border:3px solid red; */
   }
 
- /*  img{
-    width: 100%;
-    height: 100%;
-    box-shadow: none;
-    overflow: hidden;
-    /* border: 2px solid green; */
+  img{
+    object-fit: cover; /* This crops and fills like Facebook */
+      object-position: center; /* Keeps the image centered */
 
-  /* } */
+  /* }
 
   .imageUpload{
     height: 40px;
@@ -198,11 +224,13 @@ img{
 
   
 .detailsContainer{
-  margin-top: 10px;
-  /* background-color: darkgrey; */
+  margin-top: 0px;
+  overflow: hidden;
+
+ 
   display: grid;
-  grid-template-rows: 0.5fr 1fr 0.5fr 0.5fr;
-  grid-template-areas: "detailsHeader"
+  grid-template-rows: 0.5fr 0.5fr 0.5fr;
+  grid-template-areas: 
   "details"
   "updateButton"
   "updatedOn";
@@ -236,7 +264,7 @@ img{
 
   .updateButton{
     margin:auto;
-    margin-top:20px;
+    margin-top:0px;
   }
 
   .updateButton .btn{
@@ -249,7 +277,7 @@ img{
 
   .updatedOn{
     margin:auto;
-    margin-top: 20px;
+    margin-top: 0px;
     color: rgb(131, 129, 129);
     font-weight: 400;
   }

@@ -1,0 +1,98 @@
+
+<!-- This is for Regular-User-Update -->
+        
+    <div *ngIf="(isRoleUser$ | async) && !(isRoleAdmin$ | async) " class="modalContainer modal-content">
+    
+        <div  class="header modal-header">
+            <h4 class="modal-title pull-left">Edit User Info</h4>
+            <button type="button" class=" btn-close close pull-right" aria-label="Close" (click)="_modalService.hide()">
+                <span aria-hidden="true" class="closeButton visually-hidden">&times;</span>
+            </button>
+        </div>
+    
+        <div class="modalBody modal-body">
+            
+            <section class="row g-3">
+                <div class="col ">
+                    <label class="form-label  ps-2" for="email">Email</label>
+                    <input type="email" class="placeHolder form-control" placeholder="Email" aria-label="Email" id="email"
+                    [(ngModel)]="userUpdateRequest.email">
+                    
+                </div>
+                <div class="col">
+                    <label class="form-label ps-2" for="email">Current Password</label>
+                    <input type="password" class="placeHolder form-control" placeholder="Current Password" aria-label="Current Password"
+                    [(ngModel)]="userUpdateRequest.currentPassword">
+                </div>
+            </section>
+            
+            <section class="row g-3 mt-4">
+                <div class="col">
+                    <label class="form-label ps-2" for="newPassword">New Password</label>
+                    <input  type="password" class="placeHolder form-control" placeholder="New Password" aria-label="New Password" id="newPassword"
+                    [(ngModel)]="userUpdateRequest.newPassword">
+                </div>
+            </section>
+
+            <section class="row g-3 mt-2">
+                <div class="col">
+                    <label class="form-label ps-2" for="confirmPassword">Confirm Password</label>
+                    <input type="password" class="placeHolder form-control" placeholder="Confirm Password" aria-label="Confirm Password" id="confirmPassword"
+                    [(ngModel)]="userUpdateRequest.confirmPassword">
+                </div>
+            </section>
+
+
+            <section class="buttons row g-3 mt-3">
+                <div *ngIf="!isLoading" class="col ">
+                    <button class="button btn btn-success w-100" (click)="onUpdateClick()"> Update </button>  
+                </div>
+
+                <div *ngIf="isLoading" class="col ">
+                    <button  class="btn btn-success w-100" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Loading...
+                    </button>
+                </div>
+
+                <div class="col">
+                    <button class="button btn btn-danger w-100" (click)="_modalService.hide()"> Cancel </button>
+                </div>
+            </section>
+
+        </div>
+    </div>
+  
+
+
+
+
+
+
+
+
+  <!-- This is for the Admin-User-Update -->
+  <div *ngIf="(isRoleAdmin$ | async)" class="whole modal-dialog modal-xl">
+    
+        <div class="modal-content">
+        
+            <div  class="header modal-header">
+                <h4 class="modal-title pull-left">Edit Admin Info</h4>
+                <button type="button" class=" btn-close close pull-right" aria-label="Close" (click)="_modalService.hide()">
+                    <span aria-hidden="true" class="closeButton visually-hidden">&times;</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                
+                <div class="row g-3">
+                    <div class="col">
+                      <input type="text" class="form-control" placeholder="First name" aria-label="First name">
+                    </div>
+                    <div class="col">
+                      <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+                    </div>
+                  </div>
+            </div>
+        </div>
+  </div>

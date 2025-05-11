@@ -1,7 +1,7 @@
 export const API_ENDPOINTS= {
 
-    apiBaseUrl : "http://localhost:8080/api",
-    imageBaseUrl : "http://localhost:8080",
+    apiBaseUrl : "https://limitless-tor-07059-c4eab57a6fb3.herokuapp.com/api",
+    imageBaseUrl : "https://limitless-tor-07059-c4eab57a6fb3.herokuapp.com",
 
     publicApi: {
        login : "/public/login",

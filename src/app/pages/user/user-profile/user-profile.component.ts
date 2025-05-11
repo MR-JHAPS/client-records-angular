@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject, inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, inject, OnInit, Output, TemplateRef, ViewChild, viewChild } from '@angular/core';
 import { UserApiServiceService } from '../../../core/services/user-api/user-api-service.service';
 import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -10,9 +10,11 @@ import { ApiResponseModel } from '../../../core/models/responseModel/apiResponse
 import { UserImageUploadRequest } from '../../../core/models/request/userImageUploadRequest';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { API_ENDPOINTS } from '../../../core/constants/apiEndpoints.const';
-import { SafeUrl } from '@angular/platform-browser';
 import { MatButton } from '@angular/material/button';
 import { ImageGalleryComponent } from '../../../shared/components/image-gallery/image-gallery.component';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { UpdateUserComponent } from '../../../shared/components/modals/update-user/update-user.component';
+import { ImageResponse } from '../../../core/models/response/imageResponse';
 
 @Component({
   selector: 'app-user-profile',
@@ -27,15 +29,25 @@ export class UserProfileComponent implements OnInit{
   formattedCreatedOn : string ;
   formattedUpdatedOn : string;
 
+  /* emitting that new image is added to the imageGalleryComponent*/
+  // @Output() imagedAdded = new EventEmitter<boolean>(true);
+  @ViewChild(ImageGalleryComponent) imageGallery !: ImageGalleryComponent
 
 
   baseUrl = API_ENDPOINTS.imageBaseUrl;
-  private _httpClient = inject(HttpClient);
   private _userApiService = inject(UserApiServiceService); 
   private _dateConverter = inject(CustomDateConverterService);
   private _toastrService = inject(ToastrService);
   userProfileImageRequest = new UserImageUploadRequest();
+  // imageResponseList : Array<ImageResponse> = [];
   completeImageUrl : string ="";
+
+  _modalService = inject(BsModalService);
+  bsModalRef ?: BsModalRef;
+
+  /* Receiving the event status from imageGallery*/
+  areImagesPresentInGallery :boolean = true ;
+
  
 
 
@@ -56,7 +68,7 @@ getCurrentUser():void{
           this.currentUser = response.data;
           this.formattedCreatedOn = this._dateConverter.formatLocalDateTime(response.data.createdOn);
           this.formattedUpdatedOn = this._dateConverter.formatLocalDateTime(response.data.updatedOn);
-          this.completeImageUrl = `${this.baseUrl}${response.data.imageUrl}`;
+          this.completeImageUrl = `${response.data.imageUrl}`;
           console.log(this.formattedCreatedOn);              
           console.log(response)
                         },
@@ -83,6 +95,8 @@ updateProfilePicture(event: Event){
       next : (response : ApiResponseModel<string>)=>{
         this.getCurrentUser();
         this._toastrService.success("Profile Image Updated Successfully");
+        this.imageGallery.getAllImagesOfCurrentUser();
+        
       },
       error : (error)=>{
         console.log("Error updating the profile Picture", error);
@@ -99,71 +113,25 @@ updateProfilePicture(event: Event){
 
 
 
-uploadImageBackEnd(file: File,  fileName: string){
-
-
-}
-
-
-/*-------------------- Saving image locally------------------------------------------------------*/
-  // private saveImageLocally(file: File, fileName: string): Promise<void> {
-  //   return new Promise((resolve, reject) => {
-  //     // Create a local copy in browser's IndexedDB or localStorage
-  //     const reader = new FileReader();
-  //     reader.onload = (e: any) => {
-  //       try {
-  //         // Save to browser storage (alternative: save to assets folder during development)
-  //         localStorage.setItem(`profile_${fileName}`, e.target.result);
-  //         resolve();
-  //       } catch (err) {
-  //         reject(err);
-  //       }
-  //     };
-  //     reader.readAsDataURL(file);
-  //   });
-  // }
-
-
-
-
-  // /* NEED TO STUDY THIS FURTHER : */
-  // private saveImageLocally(file: File, userEmail: string, fileName: string): Promise<void> {
-  //   return new Promise((resolve, reject) => {
-  //     const reader = new FileReader();
-  //     reader.onload = (e: any) => {
-  //       try {
-  //         // Create user directory if not exists
-  //         const userDir = `${environment.publicAssetsPath}/users/${userEmail}`;
-  //         if (!window.require('fs').existsSync(userDir)) {
-  //           window.require('fs').mkdirSync(userDir, { recursive: true });
-  //         }
-
-  //         // Save file
-  //         const fs = window.require('fs');
-  //         const path = window.require('path');
-  //         const filePath = path.join(userDir, fileName);
-          
-  //         const buffer = Buffer.from(e.target.result.split(',')[1], 'base64');
-  //         fs.writeFile(filePath, buffer, (err: any) => {
-  //           if (err) reject(err);
-  //           else {
-  //             this.currentUser.image = fileName;
-  //             this.getCurrentUser();
-  //             resolve();
-  //           }
-  //         });
-  //       } catch (err) {
-  //         reject(err);
-  //       }
-  //     };
-  //     reader.readAsDataURL(file);
-  //   });
-  // }
+  openUpdateModal(email : string) :void{
+    this.bsModalRef = this._modalService.show(UpdateUserComponent, {
+      initialState: {
+        openUpdateModal : true,
+        userEmail : email
+      }
+    })
+  }
 
 
 
 
 
+
+
+
+  checkingImagesInGallery(hasImages : boolean): void{
+    this.areImagesPresentInGallery = hasImages;
+  }
 
 
 }// ends class.

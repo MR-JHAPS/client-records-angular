@@ -1,26 +1,7 @@
-<!-- <mat-sidenav-container class="main-container">
-    <mat-sidenav #sidenav mode="side" closed>
-      <app-side-bar></app-side-bar>
-    </mat-sidenav>
-  
-    <mat-sidenav-content>
-        <app-header (menuToggle)="sidenav.toggle()"></app-header>
-      <div class="main-content">
-        
-      </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
- -->
+
 
 
 <main>
-   
-    <!-- <div class="videoBackground">
-        <video autoplay muted loop id="background-video">
-                <source src="assets/videos/stars.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>     -->
 
             <div class="container py-5">
                 <div class="row">
@@ -61,4 +42,52 @@
                 </div>
             </div>
         
+
+
+
+
+
+
+
+            <div appAnimateOnScroll id="fade-in" class="container py-5">
+                <div class="row">
+                    <!-- Image Container (Left side) -->
+                    <div class="col-12 col-md-6 mb-4">
+                        <div class="imageContaine">
+                            <div class="imageBordr">
+                                <!-- <img class="slide-in img-fluid" src="assets/images/beach.JPG" alt="Image" class="img-fluid"> -->
+                                <!-- [ngStyle]="{'transform': 'translateX(' + position + 'px)', 'transition': 'transform 1s ease-out'}" -->
+                                <img  src="assets/images/beach.JPG" alt="Image" width="200px">
+                            
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Container (Right side) -->
+                    <div class="col-12 col-md-6 mb-4">
+                        <!-- Language Section -->
+                        <div class="language text-end">
+                            <h5>Spring Boot | Angular</h5>
+                        </div>
+
+                        <!-- Profession Section -->
+                        <div class="profession text-end">
+                            <h1>WEB DEVELOPER</h1>
+                        </div>
+
+                        <!-- Description Section -->
+                        <div class="description text-end">
+                            <p>Passion For Learning And Growing Is Never Out Of Fashion.</p>
+                        </div>
+
+                        <!-- About Me Section -->
+                        <div class="aboutMe text-end">
+                            <h5>NERAZ OLI</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div appAnimateOnScroll class="fade-in">Fade animation</div>
 </main>
