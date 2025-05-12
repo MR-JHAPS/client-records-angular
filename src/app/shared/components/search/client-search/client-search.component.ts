@@ -1,13 +1,13 @@
 import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { SearchRequest } from '../../../../core/models/request/searchRequest';
 import { FormControl, FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-client-search',
-  imports: [FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, NgFor],
   templateUrl: './client-search.component.html',
   styleUrl: './client-search.component.css'
 })

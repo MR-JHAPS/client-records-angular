@@ -1,55 +1,24 @@
-.clickable-row {
-    cursor: pointer;
-  }
-  .clickable-row:hover {
-    background-color: #f1f1f1;
-  }
 
-  
-/*-------------------------------------------------- This is for the search container -------------------------------------------------------------------------------*/
-.container>.btn{
-  background-color: var(--mutedOrange);
-  border: none;
-  color:var(--lightShade)
+main{
+  padding:8px;
 }
 
-.container>.btn:hover{
-  background-color: var(--orange);
-}
+/* ISLOADING--- Spinner width. */
 
-/* This is for the table. */
-.clientTable {
-  overflow-x: auto;
-  max-width: 100%;
-}
-
-.header{
-  background-color: var(--primaryColor) !important;
-}
-
-/* <tr class> */
-.header{
-  border: 2px 2px 2px 0px solid var(--orange);
-  
-}
-
-th{
-  background-color: var(--secondaryColor);
-  color: var(--lightShade);
-}
-
-.uncheckIcon{
-  cursor: pointer;
+.spinner-border{
+  width: 3rem !important;
+  height: 3rem !important;
 }
 
 
 
-/* -------------------------------------------------INSERT/DELETE-Multiple------------------------------------------------------------------------------------------------- */
 
-/* This is for the Dynamic Insert Client button -------------------------------------*/
 
+
+
+/* --------------------------------------DYNAMIC INSERT/DELETE-Multiple----------------------------------------------------------- */
 .insertButtonContainer{
-  padding:4px;
+  /* padding:4px; */
 }
 
 .insertButtonContainer>button{
@@ -57,20 +26,20 @@ th{
   width: 50%;
   margin: auto;
   border: none;
-  border-radius: 4px;
-  background-color: var(--orange);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  background-color: var(--secondaryColor);
   color: var(--lightShade);
   padding: 4px;
 }
 
 .insertButtonContainer>button:hover{
-  background-color: var(--mutedOrange);
+  background-color: var(--darkBlue);
   color: var(--lightShade);
 }
 
  /* ------------------- Dynamic multiple-Delete-Button-Container------------ */
   .multipleDeleteButtonContainer{
-    padding:4px;
   }
 
   .multipleDeleteButtonContainer>button{
@@ -85,25 +54,76 @@ th{
 
 
 
+/* ----------------TABLE----------------------------- */
+.clickable-row {
+    cursor: pointer;
+    padding: 40px !important;
+    color: green !important;
+  }
+
+.clickable-row:hover td {
+  background-color: rgb(236, 243, 250) !important;
+}
+  
+
+
+/* This is for the table. */
+.clientTable {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+
+th{
+  color: var(--secondaryColor);
+}
+
+td{
+  color:var(--primaryColor);
+}
+.uncheckIcon{
+  cursor: pointer;
+}
+
+
+
+
+
+/*------------- THIS IS FOR THE CHECKBOX -----------------------*/
+.checkbox{
+  transform: scale(1.5);
+  margin: 5px;
+}
+
+
+
+
 /* -------------------------------------- Update button ------------------------------------------------------------------------------------*/
   .updateButton{
-    background-color: var(--secondaryColor);
+     padding:16px;
     border: none;
-    border-radius: 4px;
-    color: var(--lightShade);  
+    display: flex;
+    flex-direction: row;
+    justify-self: center;
+    border-radius: 50%;
+    background-color: var(--updateButton);  
   }
 
   .updateButton:hover{
     transition-duration: 0.2s;
     background-color: var(--darkBlue);
-    box-shadow: 2px 0.8px 5px var(--orange);
   }
 
 
 /* --------------------------------------------------------- Delete button ------------------------------------------------------------*/
   .deleteButton{
+    padding:16px;
     border: none;
-    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    justify-self: center;
+    border-radius: 50%;
+    background-color: var(--deleteButton);
   }
 
   .deleteButton:hover{
@@ -115,7 +135,7 @@ th{
 
   /* ---------------------------------------------------------Pagination------------------------------------------------------------------- */
 
-  .page-item>.page-link{
+  /* .page-item>.page-link{
     background-color: var(--darkBlue);
     color: var(--lightShade);
     cursor: pointer;
@@ -125,13 +145,13 @@ th{
    .page-item>.one {
     background-color: var(--orange);
     cursor: pointer;
-   }
+   } */
 
 
    /* -------------------------------------- Number Of Contents Per Page ---------------------------------------------------------*/
-  .pageContent>.container-fluid{
+  /* .pageContent>.container-fluid{
     background-color: green;
-    }
+    } */
 
 
 
@@ -146,7 +166,7 @@ th{
 
 
    /* ------------------------------------------SideBar--------------------------------------------------------- */
-
+/* 
    .sidebarButton{
     background-color: aliceblue ;
     border: none;
@@ -160,4 +180,85 @@ th{
 
    .sideBarCloseButton{
     color: green !important;
+   } */
+
+
+
+
+   /* THIS IS FOR THE CLIENT-ACCORDIAN FOR THE MOBILE DISPLAY---------------------- */
+
+   /* This removes the border radius from the mat-panel */
+   .panel{
+    border-radius: 1px !important;
    }
+
+   /* This is the main content displayed in the panel */
+   .panelTitle{
+    font-size: small;
+    font-weight: 500;
+    color : var(--secondaryColor);
+   }
+
+  /* This is the content container */
+  .contentContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  /* These are the Sub-container(1.DateOfBirth: ...  and  2. Postalcode: ....) */
+  .firstContent,.secondContent{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Label inside of subContainers */
+  .label{
+    font-weight: 600;
+    font-size: small;
+    color: var(--lightBlue);
+  }
+
+  /* data inside of subContainers */
+  .data{
+     font-weight: 400;
+    font-size: small;
+    color: var(--lightBlue);
+  }
+
+  /* This is the button container */
+  .buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Creating a little space between the button */
+  .buttons>button{
+    margin: 10px;
+    margin-top: 0px;
+  }
+
+  .buttons .delete{
+    background-color: var(--deleteButton);
+    color:white;
+  }
+
+  .buttons .update{
+    background-color: var(--updateButton);
+    color:white;
+  }
+
+    .buttons .update:active{
+    background-color: var(--lightBlue);
+    transition-duration: 0.5s;
+  }
+
+  .buttons .delete:active{
+    background-color: var(--orange);
+       transition-duration: 0.5s;
+  }

@@ -15,13 +15,18 @@ export class ClientLogService {
   private clientLogEndpoint = API_ENDPOINTS.clientLogApi; // contains all the client's API's
 
 
-  getAllClientLog(pageNumber?: number, pageSize?: number) : Observable<ApiResponseModelPaginated<ClientLogResponse>>{
+  getAllClientLog(pageNumber?: number, pageSize?: number, sortByField?:string, sortDirection?: string) : Observable<ApiResponseModelPaginated<ClientLogResponse>>{
       const url = `${this.apiBaseUrl+this.clientLogEndpoint.getAllClientLog}`;
       let size = pageSize? pageSize : "10";
       let page = pageNumber? pageNumber : "0";
+      let sortBy = sortByField? sortByField : "updatedAt";
+      let direction = sortDirection? sortDirection : "desc"; 
       let  params = new HttpParams()
                       .set("size", size)   
-                      .set("page", page);
+                      .set("page", page)
+                      .set("sortBy", sortBy)
+                      .set("direction", direction);
+                      
         return this._httpClient.get<ApiResponseModelPaginated<ClientLogResponse>>(url, {params});
   }
 

@@ -34,7 +34,7 @@ export class UserProfileComponent implements OnInit{
   @ViewChild(ImageGalleryComponent) imageGallery !: ImageGalleryComponent
 
 
-  baseUrl = API_ENDPOINTS.imageBaseUrl;
+  // baseUrl = API_ENDPOINTS.imageBaseUrl;
   private _userApiService = inject(UserApiServiceService); 
   private _dateConverter = inject(CustomDateConverterService);
   private _toastrService = inject(ToastrService);
@@ -100,7 +100,7 @@ updateProfilePicture(event: Event){
       },
       error : (error)=>{
         console.log("Error updating the profile Picture", error);
-        this._toastrService.error(error);
+        this._toastrService.error("Unable To Update Profile Picture");
       },
       complete : ()=>{
         console.log("Successfuly updated profile image");

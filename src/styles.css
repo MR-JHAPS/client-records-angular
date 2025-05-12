@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+
+
 :root{
     --darkBlue: #112C50;
     --introBackground: #E8E8E8;
@@ -15,6 +17,11 @@
     --accentColor: #EF6602;
     --backgroundColor:  #F5F5F5;
     --textColor: #333333;
+
+
+	--deleteButton:#e53935;
+	--updateButton:#1e88e5;
+
 }
 
 /* ANIMATION DIRECTIVES : */

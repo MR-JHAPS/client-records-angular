@@ -7,6 +7,8 @@ import { ApiLinksDetails } from '../../../../core/models/responseModel/apiLinksD
 import { PaginationComponent } from "../../pagination/pagination/pagination.component";
 import { PaginationServiceService } from '../../../../core/services/paginationService/pagination-service.service';
 import { ToastrService } from 'ngx-toastr';
+import { CustomDateConverterService } from '../../../customDateConverter';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-client-log-table',
@@ -21,6 +23,8 @@ export class ClientLogTableComponent implements OnInit {
   private _toastrService = inject(ToastrService);
   clientLogList : Array<ClientLogResponse>;
   apiPageLink : Array<ApiLinksDetails>;
+  // dateFormatter = inject(CustomDateConverterService);
+  // dateList  : string[] = [] ;
 
 ngOnInit(): void {
   this.getAllClientLogs();
@@ -29,7 +33,7 @@ ngOnInit(): void {
   getAllClientLogs(pageNumber?: number, size?: number): void{
     this._clientLogService.getAllClientLog(pageNumber, size).subscribe({
       next : (response : ApiResponseModelPaginated<ClientLogResponse>)=>{
-        this.clientLogList = response.data.content;
+        this.clientLogList = response.data.content;                
         this.apiPageLink = response.data.links;
         console.log("Getting the clientLog datas.")
       },

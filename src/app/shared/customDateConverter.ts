@@ -1,5 +1,5 @@
-import { formatDate } from "@angular/common";
-import { Injectable } from "@angular/core";
+import { DatePipe, formatDate } from "@angular/common";
+import { inject, Injectable } from "@angular/core";
 import { format } from "date-fns";
 
 @Injectable({
@@ -7,17 +7,20 @@ import { format } from "date-fns";
 })
 export class CustomDateConverterService{
 
+    private datePipe = inject(DatePipe);
+
     private readonly dateFormat = "medium";
     private readonly locale = "en-US";
 
-    public formatLocalDateTime(rawDate: string | Date) : string {
-       if(!rawDate){
-        return "";
-       }
+    public formatLocalDateTime(date: Date) : string {
 
-       const date = (typeof rawDate === 'string') 
-                    ? new Date(rawDate) : rawDate;
-       return formatDate(date, this.dateFormat, this.locale);
+       return this.datePipe.transform(date, 'dd/MM/yyyy HH:mm') ?? '';
+      //  if(!rawDate){
+      //   return "";
+      //  }
+      //  const date = (typeof rawDate === 'string') 
+      //               ? new Date(rawDate) : rawDate;
+      //  return formatDate(date, this.dateFormat, this.locale);
 
 
     }

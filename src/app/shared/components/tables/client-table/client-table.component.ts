@@ -1,8 +1,8 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { ClientApiServiceService } from '../../../../core/services/client-api/client-api-service.service';
 import { ClientResponse } from '../../../../core/models/response/clientResponse';
 import { Router } from '@angular/router';
-import { CommonModule, NgIf } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiLinksDetails } from '../../../../core/models/responseModel/apiLinksDetails';
 import { ApiResponseModelPaginated } from '../../../../core/models/responseModel/apiResponseModelPaginated';
@@ -18,39 +18,45 @@ import { CommunicationServiceService } from '../../../services/communication-ser
 import { Subscription } from 'rxjs';
 import { PaginationComponent } from "../../pagination/pagination/pagination.component";
 import { SearchRequest } from '../../../../core/models/request/searchRequest';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { MaterialModules } from '../../../../material';
+
 
 
 @Component({
   selector: 'app-client-table',
   standalone: true,
-  imports: [CommonModule, FormsModule, ClientSearchComponent, AlertModule, ClientUpdateComponent, PaginationComponent],
+  imports: [
+            CommonModule, FormsModule,
+            ClientSearchComponent, AlertModule,
+            ClientUpdateComponent, PaginationComponent,
+            AccordionModule, MaterialModules
+          ],
   templateUrl: './client-table.component.html',
   styleUrl: './client-table.component.css',
-  providers: [BsModalService, NgIf]
+  providers: [BsModalService, NgIf, NgFor]
 })
 export class ClientTableComponent implements OnInit, OnDestroy {
-  
- 
-  
-
-  // isClientInserted : boolean | null = null;
-
-  bsModalRef?: BsModalRef;
 
   private _toastrService = inject(ToastrService);
   private _clientService = inject(ClientApiServiceService);
   private _router = inject(Router);
   private _modalService = inject(BsModalService);
   private _communicationService = inject(CommunicationServiceService); // for  update message if client update successful.
-
+  bsModalRef?: BsModalRef;
   clientList : Array<ClientResponse>;
   pageLinks : Array<ApiLinksDetails>; // this is for method : toSpecificPage(){} -->i.e: For pagination.
   selectedClients :BulkClientDeleteRequest = new BulkClientDeleteRequest();
   isCheckBoxChecked = false; //for the dynamic insert/delete button.
   updateSubscription : Subscription;
   searchRequest : SearchRequest;
+  isMobile = false; // this stores if the viewing device is mobile/laptop.
+  isLoading = true;
+
+
 
   ngOnInit(): void {
+    this.onResize();
     this.getAllClients();
     this.pageLinks;
 
@@ -63,6 +69,23 @@ export class ClientTableComponent implements OnInit, OnDestroy {
       }
     );
   }
+
+  //This is to check the width of the screen to change table to accordian:
+  @HostListener("window:resize", [])
+  onResize(){
+    this.checkScreen();
+  }
+
+  checkScreen(){
+    this.isMobile = window.innerWidth<600 ;
+  }
+
+  readonly panelOpenState = signal(false);
+
+
+
+
+
 
 
   //Destroying the clientUpdate Subscription to prevent memory leak.
@@ -80,10 +103,12 @@ export class ClientTableComponent implements OnInit, OnDestroy {
         this.clientList = response.data.content;
         //saving the list of (next, previous, last, first) page links in a variable.
         this.pageLinks = response.data.links; 
+        this.isLoading = false;
         console.log(response.data);
       },
       error : (error)=> {
         console.log("Error occured while getting all the clients.", error);
+        this.isLoading = true;
       },
       complete : () => { console.log("All client obtained Successfully.")}
     })
@@ -92,14 +117,17 @@ export class ClientTableComponent implements OnInit, OnDestroy {
 /* -----------------------------Searching Clients -------------------------------------------*/
 
     searchClients(searchRequest: SearchRequest ){
+      this.isLoading = true
       this._clientService.searchQuery(searchRequest).subscribe({
         next : (response : ApiResponseModelPaginated<ClientResponse>)=>{
           this.clientList = response.data.content;
+          this.isLoading = false;
           console.log(this.clientList);
           // this._toastrService.success("Search Complete.")
         },
         error : error => {
           this._toastrService.error("Error! Search failed.")
+          this.isLoading = true;
         },
         complete : ()=>{
           console.log("Search done successfully.")
@@ -180,7 +208,6 @@ openInsertClientModal(): void {
     this.selectedClients = this.selectedClients.includesClientId(clientId) 
       ? this.selectedClients.removeClientId(clientId) 
       : this.selectedClients.addClientId(clientId);
-    
     /* If selectedClients object contains client id , then checkBox is checked  */
     if(this.selectedClients.getClientIdList().length > 0 ){
       this.isCheckBoxChecked=true;

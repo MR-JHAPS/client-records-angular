@@ -1,10 +1,13 @@
-import { environment } from "../../../environments/environment.prod";
+// import { environment } from "../../../environments/environment.prod";
+import { environment } from "../../../environments/environment";
 
 export const API_ENDPOINTS= {
     
 
-    apiBaseUrl : environment.apiUrl,
-    imageBaseUrl : "https://limitless-tor-07059-c4eab57a6fb3.herokuapp.com",
+    // apiBaseUrl : environment.apiUrl,
+        // apiBaseUrl : environment.apiUrl,
+        apiBaseUrl : "http://localhost:8080/api",
+    // imageBaseUrl : "https://limitless-tor-07059-c4eab57a6fb3.herokuapp.com",
 
     publicApi: {
        login : "/public/login",

@@ -1,57 +1,73 @@
-
+<main>
 
 <app-client-search
 (clientSearch)="searchClients($event)"
 />
 
-<!-- <button (click)="printCheckBoxNumbers()">Print</button> -->
-<!-- This is to insert new client -->
 
-<div *ngIf="!isCheckBoxChecked" class="insertButtonContainer mb-3">
+<!-------------------------------------- This is DYNAMIC to insert new client -------------------------------------->
+<div *ngIf="!isCheckBoxChecked" class="insertButtonContainer">
     <button type="button" class="button" (click)="openInsertClientModal()">
         <i class="fas fa-plus me-2"></i> Insert
     </button>
 </div>
-
-<div *ngIf="isCheckBoxChecked" class="multipleDeleteButtonContainer mb-3">
+<!-- This is DYNAMIC to deleteMultiple clients -->
+<div *ngIf="isCheckBoxChecked" class="multipleDeleteButtonContainer">
     <button type="button" class="button btn btn-danger" (click)="openDeleteMultipleClientModal(selectedClients)">
-        <i class="fa-solid fa-trash fa-beat-fade me-2"></i> Delete Multiple
+        <i class="fa-solid fa-trash me-2"></i> Delete Multiple
     </button>
 </div>
 
 
 
 
-
-
-<div class="clientTable">
-    <table class="table table-hover">
+<!-------------------------------------- This table is for Bigger-Screen/Desktop -------------------------------------->
+<div *ngIf="!isMobile" class="clientTable">
+    <table class="table  table-borderless">
 
         <thead >
-            <tr class="header">
+            <tr>
                 <th>
                     <!-- <button class="btn" (click)="resetCheckBox()"> -->
-                        <i class="uncheckIcon fa-solid fa-square-xmark fa-fade fa-xl" (click)="resetCheckBox()"></i>
+                        <i class="uncheckIcon fa-solid fa-square-xmark fa-xl" (click)="resetCheckBox()"></i>
                     <!-- </button> -->
                 </th>
-                <th><b>Id</b></th>
-                <th><b>First-Name</b></th>
-                <th><b>Last-Name</b></th>
-                <th><b>Date-Of-Birth</b></th>
-                <th><b>Postal-Code</b></th>
-                <th><b>Action</b></th>
+                <th><b>ID</b></th>
+                <th><b>FIRST NAME</b></th>
+                <th><b>LAST NAME</b></th>
+                <th><b>DOB</b></th>
+                <th><b>POSTAL CODE</b></th>
+                <th><b>ACTION</b></th>
+                
+                
                 <!-- <th>Delete</th> -->
             </tr>
         </thead>
         
-        <tbody>
-            @for (client of clientList ; track client.id) {
-                <!-- <tr class="clickable-row" (click)="openSelectedClient(client.id)"> -->
-                    <tr class="clickable-row">
-                    <td>
+        
+            <!-- ------------------------------------If client is  still loading ---------------------------------------->
+                      <tr *ngIf="isLoading">
+                        <td colspan="7" class="text-center">
+                            <div>Loading Please Wait a second</div>
+                            <div class="spinner-border" role="status">
+                                
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </td>
+                    </tr>
+                
+
+
+
+                <!-------------------------------------- IF client is Loaded completely -------------------------------------->
+                 <tbody>
+                    @for (client of clientList ; track client.id) {
+                    <tr *ngIf="!isLoading" class="clickable-row" >
+                    <td >
                         <input type="checkbox" 
                         [checked]="selectedClients.includesClientId(client.id)"
-                         (change)="toggleClientSelection(client.id)">
+                         (change)="toggleClientSelection(client.id)"
+                         class="checkbox">
                     </td>
                     <td>{{client.id}}</td>
                     <td>{{client.firstName}}</td>
@@ -61,11 +77,13 @@
 
                     <td class="text-center">
                         <div class="d-flex gap-3 justify-content-start">
-                            <button class="updateButton btn btn-primary" (click)="navigateToUpdatePage(client.id); $event.stopPropagation()">
-                                Update  <i class="fa-solid fa-pen ms-2"></i></button>
+                            <button class="updateButton" (click)="navigateToUpdatePage(client.id); $event.stopPropagation()">
+                               <i class="fa-solid fa-pen" style="color: #ffffff;"></i>
+                            </button>
 
-                            <button class="deleteButton btn btn-danger" (click)="openDeleteSingleClientModal(client.id)">
-                                Delete <i class="fa-solid fa-trash ms-2" ></i></button>
+                            <button class="deleteButton" (click)="openDeleteSingleClientModal(client.id)">
+                               <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                            </button>
                         </div> 
                     </td>
                 
@@ -79,6 +97,76 @@
 
 
 
+
+
+
+
+
+
+
+
+
+<!-- MOBILE : This is Angular-Material-Accordian For smaller-Screen-------------------------------------------------------- -->
+    <section  *ngIf="isMobile" class="tableMobile">
+
+            <button mat-button class="panelTitle" (click)="resetCheckBox()">
+                     <i class="uncheckIcon fa-solid fa-square-xmark fa-small" ></i>
+                      Reset Selection
+            </button>
+
+        @for (client of clientList ; track client.id) {
+        <mat-accordion>
+            <mat-expansion-panel class="panel">
+                <mat-expansion-panel-header  class="panelHeader">
+                <mat-panel-title class="panelTitle" >
+                    <input type="checkbox" 
+                        [checked]="selectedClients.includesClientId(client.id)"
+                         (change)="toggleClientSelection(client.id)"
+                         (click)="$event.stopPropagation()">
+                </mat-panel-title>
+               
+                <mat-panel-title class="panelTitle"> {{client.id}} </mat-panel-title>
+                <mat-panel-title class="panelTitle"> {{client.firstName}} </mat-panel-title>
+                <mat-panel-title class="panelTitle"> {{client.lastName}} </mat-panel-title>
+                <!-- <mat-panel-title class="panelTitle"> 
+                    <button class="btn btn-primary">Update</button>
+                </mat-panel-title>
+                <mat-panel-title class="panelTitle"> 
+                    <button class="btn btn-danger">Delete</button>
+                </mat-panel-title> -->
+                </mat-expansion-panel-header>
+                <div class="contentContainer">
+                        <div class="firstContent">
+                            <span class="label">
+                                Dater Of Birth : 
+                            </span>
+                            <span class="data">{{client.dateOfBirth}}</span>
+                        </div>
+                        
+                        <div class="secondContent">
+                            <span class="label">
+                                Postal Code :
+                            </span>
+                            <span class="data">{{client.postalCode}}</span>
+                        </div>
+                </div>
+                <br>
+                <div class="buttons">
+                    <button mat-raised-button class="update">Update</button>
+                    <button mat-raised-button class="delete"> Delete</button>
+                </div>
+ 
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <!-- <br> -->
+        }
+    </section>  
+
+    
+
+
+
 <!---- (contentSize --emitts number--) is the @Output Emitted from PaginationComponent.
         [pageLinks]="pageLinks" sending to childClass.
 
@@ -89,5 +177,5 @@
 (pageUrl)="toSpecificPage($event)"
 />
 
-
+</main>
 
