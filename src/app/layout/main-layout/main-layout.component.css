@@ -3,3 +3,12 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     /* color:var(--darkBlue); */
 }
+
+
+.menuComponent {
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* make sure it stays above other elements */
+  background-color: var(--darkBlue); /* or match your theme */
+
+}

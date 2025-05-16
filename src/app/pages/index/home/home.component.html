@@ -3,91 +3,150 @@
 
 <main>
 
-            <div class="container py-5">
-                <div class="row">
-                    <!-- Image Container (Left side) -->
-                    <div class="col-12 col-md-6 mb-4">
-                        <div class="imageContainer">
-                            <div class="imageBorder">
-                                <!-- <img class="slide-in img-fluid" src="assets/images/beach.JPG" alt="Image" class="img-fluid"> -->
-                                <!-- [ngStyle]="{'transform': 'translateX(' + position + 'px)', 'transition': 'transform 1s ease-out'}" -->
-                                <img class="slide-in img-fluid" src="assets/images/beach.JPG" alt="Image" >
-                            
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Content Container (Right side) -->
-                    <div class="col-12 col-md-6 mb-4">
-                        <!-- Language Section -->
-                        <div class="language text-end">
-                            <h5>Spring Boot | Angular</h5>
-                        </div>
+    <section class="firstContainer">
 
-                        <!-- Profession Section -->
-                        <div class="profession text-end">
-                            <h1>WEB DEVELOPER</h1>
-                        </div>
+        <!-- left side -->
+        <div class="imageContainer">
+            <img class="slide-in img-fluid" src="assets/images/beach.JPG" alt="Image" >
+        </div>
 
-                        <!-- Description Section -->
-                        <div class="description text-end">
-                            <p>Passion For Learning And Growing Is Never Out Of Fashion.</p>
-                        </div>
 
-                        <!-- About Me Section -->
-                        <div class="aboutMe text-end">
-                            <h5>NERAZ OLI</h5>
-                        </div>
-                    </div>
-                </div>
+        <!--Right side  -->
+        <div appAnimateOnScroll class="detailsContainer fade-in">
+            <div class="language">
+                <h5>SPRING BOOT | ANGULAR</h5>
             </div>
+
+            <div appAnimateOnScroll class="profession fade-in">
+            <h1>
+                WEB <br>
+                DEVELOPER
+                </h1>
+            </div>
+            <div appAnimateOnScroll class="description fade-in">
+                <p>Passion For Learning And Growing Is Never Out Of Fashion. lore</p>
+            </div>
+            <div class="aboutMe">
+                <!-- <h5>NERAZ OLI</h5> -->
+            </div>
+            <div appAnimateOnScroll class="cv">
+                <button class="downloadCvButton btn btn-primary">
+                    Download CV
+                </button>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!------------------ Second Page--------------------------------------------------------------- -->
+    <section appAnimateOnScroll  class="secondContainer fade-in">
+
+        <!-- Left Side -->
+        <div  appAnimateOnScroll class="detailsContainer fade-in">
+            <div appAnimateOnScroll class="projectHeader fade-in">
+               <h2> Client-Management System </h2>
+            </div>
+
+            <div appAnimateOnScroll class="projectDescription fade-in">
+                <p>
+                    All tools to facilitate the management of Client-Data is implemented in this project.
+                    Searching (Categorically| Independently), Pagination, Sorting, CRUD, Role-Based Authentication, Security(JWT Token).
+                </p>    
+            </div>
+
+        </div>
+
+        <!-- right-side -->
+        <div appAnimateOnScroll class="imageContainer fade-in">
+
+            <img src="assets/images/20250305_184552~6.JPG" alt="image">
+        </div>
+
+    </section>
+
+
+    <section class="thirdContainer">
+        <div class="title">
+            SKILLS
+        </div>
+
+        <div class="frontEnd">
+            <h5>FRONT-END</h5>
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>BOOTSTRAP</li>
+                <li>ANGULAR</li>
+                <li>TYPESCRIPT</li>
+            </ul>
+        </div>
+
+        <div class="backEnd">
+            <h5>BACK-END</h5>
+            <ul>
+                <li>JAVA</li>
+                <li>SPRING BOOT</li>
+                <li>SPRING SECURITY</li>
+                <li>SPRING DATA JPA</li>
+                <li>HIBERNATE</li>
+            </ul>
+        </div>
+
+        <div class="dataBase">
+            <h5>DATABASE</h5>
+            <ul>
+                <li>MySQL</li>
+            </ul>
+        </div>
+
+        <div class="tools">
+            <h5>BACK-END</h5>
+            <ul>
+                <li>GITHUB</li>
+                <li>SWAGGER</li>
+                <li>ECLIPSE</li>
+                <li>HIBERNATE</li>
+            </ul>
+        </div>
+
+
+
+
+    </section>
+
+
+
+    <section class="lastContainer">
         
 
 
 
 
 
+    </section>
 
 
-            <div appAnimateOnScroll id="fade-in" class="container py-5">
-                <div class="row">
-                    <!-- Image Container (Left side) -->
-                    <div class="col-12 col-md-6 mb-4">
-                        <div class="imageContaine">
-                            <div class="imageBordr">
-                                <!-- <img class="slide-in img-fluid" src="assets/images/beach.JPG" alt="Image" class="img-fluid"> -->
-                                <!-- [ngStyle]="{'transform': 'translateX(' + position + 'px)', 'transition': 'transform 1s ease-out'}" -->
-                                <img  src="assets/images/beach.JPG" alt="Image" width="200px">
-                            
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Content Container (Right side) -->
-                    <div class="col-12 col-md-6 mb-4">
-                        <!-- Language Section -->
-                        <div class="language text-end">
-                            <h5>Spring Boot | Angular</h5>
-                        </div>
-
-                        <!-- Profession Section -->
-                        <div class="profession text-end">
-                            <h1>WEB DEVELOPER</h1>
-                        </div>
-
-                        <!-- Description Section -->
-                        <div class="description text-end">
-                            <p>Passion For Learning And Growing Is Never Out Of Fashion.</p>
-                        </div>
-
-                        <!-- About Me Section -->
-                        <div class="aboutMe text-end">
-                            <h5>NERAZ OLI</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
 
-            <div appAnimateOnScroll class="fade-in">Fade animation</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- <div appAnimateOnScroll class="fade-in">Fade animation</div> -->
 </main>
