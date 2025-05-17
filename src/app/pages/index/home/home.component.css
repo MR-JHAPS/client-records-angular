@@ -4,7 +4,7 @@ main{
     box-sizing: border-box;
     padding-top:40px;
     margin: 0px;
-    background-color: var(--backgroundColor);
+    background-color: var(--lightShade);
     min-height: 100vh;   
 }
 
@@ -24,6 +24,7 @@ main{
     margin-left: 100px;
     width:400px;
     background-color: var(--darkBlue);
+    
   }
         /* Image */
       .firstContainer>.imageContainer>img{
@@ -121,6 +122,8 @@ main{
   background-color: var(--darkBlue);
   padding:30px;
   padding-top:40px;
+  margin-bottom: 10px;
+  
   display: grid;
   grid-template-columns: 1fr 0.6fr;
   grid-template-areas: "detailsContainer imageContainer";
@@ -163,7 +166,74 @@ main{
       color: var(--lightShade);
     }
 
-    
+    /* --------------THIRD-Page ------------------------------------------------------ */
+
+  .thirdContainer{
+    padding:30px;
+    /* padding-top:40px; */
+    margin-bottom: 50px;
+    background-color: var(--lightShade);
+  }
+
+    /* This is the title-container of third-Container ("SKILLS") */
+    .thirdContainer>.titleContainer{
+      /* background-color: white; */
+      color: var(--orange);
+      padding:1rem;
+    }
+
+      .thirdContainer>.titleContainer>h2{
+        font-weight: bold;
+        font-size: xx-large;
+      }
+
+    .thirdContainer>.detailsContainer{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-areas: "frontEnd" "backEnd" "dataBase" "tools";
+      gap: 3rem;
+      margin-top:3rem;
+    }
+
+      .thirdContainer>.detailsContainer>.frontEnd,.backEnd,.dataBase,.tools{
+        padding:1rem;
+        /* background-color: white; */
+         background-color: var(--lighterShade);
+         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+      }
+
+      /* This is the header of skills (frontEnd, backEnd, dataBase, tools) */
+      .skillsTitle{
+        color: var(--orange);
+        font-weight: bold;
+        font-size: medium;
+      }
+
+      .thirdContainer>.detailsContainer li{
+        list-style: circle;
+        color:var(--darkBlue);
+        font-size: small;
+        letter-spacing: 0.5px;
+        padding:0.5rem;
+      }
+
+
+      .thirdContainer>.detailsContainer>.frontEnd{
+        
+      }
+
+      .thirdContainer>.detailsContainer>.backEnd{
+        
+      }
+
+      .thirdContainer>.detailsContainer>.dataBase{
+        
+      }
+
+      .thirdContainer>.tools{
+        
+      }
 
 
 
@@ -193,24 +263,33 @@ main{
     padding:0px;
     padding-top:40px;
     display: grid;
-    grid-template-rows: 1fr 0.5fr;
+    grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr;
     grid-template-areas: "imageContainer"
     "detailsContainer";
   }
 
+      .firstContainer>.detailsContainer{
+        display: grid;
+        grid-template-rows: 0.5fr 0.3fr 0.2fr 0.1fr 0.3fr;
+        grid-template-areas: "language"
+        "`profession"
+        "description"
+        "aboutMe"
+        "cv";
+      }
   .secondContainer{
     padding:10px;
     padding-top:40px;
     display: grid;
-    grid-template-rows: 0.8fr 0.5fr;
+    grid-template-rows: 1fr 0.6fr;
     grid-template-columns: 1fr;
     grid-template-areas: "detailsContainer" "imageContainer";
   }
 
   .secondContainer>.detailsContainer{
     display: grid;
-    grid-template-rows: 0.5fr 0.5fr;
+    grid-template-rows: 0.3fr 0.5fr;
     grid-template-areas: "projectHeader"
     "projectDescription";
   }
@@ -231,6 +310,16 @@ main{
   }
   
       
+
+  .thirdContainer>.detailsContainer{
+      display: grid;
+      grid-template-rows: 0.5fr 0.5fr 0.5fr 0.5fr;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: "frontEnd" "backEnd" "dataBase" "tools";
+      gap: 10px;
+      /* margin-top:3rem; */
+     
+    }
 
 
 }

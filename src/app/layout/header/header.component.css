@@ -1,30 +1,80 @@
-.active-link{
-  color:var(--lightShade);
-  background-color: var(--mutedOrange);
-  border-radius: 10px !important;
+.navbar-toggler{
+  /* background-color: var(--orange); */
+  box-shadow: none !important;
+  padding:16px;
+  /* border: px solid var(--lightShade) !important; */
+  border: none;
+
 }
 
-a{
-  color: var(--secondaryColor);
-  border-radius: 10px !important;
+.navbar-toggler:active{
+  /* border: 2px solid var(--lighterShade) !important; */
+  background-color: var(--orange);
+  box-shadow: none !important;
+} 
+
+/* separting left menu and right menu */
+@media (min-width:1000px){
+    .collapse{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .rightMenu{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .leftMenu{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
 }
+
 
 .headerContainer{
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+  /* margin:0px;
+  padding:0px; */
+  
 }
 
-a:hover{
-  color: var(--darkBlue);
-}
-
-.active-link:hover{
+h3{
   color: var(--lightShade);
 }
 
 
+.active-link{
+  color:var(--lighterShade);
+  /* background-color: var(--orange); */
+  border-bottom: 4px solid var(--orange);
+  /* border-radius: 4px !important; */
+}
+
+.active-link:hover{
+  color: var(--lightShade) !important;
+}
+
+a{
+  color: var(--lightShade);
+  /* border-radius: 10px !important; */
+}
+
+a:hover{
+  color: var(--orange);
+}
+
+
+
+
+
+
 
 /* When the menu is compacted in small screen */
-@media (max-width : 900px) {
+@media (max-width : 1000px) {
 
   li:hover{
     background-color: var(--lightShade);
@@ -33,10 +83,13 @@ a:hover{
   }
 
   a{
-    color: var(--secondaryColor);
-    border-radius: 10px !important;
+    /* color: var(--li); */
+    /* border-radius: 10px !important; */
     padding-left:20px;
   }
 
+  a:hover{
+  color: var(--darkBlue);
+}
 
 }

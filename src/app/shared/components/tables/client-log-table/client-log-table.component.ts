@@ -7,8 +7,6 @@ import { ApiLinksDetails } from '../../../../core/models/responseModel/apiLinksD
 import { PaginationComponent } from "../../pagination/pagination/pagination.component";
 import { PaginationServiceService } from '../../../../core/services/paginationService/pagination-service.service';
 import { ToastrService } from 'ngx-toastr';
-import { CustomDateConverterService } from '../../../customDateConverter';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-client-log-table',

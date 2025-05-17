@@ -1,7 +1,9 @@
 
 main{
   padding:8px;
+  /* background-color: var(--lightShade); */
 }
+
 
 /* ISLOADING--- Spinner width. */
 
@@ -58,11 +60,10 @@ main{
 .clickable-row {
     cursor: pointer;
     padding: 40px !important;
-    color: green !important;
   }
 
 .clickable-row:hover td {
-  background-color: rgb(236, 243, 250) !important;
+  background-color: var(--lighterShade) !important;
 }
   
 
@@ -71,6 +72,7 @@ main{
 .clientTable {
   overflow-x: auto;
   max-width: 100%;
+  /* background-color: var(--lightShade); */
 }
 
 

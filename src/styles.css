@@ -3,11 +3,14 @@
 
 :root{
     --darkBlue: #112C50;
-    --introBackground: #E8E8E8;
-    --orange: #EF6602;  /* Button links or icons. use minimal */
+    /* --introBackground: #E8E8E8; */
+    /* --introBackground: #E8E8E8; */
+	--orange: #EF6602;  /* Button links or icons. use minimal */
     --mutedOrange: #FF8C42;
     --lightBlue: #4B6F8C;
-    --lightShade : #F5F5F5;
+    --lightShade : #E8E8E8;
+	/* --lightShade : #F5F5F5; */
+	--lighterShade : #F5F5F5;
     /* #FF8C42 */
 
 	--uploadHover:  #faebdd;
@@ -29,8 +32,8 @@
 /* styles.css or component CSS */
 [appAnimateOnScroll] {
 	opacity: 0;
-	transform: translateY(20px);
-	transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+	transform: translateY(40px);
+	transition: opacity 0.6s ease-out, transform 0.8s ease-out;
   }
   
   [appAnimateOnScroll].animate-in {
@@ -39,11 +42,16 @@
   }
   
   /* Add more animation variations as needed */
-  #fade-in { transition: opacity 0.6s ease-out; }
-  .fade-in.animate-in { opacity: 1; }
+  /* .fade-in {
+	 transition: opacity 0.6s ease-out; 
+	} */
+
+  .fade-in.animate-in {
+	 opacity: 1;
+	}
   
-  .slide-left { transform: translateX(20px); }
-  .slide-left.animate-in { transform: translateX(0); }
+  /* .slide-left { transform: translateX(20px); }
+  .slide-left.animate-in { transform: translateX(0); } */
 
 
 
