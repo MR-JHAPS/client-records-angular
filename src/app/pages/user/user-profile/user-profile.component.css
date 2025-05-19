@@ -3,8 +3,8 @@
 
 
 main{
-  min-height: 100vh;
-  margin-bottom: 0px;
+  min-height: 100svh;
+  margin-bottom: 12px;
 }
 
 
@@ -151,7 +151,7 @@ img{
 .galleryContainer{
   padding:10px;
   padding-top:10px;
-  min-height: 30vh;
+  min-height: 40svh;
   margin-top: 20px;
 
 }
@@ -282,6 +282,11 @@ img{
     font-weight: 400;
   }
 
+
+  .galleryContainer{
+    /* margin-bottom: 200px; */
+    /* border:2px solid green; */
+  }
 
 
 }

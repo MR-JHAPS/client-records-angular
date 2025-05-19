@@ -18,19 +18,24 @@ import { ClientLogTableComponent } from './shared/components/tables/client-log-t
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { UserTableComponent } from './shared/components/tables/user-table/user-table.component';
 import { ClientBinComponent } from './shared/components/tables/client-bin/client-bin.component';
+import { IndexLayoutComponent } from './layout/index-layout/index-layout.component';
 
 export const routes: Routes = [
-    {path: "", component : MainLayoutComponent,
+    {path: "", component : IndexLayoutComponent,
         children : [
             { path:"",  redirectTo: "home", pathMatch: "full" }, //inside Main Layout
             {path: "home", component: HomeComponent},
             {path: "login", component: LoginComponent},
             {path: "register", component: RegisterComponent},
             {path: "check", component:CheckComponent},
+        ]
+    },
 
-            {path: "user",
+
+            { path: "user",
             canActivate : [userGuardGuard],
             canActivateChild : [userGuardGuard], /* Calling a AuthGuard class. */
+            component : MainLayoutComponent,
             children : [ 
                     {path: "user-home",component: UserHomeComponent,
                         children : [
@@ -50,6 +55,7 @@ export const routes: Routes = [
             {path: "admin",
             canActivate : [adminGuardGuard],
             canActivateChild : [adminGuardGuard], /* Calling a AuthGuard class. */
+            component : MainLayoutComponent,
             children : [ 
                     {path: "admin-home",
                      component: AdminHomeComponent,
@@ -71,13 +77,9 @@ export const routes: Routes = [
             {path: "forbidden", component: ForbiddenComponent},
             {path: "error", component: ErrorComponent},/* This should always be in the end */
             {path: "**", component: ErrorComponent}
-            
-        ]
-    }
-]
-    
+          
    
-    
+        ]
 
     
 
