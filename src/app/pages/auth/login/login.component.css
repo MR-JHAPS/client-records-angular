@@ -1,0 +1,145 @@
+/* main{
+    background-color: var(--lightShade);
+} */
+
+
+.mainContainer{
+    margin-top: 10svh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* -------------------------------- This is for the detailsContents of the LoginPage -------------------------------------------- */
+
+.info{
+    /* background-color: var(--lighterShade); */
+    padding:1rem;
+}
+
+    .info>.infoHeader{
+        margin-bottom: 2rem;
+    }
+
+        .info>.infoHeader>h5{
+            color:var(--orange);
+            font-weight: 600;
+            letter-spacing: 0.4px;
+        }
+
+    .info>.description{
+
+    }
+
+        .info>.description>p{   
+            color: var(--darkBlue);
+        }   
+
+            .me{
+                font-weight: bold;
+            }
+     .info>.credentialsDetails{
+        /* background-color: var(--orange); */
+        margin-top: 4rem;
+        color: var(--orange);
+        font-weight: 600;
+    }
+
+        .info>.credentialsDetails>ul{
+
+        }
+
+            .info>.credentialsDetails>ul>li{
+                color: var(--darkBlue);
+                font-style: italic;
+            }
+
+
+
+
+    
+/* ----------------------------------This is for the form----------------------------------------------------------------- */
+
+    .formContainer{
+        min-height: 50svh;
+        margin-right:0px;
+        margin-top: 0px; 
+    }
+
+
+        .headerContainer{
+            background-color: var(--secondaryColor);
+            padding-top:8px;
+            letter-spacing: 0.4px;
+            width:100%;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            overflow: hidden;
+        }
+
+            .headerContainer>h4{
+                color: var(--lighterShade);
+                text-align: center;
+                font-weight: bold;
+            }
+
+        form{
+            height: 100%;
+            margin-top: 0px; 
+            width: 500px;
+            background-color: #fff !important;
+            border-bottom-right-radius:10px;
+            border-bottom-left-radius:10px;
+        }
+
+            input[type=email]{
+                min-width: max-content;
+                margin-bottom:2rem;
+                /* border: 5px solid green; */
+            }
+
+
+            .buttonContainer>button{
+                background-color: var(--secondaryColor);
+                border: none;
+                width: 200px;
+            }
+
+            .buttonContainer>button:hover{
+                background-color: var(--darkBlue);
+            }
+
+            .registerButton{
+                background-color: var(--mutedOrange);
+                border: none;
+                width: 200px;
+            }
+
+            .registerButton:hover{
+                background-color: var(--orange);
+            }
+
+
+@media (max-width: 700px){
+
+    .mainContainer{
+        margin-bottom: 4rem;
+        margin-top: 10svh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+
+    .credentialsDetails{
+        display: none;
+    }
+
+     form{
+        width: 100%;
+        }
+
+
+
+
+}

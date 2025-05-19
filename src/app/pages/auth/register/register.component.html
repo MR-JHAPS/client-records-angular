@@ -1,60 +1,96 @@
-@if (errorStatus) {
-    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
-        <strong>Error!</strong> {{registrationErrorMessage}}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeErrorMessage()"></button>
-      </div>
-}
+<!-- This is to show the dynamic loading progress bar -->
 
+<!-- <div class="container-fluid mt-4">
+   
 
-<div class="container-fluid text-center mt-4 mb-4">
-    <h3 class="text-primary text-primary">Register User</h3>
-</div>
+    <div *ngIf="isProgressBarActive" class="progress w-100">
+            <div class="mb-2 w-100">
+                    <progressbar class="bar progress-striped active w-100"  [striped]="false" [value]="progressValue"
+                        [max]="100"
+                        [animate]="true"
 
-
-<form class="container bg bg-light  p-5">
-
-    <div class="form-floating mb-3 ">
-        <input type="email" class="form-control" id="floatingInput"  name="email" placeholder="name@example.com" 
-                                        [(ngModel)]="userObj.email">
-                                       
-        <label for="floatingInput">Email address</label>
-    </div>
-    <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password"
-                [(ngModel)]="userObj.password">                          
-        <label for="floatingPassword">Password</label>
+                        
+                        >
+                        {{progressValue}}%
+                    </progressbar>
+             </div>
     </div>
 
-    <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" name="confirmPassword" placeholder="Confirm Password"
-                [(ngModel)]="userObj.confirmPassword">                          
-        <label for="floatingPassword">Confirm Password</label>
-    </div>
+     <button class="btn btn-primary mt-3" (click)="loadProgressBar()">
+            start Progress bar
+    </button>
+</div> -->
 
-    <div class="container-fluid text-center mt-3">
-        <button class="btn btn-primary w-50" (click)="onRegister()" id="floatingPassword" placeholder="Password">Register</button>
-    </div>
-</form>
+<main>
+    <div class="mainContainer container">
+
+    
+
+        <!-- This is the info shown in login page -->
+        <section class="info">
+
+            <article class="infoHeader">
+                <h5>
+                New User? Register here.
+                </h5>
+            </article>
+
+            <article class="description">
+                <p>
+                    Created By <span class="me">Neraz Oli</span>.
+                </p>
+                
+            </article>
+
+        </section>
 
 
+        <!-- This is the formContainer  -->
+        <section class="formContainer">
+            <div class="headerContainer">
+                <h4>
+                    Registration Form
+                </h4>
+            </div>
 
+            <form class="container shadow  p-5">
 
-<!-- <form class="container-fluid bg bg-light col-5 p-5">
+                <div class="form-floating mb-4 ">
+                    <input type="email" class="form-control" id="floatingInput"  name="email" placeholder="name@example.com" 
+                                                    [(ngModel)]="userObj.email">
+                                                
+                    <label for="floatingInput">Email address</label>
+                </div>
+                <div class="form-floating mb-4">
+                    <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password"
+                                                    [(ngModel)]="userObj.password">
+                                                
+                    <label for="floatingPassword">Password</label>
+                </div>
 
-    <div class="form-floating mb-3 ">
-        <input type="email" class="form-control" id="floatingInput"  name="email" placeholder="name@example.com" 
-                                        [(ngModel)]="userObj.email">
-                                       
-        <label for="floatingInput">Email address</label>
-    </div>
-    <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password"
-                                        [(ngModel)]="userObj.password">
-                                       
-        <label for="floatingPassword">Password</label>
-    </div>
+                <div class="form-floating mb-4">
+                    <input type="password" class="form-control" id="floatingPassword" name="confirmPassword" placeholder="Confirm Password"
+                            [(ngModel)]="userObj.confirmPassword">                          
+                    <label for="floatingPassword">Confirm Password</label>
+                </div>
 
-    <div class="container-fluid text-center mt-3">
-        <button class="btn btn-primary w-50" (click)="onRegister()" id="floatingPassword" placeholder="Password">Register</button>
-    </div>
-</form> -->
+                <div class="buttonContainer container text-center">
+                    <button class="btn btn-primary" (click)="onRegister()" id="floatingPassword" placeholder="Password">
+                        <i class="fa-solid fa-user-plus me-2"></i>
+                        Register
+                    </button>
+                </div>
+
+                <hr class=" w-75 mx-auto">
+                <!-- this is for the regiter option -->
+                <div class="text-center mt-3">
+                    <button class="registerButton btn btn-primary" routerLink="/register"> 
+                        <i class="fa-solid fa-right-to-bracket me-1"></i>
+                        Return to Login Page
+                    </button>
+                </div>
+            </form>
+        
+        </section> <!-- ends formContainer -->
+    </div> <!-- Ends mainContainer -->
+</main>

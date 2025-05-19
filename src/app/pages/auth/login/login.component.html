@@ -1,3 +1,6 @@
+
+
+
 @if (registrationStatus) {
    <!--  <div class="alert alert-success text-center" role="alert">
       <p>Success! User registered Successfully.</p> <button (click)="closeRegistrationMessage()">close</button> 
@@ -11,27 +14,78 @@
 
 
 
-<div class="container-fluid text-center mt-4 mb-4">
-    <h3 class="text-primary text-primary">Login Page</h3>
-</div>
 
 
-<form class="container bg bg-light  p-5">
 
-    <div class="form-floating mb-3 ">
-        <input type="email" class="form-control" id="floatingInput"  name="email" placeholder="name@example.com" 
-                                        [(ngModel)]="user.email">
-                                       
-        <label for="floatingInput">Email address</label>
-    </div>
-    <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password"
-                                        [(ngModel)]="user.password">
-                                       
-        <label for="floatingPassword">Password</label>
-    </div>
+<div class="mainContainer container">
 
-    <div class="container-fluid text-center mt-3">
-        <button class="btn btn-primary" (click)="onLogin()" id="floatingPassword" placeholder="Password">Log In</button>
-    </div>
-</form>
+    <!-- This is the info shown in login page -->
+    <section class="info">
+
+        <article class="infoHeader">
+            <h5>
+                Hey there! Welcome To My Project.
+            </h5>
+        </article>
+
+        <article class="description">
+            <p>
+                Created By <span class="me">Neraz Oli</span>.
+            </p>
+            
+        </article>
+
+        <article class="credentialsDetails">
+            Admin Login Details : <br>
+            <ul>
+                <li>Email : admin&#64;gmail.com <br></li>
+                <li>Password : 1111</li>
+            </ul>
+        </article>
+
+    </section>
+
+
+    <!-- This is the formContainer  -->
+     <section class="formContainer">
+        <div class="headerContainer">
+            <h4>
+                Login Form
+            </h4>
+        </div>
+
+        <form class="container shadow  p-5">
+
+            <div class="form-floating mb-4 ">
+                <input type="email" class="form-control" id="floatingInput"  name="email" placeholder="name@example.com" 
+                                                [(ngModel)]="user.email">
+                                            
+                <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating mb-4">
+                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password"
+                                                [(ngModel)]="user.password">
+                                            
+                <label for="floatingPassword">Password</label>
+            </div>
+
+            <div class="buttonContainer container text-center">
+                <button class="btn btn-primary" (click)="onLogin()" id="floatingPassword" placeholder="Password">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    Log In
+                </button>
+            </div>
+
+            <hr class=" w-75 mx-auto">
+            <!-- this is for the regiter option -->
+             <div class="text-center mt-3">
+                <button class="registerButton btn btn-primary" routerLink="/register"> 
+                    <i class="fa-solid fa-user-plus me-2"></i>
+                     Register
+                </button>
+            </div>
+        </form>
+       
+    </section> <!-- ends formContainer -->
+</div> <!-- Ends mainContainer -->
+

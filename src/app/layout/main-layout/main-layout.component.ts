@@ -1,6 +1,5 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { MaterialModules } from '../../material';
-import { SideBarComponent } from "../side-bar/side-bar.component";
 import { MatSidenav } from '@angular/material/sidenav';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "../header/header.component";
@@ -8,16 +7,17 @@ import { AuthServiceService } from '../../core/auth/services/auth-service.servic
 import { filter, Subscription } from 'rxjs';
 import { CommonModule, NgIf } from '@angular/common';
 import { SubMenuComponent } from "../sub-menu/sub-menu.component";
+import { FooterComponent } from "../../shared/components/footer/footer.component";
 
 @Component({
   selector: 'app-main-layout',
-  imports: [MaterialModules, SideBarComponent, RouterOutlet, HeaderComponent, NgIf, CommonModule, SubMenuComponent],
+  imports: [MaterialModules, RouterOutlet, HeaderComponent, NgIf, CommonModule, SubMenuComponent, FooterComponent],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.css'
 })
 export class MainLayoutComponent implements OnInit {
 
-  @ViewChild('sidenav') sidenav!: MatSidenav;
+  // @ViewChild('sidenav') sidenav!: MatSidenav;
 
 private _authService = inject(AuthServiceService);
   private _router = inject(Router);

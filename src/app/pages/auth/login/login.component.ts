@@ -1,16 +1,17 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PublicApiServiceService } from '../../../core/services/public-api/public-api-service.service';
 import { AuthServiceService } from '../../../core/auth/services/auth-service.service';
 import { UserAuthRequest } from '../../../core/models/request/userAuthRequest';
 import { ApiResponseModel } from '../../../core/models/responseModel/apiResponseModel';
 import { ToastrService } from 'ngx-toastr';
+import { FooterComponent } from "../../../shared/components/footer/footer.component";
 
 
 @Component({
   selector: 'app-login',
-  imports: [ FormsModule],
+  imports: [FormsModule, FooterComponent, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

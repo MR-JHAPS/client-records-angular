@@ -5,10 +5,17 @@ import { PublicApiServiceService } from '../../../core/services/public-api/publi
 import { Router } from '@angular/router';
 import { UserRegisterRequest } from '../../../core/models/request/userRegisterRequest';
 import { ApiResponseModel } from '../../../core/models/responseModel/apiResponseModel';
+import { ToastrService } from 'ngx-toastr';
+import { ProgressbarConfig, ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { CommonModule } from '@angular/common';
+
+
+
+
 
 @Component({
   selector: 'app-register',
-  imports: [FormsModule],
+  imports: [FormsModule, ProgressbarModule ,CommonModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -16,8 +23,12 @@ export class RegisterComponent {
   private _router : Router = inject(Router);   
   private _publicService : PublicApiServiceService = inject(PublicApiServiceService); 
   userObj : UserRegisterRequest = new UserRegisterRequest();
+  _toastrService = inject(ToastrService);
   public errorStatus = false;
   public registrationErrorMessage = "";
+  progressValue = 0;
+  isProgressBarActive = false;
+  intervalId : any;
 
 
   onRegister():void{
@@ -25,13 +36,18 @@ export class RegisterComponent {
       next: (response: ApiResponseModel<string>) => {
         console.log(response.data);
         //routes to LoginPage after successful registration  with @param regustrationStatus=true;
+        this._toastrService.success("User Registered Successfully.");
+        setTimeout(()=>{
+          this._router.navigateByUrl("/login");
+        }, 2000)
         this.toLoginPage({registrationStatus: true});
       },
       error: (error) => {
         console.log("error registering new user : ", error);
-        this.errorStatus = true;
+        // this.errorStatus = true;
+        this._toastrService.error("Error! Registration Failed");
         //if error is 500 show custom message else show the message from the apiResponse.
-        this.registrationErrorMessage = (error.code=500) ? "Unable to Register, Something Went Wrong" : error.error.message; 
+        // this.registrationErrorMessage = (error.code=500) ? "Unable to Register, Something Went Wrong" : error.error.message; 
       },
       complete: () => console.log("Completed Successfully.") 
 
@@ -46,12 +62,34 @@ export class RegisterComponent {
   }
 
   //Method: Closes the Error message shown if the registration is failed.
-  closeErrorMessage(){
-    this.errorStatus = false;
-  }
+  // closeErrorMessage(){
+  //   this.errorStatus = false;
+  // }
+
+loadProgressBar(){
+  this.isProgressBarActive = true;
+  this.startProgressBar();
+}
 
 
+/* This is to generate the dynamic progress bar of given time interval. */
+startProgressBar():void{
+  const totalDuration = 5000;
+  const stepTime = 50;
+  const stepValue = 100/(totalDuration/stepTime);
 
+  this.progressValue = 0;
+
+  setInterval(()=>{
+    this.progressValue = this.progressValue + stepValue;
+    if(this.progressValue>=100){
+      this.progressValue = 100;
+      clearInterval(this.intervalId);
+    }
+  },stepTime)
+
+
+}
 
 
 

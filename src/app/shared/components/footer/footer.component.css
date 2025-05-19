@@ -1,4 +1,8 @@
-.container-fluid{
-    background-color: var(--secondaryColor);
-    color:var(--lightShade)
+.footerContainer{
+    background-color: var(--lighterShade);
+    color:var(--darkBlue);
+    box-shadow: 3 -4px 12px rgba(0, 0, 0, 0.1); /* Top shadow */
+    padding: 20px;
+    /* background-color: #f8f8f8; */
 }
+

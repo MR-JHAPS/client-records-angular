@@ -54,22 +54,26 @@
 
 .navbar-brand>h3{
   color: var(--lightShade);
-  font-weight: bolder;
+  font-weight: bold;
   width:fit-content;
   margin: auto;
+  letter-spacing: 0.5px;
 }
 
 
-
+/* this is ul > li > a. */
 .nav-link{
   letter-spacing: 0.5px;
 }
 
-.active-link{
+.nav-link:focus{
   color:var(--lightShade);
+}
+
+.active-link{
+  color:var(--white);
   font-weight: bolder;
   border-bottom: 3px solid var(--orange);
- 
 }
 
 .active-link:hover{
@@ -77,7 +81,7 @@
 }
 
 a{
-  color: var(--lighterShade);
+  color: var(--lightShade);
 }
 
 a:hover{
@@ -117,7 +121,7 @@ a:hover{
         }
 
         .active-link{
-          color:var(--orange);
+          color:var(--white);
           padding-left:1rem;
           /* width: max-content; */
         }

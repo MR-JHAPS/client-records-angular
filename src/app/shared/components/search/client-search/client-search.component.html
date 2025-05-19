@@ -1,10 +1,18 @@
 
-
+<!-- 
 <section class="searchContainer container-fluid my-5 w-75">
     <div class="row justify-content-center bg bg-light pt-5 ">
-      <div class="col-md-8">
+      <div class="col-md-8"> -->
           <!-- Search Box -->
-          <div class="input-group mb-3 shadow-sm">
+          <!-- <div class="input-group mb-3 shadow-sm">
+            <input type="text"
+            [formControl]="searchControl"
+            class="form-control form-control-lg" placeholder="Search clients..." aria-label="Search" 
+            [(ngModel)]="clientSearchRequest.searchQuery"
+            
+            > -->
+
+             <!-- <div class="input-group mb-3 shadow-sm">
             <input type="text"
             [formControl]="searchControl"
             class="form-control form-control-lg" placeholder="Search clients..." aria-label="Search" 
@@ -14,10 +22,10 @@
             <button class="searchButton btn btn-primary px-4" type="button" (click)="emitClientSearch()" >
               <i class="bi bi-search me-2"></i> Search
             </button>
-          </div>
+          </div> -->
         
         <!-- Filter Options -->
-          <div class="bg-light p-3 rounded-3 mb-4">
+          <!-- <div class="bg-light p-3 rounded-3 mb-4">
 
             <div class="d-flex flex-wrap align-items-center justify-content-between">
               <span class="text-muted small mb-2 mb-md-0">Filter by:</span>
@@ -48,17 +56,64 @@
           </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
 
   
 
 
+<section class="mainSearchContainer">
+
+    <article class="searchBoxContainer">
+      <input type="text"
+            [formControl]="searchControl"
+            class="searchBox form-control form-control-lg" placeholder="Search clients..." aria-label="Search" 
+            [(ngModel)]="clientSearchRequest.searchQuery">
+      <button class="searchButton btn btn-primary" type="button" (click)="emitClientSearch()" >
+        <i class="bi bi-search me-2"></i> Search
+      </button>
+    </article>
+
+    <article class="filter">
+        <div class="column1">
+            <div class="any">
+              <input class="form-check-input" type="radio" name="filterOptions" id="all" value="searchQuery" 
+              [(ngModel)]="clientSearchRequest.searchBy" checked>
+              <label class="form-check-label" for="all">Any</label>
+            </div>
+
+            <div class="firstName">
+              <input class="form-check-input" type="radio" name="filterOptions" id="firstName" value="firstName"
+              [(ngModel)]="clientSearchRequest.searchBy">
+              <label class="form-check-label" for="firstName">First Name</label>
+            </div>
+        </div>
+
+        <div class="column2">
+            <div class="lastName">
+                  <input class="form-check-input " type="radio" name="filterOptions" id="lastName" value="lastName"
+                  [(ngModel)]="clientSearchRequest.searchBy">
+                  <label class="form-check-label" for="lastName">Last Name</label>
+            </div>
+
+            <div class="postalCode">
+              <input class="form-check-input" type="radio" name="filterOptions" id="postalCode" value="postalCode"
+              [(ngModel)]="clientSearchRequest.searchBy">
+              <label class="form-check-label" for="postalCode">Postal Code</label>
+            </div>
+        </div>
+    </article>
 
 
+
+
+
+</section>
 
 
   
+
+
 
 
 
