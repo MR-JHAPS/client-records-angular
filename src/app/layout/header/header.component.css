@@ -1,8 +1,6 @@
 .navbar-toggler{
-  /* background-color: var(--orange); */
   box-shadow: none !important;
   padding:16px;
-  /* border: px solid var(--lightShade) !important; */
   border: none;
 
 }
@@ -35,36 +33,50 @@
 }
 
 
-.headerContainer{
+/* .headerContainer{
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
-  /* margin:0px;
-  padding:0px; */
   
+} */
+
+.navbar{
+  padding-left:20px;
+  padding-top : 20px;
 }
+
+.navbar-brand{
+    font-weight: bolder;
+  }
 
 h3{
   color: var(--lightShade);
+  font-weight: bolder;
 }
 
 
+
+.nav-link{
+  letter-spacing: 0.5px;
+}
+
 .active-link{
-  color:var(--lighterShade);
-  /* background-color: var(--orange); */
+  color:var(--lightShade);
+  font-weight: bolder;
   border-bottom: 4px solid var(--orange);
-  /* border-radius: 4px !important; */
+ 
 }
 
 .active-link:hover{
-  color: var(--lightShade) !important;
+  color: var(--orange) !important;
+  
 }
 
 a{
-  color: var(--lightShade);
-  /* border-radius: 10px !important; */
+  color: var(--lighterShade);
 }
 
 a:hover{
   color: var(--orange);
+   transition-duration: 0.3s;
 }
 
 
@@ -75,21 +87,31 @@ a:hover{
 
 /* When the menu is compacted in small screen */
 @media (max-width : 1000px) {
+  .navbar{
+    padding-left:0px;
+    padding-top : 5px;
+  }
 
   li:hover{
-    background-color: var(--lightShade);
     transition-duration: 0.5s;
     border-radius: 10px !important;
   }
 
-  a{
-    /* color: var(--li); */
-    /* border-radius: 10px !important; */
-    padding-left:20px;
+
+  .navbar-nav{
+    padding:1rem;
   }
 
-  a:hover{
-  color: var(--darkBlue);
-}
+  
+  .active-link{
+    color:var(--lightShade);
+    padding-left:1rem;
+    
+  }
+
+  /* "ClientRecords" left padding is 0  */
+  .navbar-brand{
+    padding-left: 0px;
+  }
 
 }
