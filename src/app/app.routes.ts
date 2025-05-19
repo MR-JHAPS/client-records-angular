@@ -22,7 +22,7 @@ import { ClientBinComponent } from './shared/components/tables/client-bin/client
 export const routes: Routes = [
     {path: "", component : MainLayoutComponent,
         children : [
-            { path:"", component: HomeComponent }, //inside Main Layout
+            { path:"",  redirectTo: "home", pathMatch: "full" }, //inside Main Layout
             {path: "home", component: HomeComponent},
             {path: "login", component: LoginComponent},
             {path: "register", component: RegisterComponent},

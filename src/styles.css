@@ -17,7 +17,6 @@
 	--uploadBackground:   #fdf9f2; 
     --primaryColor:#112C50;
     --secondaryColor: #2E5A88;  
-    --accentColor: #EF6602;
     --backgroundColor:  #F5F5F5;
     --textColor: #333333;
 
@@ -52,6 +51,29 @@
   
   /* .slide-left { transform: translateX(20px); }
   .slide-left.animate-in { transform: translateX(0); } */
+
+
+
+/* FOR TOASTR MESSAGES--------------------------------------------- */
+
+	.toast-top-right {
+		top: 68px !important; /* adjust this based on your .menuComponent height */
+		/* left: 50%; */
+		/* transform: translateX(-50%); */
+		z-index: 1060; /* higher than navbar if needed */
+	}
+
+	@media (max-width: 650px){
+		.toast-top-right {
+			top: 60px !important; /* adjust this based on your .menuComponent height */
+			left: 50%;
+			transform: translateX(-50%);
+			z-index: 1060; /* higher than navbar if needed */
+		}
+	}
+
+	
+
 
 
 

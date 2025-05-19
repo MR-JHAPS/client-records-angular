@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit{
   
   public registrationStatus = false;
   public registrationMessage ="";
-  public errorStatus = false;
     
 
   ngOnInit(): void {
@@ -58,8 +57,8 @@ export class LoginComponent implements OnInit{
           this._authService.updateAuthState(this.token);
         },   
         error : (error) =>{
+          this._toastrService.error("Error! Unable to Login");
           console.log("something went wrong : " + error)
-          this.errorStatus=true;
         },
         complete : () => {
           console.log("completed")
@@ -72,7 +71,6 @@ export class LoginComponent implements OnInit{
 
 closeRegistrationMessage(){
   this.registrationStatus = false;
-  this.errorStatus = false;
 }
 
 
