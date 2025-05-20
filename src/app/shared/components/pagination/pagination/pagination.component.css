@@ -1,10 +1,47 @@
   /* ---------------------------------------------------------Pagination------------------------------------------------------------------- */
+  .pagination{
+    border:none !important;
+  }
 
   .page-item>.page-link{
-    background-color: var(--darkBlue);
+    /* background-color: var(--orange); */
     color: var(--lightShade);
     cursor: pointer;
-    border: 1px solid var(--lightShade);
+    /* border: 1px solid var(--lightShade); */
+    border: none !important;
+  }
+
+  .page-item>.page-link.first, .page-item>.page-link.last{
+    background-color: var(--darkBlue);
+  }
+
+   /* .page-item>.page-link.first:hover, .page-item>.page-link.last :hover{
+    background-color: var(--lightShade);
+  } */
+
+/* .page-item>.page-link:hover .first,.last{
+    background-color: var(--lightShade);
+  } */
+
+
+  .page-item>.page-link.prev, .page-item>.page-link.next{
+    background-color: var(--orange);
+    border-radius: 0px !important;
+    padding: 0.4rem 1rem;
+  }
+
+
+
+  .page-item>.page-link:active{
+    background-color: var(--mutedOrange) !important;
+  }
+
+  .nextPrev{
+    /* width:100px; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 0px !important;
   }
 
    .page-item>.one {
@@ -14,7 +51,40 @@
 
 
    /* -------------------------------------- Number Of Contents Per Page ---------------------------------------------------------*/
-  .pageContent>.container-fluid{
-    background-color: green;
-    }
+   .outerContainer{
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
 
+   }
+
+      .labelContainer{
+          text-align: center;
+          padding:0.3rem;
+      }
+
+      .labelContainer>label{
+        color: var(--darkBlue);
+      }
+
+      .contentContainer{
+        text-align: center;
+        padding:0.3rem;
+      }
+
+        .contentContainer>select{
+          text-align: center;
+          width: 100px;
+          height: 2rem;
+          border: none !important;
+        }
+
+        .contentContainer>select>option{
+          text-align: center !important;
+        }
+
+  

@@ -1,1 +1,19 @@
-<p>error works!</p>
+
+<!-- This container is for the error-404  -->
+<div *ngIf="(errorCode==='404')" class="error404 container">
+    <h3>
+       Page Not Found!
+        ERROR-404
+    </h3>
+</div>
+
+
+
+
+<!-- This container is for the error-500  -->
+<div *ngIf="(errorCode==='500')" class="error500 container">
+    <h3>
+        Internal Server Error!
+        ERROR-500
+    </h3>
+</div>

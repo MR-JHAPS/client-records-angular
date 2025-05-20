@@ -75,7 +75,7 @@ export const routes: Routes = [
 
 
             {path: "forbidden", component: ForbiddenComponent},
-            {path: "error", component: ErrorComponent},/* This should always be in the end */
+            {path: "error/:code", component: ErrorComponent},/* This should always be in the end */
             {path: "**", component: ErrorComponent}
           
    

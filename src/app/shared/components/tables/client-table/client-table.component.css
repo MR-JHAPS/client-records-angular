@@ -1,15 +1,27 @@
 
 main{
-  padding:8px;
-  /* background-color: var(--lightShade); */
+  padding:1rem;
 }
 
 
 /* ISLOADING--- Spinner width. */
 
+
+
+.loader{
+  background-color: var(--white);
+}
+
 .spinner-border{
   width: 3rem !important;
   height: 3rem !important;
+  background-color: var(--white) !important;
+}
+
+.loadingMessage{
+  padding: 1rem;
+  font-size: 16px;
+  color: var(--darkBlue);
 }
 
 
@@ -30,14 +42,14 @@ main{
   border: none;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  background-color: var(--secondaryColor);
-  color: var(--lightShade);
+  background-color: var(--orange);
+  color: var(--lighterShade);
   padding: 4px;
 }
 
 .insertButtonContainer>button:hover{
-  background-color: var(--darkBlue);
-  color: var(--lightShade);
+  background-color: var(--orange);
+  color: var(--darkBlue);
 }
 
  /* ------------------- Dynamic multiple-Delete-Button-Container------------ */
@@ -72,16 +84,22 @@ main{
 .clientTable {
   overflow-x: auto;
   max-width: 100%;
-  /* background-color: var(--lightShade); */
 }
 
 
 th{
+  padding-top:1rem;
+  padding-left: 20px;
   color: var(--secondaryColor);
+  font-size: 16px;
 }
 
 td{
   color:var(--primaryColor);
+  font-size: 14px;
+  border-bottom: 1px solid var(--lightShade);
+  padding-left: 20px;
+
 }
 .uncheckIcon{
   cursor: pointer;
@@ -135,64 +153,53 @@ td{
 
 
 
-  /* ---------------------------------------------------------Pagination------------------------------------------------------------------- */
-
-  /* .page-item>.page-link{
-    background-color: var(--darkBlue);
-    color: var(--lightShade);
-    cursor: pointer;
-    border: 1px solid var(--lightShade);
-  }
-
-   .page-item>.one {
-    background-color: var(--orange);
-    cursor: pointer;
-   } */
-
-
-   /* -------------------------------------- Number Of Contents Per Page ---------------------------------------------------------*/
-  /* .pageContent>.container-fluid{
-    background-color: green;
-    } */
 
 
 
+   /* THIS IS FOR THE CLIENT-ACCORDIAN FOR THE MOBILE DISPLAY----------------------------------------------------------- */
+      /* --This is when the accordian is loading in small screen--- */
+      
+      .panelContainer{
+          /* background-color: coral;
+          border: 2px solid green; */
+      }
+
+      .loadingPanel{
+        
+      }
+
+      .loadingPanelHeader{
+        animation: waveMotion 2s infinite ease-in-out;
+      }
 
 
 
+      
 
+  /* THis is when the content is loaded in small screen------------- */
+     
+      /* This is to add the margin between the mat-accordian. */
+    
+    .mobileResetContainer{
+      background-color: var(--lighterShade);
+      margin-bottom: 8px;
+    }
 
+    .resetButton{
+      color: var(--secondaryColor);
+      letter-spacing: 0.5px;
+    }
 
+    .mobileContainer{
+      margin-bottom:8px;
+     } 
 
-
-
-
-   /* ------------------------------------------SideBar--------------------------------------------------------- */
-/* 
-   .sidebarButton{
-    background-color: aliceblue ;
-    border: none;
-    box-shadow: 0.6px 1px 1px rgb(60, 55, 64);
-   }
-
-   .sidebarHeader{
-    background-color: var(--orange) !important;
-
-   }
-
-   .sideBarCloseButton{
-    color: green !important;
-   } */
-
-
-
-
-   /* THIS IS FOR THE CLIENT-ACCORDIAN FOR THE MOBILE DISPLAY---------------------- */
-
-   /* This removes the border radius from the mat-panel */
-   .panel{
-    border-radius: 1px !important;
-   }
+     /* this is to change the background color and remove box shadow of matAccordian panel */
+    ::ng-deep .panel {
+      box-shadow: none !important;
+      border-radius: 0px !important;
+      background-color: var(--lighterShade) !important;
+    }
 
    /* This is the main content displayed in the panel */
    .panelTitle{
@@ -202,11 +209,20 @@ td{
    }
 
   /* This is the content container */
-  .contentContainer{
+  .contentContainer1{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    padding: 0.5rem;
+  }
+
+  .contentContainer2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
   }
 
   /* These are the Sub-container(1.DateOfBirth: ...  and  2. Postalcode: ....) */

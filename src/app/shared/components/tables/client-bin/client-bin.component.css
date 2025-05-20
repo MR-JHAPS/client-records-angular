@@ -1,9 +1,30 @@
 .mainContainer{
     overflow: scroll !important;
+    padding:1rem;
+}
+
+
+.clickable-row {
+    cursor: pointer;
+  }
+
+.clickable-row:hover td {
+  background-color: var(--lighterShade) !important;
 }
 
 th{
-    background-color: var(--lightShade);
+    padding-top: 2rem ;
+    padding-bottom: 2rem;
+    padding-left: 20px;
     font-weight: bold;
     letter-spacing: 0.5;
+    font-size: 16px;
+    color: var(--secondaryColor);
+}
+
+td{
+    font-size: 14px;
+    padding-left: 20px;
+    border-bottom: 1px solid var(--lightShade);
+    color:var(--secondaryColor);
 }

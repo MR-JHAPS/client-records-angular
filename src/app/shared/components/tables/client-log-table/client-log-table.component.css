@@ -2,18 +2,139 @@
     overflow: scroll !important;
 }
 
-th{
-    background-color: var(--lightShade);
-    font-weight: bold;
-    letter-spacing: 0.5;
-    /* text-align: center; */
+.clickable-row {
+    cursor: pointer;
+    padding: 40px !important;
 }
 
-/* td{
-    text-align: center;
+.clickable-row:hover td {
+  background-color: var(--lighterShade) !important;
 }
- */
+
+th{
+    font-weight: bold;
+    letter-spacing: 0.5;
+    font-size: 16px;
+    color: var(--secondaryColor);
+}
+
+td{
+  color:var(--primaryColor);
+  font-size: 14px;
+  padding:16px;
+}
+
 .modType{
-    background-color: var(--lightShade);
+    color: var(--mutedOrange);
     text-align: center;
+    font-weight: bold;
+    letter-spacing: 0.4px;
+    font-style: italic;
 }
+
+.modType.header{
+    color: var(--orange);
+    font-style: normal;
+        
+}
+
+
+/* -----THIS IS FOR THE MOBILE/SMALL SCREEN-------------------- */
+
+.mobileContainer{
+    /* background-color: green !important; */
+    padding: 1rem !important;
+    /* border:2px solid green; */
+}
+
+    .cardContainer{
+        padding: 0.5rem;
+        background-color: var(--lighterShade);
+        margin-bottom: 10px;   
+    }
+
+    .row1,.row2,.row3,.row4{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding:0.5rem;
+
+            font-size: 13px;
+            color: var(--secondaryColor);
+            font-weight: light;
+            letter-spacing: 0.1px;
+    }
+
+    .row5{
+        color: darkgrey;
+        text-align: right;
+        font-size: 11px;
+        font-weight: light;
+        font-style: italic;
+        letter-spacing: 0.2px;
+        padding:0.5rem;
+        }
+
+        /* This is for the  ID span-text */
+        .id{
+            font-weight: bold;
+        }
+
+        /* This is for the modification Type span-text */
+        .modTypeMobile{
+            color:var(--orange);
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        
+        .row1{
+            /* background-color: aqua; */
+        }
+
+        .row2{
+            /* background-color: azure; */
+            
+        }
+
+        .row3{
+            /* background-color: bisque; */
+        }
+
+        .row4{
+            /* background-color: cadetblue; */
+            
+        }
+
+        
+        /* ---------------THESE ARE FOR THE ANIMATIONS AND THE DYNAMIC BUTTON.----------------------- */
+
+        .buttonContainer{
+        width: 100%;
+        /* padding: 0 1rem; */
+        /* margin-top: 0.5rem; */
+        }
+
+        .toggleButton{
+            border: none;
+            border-radius: 4px;
+            padding: 0.1rem;
+            background-color: var(--lighterShade);
+            color: var(--secondaryColor);
+        }
+
+        .showDetails{
+            max-height: 100px;
+            opacity: 1;
+            overflow: hidden;
+            transition:
+                max-height 0.4s ease-in,   /* expand faster */
+                opacity 0.4s ease-in;
+        }
+
+        .hideDetails{
+            max-height: 10px;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.4s ease, opacity 0.4s ease;
+        }

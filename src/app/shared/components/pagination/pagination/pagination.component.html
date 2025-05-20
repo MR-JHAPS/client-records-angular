@@ -1,27 +1,23 @@
 <!-- This is the PAGINATION COMPONENT -->
-<div class=" d-flex justify-content-center mt-5">
-    <nav aria-label="...">
-        <ul class="pagination">
+<div class="paginationContainer d-flex justify-content-center mt-5 ">
+    <nav aria-label="... ">
+        <ul class="pagination shadow">
             <li class="page-item" >
-                <a class="page-link" (click)="changingRelToUrl('first')">FirstPage</a>
+                <a class="page-link first" (click)="changingRelToUrl('first')">FirstPage</a>
             </li>
             
-            <li class="page-item " >
-                <a class="page-link" (click)="changingRelToUrl('prev')"> &laquo; </a>
-            </li>
-
-           <!--  <li *ngFor="let page of pageNumbers"
-                (click)="goToPage(page)"
-                [class.active]="page === currentPage" class="page-item active">
-                <a class="one page-link" (click)="changingRelToUrl('first')" > {{ page }} </a>
-            </li> -->
-       
-            <li class="page-item" >
-                <a class="page-link" (click)="changingRelToUrl('next')">  &raquo; </a>
-            </li>
+           <span class="nextPrev">
+                <li class="page-item " >
+                    <a class="page-link prev" (click)="changingRelToUrl('prev')"> &laquo; </a>
+                </li>
+        
+                <li class="page-item" >
+                    <a class="page-link next" (click)="changingRelToUrl('next')">  &raquo; </a>
+                </li>
+            </span>
 
             <li class="page-item" >
-                <a class="page-link" (click)="changingRelToUrl('last')">Last</a>
+                <a class="page-link last" (click)="changingRelToUrl('last')">Last</a>
             </li>
 
         </ul>
@@ -30,16 +26,23 @@
 
 
 <!-- This is for Selecting Number Of Client Contents Per Page -->
-<section class="pageContent container-fluid  mb-2 p-2 text-center">
-    
-    <label class="me-3" for="contentNumber">Content Per Page </label>
+<section class="outerContainer">
+    <div class="labelContainer">
+        <label for="contentNumber">Page-Size </label>
+    </div>
 
-    <select class="col-1 p-1 text-center bg bg-light text-dark" id="contentNumber" [(ngModel)]="contentSizeSelf"
-    (change)="onContentSizeChange()">  
-       <!-- generateContentSize is a method that generates the value for content size. it return array of number. -->
-        @for (size of getcontentSize(); track size ) {
-        <option value={{size}} > {{size}} </option>
-        }
-    </select>
+    <div class="contentContainer">
+        <select class="shadow" id="contentNumber" [(ngModel)]="contentSizeSelf"
+        (change)="onContentSizeChange()">  
+        <!-- generateContentSize is a method that generates the value for content size. it return array of number. -->
+            @for (size of getcontentSize(); track size ) {
+            <option value={{size}} > {{size}} </option>
+            }
+        </select>
+    </div>
 
 </section>
+
+
+
+
