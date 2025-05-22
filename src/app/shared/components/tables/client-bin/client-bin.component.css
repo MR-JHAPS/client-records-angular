@@ -1,8 +1,34 @@
+
+main{
+  /* padding-top:1rem; */
+  background-color: var(--lighterShade);
+}
+
+
 .mainContainer{
     overflow: scroll !important;
     padding:1rem;
+    background-color: var(--lighterShade);
 }
 
+
+.header{
+  background-color: var(--lighterShade);
+  opacity: 0.9;
+  margin-bottom: 0px;
+  position: sticky;
+  top: 60px;
+  z-index: 100; /* make sure it stays above other elements */
+  width: 100%;
+}
+
+.header>p{
+  padding: 1rem;
+  color: var(--secondaryColor);
+  margin-bottom: 0px;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 22px;
+}
 
 .clickable-row {
     cursor: pointer;
@@ -28,3 +54,116 @@ td{
     border-bottom: 1px solid var(--lightShade);
     color:var(--secondaryColor);
 }
+
+
+
+
+/* ---FOR SMALLER SCREEEN............................................. */
+
+@media (max-width:650px){
+
+
+  .header{
+  padding: 1rem;
+  background-color: var(--lighterShade);
+  opacity: 0.9;
+  margin-bottom: 0px;
+   position: sticky;
+  top: 60px;
+  z-index: 100; /* make sure it stays above other elements */
+  width: 100%;
+
+}
+
+
+}
+.mobileContainer{
+      margin-bottom:8px;
+     } 
+
+     /* this is to change the background color and remove box shadow of matAccordian panel */
+    ::ng-deep .panel {
+      box-shadow: none !important;
+      border-radius: 0px !important;
+      background-color: var(--white) !important;
+    }
+
+   /* This is the main content displayed in the panel */
+   .panelTitle{
+    font-size: small;
+    font-weight: 500;
+    color : var(--secondaryColor);
+   }
+
+  /* This is the content container */
+  .contentContainer1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+  }
+
+  .contentContainer2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+  }
+
+  /* These are the Sub-container(1.DateOfBirth: ...  and  2. Postalcode: ....) */
+  .firstContent,.secondContent{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Label inside of subContainers */
+  .label{
+    font-weight: 600;
+    font-size: small;
+    color: var(--lightBlue);
+  }
+
+  /* data inside of subContainers */
+  .data{
+     font-weight: 400;
+    font-size: small;
+    color: var(--lightBlue);
+  }
+
+  /* This is the button container */
+  .buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Creating a little space between the button */
+  .buttons>button{
+    margin: 10px;
+    margin-top: 0px;
+  }
+
+  .buttons .delete{
+    background-color: var(--deleteButton);
+    color:white;
+  }
+
+  .buttons .update{
+    background-color: var(--updateButton);
+    color:white;
+  }
+
+    .buttons .update:active{
+    background-color: var(--lightBlue);
+    transition-duration: 0.5s;
+  }
+
+  .buttons .delete:active{
+    background-color: var(--orange);
+       transition-duration: 0.5s;
+  }

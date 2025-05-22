@@ -1,6 +1,7 @@
 
 main{
   padding:1rem;
+  background-color: var(--lighterShade);
 }
 
 
@@ -37,18 +38,18 @@ main{
 
 .insertButtonContainer>button{
   display: block;
-  width: 50%;
+  width: 10rem;
   margin: auto;
   border: none;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  background-color: var(--orange);
-  color: var(--lighterShade);
-  padding: 4px;
+  background-color: var(--lighterShade);
+  color: var(--secondaryColor);
+  padding: 1rem;
 }
 
 .insertButtonContainer>button:hover{
-  background-color: var(--orange);
+  background-color: var(--lightShade);
   color: var(--darkBlue);
 }
 
@@ -58,12 +59,20 @@ main{
 
   .multipleDeleteButtonContainer>button{
     display: block;
-    width: 50%;
+    width: 16rem;
     margin: auto;
     border: none;
-    border-radius: 4px;
-    color: var(--lightShade);
-    padding: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    background-color: var(--lighterShade);
+    color: var(--deleteButton);
+    padding: 1rem;
+  }
+
+  .multipleDeleteButtonContainer>button:hover{
+    background-color: var(--deleteButton);
+    color: var(--lighterShade);
+    opacity: 0.9;
   }
 
 
@@ -95,7 +104,7 @@ th{
 }
 
 td{
-  color:var(--primaryColor);
+  color:var(--secondaryColor);
   font-size: 14px;
   border-bottom: 1px solid var(--lightShade);
   padding-left: 20px;
@@ -181,7 +190,7 @@ td{
       /* This is to add the margin between the mat-accordian. */
     
     .mobileResetContainer{
-      background-color: var(--lighterShade);
+      background-color: var(--white);
       margin-bottom: 8px;
     }
 
@@ -198,7 +207,7 @@ td{
     ::ng-deep .panel {
       box-shadow: none !important;
       border-radius: 0px !important;
-      background-color: var(--lighterShade) !important;
+      background-color: var(--white) !important;
     }
 
    /* This is the main content displayed in the panel */

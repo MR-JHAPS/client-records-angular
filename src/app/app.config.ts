@@ -7,6 +7,7 @@ import { authInterceptorInterceptor } from './core/interceptors/auth-interceptor
 import { provideToastr } from 'ngx-toastr';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { NoImageDirective } from './shared/directives/noImageDirective/no-image.directive';
 
 
 export const appConfig: ApplicationConfig = {

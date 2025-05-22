@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { ApiResponseModel } from '../../models/responseModel/apiResponseModel';
 import { RoleResponse } from '../../models/response/roleResponse';
 import { RoleSaveRequest } from '../../models/request/roleSaveRequest';
+import { ApiResponseModelPaginated } from '../../models/responseModel/apiResponseModelPaginated';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,9 @@ export class RoleApiService {
   _roleEndpoints = API_ENDPOINTS.roleApi;
 
 
-  getAllRoles() : Observable<ApiResponseModel<RoleResponse>>{
+  getAllRoles() : Observable<ApiResponseModel<RoleResponse[]>>{
     const url = `${this._baseUrl+this._roleEndpoints.getAllRoles}`;
-    return this._httpClient.get<ApiResponseModel<RoleResponse>>(url);
+    return this._httpClient.get<ApiResponseModel<RoleResponse[]>>(url);
   } 
 
 

@@ -1,5 +1,33 @@
+
+
+main{
+  /* padding:1rem; */
+  background-color: var(--lighterShade);
+}
+
+
+.mainHeader{
+  background-color: var(--lighterShade);
+  opacity: 0.9;
+  margin-bottom: 0px;
+  position: sticky;
+  top: 60px;
+  z-index: 100; /* make sure it stays above other elements */
+  width: 100%;
+}
+
+.mainHeader>p{
+  padding: 1rem;
+  color: var(--secondaryColor);
+  margin-bottom: 0px;
+  font-size: 22px;
+  font-family: 'Inter', sans-serif !important;
+}
+
 .mainContainer{
     overflow: scroll !important;
+    padding:1rem;
+    padding-top: 0;
 }
 
 .clickable-row {
@@ -16,12 +44,17 @@ th{
     letter-spacing: 0.5;
     font-size: 16px;
     color: var(--secondaryColor);
+    padding-left: 20px;
+    padding-top:2rem;
+    padding-bottom: 2rem;
 }
 
 td{
-  color:var(--primaryColor);
+  color:var(--secondaryColor);
   font-size: 14px;
-  padding:16px;
+  padding:1rem;
+  padding-left: 20px;
+  border-bottom: 1px solid var(--lightShade);
 }
 
 .modType{

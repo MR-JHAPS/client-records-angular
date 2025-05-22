@@ -1,6 +1,8 @@
 .modalContainer{
     border: none !important;
     border-radius: 4px solid var(--lightShade) !important;
+    /* background-color: green !important;
+    opacity: 0.3; */
 }
 
 

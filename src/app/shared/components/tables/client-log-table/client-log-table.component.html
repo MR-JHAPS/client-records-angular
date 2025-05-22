@@ -1,94 +1,106 @@
-<div *ngIf="!isMobile" class="mainContainer mt-5">
-    <table class="table table-borderless">
-        <thead >
-            <tr >
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Postal Code</th>
-                <th>DOB</th>
-                <th class="modType header">Modification Type</th>
-                <th>Mod By</th>
-                <th>Logged On</th>
-                
-            </tr>
-        </thead>
+<main>
 
     
-        <tbody>
-            @for (client of clientLogList; track client.id) {
-                <tr *ngIf="!isLoading" class="clickable-row">
-                    <td> {{client.id}} </td>
-                    <td> {{client.firstName}} </td>
-                    <td> {{client.lastName}} </td>
-                    <td> {{client.postalCode}} </td>
-                    <td> {{client.dateOfBirth}} </td>
-                    <td class="modType"> {{client.modificationType}} </td>
-                    <td>{{client.userEmail}}</td>
-                    <td>{{client.updatedAt}}</td>
+    <div class="mainHeader text-center">
+        <p>CLIENT-LOG</p>
+    </div>
+
+
+    <div *ngIf="!isMobile" class="mainContainer mt-2">
+        <table class="table table-borderless">
+            <thead >
+                <tr >
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Postal Code</th>
+                    <th>DOB</th>
+                    <th class="modType header">Modification Type</th>
+                    <th>Mod By</th>
+                    <th>Logged On</th>
+                    
                 </tr>
-            }
-        </tbody>
-    </table>  
-</div>
+            </thead>
+
+        
+            <tbody>
+                @for (client of clientLogList; track client.id) {
+                    <tr *ngIf="!isLoading" class="clickable-row">
+                        <td> {{client.id}} </td>
+                        <td> {{client.firstName}} </td>
+                        <td> {{client.lastName}} </td>
+                        <td> {{client.postalCode}} </td>
+                        <td> {{client.dateOfBirth}} </td>
+                        <td class="modType"> {{client.modificationType}} </td>
+                        <td>{{client.userEmail}}</td>
+                        <td>{{client.updatedAt}}</td>
+                    </tr>
+                }
+            </tbody>
+        </table>  
+    </div>
 
 
 
 <!-- This is for the mobile Screen----------------- -->
 
-<section *ngIf="isMobile" class="mobileContainer">
-    @for (client of clientLogList; track client.id) {
-        <article class="cardContainer shadow ">
-            <div class="row1">
-                <span class="id">Id : {{client.id}} </span>
-                <span class="modTypeMobile">Modification-Type: {{client.modificationType}} </span>
-            </div>
+    <section *ngIf="isMobile" class="mobileContainer">
+        @for (client of clientLogList; track client.id) {
+            <article class="cardContainer shadow ">
+                <div class="row1">
+                    <span class="id">Id : {{client.id}} </span>
+                    <span class="modTypeMobile">Modification-Type: {{client.modificationType}} </span>
+                </div>
 
-            <div class="row2">
-                <span>First Name : {{client.firstName}} </span>
-                <span>Last Name : {{client.lastName}} </span>
-            </div>
+                <div class="row2">
+                    <span>First Name : {{client.firstName}} </span>
+                    <span>Last Name : {{client.lastName}} </span>
+                </div>
 
-            <div [class.showDetails]="client.id===expandedClientId" [class.hideDetails]="client.id!==expandedClientId">
-                    <div class="row3">
-                        <span>Postal Code : {{client.postalCode}} </span>
-                        <span>DOB : {{client.dateOfBirth}} </span>
-                    </div>
-                    <div class="row4">
-                        <span> Modified By : {{client.userEmail}} </span>
-                    </div>
-                    <div class="row5">
-                        <!-- <span> Modified By : {{client.userEmail}} </span> -->
-                        <span>Modified At : {{client.updatedAt}} </span>
-                    </div>
-            </div>
+                <div [class.showDetails]="client.id===expandedClientId" [class.hideDetails]="client.id!==expandedClientId">
+                        <div class="row3">
+                            <span>Postal Code : {{client.postalCode}} </span>
+                            <span>DOB : {{client.dateOfBirth}} </span>
+                        </div>
+                        <div class="row4">
+                            <span> Modified By : {{client.userEmail}} </span>
+                        </div>
+                        <div class="row5">
+                            <!-- <span> Modified By : {{client.userEmail}} </span> -->
+                            <span>Modified At : {{client.updatedAt}} </span>
+                        </div>
+                </div>
 
-            <div class="buttonContainer">
-                <button class="toggleButton w-100" (click)="toggleDetails(client.id)">
-                    
-                    <i
-                        class="fa-solid"
-                        [ngClass]="client.id === expandedClientId ? 'fa-angle-up' : 'fa-angle-down'"
-                    ></i>
-                    <!-- Details -->
-                </button>
-            </div>
+                <div class="buttonContainer">
+                    <button class="toggleButton w-100" (click)="toggleDetails(client.id)">
+                        
+                        <i
+                            class="fa-solid"
+                            [ngClass]="client.id === expandedClientId ? 'fa-angle-up' : 'fa-angle-down'"
+                        ></i>
+                        <!-- Details -->
+                    </button>
+                </div>
 
-        </article>
-    }
-    
-</section>
-
-
+            </article>
+        }
+        
+    </section>
 
 
 
 
 
 
-<!-- This is the pagination -->
-<app-pagination
-    [pageLinks]="apiPageLink"
-    (pageUrl)="toSpecificPage($event)"
-    (contentSize)="setContentPerPage($event)"
-/>
+
+
+    <!-- This is the pagination -->
+    <app-pagination
+        [pageLinks]="apiPageLink"
+        (pageUrl)="toSpecificPage($event)"
+        (contentSize)="setContentPerPage($event)"
+    />
+
+
+
+</main>

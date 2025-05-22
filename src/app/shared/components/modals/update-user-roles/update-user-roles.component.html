@@ -1,0 +1,126 @@
+<div  class="modalContainer modal-content">
+    
+        <div  class="header modal-header">
+            <h4 class="modal-title pull-left">Edit User Info</h4>
+            <button type="button" class=" btn-close close pull-right" aria-label="Close" (click)="_modalService.hide()">
+                <span aria-hidden="true" class="closeButton visually-hidden">&times;</span>
+            </button>
+        </div>
+    
+        <div class="modalBody modal-body">
+            
+            <section class="row g-3">
+                <div class="col ">
+                    <label class="form-label  ps-2" for="email">Email</label>
+                    <input type="email" class="placeHolder form-control" placeholder="Email" aria-label="Email" id="email"
+                    [(ngModel)]="userAdmin.email">
+                    
+                </div>
+
+                  <div class="col ">
+                    <label class="form-label  ps-2" for="email">Roles</label>
+                    <input type="email" class="placeHolder form-control" placeholder="Email" aria-label="Email" id="email"
+                    [(ngModel)]="userAdmin.roles">
+                    
+                </div>
+            </section>
+
+
+            <div class="roleLabel p-4">
+               {{ getSelectedRolesLabel() }}
+            </div>    
+
+
+
+
+            <section class="row g-3 mt-4">
+                <div class="col">
+                    <label class="form-label ps-2" for="roles">Roles</label>
+
+                    <div class="selectContainer">
+                        <button
+                            id="roles"
+                            class="toggleButton shadow"
+                            type="button"
+                            (click)="onOptionClick()"
+                        >
+                            {{rolesList[0]?.role}}
+                            <i
+                            class="fa-solid"
+                            [ngClass]="isHidden ? 'fa-angle-down' : 'fa-angle-up'"
+                            ></i>
+                        </button>
+
+                        <div [ngClass]="{ hide: isHidden, show: !isHidden }" class="optionContainer dropdownMenu">
+                            @for (role of rolesList; track role.id) {
+                                <div  class="optionContents">
+                                    <input
+                                        type="checkbox"
+                                        [checked]="roleRequest.roles.includes(role.role)"
+                                        (change)="toggleRole(role.role)"
+                                        [id]="'role_' + role.id"
+                                    />
+                                    <label [for]="'role_' + role.id">{{ role.role }}</label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+             <!-- <section class="row g-3 mt-4">
+                <div class="col">
+                    <label class="form-label ps-2" for="roles">Roles</label>
+                <div class="selectContainer w-100">
+                    <ul>    
+                        <button id="roles" class="toggleButton w-100" (click)="onOptionClick()">
+                            {{rolesList[0].role}}
+                            <i
+                                class="fa-solid"
+                                [ngClass]="!isHidden ? 'fa-angle-up' : 'fa-angle-down'"
+                                ></i>
+                        </button>
+                        <div [class.hide]="isHidden" [class.show]="!isHidden">
+                            @for (role of rolesList; track role.id) {
+                                <div>
+                                    <div class="check">
+                                        <input type="checkbox" 
+                                        [checked]="roleRequest.roles.includes(role.role)"
+                                        (change)="toggleRole(role.role)">
+                                    </div>
+
+                                    <div class="roles">
+                                        <li>{{role.role}}</li>
+                                    </div>
+                                </div>
+                              
+                            }
+                        </div>
+                    </ul>
+                </div>
+              
+                </div>
+            </section> -->
+           
+
+
+            <section class="buttons row g-3 mt-3">
+                <div *ngIf="!isLoading" class="col ">
+                    <button class="button btn btn-success w-100" (click)="onUpdateClick(userAdmin.id)"> Update </button>  
+                </div>
+
+                <div *ngIf="isLoading" class="col ">
+                    <button  class="btn btn-success w-100" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Loading...
+                    </button>
+                </div>
+
+                <div class="col">
+                    <button class="button btn btn-danger w-100" (click)="_modalService.hide()"> Cancel </button>
+                </div>
+            </section>
+
+        </div>
+    </div>

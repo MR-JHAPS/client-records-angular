@@ -7,6 +7,8 @@ import { UserAdminResponse } from '../../models/response/userAdminResponse';
 import { ApiResponseModelPaginated } from '../../models/responseModel/apiResponseModelPaginated';
 import { SearchRequest } from '../../models/request/searchRequest';
 import { errorContext } from 'rxjs/internal/util/errorContext';
+import { RoleSaveRequest } from '../../models/request/roleSaveRequest';
+import { RoleRequest } from '../../models/request/roleRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -67,8 +69,9 @@ searchUserByEmail(searchRequest : SearchRequest) : Observable<ApiResponseModel<U
 }//ends method
 
 
-updateUserRole(){
-
+updateUserRole(userId: number, roleRequest: RoleRequest): Observable<ApiResponseModel<string>>{
+  const url = `${this.baseUrl}${this.adminApi.updateUserRole(userId)}`;
+  return this._httpClient.put<ApiResponseModel<string>>(url, roleRequest);
 }
 
 updateCurrentAdmin(){
@@ -81,7 +84,13 @@ deleteCurrentAdmin(){
 
 
 
-
+ getRequiredPage(pageHref: string): Observable<ApiResponseModelPaginated<UserAdminResponse>>{
+   /* if the url is provided directly */
+   /* if(!pageHref){
+       return throwError(()=> new Error("Error Unable to find the pageHref: url"))
+    } */
+    return this._httpClient.get<ApiResponseModelPaginated<UserAdminResponse>>(pageHref);
+  }
 
 
 }//ends class

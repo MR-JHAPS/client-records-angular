@@ -1,80 +1,216 @@
+<main>
+
+    <!-- This is the search component for the user -->
+    <app-user-search
+        (userSearch)="searchUser($event)"
+    />
 
 
-<app-user-search
-    (userSearch)="searchUser($event)"
-/>
 
 
-<div class="clientTable">
-    <table class="table table-hover">
-
-        <thead >
-            <tr class="header">
-                
-                <th><b>Id</b></th>
-                <th><b>Email</b></th>
-                <th><b>Roles</b></th>
-                <th><b>Created On</b></th>
-                <th><b>Updated On</b></th>
-                <th><b>Action</b></th>
-            </tr>
-        </thead>
-        
-        <tbody>
-            @for (user of userList ; track user.id) {
-                <!-- <tr class="clickable-row" (click)="openSelectedClient(client.id)"> -->
-                    <tr class="clickable-row">
-                    
-                    <td>{{user.id}}</td>
-                    <td>{{user.email}}</td>
-                    <td>{{user.roles}}</td>
-                    <td>{{user.createdOn}}</td>
-                    <td>{{user.updatedOn}}</td>
+    <!-------------------------------------- This is DYNAMIC to insert new User -------------------------------------->
+    <div  class="insertButtonContainer">
+        <button type="button" class="button" (click)="null">
+            <i class="fas fa-plus fa-lg me-2"></i> Create User
+        </button>
+    </div>
 
 
-                    <td class="text-center">
-                        <div class="d-flex gap-3 justify-content-start">
-                            <button class="updateButton btn btn-primary" >
-                                Update  <i class="fa-solid fa-pen ms-2"></i></button>
 
-                            <button class="deleteButton btn btn-danger">
-                                Delete <i class="fa-solid fa-trash ms-2" ></i></button>
-                        </div> 
-                    </td>
-                
+    
+    <!-------------------------------------- This table is for Bigger-Screen/Desktop -------------------------------------->
+
+    
+    <div *ngIf="!isMobile" class="userTable">
+        <table class="table table-borderless">
+
+            <thead >
+                <tr>
+                    <th><b>ID</b></th>
+                    <th></th>
+                    <th><b>Email</b></th>
+                    <th><b>Roles</b></th>
+                    <th><b>Created On</b></th>
+                    <th><b>UpdateOn</b></th>
+                    <th><b>Action</b></th>
                 </tr>
+            </thead>
+                <!-- ------------------------------------If client is  still loading for big screen---------------------------------------->
+                        <tr *ngIf="isLoading">
+                            <td colspan="8" class="loader text-center">
+
+                                <div class="loadingMessage">Loading Please Wait a second</div>
+                                <div class="spinner-border" role="status">
+                                    
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- <div *ngIf="isLoading" class="loader ">
+                            <div class="loadingMessage">Loading Please Wait a second</div>
+                                <div class="spinner-border" role="status">
+                                    
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                        </div> -->
+                    <!-------------------------------------- IF client is Loaded completely for big screen -------------------------------------->
+                    <tbody>
+                        @for (user of userList ; track user.id) {
+                        <tr *ngIf="!isLoading" class="clickable-row" >
+                    
+                        <td>{{user.id}}</td>
+                        <td>
+                            <img class="profileImageIcon" 
+                                appNoImage
+                                src="{{user.profileImage}}"
+                                alt="image">
+                        </td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.roles}}</td>
+                        <td>{{user.createdOn | dateConverter}}</td>
+                        <td>{{user.updatedOn | dateConverter}}</td>
+
+                        <td class="text-center">
+                            <div class="d-flex gap-3 justify-content-start">
+                                <button class="updateButton" (click)="updateButtonClick(user.id); $event.stopPropagation()">
+                                <i class="fa-solid fa-pen" style="color: #ffffff;"></i>
+                                </button>
+
+                                <button class="deleteButton" (click)="deleteUserAsAdmin(user.id)">
+                                <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                                </button>
+                            </div> 
+                        </td>
+                    
+                    </tr>
+                }
+            </tbody>
+
+
+        </table>
+    </div>
 
 
 
-                    <!-- <td class="text-center">
-                        <div class="d-flex gap-3 justify-content-start">
-                            <button class="updateButton btn btn-primary" (click)="navigateToUpdatePage(client.id); $event.stopPropagation()">
-                                Update  <i class="fa-solid fa-pen ms-2"></i></button>
-
-                            <button class="deleteButton btn btn-danger" (click)="openDeleteSingleClientModal(client.id)">
-                                Delete <i class="fa-solid fa-trash ms-2" ></i></button>
-                        </div> 
-                    </td>
-                
-                </tr> -->
-            }
-        </tbody>
-
-
-    </table>
-</div>
 
 
 
-<!---- (contentSize --emitts number--) is the @Output Emitted from PaginationComponent.
-        [pageLinks]="pageLinks" sending to childClass.
 
-------------->
-<!-- <app-pagination
+
+
+    <!-- MOBILE : This is Angular-Material-Accordian For smaller-Screen-------------------------------------------------------- -->
+    <section  *ngIf="isMobile" class="tableMobile">
+       
+            <!------------- If the page is still loading for mobile devices/small screen---------------  -->
+                    <div *ngIf="isLoading" class="panelContainer col-13">
+
+                        <div class="container p-5 text-center">
+                            
+                             <div class="loadingMessage">Loading Please Wait a second</div>
+                            <div class="spinner-border" role="status"></div>
+
+                        </div>
+
+                    </div>
+
+
+        <!------------- If the page is loaded completely for mobile devices/small screen---------------  -->
+        @for (user of userList ; track user.id) {
+            <div *ngIf="!isLoading" class="mobileContainer">
+        <mat-accordion >
+            <mat-expansion-panel class="panel">
+                <mat-expansion-panel-header  class="panelHeader">
+                        <mat-panel-title  class="panelTitleId">
+                            {{user.id}}
+                        </mat-panel-title>
+
+                        <mat-panel-title class="panelTitleEmail"> 
+                            <img class="profileImageIcon" 
+                                    appNoImage
+                                    src="{{user.profileImage}}"
+                                    alt="image">
+                                    {{user.email}} 
+                        </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="contentContainer1">
+                        <div class="firstContent">
+                            <span class="label">
+                                Email &nbsp;:&nbsp; 
+                            </span>
+                            <span class="data">{{user.email}}</span>
+                        </div>
+                        
+                        
+                </div>
+
+                <div class="contentContainer2">
+                         <div class="secondContent">
+                            <span class="label">
+                                Roles &nbsp;: &nbsp;
+                            </span>
+                            <span class="data">
+                                {{user.roles}}
+                            </span>
+                        </div>
+                </div>
+
+                <div class="contentContainer2">
+                        <div class="firstContent">
+                            <span class="label">
+                                Updated On &nbsp; : &nbsp;
+                            </span>
+                            <span class="data">{{user.updatedOn| dateConverter}}</span>
+                        </div>
+                </div>
+
+                <div class="contentContainer2">                        
+                        
+                        <div class="firstContent">
+                            <span class="label">
+                                Created On &nbsp;:&nbsp;
+                            </span>
+                            <span class="data">{{user.createdOn | dateConverter}}</span>
+                        </div>
+                </div>
+                <br>
+                <div class="buttons">
+                    <button mat-raised-button class="update"
+                    (click)="updateButtonClick(user.id); $event.stopPropagation()">
+                         <i class="fa-solid fa-pen" style="color: #ffffff;"></i>    
+                    </button>
+                    <button mat-raised-button class="delete"
+                    (click)="deleteUserAsAdmin(user.id)"> 
+                        <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                    </button>
+                </div>
+ 
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+        <!-- <br> -->
+        }
+    </section>  
+
+
+<app-pagination
 [pageLinks]="pageLinks" 
 (contentSize)="setContentPerPage($event)"
-(pageChange)="toSpecificPage($event)"
+(pageUrl)="toSpecificPage($event)"
 />
- -->
+
+
+
+</main>
+
+
+
+
+
+
+
+
+
 
 

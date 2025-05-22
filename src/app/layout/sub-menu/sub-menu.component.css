@@ -1,12 +1,35 @@
+.subMenuContainer{
+    background-color: var(--lighterShade);
+    padding: 1rem;
+    margin-bottom: 0 !important;
+    padding-bottom: 0;
+}
+
+
 .active-link{
     color:var(--lightShade);
     background-color: var(--orange);
+    /* border-radius: 10px; */
 }
 
-a{
+
+.active-link:hover{
+    color:var(--lightShade) !important;
+    background-color: var(--orange);
+    box-shadow: var(--orange) 0px 1px 3px ;
+}
+
+ a{
     color: var(--secondaryColor)
 }
 
+a:hover{
+    color: var(--darkBlue);
+    background-color: var(--white);
+}
+
+
+
 li{
-    background-color: var(--lightShade);
+    background-color: var(--lighterShade);
 }

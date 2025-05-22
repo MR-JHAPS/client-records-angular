@@ -1,5 +1,15 @@
-<div class="mainContainer mt-5">   
-   <table class="table table-borderless shadow">
+<main>   
+    
+    
+    <div class="header text-center">
+        <p>CLIENT-BIN</p>
+    </div>
+
+<div class="mainContainer mt-2">   
+
+
+
+   <table  *ngIf="!isMobile" class="table table-borderless shadow">
     <thead>
         <tr>
             <th>ID</th>
@@ -33,8 +43,117 @@
     </table>
 </div>
 
+
+
+
+
+
+<!-- MOBILE : This is Angular-Material-Accordian For smaller-Screen-------------------------------------------------------- -->
+    <section  *ngIf="isMobile" class="tableMobile">
+       
+            
+            <!------------- If the page is still loading for mobile devices/small screen---------------  -->
+                    <div *ngIf="isLoading" class="panelContainer col-13">
+
+                        <div class="container p-5 text-center">
+                            
+                             <div class="loadingMessage">Loading Please Wait a second</div>
+                            <div class="spinner-border" role="status"></div>
+
+                        </div>
+
+                    </div>
+
+
+        <!------------- If the page is loaded completely for mobile devices/small screen---------------  -->
+        @for (client of clientBinList ; track client.id) {
+            <div *ngIf="!isLoading" class="mobileContainer">
+        <mat-accordion >
+            <mat-expansion-panel class="panel">
+                <mat-expansion-panel-header  class="panelHeader">
+                
+               
+                <mat-panel-title class="panelTitle"> {{client.id}} </mat-panel-title>
+                <mat-panel-title class="panelTitle"> {{client.firstName}} </mat-panel-title>
+                <mat-panel-title class="panelTitle"> {{client.lastName}} </mat-panel-title>
+               
+                </mat-expansion-panel-header>
+                <div class="contentContainer1">
+                        <div class="firstContent">
+                            <span class="label">
+                                First Name &nbsp;:&nbsp; 
+                            </span>
+                            <span class="data">{{client.firstName}}</span>
+                        </div>
+                        
+                        <div class="secondContent">
+                            <span class="label">
+                                Last Name &nbsp;:&nbsp;
+                            </span>
+                            <span class="data">{{client.lastName}}</span>
+                        </div>
+                </div>
+
+                <div class="contentContainer2">
+                        <div class="firstContent">
+                            <span class="label">
+                                Dater Of Birth &nbsp; : &nbsp;
+                            </span>
+                            <span class="data">{{client.dateOfBirth}}</span>
+                        </div>
+                </div>
+
+                <div class="contentContainer2">                        
+                        <div class="secondContent">
+                            <span class="label">
+                                Postal Code &nbsp;: &nbsp;
+                            </span>
+                            <span class="data">
+                                {{client.postalCode}}
+                            </span>
+                        </div>
+                </div>
+                <br>
+                <div class="buttons">
+                    <!-- <button mat-raised-button class="restore"
+                    (click)="restoreFromClientBin(client.id); $event.stopPropagation()">
+                         <i class="fa-solid fa-pen" style="color: #ffffff;"></i>    
+                    </button> -->
+                    <button type="button" class="deleteButton btn btn-success" (click)="restoreFromClientBin(client.id)">Restore</button>
+                    <button 
+                    *ngIf="(isRoleAdmin$ | async)"
+                    mat-raised-button class="delete"
+                    (click)="deleteFromClientBin(client.id)"> 
+                        <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                    </button>
+                </div>
+ 
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+        <!-- <br> -->
+        }
+    </section>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <app-pagination
    [pageLinks]="apiPageLink"
    (contentSize)="setContentPerPage($event)"
    (pageUrl)="toSpecificPage($event)" 
 />
+
+</main> 

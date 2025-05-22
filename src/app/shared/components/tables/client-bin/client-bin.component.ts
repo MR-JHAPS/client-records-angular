@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
 import { ClientBinService } from '../../../../core/services/clientBinApi/client-bin.service';
 import { clientBinResponse } from '../../../../core/models/response/clientBinResponse';
 import { ApiResponseModelPaginated } from '../../../../core/models/responseModel/apiResponseModelPaginated';
@@ -11,10 +11,12 @@ import { CommonModule, NgIf } from '@angular/common';
 import { ApiLinksDetails } from '../../../../core/models/responseModel/apiLinksDetails';
 import { PaginationServiceService } from '../../../../core/services/paginationService/pagination-service.service';
 import { PaginationComponent } from "../../pagination/pagination/pagination.component";
+import { MaterialModules } from '../../../../material';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 @Component({
   selector: 'app-client-bin',
-  imports: [NgIf, CommonModule, PaginationComponent],
+  imports: [NgIf, CommonModule, PaginationComponent,AccordionModule, MaterialModules],
   templateUrl: './client-bin.component.html',
   styleUrl: './client-bin.component.css'
 })
@@ -30,8 +32,11 @@ export class ClientBinComponent implements OnInit {
   apiPageLink : Array<ApiLinksDetails>; // this contains the pageLinks (next,first,last, previous)
   isRoleUser$ = this._authService.isRoleUser$
   isRoleAdmin$ = this._authService.isRoleAdmin$;
+  isLoading = true;
+  isMobile = false;
   
   ngOnInit(): void {
+    this.onResize();
     this.getAllClientBin();
       this._authService.initializeAuthState();
   
@@ -45,6 +50,19 @@ export class ClientBinComponent implements OnInit {
 
 
 
+     //This is to check the width of the screen to change table to accordian:
+      @HostListener("window:resize", [])
+      onResize(){
+        this.checkScreen();
+      }
+    
+      checkScreen(){
+        this.isMobile = window.innerWidth<600 ;
+      }
+    
+      readonly panelOpenState = signal(false);
+
+
 
   getAllClientBin(pageNumber?: number, size?: number):void{
     this._clientBinService.getAllClientBin(pageNumber, size).subscribe({
@@ -52,9 +70,11 @@ export class ClientBinComponent implements OnInit {
         this.clientBinList =  response.data.content;
         this.apiPageLink = response.data.links;
         console.log("Getting ClientBin data");
+        this.isLoading = false;
       },
       error : (error)=>{
         console.log("Error getting the ClientBin Data", error);
+        this.isLoading = false;
       },
       complete: ()=>{
         console.log("ClientBin fetched Successfully.");

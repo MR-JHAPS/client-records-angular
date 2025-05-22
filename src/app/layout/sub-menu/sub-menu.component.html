@@ -1,8 +1,9 @@
 
 <!-- For Admin -->
-    <div *ngIf="(isRoleAdmin$ | async)"  class="container">
-        <ul class="nav justify-content-center">
-            <li class="nav-item">
+    <div *ngIf="(isRoleAdmin$ | async)"  class="subMenuContainer container-fluid">
+        <ul class="nav justify-content-center ">
+            <!-- <div class=""> -->
+            <li class="clientTab nav-item shadow ">
                 <a class="nav-link active" aria-current="page" 
                     routerLink="/admin/admin-home/clientTable"
                     routerLinkActive="active-link"
@@ -10,7 +11,7 @@
                     Manage Clients
                 </a>
             </li>
-            <li class="nav-item">
+            <li class=" userTab nav-item shadow ">
                 <a class="nav-link"
                     routerLink="/admin/admin-home/userTable"
                     routerLinkActive="active-link"
@@ -18,7 +19,8 @@
                     Manage Users
                 </a>
             </li>
-    </ul>
+            <!-- </div> -->
+        </ul>
     </div>
 
 
