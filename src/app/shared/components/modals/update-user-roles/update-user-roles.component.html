@@ -11,33 +11,40 @@
             
             <section class="row g-3">
                 <div class="col ">
-                    <label class="form-label  ps-2" for="email">Email</label>
-                    <input type="email" class="placeHolder form-control" placeholder="Email" aria-label="Email" id="email"
-                    [(ngModel)]="userAdmin.email">
+                    <label class="form-label  ps-2" for="email">Email</label><br>
+                    <!-- <input type="email" class="placeHolder form-control" placeholder="Email" aria-label="Email" id="email"
+                    readonly
+                    [(ngModel)]="userAdmin.email"> -->
+                    <p class="email ps-2">{{userAdmin.email}}</p>
                     
                 </div>
 
                   <div class="col ">
                     <label class="form-label  ps-2" for="email">Roles</label>
-                    <input type="email" class="placeHolder form-control" placeholder="Email" aria-label="Email" id="email"
-                    [(ngModel)]="userAdmin.roles">
+                    <!-- <input type="email" class="placeHolder form-control" placeholder="Email" aria-label="Email" id="email"
+                    [(ngModel)]="userAdmin.roles"> -->
+                    <p class="roles ps-2">{{userAdmin.roles}}</p>
                     
                 </div>
             </section>
 
 
-            <div class="roleLabel p-4">
-               {{ getSelectedRolesLabel() }}
-            </div>    
+            <section class="roleLabel buttons row g-3 mt-3">
+                <label class="displaySelectedRoles">Selected Roles  </label>
+                <div class="selectedRoles ms-2">
+                    <p class="noRolesSelected">{{ getSelectedRolesLabel() }}</p>
+                </div> 
+            </section>    
 
 
 
 
-            <section class="row g-3 mt-4">
+            <section class="row g-3 mt-2">
                 <div class="col">
                     <label class="form-label ps-2" for="roles">Roles</label>
 
-                    <div class="selectContainer">
+                    <div [ngClass]="{ selectContainerHidden: isHidden, selectContainerExpanded: !isHidden }" class="selectContainerExpanded">
+                        <!-- button that triggers show and hide roles-select-options -->
                         <button
                             id="roles"
                             class="toggleButton shadow"
@@ -51,6 +58,9 @@
                             ></i>
                         </button>
 
+                    <!-- <div [ngClass]="{ selectContainerHidden: isHidden, selectContainerExpanded: !isHidden }" class="selectContainerExpanded"> -->
+
+                        <!-- This is the container of select roles that is hidden and shown dynamically. -->
                         <div [ngClass]="{ hide: isHidden, show: !isHidden }" class="optionContainer dropdownMenu">
                             @for (role of rolesList; track role.id) {
                                 <div  class="optionContents">
@@ -67,41 +77,6 @@
                     </div>
                 </div>
             </section>
-
-
-             <!-- <section class="row g-3 mt-4">
-                <div class="col">
-                    <label class="form-label ps-2" for="roles">Roles</label>
-                <div class="selectContainer w-100">
-                    <ul>    
-                        <button id="roles" class="toggleButton w-100" (click)="onOptionClick()">
-                            {{rolesList[0].role}}
-                            <i
-                                class="fa-solid"
-                                [ngClass]="!isHidden ? 'fa-angle-up' : 'fa-angle-down'"
-                                ></i>
-                        </button>
-                        <div [class.hide]="isHidden" [class.show]="!isHidden">
-                            @for (role of rolesList; track role.id) {
-                                <div>
-                                    <div class="check">
-                                        <input type="checkbox" 
-                                        [checked]="roleRequest.roles.includes(role.role)"
-                                        (change)="toggleRole(role.role)">
-                                    </div>
-
-                                    <div class="roles">
-                                        <li>{{role.role}}</li>
-                                    </div>
-                                </div>
-                              
-                            }
-                        </div>
-                    </ul>
-                </div>
-              
-                </div>
-            </section> -->
            
 
 

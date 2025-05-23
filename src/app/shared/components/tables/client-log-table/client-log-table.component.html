@@ -33,7 +33,7 @@
                         <td> {{client.dateOfBirth}} </td>
                         <td class="modType"> {{client.modificationType}} </td>
                         <td>{{client.userEmail}}</td>
-                        <td>{{client.updatedAt}}</td>
+                        <td>{{client.updatedAt | dateConverter}}</td>
                     </tr>
                 }
             </tbody>
@@ -67,7 +67,7 @@
                         </div>
                         <div class="row5">
                             <!-- <span> Modified By : {{client.userEmail}} </span> -->
-                            <span>Modified At : {{client.updatedAt}} </span>
+                            <span>Modified At : {{client.updatedAt | dateConverter}} </span>
                         </div>
                 </div>
 

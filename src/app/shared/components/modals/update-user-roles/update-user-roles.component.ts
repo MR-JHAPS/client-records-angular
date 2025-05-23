@@ -118,9 +118,10 @@ export class UpdateUserRolesComponent implements OnInit{
 
   
 getSelectedRolesLabel(): string {
+
   return this.roleRequest.roles.length > 0
-    ? this.roleRequest.roles.join(', ')
-    : 'Select roles';
+    ? this.roleRequest.roles.join(' | ')
+    : "No Roles Selected"
 }
   
 

@@ -52,22 +52,6 @@ export class UserTableComponent implements OnInit {
      })
   }
 
-
-    // /* This is the trial of the select checkbox */
-
-    // isHidden = true;
-
-    // onOptionClick(){
-    //   this.isHidden = !this.isHidden;
-    // }
-
-
-
-
-
-
-
-
     //This is to check the width of the screen to change table to accordian:
     @HostListener("window:resize", [])
     onResize(){
@@ -75,7 +59,7 @@ export class UserTableComponent implements OnInit {
     }
   
     checkScreen(){
-      this.isMobile = window.innerWidth<600 ;
+      this.isMobile = window.innerWidth<700 ;
     }
   
     readonly panelOpenState = signal(false);
@@ -202,24 +186,6 @@ export class UserTableComponent implements OnInit {
 
 
 /*------------------------- This is for the Pagination.--------------------------------------------------------------------- */
-
-//@param: action  is "prev", "next", "self", "first", "last"
-// toSpecificPage(action: string): void {
-//   //passing the list of pagination Links to the service layer.
-//   this._clientService.getRequiredPage(this.pageLinks, action).subscribe({
-//     next : (response: ApiResponseModelPaginated<ClientResponse>) => {
-//       this.clientList = response.data.content;
-//       //saving the list of (next, previous, last, first) page links in a variable.
-//       this.pageLinks = response.data.links; 
-//       console.log(response.data);
-//     },
-//     error : (error)=> {
-//       console.log("Error occured while getting all the clients.", error);
-//       this._toastrService.error("Error Getting the Specific Page.");
-//     },
-//     complete : () => { console.log("All client obtained Successfully.")}
-//   })
-// }
 
 
 toSpecificPage(rawUrl: string): void {

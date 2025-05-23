@@ -9,10 +9,11 @@ import { PaginationServiceService } from '../../../../core/services/paginationSe
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { DateConverterPipe } from '../../../pipes/dateConverter/date-converter.pipe';
 
 @Component({
   selector: 'app-client-log-table',
-  imports: [PaginationComponent, CommonModule],
+  imports: [PaginationComponent, CommonModule, DateConverterPipe],
   templateUrl: './client-log-table.component.html',
   styleUrl: './client-log-table.component.css'
 })
@@ -42,7 +43,7 @@ ngOnInit(): void {
   }
 
   checkScreen(){
-    this.isMobile = window.innerWidth<600 ;
+    this.isMobile = window.innerWidth<800 ;
   }
 
   /* TO SHOW AND HIDE THE CLIENTLOG CONTENTS...... */

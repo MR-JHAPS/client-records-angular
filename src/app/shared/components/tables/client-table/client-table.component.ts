@@ -77,7 +77,7 @@ export class ClientTableComponent implements OnInit, OnDestroy {
   }
 
   checkScreen(){
-    this.isMobile = window.innerWidth<600 ;
+    this.isMobile = window.innerWidth<700 ;
   }
 
   readonly panelOpenState = signal(false);
