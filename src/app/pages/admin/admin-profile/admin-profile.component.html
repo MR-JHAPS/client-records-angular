@@ -1,1 +1,94 @@
-<p>admin-profile works!</p>
+<main >
+    @if(isLoading){
+        <div> Admin-User is still loading.</div>
+
+
+          <section class="mainContainer bg bg-light shadow m-3 mt-0">
+
+            <div class="imageContainer bg bg-light">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+            </div>
+        
+                <div class="detailsContainer card bg bg-light" >
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                   
+                </div>  
+        </section>
+    }
+
+
+
+
+    <!-- Once the currentUser variable is filled with apiUserResponseData only then it will load this -->
+
+
+        @else if(!isLoading) {
+            <h5 class="detailsHeader ">Profile Details</h5>
+
+            <section class="mainContainer bg bg-light shadow m-3 mt-0">
+
+                <div class="imageContainer bg bg-light">
+                    <img  appNoImage [src]="completeImageUrl" alt="profile picture">
+
+                    <div class="imageUpload">
+                        <label class="imageUploadLabel" for="profileImageUpload">
+                            <i class="fa-solid fa-pen fa-xl  p-5" style="color: #fefefe;"></i>
+                        </label>
+                          <input 
+                            id="profileImageUpload" 
+                            type="file" 
+                            accept="image/*" 
+                            (change)="updateProfilePicture($event)"
+                            style="display: none;"
+                          >
+                        
+                      </div>
+                </div>
+            
+                <!-- <div class="detailsContainer "> -->
+
+                    <div class="detailsContainer " >
+                        
+                      
+                        <div class="details">
+                            <div class="row1" >
+                                <div class="label">Email : </div>
+                                <div class="contents"> {{currentAdmin.email}}</div>
+                            </div>
+                            <div class="row2">
+                                <div class="label">Created On :</div>
+                                <div class="contents"> {{currentAdmin.createdOn | dateConverter }}</div>
+                            </div>
+                        </div>
+
+                        
+                        <div class="updateButton">
+                            <button mat-raised-button class="btn" (click)="openUpdateModal(currentAdmin.email)">Update User</button> 
+                        </div>
+                         
+
+                        <div class="updatedOn">
+                            <p>
+                                <!-- Last Updated on {{formattedUpdatedOn?.formattedUpdatedOn}} -->
+                                 Last Updated on :
+                                 {{currentAdmin.updatedOn | dateConverter}}
+                            </p>
+                        </div>
+                    </div>  
+            
+            </section>
+       
+            <section class="galleryContainer bg bg-light shadow m-3 mb-2">
+                <app-image-gallery 
+                (hasImages)="checkingImagesInGallery($event)"
+                />       
+            </section>
+
+ }
+
+
+</main>

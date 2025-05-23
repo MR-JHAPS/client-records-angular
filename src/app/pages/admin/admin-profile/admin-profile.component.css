@@ -1,0 +1,324 @@
+
+
+
+
+main{
+  min-height: 100svh;
+  margin-bottom: 12px;
+}
+
+
+.detailsHeader{
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px ;
+  text-align: center;
+  padding: 4px;
+  width:200px;
+  background-color: var(--mutedOrange);
+  color:var(--lightShade);
+  margin:auto;
+  margin-top: 1rem;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+
+.mainContainer{
+  padding:10px;
+  padding-top:40px;
+  display: grid;
+  grid-template-columns: 0.4fr 1fr;
+  grid-template-areas: "imageContainer detailsContainer";
+  overflow: hidden;
+}
+
+.imageContainer{
+  overflow: hidden;
+  position: relative;
+  width: 300px; 
+  height: 300px;
+  border-radius: 50%; 
+}
+img{
+  width: 100%;
+    height: 100%;
+    object-fit: cover; /* This crops and fills like Facebook */
+    object-position: center; /* Keeps the image centered */
+}
+
+
+
+.imageContainer>.imageUpload{
+  background-color: rgba(0, 0, 0, 0.521);
+  padding:1.5rem;
+  width: 100%;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.8;
+  z-index: 224;
+  position: relative;
+  top:-42px;
+  right: -5px;
+  overflow: hidden;
+  border-top:1px solid rgba(0, 0, 0, 0.089);
+}
+
+.imageUploadLabel{
+  cursor: pointer;  
+  opacity: 1;
+}
+
+.imageContainer>.imageUpload:hover{
+  opacity: 0.9;
+  background-color: rgba(0, 0, 0, 0.726);
+  /* opacity: 0.6; */
+
+}
+
+
+.detailsContainer{
+  border: none;
+  padding-top: 40px;
+  display: grid;
+  grid-template-rows: 1fr 0.5fr 0.5fr;
+  grid-template-areas: 
+  "details"
+  "updateButton"
+  "updatedOn";
+}
+
+    /* This Contains the contents : "EMAIL" and "CREATED ON" */
+    .details{
+      margin:auto;
+      width: 50svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      /* background-color: coral; */  
+    }
+
+          /* Row of "Email" and "CreatedOn" */
+          .details>.row1,.row2{
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            width: inherit;
+            padding: 0.5rem;
+             border-bottom: 2px solid var(--lightShade);
+          }
+
+
+            /* This is "Email" and "CreatedOn" */
+            .details .label{
+            width: 120px;
+            color: rgb(105, 105, 105);
+            font-size: 16px;
+            }
+
+            /* this is "me@gmail.com" & "2023/3/23 4:23:23" */
+            .details .contents{
+              color: rgb(136, 134, 134);
+              font-weight: 350;
+              font-size: 14px;
+              letter-spacing: 0.7px;
+            }
+
+
+  /* updateButton Container  */
+  .updateButton{
+    margin-top: 2rem;
+    text-align: center;
+    border: none;
+  }
+
+      /* update Button */
+      .updateButton .btn{
+        border: none;
+        background-color: var(--secondaryColor);
+        color: var(--lightShade);
+      }
+
+  .updateButton .btn:hover{
+    background-color: var(--darkBlue);
+  }
+
+
+  /* This is the container that contains the Account updatedInfo */
+  .updatedOn{
+    margin-top: 20px;
+    padding-right: 1rem;
+    text-align: right;
+    font-size: small;
+    letter-spacing: 0.3px;
+  }
+
+      .updatedOn>p{
+      color: #999999;
+      font-style: italic;
+      position: relative;
+      }
+
+
+
+/* THIS IS THE CONTAINER FOR THE IMAGE-GALLERY */
+
+.galleryContainer{
+  padding:10px;
+  padding-top:10px;
+  min-height: 40svh;
+  margin-top: 20px;
+
+}
+
+.emptyState{
+  font-size: larger;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-align: center;
+  color: var(--secondaryColor);
+  text-shadow: 1px 2.5px 2px darkgrey;
+  position: relative;
+  min-height: 30vh;
+}
+
+.emptyState p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+/* MEDIA QUERY FOR RESPONSIVE GRID.------------------------------------ */
+
+@media(max-width : 650px) {
+  /* Header */
+  .detailsHeader{
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    letter-spacing: 2px;
+    font-weight: 800;
+    color:var(--lightShade);
+  }
+
+  .mainContainer{
+    overflow: hidden;
+    padding-top:30px;
+    display: grid;
+    grid-template-rows: 0.5fr 0.8fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: "imageContainer"
+    " detailsContainer";
+  }
+
+
+  
+  .imageContainer{
+    margin: auto;
+    width: 330px;
+    height: 330px;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+  }
+
+      img{
+        object-fit: cover; /* This crops and fills like Facebook */
+        object-position: center; /* Keeps the image centered */
+      }
+
+  
+.detailsContainer{
+  box-sizing: border-box;
+  margin-top: 0px;
+  overflow: hidden; 
+  display: grid;
+   grid-template-columns: 100%;
+  grid-template-rows: 0.3fr 0.2fr 0.3fr;
+ 
+  grid-template-areas: 
+  "details"
+  "updateButton"
+  "updatedOn";
+}
+
+  /* details content */
+  .details{
+    margin: auto;
+  }
+
+  .createdOn{
+    padding-top:0;
+  }
+
+  .details .label{
+    font-weight: 500;
+    color: rgb(136, 134, 134);
+    font-size: 14px;
+  }
+  .details .contents{
+    color: rgb(136, 134, 134);
+    font-weight: 400;
+    font-size: 12px;
+    font-family: sans-serif;
+    letter-spacing: 0.5px;
+  }
+
+  .details>.row1,.row2{
+    border-bottom: 2px solid var(--lightShade);
+  }
+
+
+  .detailsContainer>.updateButton{
+    box-sizing: border-box;
+    margin: auto;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+    .detailsContainer>.updateButton>.btn{
+      border: none;
+      border-radius: 20px;
+      background-color: var(--secondaryColor);
+      color: var(--lightShade);
+    }
+
+  .detailsContainer>.updatedOn{
+    box-sizing: border-box;
+    padding: 0 !important;
+    padding-right: 0;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.3px;
+    text-align: right;
+  }
+
+  .detailsContainer>.updatedOn>p{
+    font-weight: lighter;
+    /* background-color: green; */
+  }
+
+
+
+  .galleryContainer{
+    /* margin-bottom: 200px; */
+    /* border:2px solid green; */
+  }
+
+
+}
+
+
+
+
+
+
+
+

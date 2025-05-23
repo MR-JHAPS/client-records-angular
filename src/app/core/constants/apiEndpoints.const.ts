@@ -25,6 +25,7 @@ export const API_ENDPOINTS= {
     },
 
     adminApi: {
+        getCurrentUser: "/admin/me",
         getUserById:(id:number) => `/admin/users/${id}`,
         getAllUsers: "/admin/users",
         getUsersByRole: "/admin/users/by-role",

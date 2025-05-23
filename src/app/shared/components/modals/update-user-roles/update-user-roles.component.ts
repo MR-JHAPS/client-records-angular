@@ -27,7 +27,7 @@ export class UpdateUserRolesComponent implements OnInit{
 
   userAdmin : UserAdminResponse = {
                         id: 0,
-                        profileImage: "",
+                        profileImageUrl: "",
                         email: "",
                         roles : [],
                         createdOn: new Date(),

@@ -1,18 +1,15 @@
 
-<!-- <div class="header ">
-    <h4> Image Gallery</h4>
-</div> -->
-
-<!-- <ng-container *ngIf="imageResponseList!.length > 0; else noImages"> -->
-    <!-- <main  class="mainCosntainer  "> -->
     <main>
-    
-
+        
         <section class="gridContainer">
-            <div class="gridContent">
+            <div class="gridContent shadow">
+                <!-- <p>Upload New Image</p> -->
                 <label class="imageUploadLabel" for="imageUpload">
                     <!-- <i class="fa-solid fa-camera fa-xl" style="color: #ff8000;"></i> -->
-                    <i class="clickableUpload fa-solid fa-plus fa-2xl p-5" style="color: #ffffff;"></i>
+                    <i class="clickableUpload fa-solid fa-plus fa-2xl" style="color: #ffffff;"></i><br>
+                    <i class="clickableUpload fa-solid fa-sm" style="color: #ffffff;">
+                        Add Images
+                    </i>
                 </label>
                 <input 
                     id="imageUpload" 
@@ -23,26 +20,34 @@
                 >
             </div>
             @for (image of imageResponseList; track image.id) {
-            <div class="gridContent" >
-                <div class="imageWrapper">
-                    <input type="checkbox" class="imageCheckbox" 
-                    [checked]="checkedImages.idList.includes(image.id)" (change)="toggleCheckBox(image.id)">
-                    <img [src]="image.imageUrl" alt="image" (click)="openImage(image.imageUrl, image.imageName)">
+                <div class="gridContent" >
+                    <div class="imageWrapper">
+                        <input type="checkbox" class="imageCheckbox" 
+                        [checked]="checkedImages.idList.includes(image.id)" (change)="toggleCheckBox(image.id)">
+                        <img [src]="image.imageUrl" alt="image" (click)="openImage(image.imageUrl, image.imageName)">
+                    </div>
                 </div>
-            </div>
-            
-        }
+            }
         
         </section>    
         
-            <section *ngIf="isImageSelected" class="actionBar sticky-bottom text-center mt-4">
-                <button class="btn delete" (click)="deleteSelectedImages()">
-                    <i class="fa-solid fa-trash fa-beat fa-2xl" style="color: #d11b3f;"></i>
-                </button>
-                <button class="btn reset" (click)="resetSelectedImages()">
-                    <i class="fa-solid fa-ban fa-2xl" style="color: #74C0FC;"></i>
-                </button>
-            </section>
-      
-    
+        <!-- No Images found display Text. -->
+        <div *ngIf="!isImagePresent" class="imageNotFound bg bg-light">
+                        No Images Found In Gallery !
+        </div> 
+        
+
+        <!-- This is the delete Selected Button. -->
+        <section *ngIf="isImageSelected" class="actionBar sticky-bottom text-center mt-4">
+            <button class="btn delete" (click)="deleteSelectedImages()">
+                <i class="fa-solid fa-trash fa-beat fa-2xl" style="color: #d11b3f;"></i>
+            </button>
+            <button class="btn reset" (click)="resetSelectedImages()">
+                <i class="fa-solid fa-ban fa-2xl" style="color: #74C0FC;"></i>
+            </button>
+        </section>
+
+
+           
+            
     </main> 

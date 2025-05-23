@@ -61,7 +61,7 @@
                             </div>
                             <div class="row2">
                                 <div class="label">Created On :</div>
-                                <div class="contents"> {{formattedCreatedOn}}</div>
+                                <div class="contents"> {{currentUser.createdOn | dateConverter }}</div>
                             </div>
                         </div>
 
@@ -86,10 +86,10 @@
                 <app-image-gallery 
                 (hasImages)="checkingImagesInGallery($event)"
                 />       
-                <div *ngIf="!areImagesPresentInGallery" class="emptyState">
+                <!-- <div *ngIf="!areImagesPresentInGallery" class="emptyState"> -->
     
-                   <p> No images found. </p>
-                  </div>
+                   <!-- <p> No images found. </p> -->
+                  <!-- </div> -->
             </section>
 
  }

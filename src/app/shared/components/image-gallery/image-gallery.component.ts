@@ -33,8 +33,9 @@ export class ImageGalleryComponent implements OnInit {
   bsModalref?: BsModalRef;
   _modalService = inject(BsModalService);
   checkedImages = new BulkImageDeleteRequest(); //holds the checked-Box ImageId
-  isImageSelected = false;
+  isImageSelected = false; /* to see if the multiple/single images are selected for deletion. */
   imageRequest = new ImageRequest();
+  isImagePresent = false;  /* checks if the gallery is empty */
 
 
   @Output() hasImages = new EventEmitter<boolean>(); 
@@ -44,9 +45,13 @@ export class ImageGalleryComponent implements OnInit {
     this.getAllImagesOfCurrentUser();    
   }
 
-  isImagePresent() : boolean{
-    
-    return true;
+
+  checkIfContainsImages(){
+    if(this.imageResponseList.length>0){
+      this.isImagePresent = true;
+    }else{
+      this.isImagePresent = false;
+    }
   }
 
 
@@ -57,10 +62,12 @@ export class ImageGalleryComponent implements OnInit {
         console.log("Fetching all the images of the Current user.");
         console.log(this.imageResponseList);
         this.emitContainsImages();
+        this.checkIfContainsImages();
       },
       error : (error)=>{
         console.log("Error getting All the images of current user.");
         this.emitContainsImages();
+        this.isImagePresent = false;
       },
       complete :()=>{
         this.isLoading=false;

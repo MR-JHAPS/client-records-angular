@@ -1,28 +1,57 @@
 
 main{
- /* background-color: green; */
+  /* display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center; */
+
+  padding: 1rem;
 }
 
 
-.header{
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px ;
-    text-align: center;
-    padding: 4px;
-    width:200px;
-    background-color: var(--mutedOrange);
-    color:var(--lightShade);
-    margin:auto;
-    margin-top: 60px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    letter-spacing: 2px;
-    font-weight: 600;
+
+
+
+.imageNotFound{
+  /* background: var(--lighert); */
+  padding:1rem;
+  /* padding-right: 20rem; */
+  /* margin-left: 50svh; */
+  font-size: large;
+  color: var(--secondaryColor);
+  text-align: center;
 }
 
-.mainContainer{
-    /* padding:20px;
-    margin-bottom: 30vh; */
+.addImage{
+  overflow: hidden;
+  min-height: 316px;
+  /* max-height: 316px; */
+  border: 1px solid #ccc;
+  border-radius: 8px; /* optional for a softer look */
+  background-color: #00000085;
+  transition: transform 0.3s ease; /* Smooth animation */
 }
+
+/* .addImage>p{
+  color: var(--lightShade);
+  padding: 1rem;
+} */
+
+/* THis is the clickable part of addImage */
+.addImage>label{
+  cursor: pointer;
+  padding: 135px 50px;
+}
+
+.addImage:hover{
+  /* cursor: pointer; */
+  transform: scale(1.05); /* Slightly grow */
+  z-index: 3;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.71);
+  opacity: 1;
+}
+
 
 
 .gridContainer {
@@ -74,18 +103,14 @@ main{
   }
 
 
-  .gridContainer:hover>.gridContent:not(:hover){
-    /* filter: brightness(0.6); */
-    /* optional, to keep it slightly faded */
-    /* opacity: 0.9;  */
-    /* transition: filter 0.2s ease, opacity 0.2s ease; */
-  }
 
-  .gridContent:hover{
+  .gridContainer>.gridContent:hover{
     cursor: pointer;
     transform: scale(1.05); /* Slightly grow */
     z-index: 3;
     overflow: auto;
+    background: rgba(0, 0, 0, 0.71);
+    opacity: 1;
   }
   
 
@@ -134,27 +159,66 @@ main{
 
   @media(max-width:700px) {
 
+    
+  .imageNotFound{
+    /* background: var(--lighert); */
+    padding:1rem;
+    /* padding-right: 20rem; */
+    /* margin-left: 50svh; */
+    font-size: large;
+    color: var(--secondaryColor);
+    text-align: center;
+  }
+
+  .addImage{
+    overflow: hidden;
+    min-height: 0px;
+    /* max-height: 316px; */
+    border: 1px solid #ccc;
+    border-radius: 8px; /* optional for a softer look */
+    background-color: #00000085;
+    transition: transform 0.3s ease; /* Smooth animation */
+  }
+
+ 
+  .addImage:hover{
+    /* cursor: pointer; */
+    transform: scale(1.05); /* Slightly grow */
+    z-index: 3;
+    overflow: auto;
+    background: rgba(0, 0, 0, 0.71);
+    opacity: 1;
+  }
+
+
 
     /* Fixed size grid content for smaller screen */
     .gridContainer {
       display: grid;
       gap: 1rem;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 100px));
+      grid-template-columns: repeat(auto-fit, minmax(100px, 150px));
       justify-content: center;
-      grid-template-areas: "gridContent";
-      
+      grid-template-areas: "gridContent";      
     }
     
-    .gridContainer > .gridContent {
+    .gridContainer > .gridContent{
       overflow: hidden;
-      min-height: 0px;
-      border: 1px solid #ccc;
+      min-height: 100px;
+      border: none;
       border-radius: 8px; /* optional for a softer look */
       display: flex;
       justify-content: center ;
-      background-color: #f0f0f0;
+      background-color: rgba(0, 0, 0, 0.545);
       transition: transform 0.3s ease; /* Smooth animation */
+      cursor: pointer;
     }
+
+     /* THis is the clickable part of addImage */
+    .gridContent>label{
+      cursor: pointer;
+      padding: 20px 20px;
+    }
+
     
     .imageWrapper {
       position: relative;
@@ -163,7 +227,7 @@ main{
     }
   
     .imageWrapper>img{
-      width: 100px;
+      width: 150px;
       height: 100px;
       object-fit: cover; /* This crops and fills like Facebook */
       object-position: center; /* Keeps the image centered */

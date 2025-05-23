@@ -9,6 +9,8 @@ import { SearchRequest } from '../../models/request/searchRequest';
 import { errorContext } from 'rxjs/internal/util/errorContext';
 import { RoleSaveRequest } from '../../models/request/roleSaveRequest';
 import { RoleRequest } from '../../models/request/roleRequest';
+import { UserGeneralResponse } from '../../models/response/userGeneralResponse';
+import { AdminUpdateRequest } from '../../models/request/adminUpdateRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -32,9 +34,9 @@ getAllUsers() : Observable<ApiResponseModelPaginated<UserAdminResponse>>{
   return this._httpClient.get<ApiResponseModelPaginated<UserAdminResponse>>(url);
 }
 
-/* We pass the name of the role and we get the list of the user's with that role.*/
-getUsersByRole(){
-
+/* Get the authenticated admin */
+getCurrentAdmin():Observable<ApiResponseModel<UserAdminResponse>>{
+  return this._httpClient.get<ApiResponseModel<UserAdminResponse>>(`${this.baseUrl}${this.adminApi.getCurrentUser}`);
 }
 
 
@@ -74,8 +76,9 @@ updateUserRole(userId: number, roleRequest: RoleRequest): Observable<ApiResponse
   return this._httpClient.put<ApiResponseModel<string>>(url, roleRequest);
 }
 
-updateCurrentAdmin(){
-
+updateCurrentAdmin(request : AdminUpdateRequest): Observable<ApiResponseModel<string>>{
+  const url = `${this.baseUrl}${this.adminApi.updateCurrentAdmin}`;
+  return this._httpClient.post<ApiResponseModel<string>>(url, request);
 }
 
 deleteCurrentAdmin(){
