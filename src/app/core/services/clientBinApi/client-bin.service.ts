@@ -17,11 +17,13 @@ export class ClientBinService {
 
 
 
-  getAllClientBin(pageNumber?: number, pageSize?: number ) : Observable<ApiResponseModelPaginated<clientBinResponse>>{
+  getAllClientBin(pageNumber?: number, pageSize?: number, sortBy?:string, direction?:string ) : Observable<ApiResponseModelPaginated<clientBinResponse>>{
 
     let params = new HttpParams()
               .set("page", pageNumber? pageNumber : 0)
-              .set("size", pageSize? pageSize : 10);
+              .set("size", pageSize? pageSize : 10)
+              .set("sortBy", sortBy? sortBy: "")
+              .set("direction", direction? direction : "");
     const url = `${this.apiBaseUrl+this.clientBinEndpoints.getAllClientBin}`;
     return this._httpClient.get<ApiResponseModelPaginated<clientBinResponse>>(url, {params});
   }

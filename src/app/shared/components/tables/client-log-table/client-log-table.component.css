@@ -47,8 +47,15 @@ th{
     padding-left: 20px;
     padding-top:2rem;
     padding-bottom: 2rem;
+    cursor: pointer;
     
 }
+
+ .sortIcon{
+      padding-left: 20px !important;
+      padding-right : 20px !important;
+      cursor: pointer !important;
+    }
 
 td{
   color:var(--secondaryColor);
@@ -76,6 +83,57 @@ tr{
     font-style: normal;
         
 }
+
+ @media(max-width: 900px){
+    .mainContainer{
+      padding:0;
+      background-color: var(--lighterShade);
+    }
+
+    .sortIcon{
+      padding-left: 10px;
+      padding-right : 10px;
+    }
+        
+    th{
+      padding-top:1rem;
+      padding-left: 4px;
+      color: var(--secondaryColor);
+      font-size: 13px;
+    }
+
+    th:hover{
+      cursor: pointer;
+    }
+
+    td{
+      color:var(--secondaryColor);
+      font-size: 12px;
+      border-bottom: 1px solid var(--lightShade);
+      padding-left: 10px;
+
+    }
+
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* -----THIS IS FOR THE MOBILE/SMALL SCREEN-------------------- */

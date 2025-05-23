@@ -30,6 +30,15 @@ export class ClientLogTableComponent implements OnInit {
   detailsToggle = "hideDetails";
   expandedClientId : number | null = null;
 
+  /* For sorting */
+  isSortClicked = true;
+  isSortIdVisible = false;
+  isSortFirstNameVisible = false;
+  isSortLastNameVisible = false;
+  isSortDOBVisible = false;
+  isSortPostalCodeVisible = false;
+  isSortUpdatedAtVisible = false;
+
 ngOnInit(): void {
   this.onResize();
   this.getAllClientLogs();
@@ -46,6 +55,60 @@ ngOnInit(): void {
     this.isMobile = window.innerWidth<800 ;
   }
 
+
+
+
+    /*------------------------ Sorting TABLE METHODS ---------------------------------------------------------------------*/
+
+  showSortIcon(field: string){
+    if(field==="id"){
+       this.isSortIdVisible = true;
+    }else if(field==="firstName"){
+      this.isSortFirstNameVisible = true;
+    }else if(field==="lastName"){
+      this.isSortLastNameVisible = true;
+    }else if(field==="postalCode"){
+      this.isSortPostalCodeVisible = true;
+    }else if(field==="dateOfBirth"){
+      this.isSortDOBVisible = true;
+    }else if(field==="updatedAt"){
+      this.isSortUpdatedAtVisible = true;
+    }
+  }
+
+  hideSortIcon(){
+    this.isSortIdVisible = false;
+    this.isSortFirstNameVisible = false;
+    this.isSortLastNameVisible = false;
+    this.isSortPostalCodeVisible = false;
+    this.isSortDOBVisible = false;
+    this.isSortUpdatedAtVisible = false;
+  }
+
+  onSortClick(field : string){
+    this.isSortClicked = !this.isSortClicked;
+    let sortBy = "";
+    if(field=="id"){
+       sortBy = "id";
+    }else if(field==="firstName"){
+      sortBy = "firstName";
+    }else if(field==="lastName"){
+      sortBy = "lastName";
+    }else if(field==="postalCode"){
+      sortBy = "postalCode";
+    }else if(field==="dateOfBirth"){
+      sortBy = "dateOfBirth";
+    }else if(field==="updatedAt"){
+      sortBy = "updatedAt";
+    }
+
+    if(this.isSortClicked){
+        this.getAllClientLogs(0,10,sortBy,"asc");
+    }else{
+        this.getAllClientLogs(0,10,sortBy, "desc");
+    }
+  }//ends method
+
   /* TO SHOW AND HIDE THE CLIENTLOG CONTENTS...... */
 
   toggleDetails(id: number):void{
@@ -56,8 +119,8 @@ ngOnInit(): void {
 
   /* -------------------------------------------------------------------------------------------- */
 
-  getAllClientLogs(pageNumber?: number, size?: number): void{
-    this._clientLogService.getAllClientLog(pageNumber, size).subscribe({
+  getAllClientLogs(pageNumber?: number, size?: number, sortBy?:string, direction?:string): void{
+    this._clientLogService.getAllClientLog(pageNumber, size, sortBy, direction).subscribe({
       next : (response : ApiResponseModelPaginated<ClientLogResponse>)=>{
         this.clientLogList = response.data.content;                
         this.apiPageLink = response.data.links;

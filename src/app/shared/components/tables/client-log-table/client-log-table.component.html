@@ -10,14 +10,54 @@
         <table class="table table-borderless">
             <thead >
                 <tr >
-                    <th>ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Postal Code</th>
-                    <th>DOB</th>
-                    <th class="modType header">Modification Type</th>
-                    <th>Mod By</th>
-                    <th>Logged On</th>
+                    <th (mouseenter)="showSortIcon('id')" (mouseleave)="hideSortIcon()" (click)="onSortClick('id')">
+                    <b>ID</b>
+                     <i [style.visibility]="isSortIdVisible ? 'visible' : 'hidden'" 
+                     class="sortIcon fa-solid fa-sort"
+                     ></i>
+                </th>
+                <th (mouseenter)="showSortIcon('firstName')"
+                    (mouseleave)="hideSortIcon()"
+                    (click)="onSortClick('firstName')">
+                    FIRST NAME
+                     <i [style.visibility]="isSortFirstNameVisible ? 'visible' : 'hidden'" 
+                     class="sortIcon fa-solid fa-sort"
+                     ></i>
+                </th>
+                <th (mouseenter)="showSortIcon('lastName')"
+                    (mouseleave)="hideSortIcon()"
+                    (click)="onSortClick('lastName')">
+                    LAST NAME
+                     <i [style.visibility]="isSortLastNameVisible ? 'visible' : 'hidden'"
+                      class="sortIcon fa-solid fa-sort"
+                      ></i>
+                </th>
+                 <th (mouseenter)="showSortIcon('dateOfBirth')" 
+                     (mouseleave)="hideSortIcon()"
+                     (click)="onSortClick('dateOfBirth')">
+                    DOB
+                     <i [style.visibility]="isSortDOBVisible ? 'visible' : 'hidden'"
+                      class="sortIcon fa-solid fa-sort"
+                      ></i>
+                </th>
+                <th (mouseenter)="showSortIcon('postalCode')"
+                     (mouseleave)="hideSortIcon()"
+                     (click)="onSortClick('postalCode')">
+                   POSTAL CODE
+                     <i [style.visibility]="isSortPostalCodeVisible ? 'visible' : 'hidden'"
+                      class="sortIcon fa-solid fa-sort"
+                      ></i>
+                </th>
+                <th class="modType header">Modification Type</th>
+                <th>Mod By</th>
+                <th (mouseenter)="showSortIcon('updatedAt')"
+                       (mouseleave)="hideSortIcon()"
+                       (click)="onSortClick('updatedAt')">
+                        Logged Date
+                     <i [style.visibility]="isSortUpdatedAtVisible ? 'visible' : 'hidden'"
+                      class="sortIcon fa-solid fa-sort"
+                      ></i>
+                </th>
                     
                 </tr>
             </thead>
@@ -29,8 +69,8 @@
                         <td> {{client.id}} </td>
                         <td> {{client.firstName}} </td>
                         <td> {{client.lastName}} </td>
-                        <td> {{client.postalCode}} </td>
                         <td> {{client.dateOfBirth}} </td>
+                        <td> {{client.postalCode}} </td>
                         <td class="modType"> {{client.modificationType}} </td>
                         <td>{{client.userEmail}}</td>
                         <td>{{client.updatedAt | dateConverter}}</td>

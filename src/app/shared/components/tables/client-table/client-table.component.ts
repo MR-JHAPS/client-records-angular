@@ -53,6 +53,12 @@ export class ClientTableComponent implements OnInit, OnDestroy {
   isMobile = false; // this stores if the viewing device is mobile/laptop.
   isLoading = true;
 
+  isSortClicked = true;
+  isSortIdVisible = false;
+  isSortFirstNameVisible = false;
+  isSortLastNameVisible = false;
+  isSortDOBVisible = false;
+  isSortPostalCodeVisible = false;
 
 
   ngOnInit(): void {
@@ -82,7 +88,51 @@ export class ClientTableComponent implements OnInit, OnDestroy {
 
   readonly panelOpenState = signal(false);
 
+  /*------------------------ Sorting TABLE METHODS ---------------------------------------------------------------------*/
 
+  showSortIcon(field: string){
+    if(field=="id"){
+       this.isSortIdVisible = true;
+    }else if(field==="firstName"){
+      this.isSortFirstNameVisible = true;
+    }else if(field==="lastName"){
+      this.isSortLastNameVisible = true;
+    }else if(field==="postalCode"){
+      this.isSortPostalCodeVisible = true;
+    }else if(field==="dateOfBirth"){
+      this.isSortDOBVisible = true;
+    }
+  }
+
+  hideSortIcon(){
+    this.isSortIdVisible = false;
+    this.isSortFirstNameVisible = false;
+    this.isSortLastNameVisible = false;
+    this.isSortPostalCodeVisible = false;
+    this.isSortDOBVisible = false;
+  }
+
+  onSortClick(field : string){
+    this.isSortClicked = !this.isSortClicked;
+    let sortBy = "";
+    if(field=="id"){
+       sortBy = "id";
+    }else if(field==="firstName"){
+      sortBy = "firstName";
+    }else if(field==="lastName"){
+      sortBy = "lastName";
+    }else if(field==="postalCode"){
+      sortBy = "postalCode";
+    }else if(field==="dateOfBirth"){
+      sortBy = "dateOfBirth";
+    }
+
+    if(this.isSortClicked){
+        this.getAllClients(0,10,sortBy,"asc");
+    }else{
+        this.getAllClients(0,10,sortBy, "desc");
+    }
+  }//ends method
 
 
 
@@ -98,7 +148,7 @@ export class ClientTableComponent implements OnInit, OnDestroy {
   getAllClients(pageNumber?:number, pageSize?: number,
     sortBy?: string, direction?: string ) : void {
 
-    this._clientService.getAllClients(pageNumber, pageSize).subscribe({
+    this._clientService.getAllClients(pageNumber, pageSize, sortBy, direction).subscribe({
       next : (response: ApiResponseModelPaginated<ClientResponse>) => {
         this.clientList = response.data.content;
         //saving the list of (next, previous, last, first) page links in a variable.

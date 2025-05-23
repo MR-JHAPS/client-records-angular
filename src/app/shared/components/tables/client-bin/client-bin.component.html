@@ -5,20 +5,58 @@
         <p>CLIENT-BIN</p>
     </div>
 
-<div class="mainContainer mt-2">   
+<div class="mainContainer">   
 
 
 
    <table  *ngIf="!isMobile" class="table table-borderless shadow">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Postal Code</th>
-            <th>DOB</th>
+            <th (mouseenter)="showSortIcon('id')"
+                    (mouseleave)="hideSortIcon()"
+                    (click)="onSortClick('id')">
+                    <b>ID</b>
+                     <i [style.visibility]="isSortIdVisible ? 'visible' : 'hidden'" 
+                     class="sortIcon fa-solid fa-sort"
+                     ></i>
+                </th>
+                <th (mouseenter)="showSortIcon('firstName')"
+                    (mouseleave)="hideSortIcon()"
+                    (click)="onSortClick('firstName')">
+                    FIRST NAME
+                     <i [style.visibility]="isSortFirstNameVisible ? 'visible' : 'hidden'" 
+                     class="sortIcon fa-solid fa-sort"
+                     ></i>
+                </th>
+
+                <th (mouseenter)="showSortIcon('lastName')"
+                    (mouseleave)="hideSortIcon()"
+                    (click)="onSortClick('lastName')">
+                    LAST NAME
+                     <i [style.visibility]="isSortLastNameVisible ? 'visible' : 'hidden'"
+                      class="sortIcon fa-solid fa-sort"
+                      ></i>
+                </th>
+
+                 <th (mouseenter)="showSortIcon('dateOfBirth')"
+                     (mouseleave)="hideSortIcon()"
+                     (click)="onSortClick('dateOfBirth')">
+                    DOB
+                     <i [style.visibility]="isSortDOBVisible ? 'visible' : 'hidden'"
+                      class="sortIcon fa-solid fa-sort"
+                      ></i>
+                </th>
+
+                <th (mouseenter)="showSortIcon('postalCode')"
+                    (mouseleave)="hideSortIcon()"
+                    (click)="onSortClick('postalCode')">
+                   POSTAL CODE
+                     <i [style.visibility]="isSortPostalCodeVisible ? 'visible' : 'hidden'"
+                      class="sortIcon fa-solid fa-sort"
+                      ></i>
+                </th>
             <th>Restore</th>
-                <th *ngIf="(isRoleAdmin$ | async)">Delete</th>            
+            <th *ngIf="(isRoleAdmin$ | async)">Delete</th>            
         </tr>
     </thead>
 
@@ -29,14 +67,23 @@
                 <td> {{clientBin.id}} </td>
                 <td> {{clientBin.firstName}} </td>
                 <td> {{clientBin.lastName}} </td>
-                <td> {{clientBin.postalCode}} </td>
                 <td> {{clientBin.dateOfBirth}} </td>
-                <td> 
-                    <button type="button" class="deleteButton btn btn-success" (click)="restoreFromClientBin(clientBin.id)">Restore</button>
-                </td>
-                <td *ngIf="(isRoleAdmin$ | async)"> 
-                    <button type="button" class="deleteButton btn btn-danger" (click)="deleteFromClientBin(clientBin.id)">Delete Permanently</button>
-                 </td>
+                 <td> {{clientBin.postalCode}} </td>
+                 <td class="text-center">
+                        <div class="d-flex gap-3 justify-content-start">
+                            <button class="updateButton" (click)="restoreFromClientBin(clientBin.id)">
+                               <i class="fa-solid fa-pen" style="color: #ffffff;"></i>
+                            </button>
+                        </div> 
+                    </td>
+
+                    <td *ngIf="(isRoleAdmin$ | async)" class="text-center">
+                        <div class="d-flex gap-3 justify-content-start">
+                            <button class="deleteButton" (click)="deleteFromClientBin(clientBin.id)">
+                               <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                            </button>
+                        </div> 
+                    </td>
             </tr>
         }
     </tbody>

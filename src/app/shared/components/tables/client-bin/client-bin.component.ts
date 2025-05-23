@@ -34,6 +34,13 @@ export class ClientBinComponent implements OnInit {
   isRoleAdmin$ = this._authService.isRoleAdmin$;
   isLoading = true;
   isMobile = false;
+
+   isSortClicked = true;
+  isSortIdVisible = false;
+  isSortFirstNameVisible = false;
+  isSortLastNameVisible = false;
+  isSortDOBVisible = false;
+  isSortPostalCodeVisible = false;
   
   ngOnInit(): void {
     this.onResize();
@@ -63,9 +70,55 @@ export class ClientBinComponent implements OnInit {
       readonly panelOpenState = signal(false);
 
 
+      /*------------------------ Sorting TABLE METHODS ---------------------------------------------------------------------*/
 
-  getAllClientBin(pageNumber?: number, size?: number):void{
-    this._clientBinService.getAllClientBin(pageNumber, size).subscribe({
+  showSortIcon(field: string){
+    if(field=="id"){
+       this.isSortIdVisible = true;
+    }else if(field==="firstName"){
+      this.isSortFirstNameVisible = true;
+    }else if(field==="lastName"){
+      this.isSortLastNameVisible = true;
+    }else if(field==="postalCode"){
+      this.isSortPostalCodeVisible = true;
+    }else if(field==="dateOfBirth"){
+      this.isSortDOBVisible = true;
+    }
+  }
+
+  hideSortIcon(){
+    this.isSortIdVisible = false;
+    this.isSortFirstNameVisible = false;
+    this.isSortLastNameVisible = false;
+    this.isSortPostalCodeVisible = false;
+    this.isSortDOBVisible = false;
+  }
+
+  onSortClick(field : string){
+    this.isSortClicked = !this.isSortClicked;
+    let sortBy = "";
+    if(field=="id"){
+       sortBy = "id";
+    }else if(field==="firstName"){
+      sortBy = "firstName";
+    }else if(field==="lastName"){
+      sortBy = "lastName";
+    }else if(field==="postalCode"){
+      sortBy = "postalCode";
+    }else if(field==="dateOfBirth"){
+      sortBy = "dateOfBirth";
+    }
+
+    if(this.isSortClicked){
+        this.getAllClientBin(0,10,sortBy,"asc");
+    }else{
+        this.getAllClientBin(0,10,sortBy, "desc");
+    }
+  }//ends method
+
+
+  getAllClientBin(pageNumber?: number, size?: number, sortBy?:string, direction?:string):void{
+    this._clientBinService.getAllClientBin(pageNumber, size, sortBy, direction).subscribe({
       next : (response: ApiResponseModelPaginated<clientBinResponse>)=>{
         this.clientBinList =  response.data.content;
         this.apiPageLink = response.data.links;

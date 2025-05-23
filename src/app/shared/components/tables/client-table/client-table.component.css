@@ -79,8 +79,8 @@ main{
 
 /* ----------------TABLE----------------------------- */
 .clickable-row {
-    cursor: pointer;
-    padding: 40px !important;
+    /* cursor: pointer; */
+    /* padding: auto !important; */
   }
 
 .clickable-row:hover td {
@@ -91,8 +91,8 @@ main{
 
 /* This is for the table. */
 .clientTable {
-  overflow-x: auto;
-  max-width: 100%;
+  /* overflow-x: auto;
+  max-width: 100%; */
 }
 
 
@@ -101,6 +101,15 @@ th{
   padding-left: 20px;
   color: var(--secondaryColor);
   font-size: 16px;
+}
+
+  .sortIcon{
+        padding-left: 20px;
+        padding-right : 20px;
+      }
+
+th:hover{
+  cursor: pointer;
 }
 
 td{
@@ -124,10 +133,7 @@ td{
   margin: 5px;
 }
 
-
-
-
-/* -------------------------------------- Update button ------------------------------------------------------------------------------------*/
+/* ------------------------- Update button -----------------------------------------------*/
   .updateButton{
      padding:16px;
     border: none;
@@ -143,8 +149,7 @@ td{
     background-color: var(--darkBlue);
   }
 
-
-/* --------------------------------------------------------- Delete button ------------------------------------------------------------*/
+/* ----------------------- Delete button --------------------------------------*/
   .deleteButton{
     padding:16px;
     border: none;
@@ -163,29 +168,53 @@ td{
 
 
 
+  
+  @media(max-width: 900px){
+    main{
+      padding:0;
+      background-color: var(--lighterShade);
+    }
 
-
-   /* THIS IS FOR THE CLIENT-ACCORDIAN FOR THE MOBILE DISPLAY----------------------------------------------------------- */
-      /* --This is when the accordian is loading in small screen--- */
-      
-      .panelContainer{
-          /* background-color: coral;
-          border: 2px solid green; */
-      }
-
-      .loadingPanel{
+    .sortIcon{
+      padding-left: 10px;
+      padding-right : 10px;
+    }
         
-      }
+    th{
+      padding-top:1rem;
+      padding-left: 10px;
+      color: var(--secondaryColor);
+      font-size: 14px;
+    }
 
-      .loadingPanelHeader{
-        animation: waveMotion 2s infinite ease-in-out;
-      }
+    th:hover{
+      cursor: pointer;
+    }
+
+    td{
+      color:var(--secondaryColor);
+      font-size: 12px;
+      border-bottom: 1px solid var(--lightShade);
+      padding-left: 10px;
+
+    }
 
 
 
-      
+  }
 
-  /* THis is when the content is loaded in small screen------------- */
+
+
+
+
+
+
+
+
+
+
+
+   /*------------------------------------ THIS IS FOR THE CLIENT-ACCORDIAN FOR THE MOBILE DISPLAY----------------------------------------------------------- */
      
       /* This is to add the margin between the mat-accordian. */
     

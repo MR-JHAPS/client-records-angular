@@ -32,12 +32,54 @@
                         <i class="uncheckIcon fa-solid fa-square-xmark fa-xl" (click)="resetCheckBox()"></i>
                     <!-- </button> -->
                 </th>
-                <th><b>ID</b></th>
-                <th><b>FIRST NAME</b></th>
-                <th><b>LAST NAME</b></th>
-                <th><b>DOB</b></th>
-                <th><b>POSTAL CODE</b></th>
-                <th><b>ACTION</b></th>
+
+                <th (mouseenter)="showSortIcon('id')"
+                    (mouseleave)="hideSortIcon()"
+                    (click)="onSortClick('id')">
+                    <b>ID</b>
+                     <i [style.visibility]="isSortIdVisible ? 'visible' : 'hidden'" 
+                     class="sortIcon fa-solid fa-sort"
+                     ></i>
+                </th>
+                <th (mouseenter)="showSortIcon('firstName')"
+                    (mouseleave)="hideSortIcon()"
+                    (click)="onSortClick('firstName')">
+                    FIRST NAME
+                     <i [style.visibility]="isSortFirstNameVisible ? 'visible' : 'hidden'" 
+                     class="sortIcon fa-solid fa-sort"
+                     ></i>
+                </th>
+
+                <th (mouseenter)="showSortIcon('lastName')"
+                    (mouseleave)="hideSortIcon()"
+                    (click)="onSortClick('lastName')">
+                    LAST NAME
+                     <i [style.visibility]="isSortLastNameVisible ? 'visible' : 'hidden'"
+                      class="sortIcon fa-solid fa-sort"
+                      ></i>
+                </th>
+
+                 <th (mouseenter)="showSortIcon('dateOfBirth')"
+                     (mouseleave)="hideSortIcon()"
+                     (click)="onSortClick('dateOfBirth')">
+                    DOB
+                     <i [style.visibility]="isSortDOBVisible ? 'visible' : 'hidden'"
+                      class="sortIcon fa-solid fa-sort"
+                      ></i>
+                </th>
+
+                <th (mouseenter)="showSortIcon('postalCode')"
+                    (mouseleave)="hideSortIcon()"
+                    (click)="onSortClick('postalCode')">
+                   POSTAL CODE
+                     <i [style.visibility]="isSortPostalCodeVisible ? 'visible' : 'hidden'"
+                      class="sortIcon fa-solid fa-sort"
+                      ></i>
+                </th>
+                
+                <th>
+                    ACTION
+                </th>
                 <!-- <th>Delete</th> -->
             </tr>
         </thead>
@@ -53,13 +95,6 @@
                         </td>
                     </tr>
 
-                    <!-- <div *ngIf="isLoading" class="loader ">
-                         <div class="loadingMessage">Loading Please Wait a second</div>
-                            <div class="spinner-border" role="status">
-                                
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
-                    </div> -->
                 <!-------------------------------------- IF client is Loaded completely for big screen -------------------------------------->
                  <tbody>
                     @for (client of clientList ; track client.id) {
