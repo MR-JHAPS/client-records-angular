@@ -44,7 +44,10 @@ export class ImageGalleryComponent implements OnInit {
     this.getAllImagesOfCurrentUser();    
   }
 
-
+  isImagePresent() : boolean{
+    
+    return true;
+  }
 
 
   getAllImagesOfCurrentUser() : void {

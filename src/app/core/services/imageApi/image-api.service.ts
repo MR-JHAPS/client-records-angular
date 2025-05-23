@@ -33,8 +33,13 @@ export class ImageApiService {
 
 
   public uploadImageForAuthenticatedUser(imageRequest : ImageRequest) : Observable<ApiResponseModel<string>>{
+   // Appending the file (key matches backend's `ImageRequest field` name)
+    const formData = new FormData();
+    formData.append("imageFile", imageRequest.imageFile);
+    formData.append("imageName", imageRequest.imageName);
+   
     const url = `${this._baseUrl+this._imageEndpoints.uploadImageForAuthenticatedUser}`;
-    return this._httpClient.post<ApiResponseModel<string>>(url, imageRequest);
+    return this._httpClient.post<ApiResponseModel<string>>(url, formData);
   }
 
   public deleteImageById(imageId : number) : Observable<ApiResponseModel<string>>{

@@ -36,12 +36,14 @@ main{
   
   .gridContainer > .gridContent {
     overflow: hidden;
+
+    min-height: 316px;
     border: 1px solid #ccc;
     border-radius: 8px; /* optional for a softer look */
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f0f0f0;
+    background-color: #00000085;
     transition: transform 0.3s ease; /* Smooth animation */
 
   }
@@ -145,6 +147,7 @@ main{
     
     .gridContainer > .gridContent {
       overflow: hidden;
+      min-height: 0px;
       border: 1px solid #ccc;
       border-radius: 8px; /* optional for a softer look */
       display: flex;

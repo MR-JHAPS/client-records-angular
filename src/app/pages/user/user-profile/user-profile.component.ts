@@ -15,10 +15,12 @@ import { ImageGalleryComponent } from '../../../shared/components/image-gallery/
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { UpdateUserComponent } from '../../../shared/components/modals/update-user/update-user.component';
 import { ImageResponse } from '../../../core/models/response/imageResponse';
+import { NoImageDirective } from '../../../shared/directives/noImageDirective/no-image.directive';
+import { DateConverterPipe } from '../../../shared/pipes/dateConverter/date-converter.pipe';
 
 @Component({
   selector: 'app-user-profile',
-  imports: [CommonModule, FormsModule, MatButton, ImageGalleryComponent],
+  imports: [CommonModule, FormsModule, MatButton, ImageGalleryComponent,  NoImageDirective, DateConverterPipe],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.css'
 })

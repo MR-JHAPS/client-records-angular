@@ -1,9 +1,6 @@
 <main >
     @if(isLoading){
         <div> CurrentUser is still loading.</div>
-        <!-- <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div> -->
 
 
           <section class="mainContainer bg bg-light shadow m-3 mt-0">
@@ -14,7 +11,6 @@
                   </div>
             </div>
         
-            <!-- <div class="detailsContainer "> -->
                 <div class="detailsContainer card bg bg-light" >
                     <div class="spinner-border" role="status">
                         <span class="visually-hidden">Loading...</span>
@@ -36,12 +32,11 @@
             <section class="mainContainer bg bg-light shadow m-3 mt-0">
 
                 <div class="imageContainer bg bg-light">
-                    <img [src]="completeImageUrl" alt="profile picture">
+                    <img  appNoImage [src]="completeImageUrl" alt="profile picture">
 
                     <div class="imageUpload">
                         <label class="imageUploadLabel" for="profileImageUpload">
-                            <!-- <i class="fa-solid fa-camera-retro fa-beat-fade"></i> Font Awesome icon -->
-                            <i class="fa-solid fa-camera fa-xl" style="color: #ff8000;"></i>
+                            <i class="fa-solid fa-pen fa-xl  p-5" style="color: #fefefe;"></i>
                         </label>
                           <input 
                             id="profileImageUpload" 
@@ -56,39 +51,34 @@
             
                 <!-- <div class="detailsContainer "> -->
 
-                    <div class="detailsContainer card bg bg-light" >
+                    <div class="detailsContainer " >
                         
                       
-                        <ul class="details list-group list-group-flush ">
-                          <li class="list-group-item bg bg-light" > <span class="label">Email :</span><span class="contents"> {{currentUser.email}}</span></li>
-                          <li class="list-group-item bg bg-light"><span class="label">Created On :</span><span class="contents"> {{formattedCreatedOn}}</span></li>
-                          
-                        </ul>
-
-                        <!-- <div class="updateButton  card-body">
-                            <button mat-raised-button class="btn" (click)="openUpdateModal(currentUser.email)">Update User</button> 
-                        </div> -->
+                        <div class="details">
+                            <div class="row1" >
+                                <div class="label">Email : </div>
+                                <div class="contents"> {{currentUser.email}}</div>
+                            </div>
+                            <div class="row2">
+                                <div class="label">Created On :</div>
+                                <div class="contents"> {{formattedCreatedOn}}</div>
+                            </div>
+                        </div>
 
                         
-                        <div class="updateButton  card bg bg-light">
-                            <ul class="details list-group list-group-flush ">
-                                <li class="list-group-item bg bg-light">
-                                    <button mat-raised-button class="btn" (click)="openUpdateModal(currentUser.email)">Update User</button> 
-                                </li>
-                            </ul>
+                        <div class="updateButton">
+                            <button mat-raised-button class="btn" (click)="openUpdateModal(currentUser.email)">Update User</button> 
                         </div>
                          
 
                         <div class="updatedOn">
-                            <ul class="details list-group list-group-flush">
-                                <li class="list-group-item  bg bg-light">
-                                    <span class="updatedOn">
-                                        Last Updated on {{formattedUpdatedOn}}
-                                    </span>
-                                </li>
-                            </ul>    
-                          </div>
-                      </div>  
+                            <p>
+                                <!-- Last Updated on {{formattedUpdatedOn?.formattedUpdatedOn}} -->
+                                 Last Updated on :
+                                 {{currentUser.updatedOn | dateConverter}}
+                            </p>
+                        </div>
+                    </div>  
             
             </section>
        
