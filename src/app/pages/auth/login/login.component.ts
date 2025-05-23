@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit{
         },   
         error : (error) =>{
           this._toastrService.error("Error! Unable to Login");
-          console.log("something went wrong : " + error)
+          console.log("Login failed: " + error)
         },
         complete : () => {
           console.log("completed")

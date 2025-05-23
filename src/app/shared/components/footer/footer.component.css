@@ -6,3 +6,37 @@
     /* background-color: #f8f8f8; */
 }
 
+
+.details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background: green !important; */
+}
+
+.me{
+    /* color: var(--secondaryColor); */
+        color: rgb(98, 97, 97);
+        font-size: 15px;
+    padding: 0.3rem;
+    font-weight: 100;
+    /* text-decoration: underline; */
+}
+
+.links{
+    /* color: var(--secondaryColor); */
+    font-style: italic;
+     color: rgb(98, 97, 97);
+     letter-spacing: 0.3px;
+     font-size: 14px;
+     text-decoration: underline;
+
+}
+
+.label{
+    color: rgb(98, 97, 97);
+    letter-spacing: 0.3px;
+    font-size: 14px;
+}
+

@@ -2,7 +2,7 @@ import { Component, EventEmitter, inject, Output, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserApiServiceService } from '../../../core/services/user-api/user-api-service.service';
 import { PublicApiServiceService } from '../../../core/services/public-api/public-api-service.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { UserRegisterRequest } from '../../../core/models/request/userRegisterRequest';
 import { ApiResponseModel } from '../../../core/models/responseModel/apiResponseModel';
 import { ToastrService } from 'ngx-toastr';
@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register',
-  imports: [FormsModule, ProgressbarModule ,CommonModule],
+  imports: [FormsModule, ProgressbarModule ,CommonModule, RouterLink],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })

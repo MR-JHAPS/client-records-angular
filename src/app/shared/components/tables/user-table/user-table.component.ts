@@ -18,10 +18,11 @@ import { DateConverterPipe } from '../../../pipes/dateConverter/date-converter.p
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { UpdateUserRolesComponent } from '../../modals/update-user-roles/update-user-roles.component';
 import { UserRoleUpdatedCommunicationService } from '../../../services/userRoleUpdatedCommunication/user-role-updated-communication.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user-table',
-  imports: [UserSearchComponent, NoImageDirective, CommonModule, MaterialModules, PaginationComponent,DateConverterPipe],
+  imports: [UserSearchComponent, NoImageDirective, CommonModule, MaterialModules, PaginationComponent,DateConverterPipe, RouterLink],
   templateUrl: './user-table.component.html',
   styleUrl: './user-table.component.css'
 })

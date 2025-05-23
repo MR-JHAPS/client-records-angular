@@ -272,10 +272,6 @@ main{
 
 /* Media Query for Mobile Devices -----------------------------------------------------------------------------------------------*/
 
-@media(max-width : 1000px) {
-
-
-}
 
 
 
@@ -314,6 +310,13 @@ main{
       h2{
         font-weight: bolder;
       }
+
+      .cv{
+        display:flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+
 
   .secondContainer{
     padding:10px;

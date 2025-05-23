@@ -40,9 +40,9 @@
             }
      .info>.credentialsDetails{
         /* background-color: var(--orange); */
-        margin-top: 4rem;
+        margin-top: 1rem;
         color: var(--orange);
-        font-weight: 600;
+       
     }
 
         .info>.credentialsDetails>ul{
@@ -51,7 +51,9 @@
 
             .info>.credentialsDetails>ul>li{
                 color: var(--darkBlue);
-                font-style: italic;
+                /* font-style: italic; */
+                 font-weight: 400;
+                 font-size: 14px;
             }
 
 
@@ -124,16 +126,16 @@
 
     .mainContainer{
         margin-bottom: 4rem;
-        margin-top: 10svh;
+        margin-top: 2svh;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
     }
 
 
-    .credentialsDetails{
+    /* .credentialsDetails{
         display: none;
-    }
+    } */
 
      form{
         width: 100%;
