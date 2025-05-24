@@ -88,7 +88,6 @@ main{
 }
   
 
-
 /* This is for the table. */
 .clientTable {
   /* overflow-x: auto;
@@ -165,6 +164,16 @@ td{
     box-shadow: 2px 0.8px 5px  rgb(169, 76, 76);
   }
 
+
+  .clientNotFound{
+    background-color: var(--white);
+    padding:1rem;
+    text-align: center;
+    color: var(--secondaryColor);
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+  }
 
 
 

@@ -6,25 +6,23 @@ import { Router } from '@angular/router';
 import { TokenValidateRequest } from '../../models/request/tokenValidateRequest';
 import { JwtServiceService } from '../../services/jwtService/jwt-service.service';
 import { ApiResponseModel } from '../../models/responseModel/apiResponseModel';
-import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthServiceService   {  
 
-  private _toastrService = inject(ToastrService);
   private _publicService = inject(PublicApiServiceService);
   private _jwtService = inject(JwtServiceService);
   private _route = inject(Router);
   tokenValidateRequest : TokenValidateRequest = new TokenValidateRequest() ;
  
   /* Auth state subject */
-  // isTokenValid : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  isTokenValid : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isRoleAdmin : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isRoleUser :  BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   /* Public Observables. */
-  // isTokenValid$ = this.isTokenValid.asObservable();
+  isTokenValid$ = this.isTokenValid.asObservable();
   isRoleAdmin$ = this.isRoleAdmin.asObservable();
   isRoleUser$ = this.isRoleUser.asObservable();
 
@@ -36,10 +34,10 @@ export class AuthServiceService   {
   initializeAuthState() {
   const token = this.getToken(); //getting from localStorage
   if (token) {
-    const tokenRoles = this.getRoleFromtoken(token);
-    this.isRoleAdmin.next(tokenRoles.includes("admin"));
-    this.isRoleUser.next(tokenRoles.includes("user"));
-    // this.isTokenValid.next(true); // Assume valid until proven otherwise
+    const roles = this.getRoleFromtoken(token);
+    // this.isRoleAdmin.next(roles.includes("admin"));
+    // this.isRoleUser.next(roles.includes("user"));
+    this.isTokenValid.next(true); // Assume valid until proven otherwise
     this.tokenValidateRequest.setTokenName(token);
     this.validateToken(this.tokenValidateRequest); // Secondary check
   }  else{
@@ -53,7 +51,7 @@ export class AuthServiceService   {
 // In AuthService
 updateAuthState(token: string): void {
   const roles = this.getRoleFromtoken(token);
-  // this.isTokenValid.next(true);
+  this.isTokenValid.next(true);
   this.tokenValidateRequest.setTokenName(token);
 
   this.isRoleAdmin.next(roles.includes("admin"));
@@ -90,6 +88,8 @@ updateAuthState(token: string): void {
     }
       this.isRoleAdmin.next(false);
       this.isRoleUser.next(false);
+      // this.isLoggedIn.next(false);
+      this.isTokenValid.next(false);
   }
 
   /*-------------------------JWT.getRoles----------------------------------------------------*/
@@ -101,40 +101,24 @@ updateAuthState(token: string): void {
 
 
   /*------------------------------Token Validation REQUEST-----------------------------------------------*/
-  /* Validating token. calling the validateToken api to check if the token is valid. */
+  /* Validating token. calling the validateToken api to check if the token is valid and
+    user is logged in using valid token. */
     validateToken(tokenRequest: TokenValidateRequest): void {
       this._publicService.validateToken(tokenRequest).subscribe({
         next: (response: ApiResponseModel<string>) => {
           console.log("Token valid, maintaining current roles.");
-          this.checkRoleAndRedirect(tokenRequest.getTokenName()); //redirects to respective home as per token roles.
+          this.isTokenValid.next(true); // Only update token state
         },
         error: (error) => {
           this.clearAuthState();
-          this._route.navigateByUrl("login");
+          this._route.navigateByUrl("home");
         }
       });
     }
 
 
-    //checks roles from token and redirects to respective home.
-    checkRoleAndRedirect(token : string) :void {
-      const tokenRoles = this.getRoleFromtoken(token);
-      const currentUrl = this._route.url;
-      if(tokenRoles.includes("admin") ){
-        if(!currentUrl.startsWith("/admin") ){
-          console.log("redirecting to Admin Home");
-          this._route.navigateByUrl("/admin/admin-home");
-        }
-
-      }else if(tokenRoles.includes("user")){
-        if(!currentUrl.startsWith("/user")){
-          console.log("redirecting to User Home");
-          this._route.navigateByUrl("/user/user-home");
-        }
-      }else{
-        console.log("redirecting to Index-Home reason: Invalid Role");
-         this._route.navigateByUrl("/login");
-      }
+    checkRoleAndRedirect(token : string){
+      
     }
 
  /*  loggedIn(){
@@ -142,9 +126,11 @@ updateAuthState(token: string): void {
   } */
 
   loggedOut(){
+    // this.isLoggedIn.next(false);
     this.isRoleUser.next(false);
     this.isRoleAdmin.next(false);
     this.clearAuthState();
+    // window.location.href = '/login'; 
     this._route.navigateByUrl("/login");
   }
 

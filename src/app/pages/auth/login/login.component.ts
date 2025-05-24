@@ -47,15 +47,16 @@ export class LoginComponent implements OnInit{
           localStorage.setItem("loggedInUser", this.user.email); //saving logged_userEmail with the "loggedInUser" as key.
           localStorage.setItem(this.user.email, this.token);    //saving token with the userEmail as key.
           console.log("User logged in successfully.", response.data);
+          this._authService.initializeAuthState();
           
-          const roles = this._authService.getRoleFromtoken(this.token);
-            if(roles.includes("admin")){
-              this._router.navigateByUrl("admin");
-            }else{
-              this._router.navigateByUrl("user/user-home");
-            }
+          // const roles = this._authService.getRoleFromtoken(this.token);
+          //   if(roles.includes("admin")){
+          //     this._router.navigateByUrl("admin/admin-home");
+          //   }else{
+          //     this._router.navigateByUrl("user/user-home");
+          //   }
           
-          this._authService.updateAuthState(this.token);
+          // this._authService.updateAuthState(this.token);
         },   
         error : (error) =>{
           this._toastrService.error("Error! Unable to Login");

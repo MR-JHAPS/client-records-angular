@@ -1,10 +1,31 @@
 
 <!-- This container is for the error-404  -->
 <div *ngIf="(errorCode==='404')" class="error404 container">
-    <h3>
-       Page Not Found!
-        ERROR-404
-    </h3>
+    <main>
+
+        <section class="imageContainer">
+            <img src="/assets/images/stewie.jpg">
+           
+                <!-- this is display: flex  -->
+            <div class="errorContainer">               
+                <div class="errorSubContainer">
+                    <div class="errorTitle">
+                        ERROR 404! Page Not Found
+                    </div> 
+                    <div class="errorMessage">
+                        Cannot Find The Content You Are Looking For
+                    </div> 
+                </div>
+                <div class="redirectLink">
+                    <button routerLink="/login">Return To Login Page</button>
+                </div>
+            </div>
+            
+        </section>
+
+
+
+</main>
 </div>
 
 
@@ -12,8 +33,29 @@
 
 <!-- This container is for the error-500  -->
 <div *ngIf="(errorCode==='500')" class="error500 container">
-    <h3>
-        Internal Server Error!
-        ERROR-500
-    </h3>
+    <main>
+
+        <section class="imageContainer">
+            <img src="/assets/images/stewie.jpg">
+           
+                <!-- this is display: flex  -->
+            <div class="errorContainer">               
+                <div class="errorSubContainer">
+                    <div class="errorTitle">
+                        ERROR 500! Internal Server Error
+                    </div> 
+                    <div class="errorMessage">
+                         Something Went Wrong! Please Try Again later.
+                    </div> 
+                </div>
+                <div class="redirectLink">
+                    <button routerLink="/login">Return To Login Page</button>
+                </div>
+            </div>
+            
+        </section>
+
+
+
+</main>
 </div>

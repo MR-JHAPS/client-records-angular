@@ -15,7 +15,7 @@ export const userGuardGuard: CanActivateFn = (route, state) => {
           return true;//allow access.
         }
         //redirect to forbidden page.
-        return router.createUrlTree(["forbidden"]);
+        return router.createUrlTree(["login"]);
       })
     )
 };

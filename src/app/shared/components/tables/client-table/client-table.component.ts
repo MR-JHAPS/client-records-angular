@@ -52,6 +52,7 @@ export class ClientTableComponent implements OnInit, OnDestroy {
   searchRequest : SearchRequest;
   isMobile = false; // this stores if the viewing device is mobile/laptop.
   isLoading = true;
+  isSearchResultPresent = true; // this is to see if the searching contains no clients.
 
   isSortClicked = true;
   isSortIdVisible = false;
@@ -173,11 +174,16 @@ export class ClientTableComponent implements OnInit, OnDestroy {
           this.clientList = response.data.content;
           this.isLoading = false;
           console.log(this.clientList);
+          this.isSearchResultPresent = true;
           // this._toastrService.success("Search Complete.")
         },
         error : error => {
-          this._toastrService.error("Error! Search failed.")
-          this.isLoading = true;
+          if(error.status===404){
+            this.isSearchResultPresent = false;
+          }else if( error.status ===500){
+            this._router.navigate(["/error/500"]);
+          }
+          this.isLoading = false;
         },
         complete : ()=>{
           console.log("Search done successfully.")

@@ -19,7 +19,7 @@ export class SubMenuComponent implements OnInit {
     isRoleAdmin$ = this._authService.isRoleAdmin$;
 
   ngOnInit(): void {
-    this._authService.initializeAuthState();
+    // this._authService.initializeAuthState();
    
        this.routerSub =  this._router.events.pipe(
          filter(event => event instanceof NavigationEnd)
@@ -29,7 +29,7 @@ export class SubMenuComponent implements OnInit {
        });
 
        this._authService.isRoleAdmin$.subscribe((a:boolean)=>{
-        console.log(a);
+        console.log("Is roleAdmin: " + a);
        })
   }
 

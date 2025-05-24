@@ -18,23 +18,5 @@ export const adminGuardGuard: CanActivateFn = (route, state) => {
       return router.createUrlTree(["forbidden"]);
     })
   )
-  
-
-
-
-  /* const authService = inject(AuthServiceService);
-  const router = inject(Router);
-
-  return combineLatest([
-    authService.isTokenValid$,
-    authService.isRoleAdmin$
-  ]).pipe(
-    take(1),
-    map(([isTokenValid, isAdmin]) => {
-      if (!isTokenValid) return router.createUrlTree(['/login']);
-      if (!isAdmin) return router.createUrlTree(['/forbidden']);
-      return true;
-    })
-  ); */
 
 };

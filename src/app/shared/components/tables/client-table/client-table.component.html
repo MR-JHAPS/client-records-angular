@@ -98,7 +98,7 @@
                 <!-------------------------------------- IF client is Loaded completely for big screen -------------------------------------->
                  <tbody>
                     @for (client of clientList ; track client.id) {
-                    <tr *ngIf="!isLoading" class="clickable-row" >
+                <tr *ngIf="!isLoading && isSearchResultPresent"   class="clickable-row" >
                     <td >
                         <input type="checkbox" 
                         [checked]="selectedClients.includesClientId(client.id)"
@@ -129,6 +129,10 @@
 
 
     </table>
+
+    <div *ngIf="!isSearchResultPresent && !isLoading" class="clientNotFound">
+        NO CLIENTS FOUND
+    </div>
 </div>
 
 
@@ -164,7 +168,7 @@
 
         <!------------- If the page is loaded completely for mobile devices/small screen---------------  -->
         @for (client of clientList ; track client.id) {
-            <div *ngIf="!isLoading" class="mobileContainer">
+            <div *ngIf="!isLoading && isSearchResultPresent" class="mobileContainer">
         <mat-accordion >
             <mat-expansion-panel class="panel">
                 <mat-expansion-panel-header  class="panelHeader">
@@ -232,6 +236,10 @@
     </div>
         <!-- <br> -->
         }
+
+         <div *ngIf="!isSearchResultPresent && !isLoading" class="clientNotFound">
+        NO CLIENTS FOUND !!!
+    </div>
     </section>  
 
     
