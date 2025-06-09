@@ -19,6 +19,7 @@ import { MainLayoutComponent } from './layout/main-layout/main-layout.component'
 import { UserTableComponent } from './shared/components/tables/user-table/user-table.component';
 import { ClientBinComponent } from './shared/components/tables/client-bin/client-bin.component';
 import { IndexLayoutComponent } from './layout/index-layout/index-layout.component';
+import { EmailVerificationComponent } from './pages/auth/email-verification/email-verification.component';
 
 export const routes: Routes = [
     {path: "", component : IndexLayoutComponent,
@@ -28,6 +29,7 @@ export const routes: Routes = [
             {path: "login", component: LoginComponent},
             {path: "register", component: RegisterComponent},
             {path: "check", component:CheckComponent},
+            {path:"emailVerification", component:EmailVerificationComponent}
         ]
     },
 

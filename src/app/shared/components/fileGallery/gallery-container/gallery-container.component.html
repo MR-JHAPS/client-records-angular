@@ -1,0 +1,44 @@
+ <main>
+ 
+    <section class="subMenuContainer bg bg-light pb-5">
+      <!-- Toggle Tabs -->
+                <div class="tabs">
+                    <ul class="nav justify-content-center ">
+                        <li [class.selectedTab]="activeTab==='images'" [class.notSelectedTab]="activeTab!=='images'">
+                            <a class="nav-link active" aria-current="page" 
+                                (click)="activeTab='images'">
+                                Image
+                            </a>
+                        </li>
+                        <li [class.selectedTab]="activeTab==='documents'" [class.notSelectedTab]="activeTab!=='documents'" >
+                            <a class="nav-link"
+                                (click)="activeTab='documents'">
+                                Documents
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+    </section>
+
+
+    <section class="contents">
+       
+       @if (activeTab ==="images") {
+         <app-image-gallery
+           (imagesToDeleteEmitter)="deleteSelectedImages($event)"  
+           (imageToUploadEmitter)="uploadNewFile($event)"
+           [imageOnlyListChild]="imageOnlyList"
+         />
+       }
+       @else if(activeTab ==="documents"){
+        <app-document-gallery
+        (uploadDocumentEmitter)="uploadNewFile($event)"
+        [documentOnlyListChild]="documentsOnlyList"
+        />
+       }
+    </section>
+
+
+
+
+</main>

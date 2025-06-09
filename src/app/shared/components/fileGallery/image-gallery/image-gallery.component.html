@@ -1,9 +1,15 @@
 
     <main>
+
+        <section class="documents">
+
+            
+
+
+        </section>
         
         <section class="gridContainer">
             <div class="gridContent shadow">
-                <!-- <p>Upload New Image</p> -->
                 <label class="imageUploadLabel" for="imageUpload">
                     <!-- <i class="fa-solid fa-camera fa-xl" style="color: #ff8000;"></i> -->
                     <i class="clickableUpload fa-solid fa-plus fa-2xl" style="color: #ffffff;"></i><br>
@@ -15,16 +21,16 @@
                     id="imageUpload" 
                     type="file" 
                     accept="image/*" 
-                    (change)="uploadNewImage($event)"
+                    (change)="emitUploadNewImage($event)"
                     style="display: none;"
                 >
             </div>
-            @for (image of imageResponseList; track image.id) {
+            @for (image of imageOnlyListChild; track image.id) {
                 <div class="gridContent" >
                     <div class="imageWrapper">
                         <input type="checkbox" class="imageCheckbox" 
                         [checked]="checkedImages.idList.includes(image.id)" (change)="toggleCheckBox(image.id)">
-                        <img [src]="image.imageUrl" alt="image" (click)="openImage(image.imageUrl, image.imageName)">
+                        <img [src]="image.fileUrl" alt="image" (click)="openImage(image.fileUrl, image.fileName)">
                     </div>
                 </div>
             }
@@ -39,10 +45,10 @@
 
         <!-- This is the delete Selected Button. -->
         <section *ngIf="isImageSelected" class="actionBar sticky-bottom text-center mt-4">
-            <button class="btn delete" (click)="deleteSelectedImages()">
+            <button class="btn delete" (click)="emitDeleteSelectedImages()">
                 <i class="fa-solid fa-trash fa-beat fa-2xl" style="color: #d11b3f;"></i>
             </button>
-            <button class="btn reset" (click)="resetSelectedImages()">
+            <button class="btn reset" (click)="emitResetSelectedImages()">
                 <i class="fa-solid fa-ban fa-2xl" style="color: #74C0FC;"></i>
             </button>
         </section>
@@ -50,4 +56,25 @@
 
            
             
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
     </main> 

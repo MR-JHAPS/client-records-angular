@@ -4,6 +4,8 @@
 
 
 .mainContainer{
+    /* height: 100vh; */
+    /* overflow: hidden; */
     margin-top: 10svh;
     display: flex;
     flex-direction: row;
@@ -64,6 +66,7 @@
 
     .formContainer{
         min-height: 50svh;
+        height: min-content;
         margin-right:0px;
         margin-top: 0px; 
     }

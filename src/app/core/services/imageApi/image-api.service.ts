@@ -1,59 +1,59 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { API_ENDPOINTS } from '../../constants/apiEndpoints.const';
-import { Observable } from 'rxjs';
-import { ApiResponseModelPaginated } from '../../models/responseModel/apiResponseModelPaginated';
-import { ImageResponse } from '../../models/response/imageResponse';
-import { ApiResponseModel } from '../../models/responseModel/apiResponseModel';
-import { ImageRequest } from '../../models/request/imageRequest';
-import { BulkImageDeleteRequest } from '../../models/request/bulkImageDeleteRequest';
+// import { HttpClient, HttpParams } from '@angular/common/http';
+// import { inject, Injectable } from '@angular/core';
+// import { API_ENDPOINTS } from '../../constants/apiEndpoints.const';
+// import { Observable } from 'rxjs';
+// import { ApiResponseModelPaginated } from '../../models/responseModel/apiResponseModelPaginated';
+// import { FileResponse } from '../../models/response/fileResponse';
+// import { ApiResponseModel } from '../../models/responseModel/apiResponseModel';
+// import { FileRequest } from '../../models/request/fileRequest';
+// import { BulkImageDeleteRequest } from '../../models/request/bulkImageDeleteRequest';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ImageApiService {
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class ImageApiService {
 
-  _httpClient = inject(HttpClient);
-  _baseUrl = API_ENDPOINTS.apiBaseUrl;
-  _imageEndpoints = API_ENDPOINTS.imageApi;
-
-
+//   _httpClient = inject(HttpClient);
+//   _baseUrl = API_ENDPOINTS.apiBaseUrl;
+//   _imageEndpoints = API_ENDPOINTS.imageApi;
 
 
-  public getAllImagesOfUser(): Observable<ApiResponseModelPaginated<ImageResponse>>{
-    const url = `${this._baseUrl+this._imageEndpoints.getAllImagesOfAuthenticatedUser}`;
-    return this._httpClient.get<ApiResponseModelPaginated<ImageResponse>>(url);
-  }
 
 
-  public getImagesById(id: number) : Observable<ApiResponseModel<ImageResponse>>{
-    const url = `${this._baseUrl+this._imageEndpoints.getImageById(id)}`;
-    return this._httpClient.get<ApiResponseModel<ImageResponse>>(url);
-  }
+//   public getAllImagesOfUser(): Observable<ApiResponseModelPaginated<FileResponse>>{
+//     const url = `${this._baseUrl+this._imageEndpoints.getAllImagesOfAuthenticatedUser}`;
+//     return this._httpClient.get<ApiResponseModelPaginated<FileResponse>>(url);
+//   }
 
 
-  public uploadImageForAuthenticatedUser(imageRequest : ImageRequest) : Observable<ApiResponseModel<string>>{
-   // Appending the file (key matches backend's `ImageRequest field` name)
-    const formData = new FormData();
-    formData.append("imageFile", imageRequest.imageFile);
-    formData.append("imageName", imageRequest.imageName);
+//   public getImagesById(id: number) : Observable<ApiResponseModel<FileResponse>>{
+//     const url = `${this._baseUrl+this._imageEndpoints.getImageById(id)}`;
+//     return this._httpClient.get<ApiResponseModel<FileResponse>>(url);
+//   }
+
+
+//   public uploadImageForAuthenticatedUser(imageRequest : FileRequest) : Observable<ApiResponseModel<string>>{
+//    // Appending the file (key matches backend's `ImageRequest field` name)
+//     const formData = new FormData();
+//     formData.append("imageFile", imageRequest.file);
+//     formData.append("imageName", imageRequest.fileName);
    
-    const url = `${this._baseUrl+this._imageEndpoints.uploadImageForAuthenticatedUser}`;
-    return this._httpClient.post<ApiResponseModel<string>>(url, formData);
-  }
+//     const url = `${this._baseUrl+this._imageEndpoints.uploadImageForAuthenticatedUser}`;
+//     return this._httpClient.post<ApiResponseModel<string>>(url, formData);
+//   }
 
-  public deleteImageById(imageId : number) : Observable<ApiResponseModel<string>>{
-    const url = `${this._baseUrl+this._imageEndpoints.deleteImageById(imageId)}`;
-    return this._httpClient.delete<ApiResponseModel<string>>(url);
-  }
+//   public deleteImageById(imageId : number) : Observable<ApiResponseModel<string>>{
+//     const url = `${this._baseUrl+this._imageEndpoints.deleteImageById(imageId)}`;
+//     return this._httpClient.delete<ApiResponseModel<string>>(url);
+//   }
 
-  public deleteMultipleImageById(idList : BulkImageDeleteRequest) : Observable<ApiResponseModel<string>>{
-    const url = `${this._baseUrl+this._imageEndpoints.deleteMultipleImageById}`;
-    return this._httpClient.delete<ApiResponseModel<string>>(url, { body : idList });
-  }
-
-
+//   public deleteMultipleImageById(idList : BulkImageDeleteRequest) : Observable<ApiResponseModel<string>>{
+//     const url = `${this._baseUrl+this._imageEndpoints.deleteMultipleImageById}`;
+//     return this._httpClient.delete<ApiResponseModel<string>>(url, { body : idList });
+//   }
 
 
 
-}//ends service
+
+
+// }//ends service

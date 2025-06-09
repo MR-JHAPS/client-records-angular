@@ -66,12 +66,12 @@ export const API_ENDPOINTS= {
         getClientLogById:(id: number) => `/client-logs/${id}`
     },
 
-    imageApi: {
-        getImageById:(imageId: number) => `/images/${imageId}`,
-        getAllImagesOfAuthenticatedUser: "/images/me",
-        uploadImageForAuthenticatedUser: "/images",
-        deleteImageById:(imageId: number) => `/images/${imageId}`,
-        deleteMultipleImageById: "/images" // the imageID's are passed through params.
+    fileApi: {
+        getFileById:(fileId: number) => `/files/${fileId}`,
+        getAllFilesOfAuthenticatedUser: "/files/me",
+        uploadFileForAuthenticatedUser: "/files",
+        deleteFileById:(fileId: number) => `/files/${fileId}`,
+        deleteMultipleFileById: "/files" // the imageID's are passed through params.
     }
 
 

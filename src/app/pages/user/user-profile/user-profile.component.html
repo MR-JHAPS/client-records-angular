@@ -82,14 +82,12 @@
             
             </section>
        
+
             <section class="galleryContainer bg bg-light shadow m-3 mb-2">
-                <app-image-gallery 
-                (hasImages)="checkingImagesInGallery($event)"
-                />       
-                <!-- <div *ngIf="!areImagesPresentInGallery" class="emptyState"> -->
-    
-                   <!-- <p> No images found. </p> -->
-                  <!-- </div> -->
+                <!-- contains both image/ document galleries. -->
+                <app-gallery-container
+                    (imageDeletedEmitter)="getCurrentUser()"
+                />                
             </section>
 
  }

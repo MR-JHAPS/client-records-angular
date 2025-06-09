@@ -1,6 +1,8 @@
-.mainLayoutContainer{
+
+
+.indexLayoutContainer{
   background-color: var(--lightShade);
-  min-height: 100svh;
+  min-height: 100vh; /* full viewport height */
 }
 
 
@@ -10,4 +12,20 @@
   top: 0;
   z-index: 1000; /* make sure it stays above other elements */
   background-color: var(--darkBlue); /* or match your theme */
+}
+
+
+.content{
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+@media (max-height: 530px){
+
+  .indexLayoutContainer{
+    background-color: var(--lightShade);
+    display: flex;
+    flex-direction: column;
+    min-height: 150svh; /* full viewport height */
+  }
 }

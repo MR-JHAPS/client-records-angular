@@ -7,6 +7,8 @@ import { UserAuthRequest } from '../../../core/models/request/userAuthRequest';
 import { ApiResponseModel } from '../../../core/models/responseModel/apiResponseModel';
 import { ToastrService } from 'ngx-toastr';
 import { FooterComponent } from "../../../shared/components/footer/footer.component";
+import { LoginResponse } from '../../../core/models/response/loginResponse';
+import { EmailVerificationStatusService } from '../../../shared/services/emailVerificationCommunication/email-verification-status.service';
 
 
 @Component({
@@ -21,12 +23,14 @@ export class LoginComponent implements OnInit{
   private _activatedRoute = inject(ActivatedRoute);
   private _authService = inject(AuthServiceService);//this is to handle the menu depending on logged in or logged out.
   private _publicController : PublicApiServiceService = inject(PublicApiServiceService);
+  private _emailVerificationService = inject(EmailVerificationStatusService);
   private _router : Router = inject(Router); 
   token : string = "";  // this is placeholder for token response.
   user : UserAuthRequest = new UserAuthRequest();
-  
+  loginResponse : LoginResponse;
   public registrationStatus = false;
   public registrationMessage ="";
+
     
 
   ngOnInit(): void {
@@ -42,21 +46,23 @@ export class LoginComponent implements OnInit{
 
   onLogin():void{
     this._publicController.userLogin(this.user).subscribe({
-        next : (response: ApiResponseModel<string>)=>{
-          this.token = response.data;
+        next : (response: ApiResponseModel<LoginResponse>)=>{
+          this.loginResponse = response.data;
           localStorage.setItem("loggedInUser", this.user.email); //saving logged_userEmail with the "loggedInUser" as key.
-          localStorage.setItem(this.user.email, this.token);    //saving token with the userEmail as key.
-          console.log("User logged in successfully.", response.data);
+          localStorage.setItem(this.user.email, this.loginResponse.token);    //saving token with the userEmail as key.
+          localStorage.setItem(this.user.email+"_refreshToken", this.loginResponse.refreshToken);
+          console.log("User logged in successfully.", this.loginResponse);
+          const emailRegistrationStatus = this.loginResponse.isEmailVerified;
+          if(emailRegistrationStatus===true){
+            this._emailVerificationService.setEmailVerified();
+          }else{
+            this._emailVerificationService.setEmailNotVerified();
+          }
+
+          //validates TOken/roles and redirects to respective homepage(admin/user)
           this._authService.initializeAuthState();
-          
-          // const roles = this._authService.getRoleFromtoken(this.token);
-          //   if(roles.includes("admin")){
-          //     this._router.navigateByUrl("admin/admin-home");
-          //   }else{
-          //     this._router.navigateByUrl("user/user-home");
-          //   }
-          
-          // this._authService.updateAuthState(this.token);
+         
+
         },   
         error : (error) =>{
           this._toastrService.error("Error! Unable to Login");

@@ -1,0 +1,38 @@
+.subMenuContainer{
+    background-color: var(--lighterShade);
+    padding: 1rem;
+    margin-bottom: 0 !important;
+    padding-bottom: 0;
+}
+
+
+.selectedTab{
+    background-color: var(--orange);
+    a{
+    color: var(--lightShade)
+    }
+}
+
+    .selectedTab:hover{
+        box-shadow: var(--orange) 0px 1px 3px ;
+    }
+
+
+.notSelectedTab{
+    background-color: var(--white);
+    a{
+    color: var(--darkBlue)
+    }
+}
+
+    .notSelectedTab:hover{
+       background-color: var(--lightShade);
+    }
+
+.selectedTab, .notSelectedTab:hover{
+    cursor: pointer;
+}
+
+
+
+

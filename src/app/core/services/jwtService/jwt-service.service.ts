@@ -15,6 +15,10 @@ export class JwtServiceService {
     }
   }
  
+  getEmailRegistrationStatus(token: string) : boolean | null {
+    const decodedToken = this.getDecodedToken(token);
+    return decodedToken?.isEmailVerified || null;
+  }
 
   getRole(token : string): Array<string> | null{
    const decodedToken = this.getDecodedToken(token);

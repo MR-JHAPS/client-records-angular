@@ -1,0 +1,20 @@
+<div class="modal-container">
+    <div class="modal-header">
+      <i class="bi bi-exclamation-triangle warning-icon"></i>
+      <h2>Verify Your Email</h2>
+    </div>
+    
+    <div class="modal-content">
+      <p>Your Account is not verified ! Please Verify your Account.</p>
+      <!-- <p class="warning-message"> 
+        <span class="text-danger"><b>Client ID : {{ clientId }}</b></span>
+         <br> This action cannot be undone.</p> -->
+    </div>
+    
+    <div class="modal-actions">
+      <button type="button" class="btn btn-outline-secondary cancel-btn" (click)="this._modalService.hide()">Verify Later</button>
+      <button type="button" class="btn btn-success confirm-btn" (click)="sendEmailVerification()">
+        Verify Now
+      </button>
+    </div>
+  </div>

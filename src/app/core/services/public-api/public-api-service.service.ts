@@ -7,6 +7,7 @@ import { UserAuthRequest } from '../../models/request/userAuthRequest';
 import { UserRegisterRequest } from '../../models/request/userRegisterRequest';
 import { TokenValidateRequest } from '../../models/request/tokenValidateRequest';
 import { ApiResponseModel } from '../../models/responseModel/apiResponseModel';
+import { LoginResponse } from '../../models/response/loginResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,9 @@ export class PublicApiServiceService {
   private publicApi = API_ENDPOINTS.publicApi; //this contains the login and signup API's.
  
  // Login Method: 
-  userLogin( userObj: UserAuthRequest):Observable<ApiResponseModel<string>>{
+  userLogin( userObj: UserAuthRequest):Observable<ApiResponseModel<LoginResponse>>{
     const url = `${this.apiBaseUrl+this.publicApi.login}`;
-    return this._httpClient.post<ApiResponseModel<string>>( url, userObj);
+    return this._httpClient.post<ApiResponseModel<LoginResponse>>( url, userObj);
   }
  
   // Registration Method: 

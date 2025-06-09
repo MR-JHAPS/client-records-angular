@@ -1,0 +1,44 @@
+
+  .action-bar.sticky-bottom {
+    /* position: fixed; */
+    position: relative;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    /* background: white; */
+    background-color: orange;
+    padding: 10px 20px;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    display: flex;
+    gap: 10px;
+    
+  }
+
+  .action-bar{
+    
+  }
+
+  .btn{
+    /* background-color: var(--lightShade); */
+    background-color: white;
+    border-radius: 0px;
+    padding: 16px;
+    opacity: 0.95;
+    border: 2px solid var(--lightShade);
+    
+  }
+
+
+
+  .btn.reset:hover{
+    background-color:rgb(233, 233, 233);
+    color: white;
+    opacity: 1;
+  }
+  .btn.delete:hover{
+    background-color: rgb(233, 233, 233);
+    color: white;
+    opacity: 1;
+  }

@@ -73,6 +73,7 @@ export class UserTableComponent implements OnInit {
     this._adminService.getAllUsers().subscribe({
       next : (response : ApiResponseModelPaginated<UserAdminResponse>) => {
         this.userList = response.data.content;
+        console.log(this.userList);
         console.log("getting all users");
         this.isLoading = false;
       },

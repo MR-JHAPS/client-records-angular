@@ -1,0 +1,56 @@
+<main>
+
+    <section class="documentContainer">
+
+        <div class="documentUploader">
+            <input type="file" accept="application/pdf"
+            style="display:none"
+            (change)="emitUploadDocuments($event)"
+            id="uploader">
+
+            <label for="uploader" >
+                    <i class="fa-solid fa-file-circle-plus fa-2xl mb-3 mt-3" style="color: #000000cc;">
+                    </i>
+                    <p> Upload Docs</p>
+            </label>
+        </div>
+
+
+
+        @for (document of documentOnlyListChild ; track document.id) {
+            <div class="fileContent">
+                    <a href={{document.fileUrl}} target="_blank" rel="noopener noreferrer" > 
+                        <!-- <input type="checkbox" class="imageCheckbox" 
+                            [checked]="checkedDocs.idList.includes(document.id)" 
+                            (change)="toggleCheckBox(document.id)"> -->
+                             <input type="checkbox" class="imageCheckbox" 
+                            [checked]="checkedDocs.idList.includes(document.id)" 
+                            (change)="toggleCheckBox(document.id)">
+                        <img src="assets/icons/docsThumbnail.jpg" alt="docs">    
+                    </a>
+                
+                    <p class="fileName"> {{document.fileName}}</p>
+                    {{checkedDocs.idList}}
+            </div>
+        }
+    </section>
+
+
+
+    @if (isDocumentSelected) {
+        <section class="actionBar sticky-bottom text-center mt-4">
+            <app-dynamic-delete-button
+                (resetSelectedEmitter)="resetCheckbox()"
+                (deleteSelectedEmitter)="emitDeleteDocuments()"
+            />
+        </section>
+    }
+    <!-- <section class="actionBar sticky-bottom text-center mt-4">
+        <app-dynamic-delete-button
+            (resetSelectedEmitter)="resetCheckbox()"
+            (deleteSelectedEmitter)="emitDeleteDocuments()"
+            [isFileSelected]="isDocumentSelected"
+        />
+    </section> -->
+
+</main>

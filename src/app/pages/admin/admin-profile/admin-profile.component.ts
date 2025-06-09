@@ -6,7 +6,7 @@ import { CustomDateConverterService } from '../../../shared/customDateConverter'
 import { ToastrService } from 'ngx-toastr';
 import { UserImageUploadRequest } from '../../../core/models/request/userImageUploadRequest';
 import { UserAdminResponse } from '../../../core/models/response/userAdminResponse';
-import { ImageGalleryComponent } from '../../../shared/components/image-gallery/image-gallery.component';
+import { ImageGalleryComponent } from '../../../shared/components/fileGallery/image-gallery/image-gallery.component';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AdminUpdateRequest } from '../../../core/models/request/adminUpdateRequest';
 import { UserApiServiceService } from '../../../core/services/user-api/user-api-service.service';
@@ -27,7 +27,7 @@ export class AdminProfileComponent {
 
 
   /* this is required because without this we cannot get the access to the images of image Gallery. */
-    @ViewChild(ImageGalleryComponent) imageGallery !: ImageGalleryComponent
+    // @ViewChild(ImageGalleryComponent) imageGallery !: ImageGalleryComponent
   
   
     // baseUrl = API_ENDPOINTS.imageBaseUrl;
@@ -109,7 +109,7 @@ export class AdminProfileComponent {
         next : (response : ApiResponseModel<string>)=>{
           this.getCurrentAdmin();
           this._toastrService.success("Profile Image Updated Successfully");
-          this.imageGallery.getAllImagesOfCurrentUser();
+          // this.imageGallery.getAllImagesOfCurrentUser();
           
         },
         error : (error)=>{

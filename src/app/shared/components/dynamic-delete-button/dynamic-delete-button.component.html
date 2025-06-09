@@ -1,0 +1,14 @@
+  <!-- This is the delete Selected Button. -->
+        <!-- <section *ngIf="isFileSelected" class="actionBar sticky-bottom text-center mt-4"> -->
+        <section class="actionBar sticky-bottom text-center mt-4">
+            <button class="btn delete" (click)="emitDeleteSelectedImages()">
+                <i class="fa-solid fa-trash fa-beat fa-2xl" style="color: #d11b3f;"></i>
+            </button>
+            <button class="btn reset" (click)="emitResetSelectedImages()">
+                <i class="fa-solid fa-ban fa-2xl" style="color: #74C0FC;"></i>
+            </button>
+        </section>
+
+        <div>
+            <!-- <p> IsFileSelected : {{isFileSelected}}</p> -->
+        </div>
