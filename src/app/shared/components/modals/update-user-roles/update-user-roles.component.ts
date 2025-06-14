@@ -29,6 +29,7 @@ export class UpdateUserRolesComponent implements OnInit{
                         id: 0,
                         profileImageUrl: "",
                         email: "",
+                        emailVerified: false,
                         roles : [],
                         createdOn: new Date(),
                         updatedOn: new Date ()

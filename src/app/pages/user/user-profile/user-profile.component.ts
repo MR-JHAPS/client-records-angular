@@ -16,10 +16,13 @@ import { NoImageDirective } from '../../../shared/directives/noImageDirective/no
 import { DateConverterPipe } from '../../../shared/pipes/dateConverter/date-converter.pipe';
 import { RouterLinkActive } from '@angular/router';
 import { GalleryContainerComponent } from "../../../shared/components/fileGallery/gallery-container/gallery-container.component";
+import { EmailVerifierPipe } from '../../../shared/pipes/emailVerifier/email-verifier.pipe';
 
 @Component({
   selector: 'app-user-profile',
-  imports: [CommonModule, FormsModule, ImageGalleryComponent, NoImageDirective, DateConverterPipe, GalleryContainerComponent],
+  imports: [CommonModule, FormsModule, ImageGalleryComponent, 
+      EmailVerifierPipe, NoImageDirective,
+     DateConverterPipe, GalleryContainerComponent],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.css'
 })
@@ -37,7 +40,8 @@ export class UserProfileComponent implements OnInit{
 
   // baseUrl = API_ENDPOINTS.imageBaseUrl;
   private _userApiService = inject(UserApiServiceService); 
-  private _dateConverter = inject(CustomDateConverterService);
+  private _dateConverter = inject(CustomDateConverterService); //this is pipe
+  // private _emailVerifierPipe = inject(EmailVerifierPipe);
   private _toastrService = inject(ToastrService);
 
   
@@ -47,6 +51,8 @@ export class UserProfileComponent implements OnInit{
   activeTab = "images";
   _modalService = inject(BsModalService);
   bsModalRef ?: BsModalRef;
+
+  isEmailVerified : boolean;
  
 
   
@@ -61,6 +67,7 @@ getCurrentUser():void{
           this.formattedCreatedOn = this._dateConverter.formatLocalDateTime(response.data.createdOn);
           this.formattedUpdatedOn = this._dateConverter.formatLocalDateTime(response.data.updatedOn);
           this.completeImageUrl = `${response.data.imageUrl}`;
+          this.isEmailVerified = response.data.emailVerified;
           console.log(this.formattedCreatedOn);              
           console.log(response)
                         },

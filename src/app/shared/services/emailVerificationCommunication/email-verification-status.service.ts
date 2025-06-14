@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 export class EmailVerificationStatusService {
 
 
-  isEmailVerified : BehaviorSubject<boolean> =  new BehaviorSubject<boolean>(false);
+  isEmailVerified : BehaviorSubject<boolean> =  new BehaviorSubject<boolean>(true);
   isEmailVerified$ = this.isEmailVerified.asObservable();
 
 

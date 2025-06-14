@@ -1,15 +1,17 @@
 
 
 <div>
-    This Page is responsible to show the Verification Success and Verification Failure Status after clicking 
-    the URL received in the User Email.
+   We Have Sent a Verification Code to your Email.
+   Click the link sent via Email to verify your Account.<a (click)="resendVerificationLink()">Resend Email</a>
 </div>
 
 
 <div class="verified">
 
     <p> Your Account is Verified. Proceed to Home
-        <>
+        <span routerLink="/user/user-home">
+            Return To HomePage.
+        </span>
 
     </p>
 </div>

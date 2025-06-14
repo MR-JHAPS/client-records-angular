@@ -12,7 +12,9 @@ export const API_ENDPOINTS= {
     publicApi: {
        login : "/public/login",
        signup: "/public/signup",
-       validateToken : "/public/validate-token"
+       validateToken : "/public/validate-token",
+       sendEmailVerification : "/public/send-verification-email",
+       verifyCode : (verificationCode: string) => `/public/verify-email?verification_code=${verificationCode}`
     },
 
     

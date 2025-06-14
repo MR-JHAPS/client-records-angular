@@ -51,16 +51,16 @@ export class AuthServiceService   {
 
 
 // In AuthService
-updateAuthState(token: string): void {
-  const roles = this.getRoleFromtoken(token);
-  // this.isTokenValid.next(true);
-  this.tokenValidateRequest.setTokenName(token);
+// updateAuthState(token: string): void {
+//   const roles = this.getRoleFromtoken(token);
+//   // this.isTokenValid.next(true);
+//   this.tokenValidateRequest.setTokenName(token);
 
-  this.isRoleAdmin.next(roles.includes("admin"));
-  this.isRoleUser.next(roles.includes("user"));
+//   this.isRoleAdmin.next(roles.includes("admin"));
+//   this.isRoleUser.next(roles.includes("user"));
   
-  this.validateToken(this.tokenValidateRequest);
-}
+//   this.validateToken(this.tokenValidateRequest);
+// }
 
 
 /*-------------------------LOCAL STORAGE----------------------------------------------------------------*/

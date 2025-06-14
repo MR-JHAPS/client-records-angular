@@ -52,13 +52,34 @@
                 <!-- <div class="detailsContainer "> -->
 
                     <div class="detailsContainer " >
-                        
+                         
                       
                         <div class="details">
+
+                            <div class="verificationRow" >
+                                <div class="status">
+                                     <div
+                                        class="fa-solid me-2 "
+                                        [ngClass]="currentUser.emailVerified ?  'fa-check verifiedIcon' : 'fa-xmark notVerifiedIcon'">
+                                    </div>
+                                    <div 
+                                    [ngClass]="currentUser.emailVerified ?  'verified' : 'notVerified'" > 
+                                        {{currentUser.emailVerified | emailVerifier}}
+                                    </div>
+                                </div>
+                               
+                                <div *ngIf="!currentUser.emailVerified">
+                                    <button class="btn btn-success verifyButton pt-1 pb-1 ms-2"> Verify Email</button>
+                                </div>
+                            </div>
+
+
                             <div class="row1" >
                                 <div class="label">Email : </div>
                                 <div class="contents"> {{currentUser.email}}</div>
                             </div>
+                            
+                            
                             <div class="row2">
                                 <div class="label">Created On :</div>
                                 <div class="contents"> {{currentUser.createdOn | dateConverter }}</div>

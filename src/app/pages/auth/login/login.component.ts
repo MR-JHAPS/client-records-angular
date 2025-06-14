@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit{
   private _activatedRoute = inject(ActivatedRoute);
   private _authService = inject(AuthServiceService);//this is to handle the menu depending on logged in or logged out.
   private _publicController : PublicApiServiceService = inject(PublicApiServiceService);
-  private _emailVerificationService = inject(EmailVerificationStatusService);
+  private _emailVerificationCommunication = inject(EmailVerificationStatusService);
   private _router : Router = inject(Router); 
   token : string = "";  // this is placeholder for token response.
   user : UserAuthRequest = new UserAuthRequest();
@@ -52,11 +52,13 @@ export class LoginComponent implements OnInit{
           localStorage.setItem(this.user.email, this.loginResponse.token);    //saving token with the userEmail as key.
           localStorage.setItem(this.user.email+"_refreshToken", this.loginResponse.refreshToken);
           console.log("User logged in successfully.", this.loginResponse);
-          const emailRegistrationStatus = this.loginResponse.isEmailVerified;
+
+          /* This is to show/hide verify-Email-Modal accordingly. */
+          const emailRegistrationStatus = this.loginResponse.emailVerified;
           if(emailRegistrationStatus===true){
-            this._emailVerificationService.setEmailVerified();
+            this._emailVerificationCommunication.setEmailVerified();
           }else{
-            this._emailVerificationService.setEmailNotVerified();
+            this._emailVerificationCommunication.setEmailNotVerified();
           }
 
           //validates TOken/roles and redirects to respective homepage(admin/user)
