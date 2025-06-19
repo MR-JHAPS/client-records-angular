@@ -20,60 +20,68 @@ import { UserTableComponent } from './shared/components/tables/user-table/user-t
 import { ClientBinComponent } from './shared/components/tables/client-bin/client-bin.component';
 import { IndexLayoutComponent } from './layout/index-layout/index-layout.component';
 import { EmailVerificationComponent } from './pages/auth/email-verification/email-verification.component';
+import { ProjectDetailsComponent } from './pages/index/project-details/project-details.component';
+import { AuthenticationLayoutComponent } from './layout/authentication-layout/authentication-layout.component';
 
 export const routes: Routes = [
-    {path: "", component : IndexLayoutComponent,
-        children : [
-            { path:"",  redirectTo: "home", pathMatch: "full" }, //inside Main Layout
-            {path: "home", component: HomeComponent},
-            {path: "login", component: LoginComponent},
-            {path: "register", component: RegisterComponent},
-            {path: "check", component:CheckComponent},
-            {path:"emailVerification", component:EmailVerificationComponent}
-        ]
-    },
+        {path: "", component : IndexLayoutComponent,
+            children : [
+                { path:"",  redirectTo: "home", pathMatch:"full" }, //inside Main Layout
+                {path: "home", component: HomeComponent},
+                {path: "projectDetails", component:ProjectDetailsComponent},
+                {path: "check", component:CheckComponent},
+                
+                {path:"emailVerification", component:EmailVerificationComponent}
+            ]
+        },
 
+        /* This Layout is for the Login And Register */
+        {path:"", component: AuthenticationLayoutComponent,
+            children:[
+                {path: "login", component: LoginComponent},
+                {path: "register", component: RegisterComponent},
+            ]
+        },
+        { path: "user",
+        canActivate : [userGuardGuard],
+        canActivateChild : [userGuardGuard], /* Calling a AuthGuard class. */
+        component : MainLayoutComponent,
+        children : [ 
+                {path: "user-home",component: UserHomeComponent,
+                    children : [
+                        {path:"clientTable", component:ClientTableComponent},
+                        {path: "", redirectTo: "clientTable", pathMatch: "full" }
+                    ]
+                },
+                {path: "", redirectTo: "user-home", pathMatch: "full" },
+                {path: "user-profile", component: UserProfileComponent},
+                {path: "client-update/:id", component: ClientUpdateComponent},
+                {path: "selected-client", component: SelectedClientComponent},
+                {path: "clientBinTable", component: ClientBinComponent},
+                {path: "clientLogTable", component: ClientLogTableComponent},    
+                ]
+        },
 
-            { path: "user",
-            canActivate : [userGuardGuard],
-            canActivateChild : [userGuardGuard], /* Calling a AuthGuard class. */
-            component : MainLayoutComponent,
-            children : [ 
-                    {path: "user-home",component: UserHomeComponent,
-                        children : [
-                            {path:"clientTable", component:ClientTableComponent},
-                            {path: "", redirectTo: "clientTable", pathMatch: "full" }
-                        ]
-                    },
-                    {path: "", redirectTo: "user-home", pathMatch: "full" },
-                    {path: "user-profile", component: UserProfileComponent},
-                    {path: "client-update/:id", component: ClientUpdateComponent},
-                    {path: "selected-client", component: SelectedClientComponent},
-                    {path: "clientBinTable", component: ClientBinComponent},
-                    {path: "clientLogTable", component: ClientLogTableComponent},    
-                   ]
-            },
-
-            {path: "admin",
-            canActivate : [adminGuardGuard],
-            canActivateChild : [adminGuardGuard], /* Calling a AuthGuard class. */
-            component : MainLayoutComponent,
-            children : [ 
-                    {path: "admin-home",
-                     component: AdminHomeComponent,
-                     children : [
-                            {path:"clientTable", component:ClientTableComponent},
-                            {path:"userTable", component:UserTableComponent},
-                            {path: "", redirectTo: "clientTable", pathMatch: "full" }
-                        ]
-                    },
-                    {path: "", redirectTo: "admin-home", pathMatch: "full" },
-                    {path: "clientLogTable", component: ClientLogTableComponent},
-                    {path: "clientBinTable", component: ClientBinComponent},
-                    {path: "admin-profile", component: AdminProfileComponent},
-                    {path: "client-update/:id", component: ClientUpdateComponent},
-                   ]
-            },
+        {path: "admin",
+        canActivate : [adminGuardGuard],
+        canActivateChild : [adminGuardGuard], /* Calling a AuthGuard class. */
+        component : MainLayoutComponent,
+        children : [ 
+                {path: "admin-home",
+                    component: AdminHomeComponent,
+                    children : [
+                        {path:"clientTable", component:ClientTableComponent},
+                        {path:"userTable", component:UserTableComponent},
+                        {path: "", redirectTo: "clientTable", pathMatch: "full" }
+                    ]
+                },
+                {path: "", redirectTo: "admin-home", pathMatch: "full" },
+                {path: "clientLogTable", component: ClientLogTableComponent},
+                {path: "clientBinTable", component: ClientBinComponent},
+                {path: "admin-profile", component: AdminProfileComponent},
+                {path: "client-update/:id", component: ClientUpdateComponent},
+                ]
+        },
 
 
             {path: "forbidden", component: ForbiddenComponent},

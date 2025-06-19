@@ -56,7 +56,7 @@ export class RegisterComponent {
 
   //Method: Redirects to the LoginPage with @param(registrationStatus).
   toLoginPage(queryParams:{[key:string] : any}):void{
-    this._router.navigate(["login"], {queryParams});
+    this._router.navigate(["/login"], {queryParams});
     // this._router.navigate( ["login"], {queryParams: {registrationStatus: true} });
 
   }

@@ -1,0 +1,18 @@
+
+
+
+    <div class="subMenuContainer container-fluid">
+        <ul class="nav">
+            @for (button of buttonTabsChild; track $index) {
+           
+                <li class=" nav-item list">
+                    <a class="nav-link active" aria-current="page" 
+                        routerLink={{button.routerLink}}
+                        routerLinkActive="active-link"
+                        [routerLinkActiveOptions]="{ exact: false }">
+                        {{button.buttonName}}
+                    </a>
+                </li>
+             }
+        </ul>
+    </div>

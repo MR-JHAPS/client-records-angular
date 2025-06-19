@@ -66,6 +66,7 @@ main{
         .firstContainer>.detailsContainer>.language>h5{
           font-size: 16px;
           font-weight: 600;
+          padding:inherit;
         }
 
       /* Adding flex to each div of details-Container */
@@ -90,14 +91,14 @@ main{
 
       /* Language-div of details container */
       .firstContainer>.detailsContainer>.description{
-        color:var(--darkBlue);
+        color:var(--primaryColor);
 
         
       }
 
       /* Language-div of details container */
       .firstContainer>.detailsContainer>.aboutMe{
-        color:var(--darkBlue);
+        color:var(--primaryColor);
 
         
       }
@@ -127,7 +128,7 @@ main{
 /* --------------------------------------------------------Second Page------------------------------------------------------------------------------ */
 
 .secondContainer{
-  background-color: var(--darkBlue);
+  background-color: var(--primaryColor);
   padding:30px;
   padding-top:40px;
   margin-bottom: 10px;

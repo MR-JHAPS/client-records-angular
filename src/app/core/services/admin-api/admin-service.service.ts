@@ -53,28 +53,36 @@ searchUserByRole(searchRequest : SearchRequest, pageNumber? :number, pageSize?: 
               .set('size', pageSize?.toString()??'10');
   /* If the searchBy is ROLE then give the paginated Response */
      const url = `${this.baseUrl+this.adminApi.getUsersByRole}`;
-     
     return this._httpClient.get<ApiResponseModelPaginated<UserAdminResponse>>(url,{params})
   
 }//ends method
 
-searchUserByEmail(searchRequest : SearchRequest) : Observable<ApiResponseModel<UserAdminResponse>>{
+
+
+searchUserByEmail(searchRequest : SearchRequest, pageNumber? :number, pageSize?: number) : Observable<ApiResponseModelPaginated<UserAdminResponse>>{
   /* if the searchBy is not "email" and "role" then throw error. */
   if(searchRequest.searchBy !== "email" ){
     throwError(()=> new Error(`User search param invalid. Expected 'email', got ${searchRequest.searchBy}`));
   }
   /* Else the searchBy is EMAIL then give the non-paginated Response */
     let params = new HttpParams()
+              .set('email', searchRequest.searchQuery)
+              .set('page', pageNumber?.toString()??'0') 
+              .set('size', pageSize?.toString()??'10');
     const url = `${this.baseUrl+this.adminApi.searchUserByEmail}`;
-    params = params.set('email', searchRequest.searchQuery);
-   return this._httpClient.get<ApiResponseModel<UserAdminResponse>>(url, {params})
+    // params = params.set('email', searchRequest.searchQuery);
+   return this._httpClient.get<ApiResponseModelPaginated<UserAdminResponse>>(url, {params})
 }//ends method
+
+
 
 
 updateUserRole(userId: number, roleRequest: RoleRequest): Observable<ApiResponseModel<string>>{
   const url = `${this.baseUrl}${this.adminApi.updateUserRole(userId)}`;
   return this._httpClient.put<ApiResponseModel<string>>(url, roleRequest);
 }
+
+
 
 updateCurrentAdmin(request : AdminUpdateRequest): Observable<ApiResponseModel<string>>{
   const url = `${this.baseUrl}${this.adminApi.updateCurrentAdmin}`;

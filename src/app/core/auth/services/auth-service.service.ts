@@ -20,11 +20,9 @@ export class AuthServiceService   {
   tokenValidateRequest : TokenValidateRequest = new TokenValidateRequest() ;
  
   /* Auth state subject */
-  // isTokenValid : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isRoleAdmin : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isRoleUser :  BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   /* Public Observables. */
-  // isTokenValid$ = this.isTokenValid.asObservable();
   isRoleAdmin$ = this.isRoleAdmin.asObservable();
   isRoleUser$ = this.isRoleUser.asObservable();
 
@@ -67,6 +65,7 @@ export class AuthServiceService   {
 
   /* Gets the logged in user from localStorage using key 'loggedInUser' */
   getLoggedInUser(): string | null {
+    console.log("Getting LoggedIn User Email/Name.");
   return localStorage.getItem("loggedInUser");
   }
 
@@ -77,12 +76,13 @@ export class AuthServiceService   {
       console.log("No logged in user to get token from.");
       return null;
     };
+    console.log("Getting Token of LoggedIn User.");
     return localStorage.getItem(loggedInUser);
   }
 /*-----------------------------------------------------------------------------------------------------------------*/
 
   clearAuthState():void{
-    console.log("Clearing AuthState.");
+    console.log("Clearing AuthState from localStorage.");
     const currentUser = this.getLoggedInUser();
     if(currentUser){
       localStorage.removeItem(currentUser); /* This removes the token-value --> ([user : key] : [token : value]) */
@@ -95,7 +95,9 @@ export class AuthServiceService   {
   /*-------------------------JWT.getRoles----------------------------------------------------*/
 
   getRoleFromtoken(token: string): Array<string> {
+    console.log("Getting role from JWT TOken.");
     const roles =  this._jwtService.getRole(token);
+    console.log("This is the roles obtained from JWT Token : ", roles![0]);
     return roles ? roles : new Array<string> ;
   }
 
@@ -105,10 +107,11 @@ export class AuthServiceService   {
     validateToken(tokenRequest: TokenValidateRequest): void {
       this._publicService.validateToken(tokenRequest).subscribe({
         next: (response: ApiResponseModel<string>) => {
-          console.log("Token valid, maintaining current roles.");
+          console.log("Validating Token. Token valid.");
           this.checkRoleAndRedirect(tokenRequest.getTokenName()); //redirects to respective home as per token roles.
         },
         error: (error) => {
+          console.log("Token Invalid, Redirecting to Login page & clearing localStorage",error);
           this.clearAuthState();
           this._route.navigateByUrl("login");
         }

@@ -1,30 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
 
-
+/* --lightShade : #F5F5F5; */
 :root{
-    --darkBlue: #112C50;
-    /* --introBackground: #E8E8E8; */
-    /* --introBackground: #E8E8E8; */
-	--orange: #EF6602;  /* Button links or icons. use minimal */
+	--white : #ffffff;
+	--lighterShade : #F5F5F5;
+	--lightShade : #E8E8E8;
+
+	--orange: #EF6602;  
     --mutedOrange: #FF8C42;
 	--lightOrange : #ffd9be;
-	--white : #ffffff;
+	
     --lightBlue: #4B6F8C;
-    --lightShade : #E8E8E8;
-	/* --lightShade : #F5F5F5; */
-	--lighterShade : #F5F5F5;
-    /* #FF8C42 */
 
 	--uploadHover:  #faebdd;
 	--uploadBackground:   #fdf9f2; 
-    --primaryColor:#112C50;
-    --secondaryColor: #2E5A88;  
+    /* --primaryColor:#112C50; */
+	 --darkBlue: #112C50;
+    /* --secondaryColor: #2E5A88;   */
     --backgroundColor:  #F5F5F5;
     --textColor: #333333;
 
-
 	--deleteButton:#e53935;
 	--updateButton:#1e88e5;
+
+	/* Greennish */
+	/* --primaryColor:#344955;
+	--secondaryColor:#4A6572; */
+	/* --primaryColor:#232F34; */
+	
+	/* --orange:; */
+
+	/* --primaryColor:#113357; */
+	--primaryColor:#203657;
+	--secondaryColor: #365071;
+
+	--darkShade : #d3d3d3;
 
 }
 

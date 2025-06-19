@@ -15,15 +15,6 @@
 }
 
 
-.subMenu{
-  padding-top:1rem;
-  position: sticky;
-  top:56px;
-  z-index: 999;
-  background-color: var(--lightShade);
-  /* background-color: green; */
-}
-
 /* .content{
   padding: 2rem;
   box-sizing: border-box;

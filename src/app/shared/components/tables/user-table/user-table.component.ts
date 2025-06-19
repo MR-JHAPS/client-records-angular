@@ -99,9 +99,9 @@ export class UserTableComponent implements OnInit {
   private searchUserByEmail(searchRequest : SearchRequest){
     this.isLoading = true;
     this._adminService.searchUserByEmail(searchRequest).subscribe({
-      next : (response : ApiResponseModel<UserAdminResponse>) =>{
+      next : (response : ApiResponseModelPaginated<UserAdminResponse>) =>{
         // const responseUser = response.data;
-        this.userList  = [response.data];
+        this.userList  = response.data.content;
         console.log("searching user by Email.");
         this.isLoading = false;
       },

@@ -74,7 +74,12 @@ td{
 
   .updateButton:hover{
     transition-duration: 0.2s;
-    background-color: var(--darkBlue);
+    background-color: var(--primaryColor);
+  }
+
+  .restoreText{
+    color: var(--secondaryColor);
+    font-size: 12px;
   }
 
 

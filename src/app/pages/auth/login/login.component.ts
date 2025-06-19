@@ -5,10 +5,12 @@ import { PublicApiServiceService } from '../../../core/services/public-api/publi
 import { AuthServiceService } from '../../../core/auth/services/auth-service.service';
 import { UserAuthRequest } from '../../../core/models/request/userAuthRequest';
 import { ApiResponseModel } from '../../../core/models/responseModel/apiResponseModel';
-import { ToastrService } from 'ngx-toastr';
+import { Toast, ToastrService } from 'ngx-toastr';
 import { FooterComponent } from "../../../shared/components/footer/footer.component";
 import { LoginResponse } from '../../../core/models/response/loginResponse';
 import { EmailVerificationStatusService } from '../../../shared/services/emailVerificationCommunication/email-verification-status.service';
+import { LoginFailureResponse } from '../../../core/models/response/loginErrorResponse';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -28,8 +30,11 @@ export class LoginComponent implements OnInit{
   token : string = "";  // this is placeholder for token response.
   user : UserAuthRequest = new UserAuthRequest();
   loginResponse : LoginResponse;
+  //User Email Registration Status.
   public registrationStatus = false;
   public registrationMessage ="";
+
+  remainingLoginAttempts : number;
 
     
 
@@ -66,9 +71,15 @@ export class LoginComponent implements OnInit{
          
 
         },   
-        error : (error) =>{
-          this._toastrService.error("Error! Unable to Login");
-          console.log("Login failed: " + error)
+        // error : (error: ApiResponseModel<LoginFailureResponse>) =>{
+        error : (error: HttpErrorResponse) => {
+          const customErrorResponse = error.error as ApiResponseModel<LoginFailureResponse>;
+          console.log("error Type : " , error); //this works
+          this.remainingLoginAttempts = customErrorResponse.data.remainingAttempts;
+          console.log("Remaining Attempts : ", this.remainingLoginAttempts);
+          const status = error.status;
+          this.checkErrorStatus(status);
+         
         },
         complete : () => {
           console.log("completed")
@@ -84,6 +95,15 @@ closeRegistrationMessage(){
 }
 
 
+  checkErrorStatus(status : number) : any {
+    if(status===401){
+      return this._toastrService.error(`Error! Wrong Credentials. ${this.remainingLoginAttempts} Attempts left.`);
+    }else if(status===423){
+      return this._toastrService.error("Error! Account locked");
+    }else{
+      return this._toastrService.error("Error! Something Went Wrong");
+    }
+  }
 
 
 

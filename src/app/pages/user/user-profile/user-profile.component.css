@@ -196,7 +196,7 @@ img{
       }
 
   .updateButton .btn:hover{
-    background-color: var(--darkBlue);
+    background-color: var(--primaryColor);
   }
 
 

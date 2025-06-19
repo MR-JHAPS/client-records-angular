@@ -2,9 +2,10 @@
     background-color: var(--lightShade);
 } */
 
-main{
+/* main{
     min-height: 80svh;
-}
+    margin-top: 10svh;
+} */
 
 ::ng-deep .bar .progress-bar{
     background-color: var(--orange);
@@ -18,6 +19,9 @@ main{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    /* min-height: 80svh; */
+    margin-top: 10svh;
 }
 
 /* -------------------------------- This is for the detailsContents of the LoginPage -------------------------------------------- */
@@ -95,7 +99,7 @@ main{
             }
 
         form{
-            height: 100%;
+            /* height: 100%; */
             margin-top: 0px; 
             width: 500px;
             background-color: #fff !important;
