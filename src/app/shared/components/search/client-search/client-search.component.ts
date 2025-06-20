@@ -7,7 +7,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-client-search',
-  imports: [FormsModule, CommonModule, ReactiveFormsModule, NgFor],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule],
   templateUrl: './client-search.component.html',
   styleUrl: './client-search.component.css'
 })

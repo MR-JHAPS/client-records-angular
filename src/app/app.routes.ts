@@ -22,6 +22,8 @@ import { IndexLayoutComponent } from './layout/index-layout/index-layout.compone
 import { EmailVerificationComponent } from './pages/auth/email-verification/email-verification.component';
 import { ProjectDetailsComponent } from './pages/index/project-details/project-details.component';
 import { AuthenticationLayoutComponent } from './layout/authentication-layout/authentication-layout.component';
+import { DemoClientTableComponent } from './shared/ui/demo-client-table/demo-client-table.component';
+import { ClientTableForUserComponent } from './pages/user/user-home/client-table-for-user/client-table-for-user.component';
 
 export const routes: Routes = [
         {path: "", component : IndexLayoutComponent,
@@ -49,8 +51,10 @@ export const routes: Routes = [
         children : [ 
                 {path: "user-home",component: UserHomeComponent,
                     children : [
-                        {path:"clientTable", component:ClientTableComponent},
-                        {path: "", redirectTo: "clientTable", pathMatch: "full" }
+                        // {path:"clientTable", component:ClientTableComponent},
+                        // {path: "", redirectTo: "clientTable", pathMatch: "full" }
+                        {path:"clientTableForUser", component: ClientTableForUserComponent},
+                        {path:"", redirectTo:"clientTableForUser", pathMatch: "full"}
                     ]
                 },
                 {path: "", redirectTo: "user-home", pathMatch: "full" },
@@ -59,6 +63,7 @@ export const routes: Routes = [
                 {path: "selected-client", component: SelectedClientComponent},
                 {path: "clientBinTable", component: ClientBinComponent},
                 {path: "clientLogTable", component: ClientLogTableComponent},    
+                {path:"demoClientTable", component: DemoClientTableComponent}
                 ]
         },
 

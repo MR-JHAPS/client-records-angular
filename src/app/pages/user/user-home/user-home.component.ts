@@ -5,11 +5,12 @@ import { SubMenuComponent } from "../../../layout/sub-menu/sub-menu.component";
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { VerifyEmailModalComponent } from '../../../shared/components/modals/verify-email-modal/verify-email-modal.component';
 import { EmailVerificationStatusService } from '../../../shared/services/emailVerificationCommunication/email-verification-status.service';
+import { ClientTableForUserComponent } from "./client-table-for-user/client-table-for-user.component";
 // import { UserMenuCommunicationService } from '../../../shared/services/userMenuCommunication/user-menu-communication.service';
 
 @Component({
   selector: 'app-user-home',
-  imports: [RouterOutlet, ClientTableComponent, SubMenuComponent],
+  imports: [RouterOutlet, ClientTableComponent, SubMenuComponent, ClientTableForUserComponent],
   templateUrl: './user-home.component.html',
   styleUrl: './user-home.component.css'
 })

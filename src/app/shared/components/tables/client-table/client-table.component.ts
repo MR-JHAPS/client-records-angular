@@ -87,7 +87,7 @@ export class ClientTableComponent implements OnInit, OnDestroy {
     this.isMobile = window.innerWidth<700 ;
   }
 
-  readonly panelOpenState = signal(false);
+  // readonly panelOpenState = signal(false);
 
   /*------------------------ Sorting TABLE METHODS ---------------------------------------------------------------------*/
 
@@ -299,23 +299,6 @@ openInsertClientModal(): void {
 
 /*------------------------- This is for the Pagination.--------------------------------------------------------------------- */
 
-//@param: action  is "prev", "next", "self", "first", "last"
-// toSpecificPage(action: string): void {
-//   //passing the list of pagination Links to the service layer.
-//   this._clientService.getRequiredPage(this.pageLinks, action).subscribe({
-//     next : (response: ApiResponseModelPaginated<ClientResponse>) => {
-//       this.clientList = response.data.content;
-//       //saving the list of (next, previous, last, first) page links in a variable.
-//       this.pageLinks = response.data.links; 
-//       console.log(response.data);
-//     },
-//     error : (error)=> {
-//       console.log("Error occured while getting all the clients.", error);
-//       this._toastrService.error("Error Getting the Specific Page.");
-//     },
-//     complete : () => { console.log("All client obtained Successfully.")}
-//   })
-// }
 
 
 toSpecificPage(rawUrl: string): void {

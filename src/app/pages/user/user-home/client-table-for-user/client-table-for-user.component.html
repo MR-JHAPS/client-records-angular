@@ -1,0 +1,17 @@
+
+
+<!-- <app-search-ui
+[searchFieldsChild]="searchFields"
+(searchEventEmitter)="searchClients($event)"
+
+/> -->
+
+<app-table-ui
+    [buttonList]="['update','delete']"
+    [tableColumnsChild]="tableColumns"
+    [contents]="clientList"
+    [includeCheckbox]="true"
+    [searchFieldsTable]="searchFields"
+    (searchEventEmitter)="searchClients($event)"
+
+/>
