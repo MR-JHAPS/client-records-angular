@@ -9,7 +9,7 @@ main{
 
 
 
-.loader{
+/* .loader{
   background-color: var(--white);
 }
 
@@ -23,7 +23,7 @@ main{
   padding: 1rem;
   font-size: 16px;
   color: var(--darkBlue);
-}
+} */
 
 
 
@@ -33,10 +33,11 @@ main{
 
 /* --------------------------------------DYNAMIC INSERT/DELETE-Multiple----------------------------------------------------------- */
 .insertButtonContainer{
-  /* padding:4px; */
+  /* padding:1rem; */
+  margin-bottom: 1rem;
 }
 
-.insertButtonContainer>button{
+/* .insertButtonContainer>button{
   display: block;
   width: 10rem;
   margin: auto;
@@ -51,7 +52,7 @@ main{
 .insertButtonContainer>button:hover{
   background-color: var(--lightShade);
   color: var(--darkBlue);
-}
+} */
 
  /* ------------------- Dynamic multiple-Delete-Button-Container------------ */
   .multipleDeleteButtonContainer{
@@ -90,22 +91,39 @@ main{
 
 /* This is for the table. */
 .clientTable {
-  /* overflow-x: auto;
-  max-width: 100%; */
+  overflow-x: scroll;
+  max-width: 100%;
 }
 
+
+table{
+  /* min-width: 100%;
+  max-width: auto; */
+  min-width: 100%;
+  width: max-content;
+}
 
 th{
   padding-top:1rem;
   padding-left: 20px;
   color: var(--secondaryColor);
   font-size: 16px;
+  min-width: max-content;
+  text-align: center;
 }
 
-  .sortIcon{
+.highlightHeader{
+   padding-top:1rem;
+  padding-left: 20px;
+  color: var(--orange);
+  font-size: 16px;
+  min-width: max-content ;
+}
+  
+  /* .sortIcon{
         padding-left: 20px;
         padding-right : 20px;
-      }
+      } */
 
 th:hover{
   cursor: pointer;
@@ -116,8 +134,14 @@ td{
   font-size: 14px;
   border-bottom: 1px solid var(--lightShade);
   padding-left: 20px;
-
+  width: fit-content;
+  text-align: center;
 }
+
+  .highlight{
+    color: var(--orange);
+  }
+
 .uncheckIcon{
   cursor: pointer;
 }
@@ -165,7 +189,7 @@ td{
   }
 
 
-  .clientNotFound{
+  .dataNotFound{
     background-color: var(--white);
     padding:1rem;
     text-align: center;

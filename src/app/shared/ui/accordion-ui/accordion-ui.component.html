@@ -1,0 +1,98 @@
+
+
+
+<!-- MOBILE : This is Angular-Material-Accordian For smaller-Screen-------------------------------------------------------- -->
+    <main class="mainContainerAccordion">
+       
+            
+            <!------------- If the page is still loading for mobile devices/small screen---------------  -->
+                    <div *ngIf="isLoading" class="panelContainer col-13">
+
+                        <div class="container p-5 text-center">
+                            
+                             <div class="loadingMessage">Loading Please Wait a second</div>
+                            <div class="spinner-border" role="status"></div>
+
+                        </div>
+
+                    </div>
+
+
+        <!------------- If the page is loaded completely for mobile devices/small screen---------------  -->
+        @for (row of contents ; track row.id) {
+      <div *ngIf="!isLoading" class="mobileContainer">
+        <mat-accordion >
+            <mat-expansion-panel class="panel">
+                <mat-expansion-panel-header  class="panelHeader">
+                 
+                   @if (includeCheckbox) {
+                     <!-- This is the checkbox -->
+                    <mat-panel-title class="panelTitle">
+                        <input
+                          type="checkbox"
+                          [checked]="checkedIds.includes(row.id)"
+                          (change)="toggleCheckBox(row.id)"
+                          (click)="$event.stopPropagation()"
+                        />
+                      </mat-panel-title>
+                  }
+
+                  @for (column of tableConfig; track $index) {
+                      @if (column.isImportant) {
+                        <mat-panel-title class="panelTitle"> 
+                        @if (column.isImage) {
+                            <app-avatar-img
+                              [avatarImageUrl]="row[column.contentKey]"
+                            />
+                          }@else if (column.isImportant) {
+                            {{row[column.contentKey]}}
+                          }
+                        </mat-panel-title>   
+                      } <!-- ends if -->
+                  }<!-- end for loop -->
+                </mat-expansion-panel-header>
+                
+                
+                <div class="contentContainer">
+                  @for (column of tableConfig; track $index) {
+                    @if (!column.isImage) {
+                        <div class="firstContentdd">
+                            <span class="label">
+                                {{column.header}} &nbsp;:&nbsp; 
+                            </span>
+                            @if(column.isDate){
+                              <span class="data">{{row[column.contentKey] | dateConverter}}</span>
+                            }@else{
+                            <span class="data">{{row[column.contentKey]}}</span>
+                            }
+                        </div>
+                      }<!-- ends-if -->
+                    }<!-- ends-for-loop Column -->
+                    
+                    <div class="buttonTabs mt-3">
+                       @for (button of buttonList; track $index) {
+                          <app-buttons-ui
+                          [buttonType]="button.buttonValue"
+                          [buttonLabel]="button.buttonName"
+                          />
+                        }
+                    </div>
+                   
+
+            </div><!-- ends mobileContainer -->
+
+
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+        }<!-- ends for-loop row -->
+
+        @if (checkedIds.length>0) {
+          <app-floating-button-tab
+          (resetSelectedEmitter)="resetCheckBox()"
+          (deleteSelectedEmitter)="deleteButtonClicked()"
+          />
+        }
+
+      </main>  
+        

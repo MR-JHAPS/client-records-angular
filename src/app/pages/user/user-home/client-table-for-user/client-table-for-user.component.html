@@ -6,12 +6,23 @@
 
 /> -->
 
-<app-table-ui
-    [buttonList]="['update','delete']"
-    [tableColumnsChild]="tableColumns"
-    [contents]="clientList"
-    [includeCheckbox]="true"
-    [searchFieldsTable]="searchFields"
-    (searchEventEmitter)="searchClients($event)"
+    @if (!isMobile) {
+        <app-table-ui
+          
+            [tableColumnsChild]="tableColumns"
+            [contents]="clientList"
+            [includeCheckbox]="true"
+            [searchFieldsData]="searchFields"
+            (searchEventEmitter)="searchClients($event)"
 
-/>
+        />
+    }
+
+    @else if(isMobile){
+        <app-accordion-ui
+        [tableConfig]="tableColumns"
+        [contents]="clientList"
+        [isLoading]="false"
+
+        />
+    }

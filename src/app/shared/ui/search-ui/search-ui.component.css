@@ -5,16 +5,16 @@
     
     background-color: var(--ligherShade);
     border-radius: 10px;
-    width: 100%;
+    width: 75vw;
     margin: auto;
     margin-bottom: 1rem;
     margin-top: 1rem;
 
-    position: sticky;
+    /* position: sticky;
     z-index: 100;
     top:60px;
     opacity: 0.95;
-    background-color: var(--lighterShade);
+    background-color: var(--lighterShade); */
 
     
 }
@@ -24,6 +24,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    width: 100%;
 }
 
     .searchBoxContainer>.searchBox{

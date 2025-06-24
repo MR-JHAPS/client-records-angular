@@ -6,10 +6,18 @@ import { TableDataModel } from '../../../core/uiModels/tableDataModel';
 import { SearchUiComponent } from "../search-ui/search-ui.component";
 import { SearchRequest } from '../../../core/models/request/searchRequest';
 import { SearchDataModel } from '../../../core/uiModels/searchDataModel';
+import { FloatingButtonTabComponent } from "../floating-button-tab/floating-button-tab.component";
+import { CheckboxUiComponent } from "../checkbox-ui/checkbox-ui.component";
+import { DateConverterPipe } from '../../pipes/dateConverter/date-converter.pipe';
+import { AvatarImgComponent } from "../avatar-img/avatar-img.component";
+import { ButtonDataModel } from '../../../core/uiModels/buttonDataModel';
+import { ButtonsUiComponent } from "../buttons-ui/buttons-ui.component";
+import { LoaderUiComponent } from "../loader-ui/loader-ui.component";
+import { AccordionUiComponent } from "../accordion-ui/accordion-ui.component";
 
 @Component({
   selector: 'app-table-ui',
-  imports: [MaterialModules, CommonModule, SearchUiComponent],
+  imports: [MaterialModules, CommonModule, SearchUiComponent, FloatingButtonTabComponent, DateConverterPipe, AvatarImgComponent, ButtonsUiComponent, LoaderUiComponent, AccordionUiComponent],
   templateUrl: './table-ui.component.html',
   styleUrl: './table-ui.component.css'
 })
@@ -23,22 +31,24 @@ export class TableUIComponent {
   @Input() includeCheckbox : boolean;
   @Input() tableColumnsChild : TableDataModel[];
   @Input() contents : any[];
-  @Input() buttonList : string[];
+  @Input() includeButtons : boolean;
+  @Input() buttonListTable : ButtonDataModel[];
   @Input() includeSearchBar : boolean;
-  @Input() searchFieldsTable : SearchDataModel[];
+  @Input() searchFieldsData : SearchDataModel[];
   
   
 
-  @Output() selectedClientEventEmitter = new EventEmitter<BulkClientDeleteRequest>();
+  @Output() deleteSelectedEventEmitter = new EventEmitter<number[]>();
   @Output() sortColumnEmitter = new EventEmitter<string>();
+  @Output() 
   
   /**
    * Emits the searchRequest obtained from <app-search-ui/>
   */
   @Output() searchEventEmitter =  new EventEmitter<SearchRequest>();
 
-   selectedContent :BulkClientDeleteRequest = new BulkClientDeleteRequest();
-   isCheckBoxChecked = false; //for the dynamic insert/delete button.
+   selectedContent : number[] = []; // this is the checked items from checkbox.
+  //  isCheckBoxChecked = false; //for the dynamic insert/delete button.
 
   isSortClicked = true;
   isSortIdVisible = false;
@@ -49,25 +59,43 @@ export class TableUIComponent {
 
 
 
-   //This is to check the width of the screen to change table to accordian:
-    @HostListener("window:resize", [])
-    onResize(){
-      this.checkScreen();
-    }
+  //  //This is to check the width of the screen to change table to accordian:
+  //   @HostListener("window:resize", [])
+  //   onResize(){
+  //     this.checkScreen();
+  //   }
   
-    checkScreen(){
-      this.isMobile = window.innerWidth<700 ;
-    }
+  //   checkScreen(){
+  //     this.isMobile = window.innerWidth<700 ;
+  //   }
   
+
+    /* ---------------------------------------------THIS IS FOR THE CHECKBOX--------------------------------------------------------------------- */
     
+    getCheckedIds(idList : number[]){
+      this.selectedContent = idList;
+    }
+
     resetCheckBox():void{
-
+      this.selectedContent = [];
+      console.log("Resetting the Selected Content : ", this.selectedContent);
     }
 
-
-    toggleClientSelection(id: number){
-
+    emitDeleteSelected():void{
+      console.log("before emitting delete button content : ", this.selectedContent);
+      this.deleteSelectedEventEmitter.emit(this.selectedContent);
     }
+
+    toggleCheckbox(id : number){
+    if(this.selectedContent.includes(id)){
+      this.selectedContent = this.selectedContent.filter((idx)=> idx !== id);
+      console.log("Untoggled Ids ",this.selectedContent);
+    }else{
+      this.selectedContent = [...this.selectedContent, id];
+      console.log("Toggled Ids ", this.selectedContent);
+    }
+  }
+
 
 
     get firstTwoColumns() {
@@ -104,6 +132,16 @@ export class TableUIComponent {
   }
 
 
+
+  /* ------------------------BUTTONS FUNCTIONS------------------------------------ */
+    verifyClickedButton(buttonClicked : string) :void {
+      console.log("The button clicked was : ", buttonClicked);
+    }
+
+
+
+
+/* ---------------------------------------------------------------------------------------- */
 
   navigateToUpdatePage(id: number){
 

@@ -33,6 +33,7 @@ export const routes: Routes = [
                 {path: "projectDetails", component:ProjectDetailsComponent},
                 {path: "check", component:CheckComponent},
                 
+                
                 {path:"emailVerification", component:EmailVerificationComponent}
             ]
         },
@@ -42,6 +43,7 @@ export const routes: Routes = [
             children:[
                 {path: "login", component: LoginComponent},
                 {path: "register", component: RegisterComponent},
+                {path:"demoClientTable", component: DemoClientTableComponent},
             ]
         },
         { path: "user",
@@ -63,7 +65,7 @@ export const routes: Routes = [
                 {path: "selected-client", component: SelectedClientComponent},
                 {path: "clientBinTable", component: ClientBinComponent},
                 {path: "clientLogTable", component: ClientLogTableComponent},    
-                {path:"demoClientTable", component: DemoClientTableComponent}
+                // {path:"demoClientTable", component: DemoClientTableComponent}
                 ]
         },
 

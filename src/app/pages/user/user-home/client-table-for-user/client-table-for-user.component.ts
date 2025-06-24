@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, HostListener, inject, ViewChild } from '@angular/core';
 import { TableUIComponent } from "../../../../shared/ui/table-ui/table-ui.component";
 import { ApiResponseModelPaginated } from '../../../../core/models/responseModel/apiResponseModelPaginated';
 import { ClientResponse } from '../../../../core/models/response/clientResponse';
@@ -13,10 +13,11 @@ import { CommunicationServiceService } from '../../../../shared/services/communi
 import { SearchUiComponent } from "../../../../shared/ui/search-ui/search-ui.component";
 import { SearchRequest } from '../../../../core/models/request/searchRequest';
 import { SearchDataModel } from '../../../../core/uiModels/searchDataModel';
+import { AccordionUiComponent } from "../../../../shared/ui/accordion-ui/accordion-ui.component";
 
 @Component({
   selector: 'app-client-table-for-user',
-  imports: [TableUIComponent, SearchUiComponent],
+  imports: [TableUIComponent, AccordionUiComponent],
   templateUrl: './client-table-for-user.component.html',
   styleUrl: './client-table-for-user.component.css'
 })
@@ -24,6 +25,7 @@ export class ClientTableForUserComponent {
 
 
     @ViewChild(TableUIComponent) tableUi !: TableUIComponent;
+    @ViewChild(AccordionUiComponent) accordianUi !: AccordionUiComponent;
 
       private _toastrService = inject(ToastrService);
       private _clientService = inject(ClientApiServiceService);
@@ -49,9 +51,9 @@ export class ClientTableForUserComponent {
   
   
       tableColumns : TableDataModel[] = [
-        { header: 'ID', contentKey: 'id' },
-        { header: 'First Name', contentKey: 'firstName' },
-        { header: 'Last Name', contentKey: 'lastName' },
+        { header: 'ID', contentKey: 'id' , isImportant : true},
+        { header: 'First Name', contentKey: 'firstName', isImportant: true },
+        { header: 'Last Name', contentKey: 'lastName' , isImportant: true},
         { header: 'Date of Birth', contentKey: 'dateOfBirth', isDate: true },
         { header: 'Postal Code', contentKey: 'postalCode' }
       ]
@@ -78,6 +80,19 @@ export class ClientTableForUserComponent {
         //   }
         // );
       }
+
+
+
+       //This is to check the width of the screen to change table to accordian:
+          @HostListener("window:resize", [])
+          onResize(){
+            this.checkScreen();
+          }
+        
+          checkScreen(){
+            this.isMobile = window.innerWidth<700 ;
+          }
+
   
   
      getAllClients(pageNumber?:number, pageSize?: number,
@@ -112,11 +127,13 @@ export class ClientTableForUserComponent {
           console.log(this.clientList);
           // this.isSearchResultPresent = true;
           this.tableUi.isSearchResultPresent = true; //to show no content found in table-UI-component.
+          this.accordianUi.isSearchResultPresent = true;
           // this._toastrService.success("Search Complete.")
         },
         error : error => {
           if(error.status===404){
             this.tableUi.isSearchResultPresent = false; //to show no content found in table-UI-component.
+            this.accordianUi.isSearchResultPresent = false;
             // this.isSearchResultPresent = false;
           }else if( error.status ===500){
             this._router.navigate(["/error/500"]);

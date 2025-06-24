@@ -35,7 +35,7 @@ export class UserProfileComponent implements OnInit{
 
   /* emitting that new image is added to the imageGalleryComponent*/
   // @Output() imagedAdded = new EventEmitter<boolean>(true);
-  @ViewChild(GalleryContainerComponent) galleryContainer !: GalleryContainerComponent
+  @ViewChild(GalleryContainerComponent) galleryContainer !: GalleryContainerComponent;
 
 
   // baseUrl = API_ENDPOINTS.imageBaseUrl;

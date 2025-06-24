@@ -1,0 +1,34 @@
+    
+    
+    
+    <!-- <div class="d-flex gap-3 justify-content-start"> -->
+        @if (buttonType==="update") {
+            <button class="updateButton" 
+                (click)="emitButtonClicked(buttonType);
+                $event.stopPropagation()">
+                <i class="fa-solid fa-pen" style="color: #ffffff;"></i>
+            </button>
+        }@else if (buttonType==="delete") {
+            <button class="deleteButton"
+            (click)="emitButtonClicked(buttonType)">
+                <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
+                @if (buttonLabel.trim()==="") { 
+                    <span class="buttonLabel ms-2">{{buttonLabel}}</span>
+                }
+            </button>
+        }@else if (buttonType==="restore") {
+            <button type="button" class="updateButton btn btn-success"
+            (click)="emitButtonClicked(buttonType)">
+                <i class="fa-solid fa-clock-rotate-left" style="color: #ffffff;"></i>
+            </button>
+        }@else if(buttonType==="insert"){
+            <button type="button" class="insertButton" 
+            (click)="emitButtonClicked(buttonType)">
+                <i class="fas fa-plus fa-lg me-2"></i> Insert
+            </button>
+        }
+
+
+
+        
+    <!-- </div>  -->

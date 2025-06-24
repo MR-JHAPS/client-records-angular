@@ -1,0 +1,7 @@
+    
+    <input
+        type="checkbox"
+        [checked]="checkedIds.includes(currentSelectedId)"
+        (change)="toggleCheckbox(currentSelectedId)"
+        (click)="$event.stopPropagation()"
+    />

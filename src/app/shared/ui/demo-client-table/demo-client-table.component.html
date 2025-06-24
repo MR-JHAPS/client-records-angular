@@ -1,11 +1,30 @@
-<p>
+<!-- <p>
     Demo Table with Table UI
-</p>
+</p> -->
 
 
+    @if (!isMobile) {
+        <app-table-ui
+            [tableColumnsChild]="clientLogColumns"
+            [includeButtons]="true"
+            [buttonListTable]="buttonList"
+            [contents]="clientLogList"
+            [includeCheckbox]="true"
+            [includeSearchBar]="true"
+            [searchFieldsData]="searchField"
+            (deleteSelectedEventEmitter)="deleteSelectedClient($event)"
+        />
+    }
 
-<app-table-ui
-[tableColumnsChild]="tableColumns"
-[buttonList]="['delete','update']"
-[contents]="clientList"
-/>
+
+    @else if (isMobile) {
+        <app-accordion-ui
+            [contents]="clientLogList"
+            [isSearchResultPresent]="isSearchResultPresent"
+            [isLoading]="isLoading"
+            [tableConfig]="clientLogColumns"
+            (deleteCheckedIDEventEmitter)="deleteSelectedClient($event)"
+            [includeCheckbox]="true"
+            [buttonList]="buttonList"
+        />
+    }

@@ -1,0 +1,129 @@
+
+   
+   
+   /* This is the main container of the Component */
+   .mainContainerAccordion{
+      background-color: var(--white);
+     }
+ 
+ 
+     /* This is the container that contains the Accordian */
+    .mobileContainer{
+      margin-bottom:4px;
+     } 
+
+
+    /* This is the header container of the accordian */
+    ::ng-deep .panelHeader{
+      background-color: var(--lightShade) !important;
+    }
+
+    
+    /* This is the title inside the header of accordian. */
+    ::ng-deep .panelTitle {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;   
+      font-size: small;
+      font-weight: 500;
+      color : var(--secondaryColor); 
+    }
+
+
+     /* this is the body of matAccordian panel */
+    ::ng-deep .panel {
+      box-shadow: none !important;
+      border-radius: 0px !important;
+      background-color: var(--lighterShade) !important;
+    }
+
+
+
+
+
+  /* This is the custom one for accordian */
+  .contentContainer{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 8px;
+    /* background-color: var(--white); */
+    padding: 1rem;
+    width: 100%;
+  }
+
+
+
+
+
+
+
+
+
+
+  /* Label inside of subContainers */
+  .label{
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--primaryColor);
+    letter-spacing: 0.5px;
+  }
+
+  /* data inside of subContainers */
+  .data{
+     font-weight: 400;
+    font-size: 12px;
+    color: var(--lightBlue);
+    letter-spacing: 0.5px;
+  }
+
+  .buttonTabs{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+
+
+
+
+
+
+
+
+  /* This is the button container */
+  .buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Creating a little space between the button */
+  .buttons>button{
+    margin: 10px;
+    margin-top: 0px;
+  }
+
+  .buttons .delete{
+    background-color: var(--deleteButton);
+    color:white;
+  }
+
+  .buttons .update{
+    background-color: var(--updateButton);
+    color:white;
+  }
+
+    .buttons .update:active{
+    background-color: var(--lightBlue);
+    transition-duration: 0.5s;
+  }
+
+  .buttons .delete:active{
+    background-color: var(--orange);
+       transition-duration: 0.5s;
+  }
+
+
+

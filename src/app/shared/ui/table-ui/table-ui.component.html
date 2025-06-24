@@ -1,146 +1,162 @@
 <main>
-    <!-- Search UI -->
-     <app-search-ui
-        [searchFieldsChild]="searchFieldsTable"
-        (searchEventEmitter)="emitSearchRequest($event)"
-    />
+    <!-- This is Search UI -->
+    
+    <div *ngIf="includeSearchBar">
+        <app-search-ui
+            [searchFieldsChild]="searchFieldsData"
+            (searchEventEmitter)="emitSearchRequest($event)"
+        />
+    </div>
 
-     
-
-
-
-
-
-
-
-
-
-
-
-<!-------------------------------------- This is DYNAMIC to insert new client -------------------------------------->
-<!-- <div *ngIf="!isCheckBoxChecked" class="insertButtonContainer">
-    <button type="button" class="button" (click)="openInsertClientModal()">
-        <i class="fas fa-plus fa-lg me-2"></i> Insert
-    </button>
-</div> -->
-<!-- This is DYNAMIC to deleteMultiple clients -->
-<!-- <div *ngIf="isCheckBoxChecked" class="multipleDeleteButtonContainer">
-    <button type="button" class="button btn btn-danger" (click)="openDeleteMultipleClientModal(selectedClients)">
-        <i class="fa-solid fa-trash me-2"></i> Delete Multiple
-    </button>
-</div> -->
+    <!-------------------------------------- This is to insert new client -------------------------------------->
+    <div class="insertButtonContainer">
+        <app-buttons-ui
+        [buttonType]="'insert'"
+        (buttonClickedEventEmitter)="verifyClickedButton($event)"
+        />
+    </div>
 
 
-
-
-<!-------------------------------------- This table is for Bigger-Screen/Desktop -------------------------------------->
-<div *ngIf="!isMobile" class="clientTable">
-    <table class="table table-borderless">
-
-        <thead >
-            <tr>
-               
-                <th *ngIf="includeCheckbox">
-                    <!-- <button class="btn" (click)="resetCheckBox()"> -->
-                        <i class="uncheckIcon fa-solid fa-square-xmark fa-xl" (click)="resetCheckBox()"></i>
-                    <!-- </button> -->
-                </th>
-            @for (column of tableColumnsChild; track $index) {
-                <th (mouseenter)="showSortIcon('id')"
-                    (mouseleave)="hideSortIcon()"
-                    (click)="onSortClick('id')">
-                    <b>{{column.header}}</b>
-                     <i [style.visibility]="isSortIdVisible ? 'visible' : 'hidden'" 
-                     class="sortIcon fa-solid fa-sort"
-                     ></i>
-                </th>
-                 }       
-                       
-                <th *ngIf="buttonList.length>0">
-                    ACTION
-                </th>
-           
-            </tr>
-        </thead>
-          
-        <tbody>
-            @for (row of contents; track $index) {
-                <tr *ngIf="!isLoading"   class="clickable-row" >
-                    <td *ngIf="includeCheckbox">
-                        <input type="checkbox" 
-                        [checked]="selectedContent.idList.includes(row.id)"
-                        (change)="toggleClientSelection(row.id)"
-                        class="checkbox">
-                    </td>
-                
-                    
-                @for (col of tableColumnsChild; track $index) {
-                    <td>
-                        {{row[col.contentKey]}}
-                        <!-- <ng-container [ngSwitch]="true">
-                            <img *ngSwitchCase="col.isImage" [src]="row[col.key]" width="40" />
-                            <span *ngSwitchCase="col.isArray">{{ row[col.key]?.join(', ') }}</span>
-                            <span *ngSwitchCase="col.isDate">{{ row[col.key] | date: 'mediumDate' }}</span>
-                            <span *ngSwitchDefault>{{ row[col.key] }}</span>
-                        </ng-container> -->
-                    </td>
-                     }
-                
-
-                    <td class="text-center">
-                        <div class="d-flex gap-3 justify-content-start">
-                            <button *ngIf="buttonList.includes('update')" class="updateButton" (click)="navigateToUpdatePage(row['id']); $event.stopPropagation()">
-                               <i class="fa-solid fa-pen" style="color: #ffffff;"></i>
-                            </button>
-
-                            <button *ngIf="buttonList.includes('delete')" class="deleteButton" (click)="openDeleteSingleClientModal(row['id'])">
-                               <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
-                            </button>
-                        </div> 
-                    </td>
-               
+    <!-------------------------------------- This table is for Bigger-Screen/Desktop -------------------------------------->
+    <div class="clientTable">
+        <table class="table table-borderless">
+            <thead >
+                <tr>
+                    <!-- Checkbox Reset button -->
+                    <th *ngIf="includeCheckbox">
+                            <i class="uncheckIcon fa-solid fa-square-xmark fa-xl" 
+                            (click)="resetCheckBox()"></i>
+                    </th>
+                    <!-- Dynamic Table Columns Header -->
+                    @for (column of tableColumnsChild; track $index) {
+                        <th (mouseenter)="showSortIcon('id')"
+                            (mouseleave)="hideSortIcon()"
+                            (click)="onSortClick('id')">
+                            @if (column.highlightColumn) {
+                                <span class="highlightHeader"> {{column.header}}</span>
+                            }@else{
+                            <b>{{column.header}}</b>
+                            }
+                        </th>
+                    }       
+                    <!--Static Table Column Header  -->  
+                    <th *ngIf="includeButtons">
+                        ACTION
+                    </th>
                 </tr>
-            }
-        </tbody>
-
-
-          <!-- ------------------------------------If client is  still loading for big screen---------------------------------------->
-                      <tr *ngIf="isLoading">
-                        <td colspan="8" class="loader text-center">
-
-                            <div class="loadingMessage">Loading Please Wait a second</div>
-                            <div class="spinner-border" role="status">
-                                
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
+            </thead>
+            
+            <!-- Table Contents -->
+            <tbody>
+                @for (row of contents; track $index) {
+                    <!-- Checkbox for table contents -->
+                    <tr *ngIf="!isLoading"   class="clickable-row" >
+                        <td *ngIf="includeCheckbox">
+                            <input type="checkbox" 
+                            [checked]="selectedContent.includes(row.id)"
+                            (change)="toggleCheckbox(row.id)"
+                            class="checkbox">
                         </td>
+                    
+                        <!-- Dynamic Table contents-value || row[col.contentKey] is like Example: row1[col1.'firstName']  -->    
+                        @for (col of tableColumnsChild; track $index) {
+                            <td>
+                                @if (col.isDate) {
+                                    {{row[col.contentKey] | dateConverter}}
+                                }@else if(col.isImage){
+                                    <app-avatar-img
+                                        [avatarImageUrl]="row[col.contentKey]"
+                                    />
+                                }@else if(col.highlightColumn){
+                                    <span class="highlight">{{row[col.contentKey]}}</span>
+                                }@else{
+                                {{row[col.contentKey]}}
+                                }
+                            </td>
+                        }
+                    
+                        <!-- Dynamic BUTTONS-UI FOR TABLE -->
+                        @if (includeButtons) {
+                            <td >
+                                <div class="d-flex gap-3 justify-content-start" >
+                                    @for (button of buttonListTable; track $index) {
+                                        <app-buttons-ui
+                                            [buttonType]="button.buttonValue"
+                                            (buttonClickedEventEmitter)="verifyClickedButton($event)"
+                                        />                               
+                                    }
+                                </div>
+                            </td>
+                        }
                     </tr>
+                }
+            </tbody>
 
 
-    </table>
+            <!-- ------------------------------------If client is  still loading for big screen---------------------------------------->
+                        <tr *ngIf="isLoading">
+                            <!-- <td colspan="8" class="loader text-center">
 
-    <!-- <div *ngIf="!isSearchResultPresent && !isLoading" class="clientNotFound">
-        NO CLIENTS FOUND
-    </div> -->
-</div>
+                                <div class="loadingMessage">Loading Please Wait a second</div>
+                                <div class="spinner-border" role="status">
+                                    
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </td> -->
+                            <app-loader-ui/>
+                        </tr>
+
+
+        </table>
+
+        <!-- In case the search result is empty display Not Found Message -->
+        <div *ngIf="!isSearchResultPresent && !isLoading" class="dataNotFound">
+            NO Datas FOUND
+        </div>
+    
+    </div>
+
+        <!-- THESE ARE THE FLOATING BUTTONS THAT IS DISPLAYED WHEN CHECKBOX IS SELECTED (DELETE, RESET/CANCEL)  -->
+     @if (selectedContent.length>0) {
+        <app-floating-button-tab
+        (deleteSelectedEmitter)="emitDeleteSelected()"
+        (resetSelectedEmitter)="resetCheckBox()"
+        />
+    }
+    
+
+
+
+    <!-- THIS IS FOR THE MOBILE DEVICE -->
+    <!-- @if (isMobile) {
+    <app-accordion-ui
+    [contents]="contents"
+    [isSearchResultPresent]="isSearchResultPresent"
+    [isLoading]="isLoading"
+    [tableConfig]="tableColumnsChild"
+    (deleteCheckedIDEventEmitter)=""
+    />
+    } -->
 
 
 
 
 
 
-<!-- MOBILE : This is Angular-Material-Accordian For smaller-Screen-------------------------------------------------------- -->
-    <section  *ngIf="isMobile" class="tableMobile">
+    
+</main>
+    <!-- MOBILE : This is Angular-Material-Accordian For smaller-Screen-------------------------------------------------------- -->
+    <!-- <section  *ngIf="isMobile" class="tableMobile">
         <div class="mobileResetContainer text-center">
             <button mat-button class="resetButton" (click)="resetCheckBox()">
                 <i class="uncheckIcon fa-solid fa-square-xmark fa-small" ></i>
                 Reset Selection
             </button>
 
-        </div>
+        </div> -->
             
             <!------------- If the page is still loading for mobile devices/small screen---------------  -->
-                    <div *ngIf="isLoading" class="panelContainer col-13">
+                    <!-- <div *ngIf="isLoading" class="panelContainer col-13">
 
                         <div class="container p-5 text-center">
                             
@@ -149,11 +165,14 @@
 
                         </div>
 
-                    </div>
+                    </div> -->
 
 
+
+
+                    
         <!------------- If the page is loaded completely for mobile devices/small screen---------------  -->
-        @for (row of contents; track $index) {
+        <!-- @for (row of contents; track $index) {
             <div *ngIf="!isLoading && isSearchResultPresent" class="mobileContainer">
               
                 <mat-accordion >
@@ -162,8 +181,8 @@
                         <mat-expansion-panel-header  class="panelHeader">
                             <mat-panel-title *ngIf="includeCheckbox" class="panelTitle" >
                                 <input type="checkbox" 
-                                    [checked]="selectedContent.idList.includes(row.id)"
-                                    (change)="toggleClientSelection(row.id)"
+                                    [checked]="selectedContent.includes(row.id)"
+                                    (change)="toggleCheckbox(row.id)"
                                     (click)="$event.stopPropagation()">
                             </mat-panel-title>
                              @for (col of firstTwoColumns; track $index) { 
@@ -203,7 +222,7 @@
          <div *ngIf="!isSearchResultPresent && !isLoading" class="clientNotFound">
         NO CLIENTS FOUND !!!
     </div>
-    </section>  
+    </section>   -->
 
 
 
@@ -212,5 +231,4 @@
 
 
 
-</main>
 

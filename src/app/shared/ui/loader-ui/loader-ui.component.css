@@ -1,0 +1,15 @@
+.loader{
+  background-color: var(--white);
+}
+
+.spinner-border{
+  width: 3rem !important;
+  height: 3rem !important;
+  background-color: var(--white) !important;
+}
+
+.loadingMessage{
+  padding: 1rem;
+  font-size: 16px;
+  color: var(--darkBlue);
+}
