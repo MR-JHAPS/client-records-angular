@@ -16,6 +16,7 @@
     /* This is the header container of the accordian */
     ::ng-deep .panelHeader{
       background-color: var(--lightShade) !important;
+      color : var(--secondaryColor); 
     }
 
     

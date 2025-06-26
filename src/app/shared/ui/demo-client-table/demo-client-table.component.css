@@ -1,0 +1,23 @@
+.buttonTabs{
+    margin-bottom: 40px;
+    position: sticky;
+    top:60px;
+    z-index: 333;
+
+    /* background-color: var(--white); */
+  transition: background-color 0.3s ease;
+}
+
+.buttonTabs.scroll{
+    background-color: var(--white);
+    /* color:white; */
+}
+
+/* app-button-tabs{
+    background-color: green;
+} */
+
+
+.searchContainer{
+    width: 50%;
+}

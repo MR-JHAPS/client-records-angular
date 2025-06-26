@@ -1,16 +1,18 @@
+import { NgClass } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-buttons-ui',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './buttons-ui.component.html',
   styleUrl: './buttons-ui.component.css'
 })
 export class ButtonsUiComponent {
 
   @Output() buttonClickedEventEmitter = new EventEmitter<string>();
-  @Input() buttonType : string; //this is the value of the button.
+  @Input() buttonValue : string; //this is the value of the button.
   @Input() buttonLabel : string; // this is the label of the button.
+  @Input() includeButtonLabel : boolean; 
 
   /* I will need to creaete a new input type that has the whole buttonModel 
     and i will add new input asking if the label is needed in the button
@@ -20,9 +22,50 @@ export class ButtonsUiComponent {
   */
 
 
+     /* This is to load the style for the button selected */
+  get buttonClass() : string{
+      switch(this.buttonValue){
+        case "insert" : 
+            return this.includeButtonLabel ? "insertButtonLabelled" : "insertButton"
+        case "update" :
+          return this.includeButtonLabel ? "updateButtonLabelled" : "updateButton";
+        case "restore" :
+          return this.includeButtonLabel ? "restoreButtonLabelled btn btn-success" : "restoreButton btn btn-success"; 
+        case "delete" :
+          return this.includeButtonLabel ? "deleteButtonLabelled" : "deleteButton" ;
+        default :
+          return this.includeButtonLabel ? "ordinaryButtonLabelled btn btn-primary" : "ordinaryButton btn btn-primary" ; 
+      }
+  }
 
-  emitButtonClicked(buttonType: string){
-    this.buttonClickedEventEmitter.emit(buttonType);
+  /* This is to load the icons value */
+  get buttonIcon() : string{
+    switch(this.buttonValue){
+      case "insert" : 
+            return "fas fa-plus fa-lg "
+      case "update" :
+        return "fa-solid fa-pen";
+      case "restore" :
+        return "fa-solid fa-clock-rotate-left"; 
+      case "delete" :
+        return "fa-solid fa-trash" ;
+      default :
+        return ""; 
+    }
+  }
+
+
+
+
+
+
+
+
+
+  emitButtonClicked(event : Event){
+    event.stopPropagation(); // this won't bubble up in parent class.
+    console.log("Emitted Button value after being clicked in Button UI : " + this.buttonValue);
+    this.buttonClickedEventEmitter.emit(this.buttonValue);
   }
 
 

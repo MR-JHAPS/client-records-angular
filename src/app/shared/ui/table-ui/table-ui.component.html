@@ -1,17 +1,11 @@
-<main>
-    <!-- This is Search UI -->
-    
-    <div *ngIf="includeSearchBar">
-        <app-search-ui
-            [searchFieldsChild]="searchFieldsData"
-            (searchEventEmitter)="emitSearchRequest($event)"
-        />
-    </div>
+<!-- <main> -->
 
     <!-------------------------------------- This is to insert new client -------------------------------------->
-    <div class="insertButtonContainer">
+    <div class="insertButtonContainer shadow">
         <app-buttons-ui
-        [buttonType]="'insert'"
+        [buttonValue]="'insert'"
+        [includeButtonLabel]="true"
+        [buttonLabel]="'Insert Client'"
         (buttonClickedEventEmitter)="verifyClickedButton($event)"
         />
     </div>
@@ -81,7 +75,7 @@
                                 <div class="d-flex gap-3 justify-content-start" >
                                     @for (button of buttonListTable; track $index) {
                                         <app-buttons-ui
-                                            [buttonType]="button.buttonValue"
+                                            [buttonValue]="button.buttonValue"
                                             (buttonClickedEventEmitter)="verifyClickedButton($event)"
                                         />                               
                                     }
@@ -95,14 +89,6 @@
 
             <!-- ------------------------------------If client is  still loading for big screen---------------------------------------->
                         <tr *ngIf="isLoading">
-                            <!-- <td colspan="8" class="loader text-center">
-
-                                <div class="loadingMessage">Loading Please Wait a second</div>
-                                <div class="spinner-border" role="status">
-                                    
-                                    <span class="visually-hidden">Loading...</span>
-                                </div>
-                            </td> -->
                             <app-loader-ui/>
                         </tr>
 
@@ -116,119 +102,12 @@
     
     </div>
 
-        <!-- THESE ARE THE FLOATING BUTTONS THAT IS DISPLAYED WHEN CHECKBOX IS SELECTED (DELETE, RESET/CANCEL)  -->
+    <!-- THESE ARE THE FLOATING BUTTONS THAT IS DISPLAYED WHEN CHECKBOX IS SELECTED (DELETE, RESET/CANCEL)  -->
      @if (selectedContent.length>0) {
         <app-floating-button-tab
         (deleteSelectedEmitter)="emitDeleteSelected()"
         (resetSelectedEmitter)="resetCheckBox()"
         />
     }
-    
 
-
-
-    <!-- THIS IS FOR THE MOBILE DEVICE -->
-    <!-- @if (isMobile) {
-    <app-accordion-ui
-    [contents]="contents"
-    [isSearchResultPresent]="isSearchResultPresent"
-    [isLoading]="isLoading"
-    [tableConfig]="tableColumnsChild"
-    (deleteCheckedIDEventEmitter)=""
-    />
-    } -->
-
-
-
-
-
-
-    
-</main>
-    <!-- MOBILE : This is Angular-Material-Accordian For smaller-Screen-------------------------------------------------------- -->
-    <!-- <section  *ngIf="isMobile" class="tableMobile">
-        <div class="mobileResetContainer text-center">
-            <button mat-button class="resetButton" (click)="resetCheckBox()">
-                <i class="uncheckIcon fa-solid fa-square-xmark fa-small" ></i>
-                Reset Selection
-            </button>
-
-        </div> -->
-            
-            <!------------- If the page is still loading for mobile devices/small screen---------------  -->
-                    <!-- <div *ngIf="isLoading" class="panelContainer col-13">
-
-                        <div class="container p-5 text-center">
-                            
-                             <div class="loadingMessage">Loading Please Wait a second</div>
-                            <div class="spinner-border" role="status"></div>
-
-                        </div>
-
-                    </div> -->
-
-
-
-
-                    
-        <!------------- If the page is loaded completely for mobile devices/small screen---------------  -->
-        <!-- @for (row of contents; track $index) {
-            <div *ngIf="!isLoading && isSearchResultPresent" class="mobileContainer">
-              
-                <mat-accordion >
-                    <mat-expansion-panel class="panel">
-                        
-                        <mat-expansion-panel-header  class="panelHeader">
-                            <mat-panel-title *ngIf="includeCheckbox" class="panelTitle" >
-                                <input type="checkbox" 
-                                    [checked]="selectedContent.includes(row.id)"
-                                    (change)="toggleCheckbox(row.id)"
-                                    (click)="$event.stopPropagation()">
-                            </mat-panel-title>
-                             @for (col of firstTwoColumns; track $index) { 
-                                <mat-panel-title class="panelTitle"> {{row[col.contentKey]}} </mat-panel-title>
-                            }
-                        </mat-expansion-panel-header>
-
-                         @for (col of tableColumnsChild; track $index) { 
-                        <div class="contentContainer1">
-                                <div class="firstContent">
-                                    <span class="label">
-                                        {{col.header}} &nbsp;:&nbsp; 
-                                    </span>
-                                    <span class="data">{{row[col.contentKey]}}</span>
-                                </div>
-                        </div>
-                        }
-
-                        <br>
-                        <div class="buttons">
-                            <button mat-raised-button class="update"
-                            (click)="navigateToUpdatePage(row.id); $event.stopPropagation()">
-                                <i class="fa-solid fa-pen" style="color: #ffffff;"></i>    
-                            </button>
-                            <button mat-raised-button class="delete"
-                            (click)="openDeleteSingleClientModal(row.id)"> 
-                                <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
-                            </button>
-                        </div>
-        
-                    </mat-expansion-panel>
-                </mat-accordion>
-            
-            </div>
-        }
-
-         <div *ngIf="!isSearchResultPresent && !isLoading" class="clientNotFound">
-        NO CLIENTS FOUND !!!
-    </div>
-    </section>   -->
-
-
-
-
-
-
-
-
-
+<!-- </main> -->

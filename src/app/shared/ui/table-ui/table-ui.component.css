@@ -1,80 +1,18 @@
 
-main{
+/* main{
   padding:1rem;
-  background-color: var(--lighterShade);
+  background-color: var(--lightShade);
 }
-
-
-/* ISLOADING--- Spinner width. */
-
-
-
-/* .loader{
-  background-color: var(--white);
-}
-
-.spinner-border{
-  width: 3rem !important;
-  height: 3rem !important;
-  background-color: var(--white) !important;
-}
-
-.loadingMessage{
-  padding: 1rem;
-  font-size: 16px;
-  color: var(--darkBlue);
-} */
-
-
-
-
-
-
+ */
 
 /* --------------------------------------DYNAMIC INSERT/DELETE-Multiple----------------------------------------------------------- */
 .insertButtonContainer{
-  /* padding:1rem; */
+  width: fit-content;
+  margin: auto;
+  /* border: 2px solid var(--lightShade); */
+  border-radius: 8px;
   margin-bottom: 1rem;
 }
-
-/* .insertButtonContainer>button{
-  display: block;
-  width: 10rem;
-  margin: auto;
-  border: none;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  background-color: var(--lighterShade);
-  color: var(--secondaryColor);
-  padding: 1rem;
-}
-
-.insertButtonContainer>button:hover{
-  background-color: var(--lightShade);
-  color: var(--darkBlue);
-} */
-
- /* ------------------- Dynamic multiple-Delete-Button-Container------------ */
-  .multipleDeleteButtonContainer{
-  }
-
-  .multipleDeleteButtonContainer>button{
-    display: block;
-    width: 16rem;
-    margin: auto;
-    border: none;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    background-color: var(--lighterShade);
-    color: var(--deleteButton);
-    padding: 1rem;
-  }
-
-  .multipleDeleteButtonContainer>button:hover{
-    background-color: var(--deleteButton);
-    color: var(--lighterShade);
-    opacity: 0.9;
-  }
 
 
 
@@ -120,10 +58,7 @@ th{
   min-width: max-content ;
 }
   
-  /* .sortIcon{
-        padding-left: 20px;
-        padding-right : 20px;
-      } */
+
 
 th:hover{
   cursor: pointer;
@@ -155,38 +90,6 @@ td{
   transform: scale(1.5);
   margin: 5px;
 }
-
-/* ------------------------- Update button -----------------------------------------------*/
-  .updateButton{
-     padding:16px;
-    border: none;
-    display: flex;
-    flex-direction: row;
-    justify-self: center;
-    border-radius: 50%;
-    background-color: var(--updateButton);  
-  }
-
-  .updateButton:hover{
-    transition-duration: 0.2s;
-    background-color: var(--darkBlue);
-  }
-
-/* ----------------------- Delete button --------------------------------------*/
-  .deleteButton{
-    padding:16px;
-    border: none;
-    display: flex;
-    flex-direction: row;
-    justify-self: center;
-    border-radius: 50%;
-    background-color: var(--deleteButton);
-  }
-
-  .deleteButton:hover{
-    transition-duration: 0.2s;
-    box-shadow: 2px 0.8px 5px  rgb(169, 76, 76);
-  }
 
 
   .dataNotFound{
@@ -244,110 +147,3 @@ td{
 
 
 
-
-
-
-   /*------------------------------------ THIS IS FOR THE CLIENT-ACCORDIAN FOR THE MOBILE DISPLAY----------------------------------------------------------- */
-     
-      /* This is to add the margin between the mat-accordian. */
-    
-    .mobileResetContainer{
-      background-color: var(--white);
-      margin-bottom: 8px;
-    }
-
-    .resetButton{
-      color: var(--secondaryColor);
-      letter-spacing: 0.5px;
-    }
-
-    .mobileContainer{
-      margin-bottom:8px;
-     } 
-
-     /* this is to change the background color and remove box shadow of matAccordian panel */
-    ::ng-deep .panel {
-      box-shadow: none !important;
-      border-radius: 0px !important;
-      background-color: var(--white) !important;
-    }
-
-   /* This is the main content displayed in the panel */
-   .panelTitle{
-    font-size: small;
-    font-weight: 500;
-    color : var(--secondaryColor);
-   }
-
-  /* This is the content container */
-  .contentContainer1{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem;
-  }
-
-  .contentContainer2{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem;
-  }
-
-  /* These are the Sub-container(1.DateOfBirth: ...  and  2. Postalcode: ....) */
-  .firstContent,.secondContent{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
-
-  /* Label inside of subContainers */
-  .label{
-    font-weight: 600;
-    font-size: small;
-    color: var(--lightBlue);
-  }
-
-  /* data inside of subContainers */
-  .data{
-     font-weight: 400;
-    font-size: small;
-    color: var(--lightBlue);
-  }
-
-  /* This is the button container */
-  .buttons{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
-
-  /* Creating a little space between the button */
-  .buttons>button{
-    margin: 10px;
-    margin-top: 0px;
-  }
-
-  .buttons .delete{
-    background-color: var(--deleteButton);
-    color:white;
-  }
-
-  .buttons .update{
-    background-color: var(--updateButton);
-    color:white;
-  }
-
-    .buttons .update:active{
-    background-color: var(--lightBlue);
-    transition-duration: 0.5s;
-  }
-
-  .buttons .delete:active{
-    background-color: var(--orange);
-       transition-duration: 0.5s;
-  }

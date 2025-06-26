@@ -33,12 +33,12 @@
 
 
   .btn.reset:hover{
-    background-color:rgb(233, 233, 233);
+    background-color:rgb(232, 241, 255);
     color: white;
     opacity: 1;
   }
   .btn.delete:hover{
-    background-color: rgb(233, 233, 233);
+    background-color: rgba(254, 216, 216, 0.962);
     color: white;
     opacity: 1;
   }

@@ -1,32 +1,69 @@
     
+
+
     
-    
+    <div class="d-flex gap-3 justify-content-start">
+        <button [ngClass]="buttonClass" (click)="emitButtonClicked($event)">
+            <i [ngClass]="buttonIcon" ></i>
+            <!-- <i [ngClass]="buttonIcon" style ="color:#ffffff"></i> -->
+            @if (includeButtonLabel) {
+                <span class="ms-2">{{buttonLabel}}</span>
+            }
+        </button>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
     <!-- <div class="d-flex gap-3 justify-content-start"> -->
-        @if (buttonType==="update") {
+        <!-- @if (buttonValue==="update") {
+
             <button class="updateButton" 
-                (click)="emitButtonClicked(buttonType);
+                (click)="emitButtonClicked(buttonValue);
                 $event.stopPropagation()">
                 <i class="fa-solid fa-pen" style="color: #ffffff;"></i>
+                <span class="buttonLabel ms-2">{{buttonLabel}}</span>
             </button>
-        }@else if (buttonType==="delete") {
-            <button class="deleteButton"
-            (click)="emitButtonClicked(buttonType)">
+
+        }@else if (buttonValue==="delete") {
+
+            <button [ngClass]="includeButtonLabel?'deleteButtonLabelled': 'deleteButton'"
+            (click)="emitButtonClicked(buttonValue)">
                 <i class="fa-solid fa-trash" style="color: #ffffff;"></i>
-                @if (buttonLabel.trim()==="") { 
+                @if (includeButtonLabel){ 
                     <span class="buttonLabel ms-2">{{buttonLabel}}</span>
                 }
             </button>
-        }@else if (buttonType==="restore") {
+
+        }@else if (buttonValue==="restore") {
             <button type="button" class="updateButton btn btn-success"
-            (click)="emitButtonClicked(buttonType)">
+            (click)="emitButtonClicked(buttonValue)">
                 <i class="fa-solid fa-clock-rotate-left" style="color: #ffffff;"></i>
+                <span class="buttonLabel ms-2">{{buttonLabel}}</span>
             </button>
-        }@else if(buttonType==="insert"){
+
+        }@else if(buttonValue==="insert"){
             <button type="button" class="insertButton" 
-            (click)="emitButtonClicked(buttonType)">
-                <i class="fas fa-plus fa-lg me-2"></i> Insert
+            (click)="emitButtonClicked(buttonValue)">
+                <i class="fas fa-plus fa-lg me-2"></i> 
+                <span class="buttonLabel ms-2">{{buttonLabel}}</span>
             </button>
-        }
+        
+        }@else {
+
+             <button type="button" [ngClass]="includeButtonLabel?'ordinaryButtonLable': 'ordinaryButton'" 
+            (click)="emitButtonClicked(buttonValue)">
+                <i class="fas fa-plus fa-lg me-2"></i> 
+                <span class="buttonLabel ms-2">{{buttonLabel}}</span>
+            </button>
+        } -->
 
 
 

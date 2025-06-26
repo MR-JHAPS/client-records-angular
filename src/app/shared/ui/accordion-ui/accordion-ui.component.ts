@@ -11,7 +11,7 @@ import { ButtonDataModel } from '../../../core/uiModels/buttonDataModel';
 
 @Component({
   selector: 'app-accordion-ui',
-  imports: [MaterialModules, CheckboxUiComponent, CommonModule, FloatingButtonTabComponent, AvatarImgComponent, DateConverterPipe, ButtonsUiComponent],
+  imports: [MaterialModules, CommonModule, FloatingButtonTabComponent, AvatarImgComponent, DateConverterPipe, ButtonsUiComponent],
   templateUrl: './accordion-ui.component.html',
   styleUrl: './accordion-ui.component.css'
 })

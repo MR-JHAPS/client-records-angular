@@ -1,56 +1,105 @@
+/* 
 .buttonLabel{
   color: var(--lighterShade);
+} */
+
+
+
+/* -----------------General Button Layout -----------------*/
+
+.updateButton,.updateButtonLabelled,
+.deleteButton, .deleteButtonLabelled,
+.insertButton, .insertButtonLabelled,
+.restoreButton , .restoreButtonLabelled,
+.ordinaryButton, .ordinaryButtonLabelled{
+   /* padding:0.5rem 1rem; */
+    border: none;
+    display: flex;
+    flex-direction: row;
+    justify-self: center;
+    align-items: center;
+    /* background-color: var(--updateButton);   */
 }
 
+/* circular Buttons: Buttons without label */
+.updateButton, .deleteButton, .restoreButton, .insertButton, .ordinaryButton {
+  border-radius: 50%;
+  padding: 1rem;
+}
 
-/* ------------------------- Update button -----------------------------------------------*/
-  .updateButton{
-     padding:16px;
-    border: none;
-    display: flex;
-    flex-direction: row;
-    justify-self: center;
-    border-radius: 50%;
-    background-color: var(--updateButton);  
-  }
+/* Buttons with label rectangular buttons. */
+.updateButtonLabelled, .deleteButtonLabelled, .restoreButtonLabelled, .insertButtonLabelled, .ordinaryButtonLabelled {
+  border-radius: 8px;
+  padding:1rem;
+}
 
-  .updateButton:hover{
-    transition-duration: 0.2s;
-    background-color: var(--darkBlue);
-  }
+      /* UpdateButton Background Color. */
+      .updateButton, .updateButtonLabelled{
+        background-color: var(--updateButton);
+        color: var(--lighterShade);
+      }
 
-/* ----------------------- Delete button --------------------------------------*/
-  .deleteButton{
-    padding:16px;
-    border: none;
-    display: flex;
-    flex-direction: row;
-    justify-self: center;
-    /* border-radius: 50%; */
-    border-radius: 10px;
-    background-color: var(--deleteButton);
-  }
-
-  .deleteButton:hover{
-    transition-duration: 0.2s;
-    box-shadow: 2px 0.8px 5px  rgb(169, 76, 76);
-  }
+      .updateButton:hover , .updateButtonLabelled:hover{
+        transition-duration: 0.2s;
+          background-color: var(--primaryColor);
+      }
 
 
+      /* DeleteButton Background Color. */
+      .deleteButton, .deleteButtonLabelled{
+        background-color: var(--deleteButton);
+        color: var(--lighterShade);
+      }
 
-  .insertButton{
-    display: block;
-    width: 10rem;
-    margin: auto;
-    border: none;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    background-color: var(--lighterShade);
-    color: var(--secondaryColor);
-    padding: 1rem;
-  }
+      .deleteButton:hover, .deleteButtonLabelled:hover{
+        transition-duration: 0.2s;
+        box-shadow: 2px 0.8px 5px  rgb(169, 76, 76);  
+      }
 
-  .insertButton:hover{
-    background-color: var(--lightShade);
-    color: var(--darkBlue);
-  }
+
+      /* RestoreButton Background Color. */
+      .restoreButton, .restoreButtonLabelled{
+        background-color: var(--updateButton);
+        color: var(--lighterShade);
+      }
+
+      .restoreButton:hover, .restoreButtonLabelled:hover{
+          transition-duration: 0.2s;
+          background-color: var(--primaryColor);
+      }
+
+
+      /* InsertButton Background Color. */
+      .insertButton, .insertButtonLabelled{
+        background-color: var(--lighterShade);
+        color: var(--secondaryColor) !important;
+      }
+      
+
+      .insertButton:hover, .insertButtonLabelled:hover{
+        background-color: var(--lightShade);
+        color: var(--primaryColor) !important;
+      }
+
+
+      /* UpdateButton Background Color. */
+      .ordinaryButton, .ordinaryButtonLabelled{
+        background-color: var(--updateButton);
+      }
+
+      .ordinaryButton:hover, .ordinaryButtonLabelled:hover{
+        transition-duration: 0.2s;
+        background-color: var(--primaryColor);
+      }
+
+
+
+
+
+
+
+
+
+
+
+

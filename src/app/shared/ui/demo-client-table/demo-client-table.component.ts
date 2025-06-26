@@ -14,6 +14,11 @@ import { SearchDataModel } from '../../../core/uiModels/searchDataModel';
 import { ButtonDataModel } from '../../../core/uiModels/buttonDataModel';
 import { MaterialModules } from '../../../material';
 import { AccordionUiComponent } from "../accordion-ui/accordion-ui.component";
+import { SearchUiComponent } from "../search-ui/search-ui.component";
+import { PaginationComponent } from "../../components/pagination/pagination/pagination.component";
+import { ButtonTabsComponent } from "../../components/button-tabs/button-tabs.component";
+import { ButtonTabs } from '../../../core/models/uiModal/buttonTabs';
+import { NgClass } from '@angular/common';
 
 export class ClientModel{
   constructor(
@@ -44,7 +49,9 @@ export class ClientLogModel{
 
 @Component({
   selector: 'app-demo-client-table',
-  imports: [TableUIComponent, MaterialModules, AccordionUiComponent],
+  imports: [TableUIComponent,
+    NgClass,
+    MaterialModules, AccordionUiComponent, SearchUiComponent, PaginationComponent, ButtonTabsComponent],
   templateUrl: './demo-client-table.component.html',
   styleUrl: './demo-client-table.component.css'
 })
@@ -66,6 +73,7 @@ export class DemoClientTableComponent implements OnInit{
       // this.getAllClients();
       this.pageLinks;
       this.onResize();
+      this.onWindowScroll();
       
   
       /* suscribing to the communicationService behaviour subj to see if client is updated and display alert accordingly.*/
@@ -101,6 +109,16 @@ export class DemoClientTableComponent implements OnInit{
     isSortPostalCodeVisible = false;
 
 
+    isScrolled : boolean = false;
+
+
+    
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const scrollTop = window.scrollY;
+    this.isScrolled = scrollTop > 60; // if scroll is above 60px isScrolled = true;
+  }
+
     searchField : SearchDataModel[] = [
       new SearchDataModel("Any", "searchQuery"),
       new SearchDataModel("FirstName", "firstName"),
@@ -109,9 +127,14 @@ export class DemoClientTableComponent implements OnInit{
     ];
 
     buttonList : ButtonDataModel[] = [
-      {buttonName: "Update", buttonValue: "update", isUpdateButton: true},
-      {buttonName: "Delete", buttonValue: "delete", isDeleteButton : true}      
+      {buttonLabel: "Update", buttonValue: "update", includeLabel:true},
+      {buttonLabel: "Delete", buttonValue: "delete", includeLabel:true}      
     ];
+
+    buttonTabList : ButtonTabs[] = [
+      new ButtonTabs("Client-Log", "/demoClientTable"),
+      new ButtonTabs("User Table", "/home")
+    ]
 
     tableColumns : TableDataModel[] = [
       { header: 'ID', contentKey: 'id' },
@@ -162,6 +185,11 @@ export class DemoClientTableComponent implements OnInit{
           console.log("Deleting the user of id : " + client.id + "and name : " + client.firstName );
         }
       })
+    }
+
+
+    setContentSize(size : number) :void{
+      
     }
 
 

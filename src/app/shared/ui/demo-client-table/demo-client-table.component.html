@@ -1,6 +1,23 @@
 <!-- <p>
     Demo Table with Table UI
 </p> -->
+ <div [ngClass]="{'buttonTabs':true, 'scroll':isScrolled}">
+        <app-button-tabs
+        [buttonTabsChild]="buttonTabList"
+        />
+    </div>
+
+
+<main class="demoContainer p-2">
+
+   
+    <div class="searchContainer">
+        <app-search-ui
+        [searchFieldsChild]="searchField"
+    />
+
+    </div>
+    
 
 
     @if (!isMobile) {
@@ -28,3 +45,12 @@
             [buttonList]="buttonList"
         />
     }
+
+
+    <app-pagination
+    (contentSize)="setContentSize($event)"
+    />
+
+
+
+    </main>

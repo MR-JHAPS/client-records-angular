@@ -13,7 +13,9 @@ import { PageEvent,MatPaginator } from '@angular/material/paginator';
 })
 export class PaginationComponent {
 
-  @Input() pageLinks : ApiLinksDetails[] = []; //Gets the apiLinks from the parentClass.
+  //Gets the Array of apiLinks from the parentClass.
+  /* for first page, lastPage, nextPage, previousPage */
+  @Input() pageLinks : ApiLinksDetails[] = []; 
   @Output() pageUrl =  new EventEmitter<string>(); //Emits the URL of pagination.
   @Output() contentSize = new EventEmitter<number>(); //Emits the ContentSize.
 
@@ -40,9 +42,9 @@ export class PaginationComponent {
     /*changing "self","first", "last" ..... to proper url .*/
     changingRelToUrl(rel: string){
       console.log(`button clicked on the pagination on ${rel}`);
-      const singleLink = this.pageLinks.find(link=> link.rel===rel);
+      const singleLink = this.pageLinks.find((link)=> link.rel===rel );
       if(!singleLink){
-        this.toastrService.warning(`${rel} Page Not Found.`)
+        this.toastrService.info(`${rel} Page Not Found.`)
         console.log(`rel : ${rel} not found in the given pagination request param. paginationComponent.ts`);
       }else{
         const url = singleLink.href;

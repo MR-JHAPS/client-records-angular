@@ -26,7 +26,7 @@ export class TableUIComponent {
 
   isMobile = false; // this stores if the viewing device is mobile/laptop.
   isLoading = false;
-  isSearchResultPresent: boolean;
+  isSearchResultPresent: boolean = true;
 
   @Input() includeCheckbox : boolean;
   @Input() tableColumnsChild : TableDataModel[];

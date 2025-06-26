@@ -1,5 +1,5 @@
 .subMenuContainer{
-    background-color: var(--lightShade);
+    /* background-color: var(--lightShade); */
     /* padding-top: 1rem; */
 
     
@@ -17,7 +17,7 @@
 }
 
 .list{
-    background-color: var(--lightShade);
+    /* background-color: var(--lightShade); */
     width: auto;
     text-align: center;
 }
