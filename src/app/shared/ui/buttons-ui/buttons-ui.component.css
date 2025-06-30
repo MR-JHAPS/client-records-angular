@@ -30,7 +30,7 @@
 /* Buttons with label rectangular buttons. */
 .updateButtonLabelled, .deleteButtonLabelled, .restoreButtonLabelled, .insertButtonLabelled, .ordinaryButtonLabelled {
   border-radius: 8px;
-  padding:1rem;
+  padding:0.5rem 1rem;
 }
 
       /* UpdateButton Background Color. */
@@ -71,14 +71,16 @@
 
       /* InsertButton Background Color. */
       .insertButton, .insertButtonLabelled{
-        background-color: var(--lighterShade);
-        color: var(--secondaryColor) !important;
+        background-color: var(--secondaryColor);
+        color: var(--lighterShade) !important;
       }
       
 
       .insertButton:hover, .insertButtonLabelled:hover{
-        background-color: var(--lightShade);
-        color: var(--primaryColor) !important;
+        box-sizing: border-box;
+        background-color: var(--primaryColor);
+        color: var(--white) !important;
+        transition-duration: 0.5s;
       }
 
 

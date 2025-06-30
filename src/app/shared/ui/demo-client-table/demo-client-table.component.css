@@ -9,15 +9,14 @@
 }
 
 .buttonTabs.scroll{
-    background-color: var(--white);
+    background-color: var(--lighterShade);
     /* color:white; */
 }
 
-/* app-button-tabs{
-    background-color: green;
-} */
 
 
 .searchContainer{
-    width: 50%;
+    margin:auto;
+    max-width: 500px;
+    margin-bottom: 3rem;
 }

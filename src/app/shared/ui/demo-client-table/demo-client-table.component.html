@@ -8,7 +8,7 @@
     </div>
 
 
-<main class="demoContainer p-2">
+<main class="demoContainer p-2 pt-0">
 
    
     <div class="searchContainer">
@@ -23,13 +23,12 @@
     @if (!isMobile) {
         <app-table-ui
             [tableColumnsChild]="clientLogColumns"
-            [includeButtons]="true"
+            [includeButtons]="false"
             [buttonListTable]="buttonList"
             [contents]="clientLogList"
             [includeCheckbox]="true"
-            [includeSearchBar]="true"
-            [searchFieldsData]="searchField"
-            (deleteSelectedEventEmitter)="deleteSelectedClient($event)"
+            [includeInsertButton]="true"
+            (deleteMultipleEventEmitter)="deleteSelectedClient($event)"
         />
     }
 
@@ -39,9 +38,10 @@
             [contents]="clientLogList"
             [isSearchResultPresent]="isSearchResultPresent"
             [isLoading]="isLoading"
-            [tableConfig]="clientLogColumns"
+            [tableColumnsChild]="clientLogColumns"
             (deleteCheckedIDEventEmitter)="deleteSelectedClient($event)"
             [includeCheckbox]="true"
+            [includeInsertButton]="true"
             [buttonList]="buttonList"
         />
     }

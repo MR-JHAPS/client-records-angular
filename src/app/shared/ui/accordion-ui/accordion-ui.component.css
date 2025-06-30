@@ -1,11 +1,40 @@
 
    
+
+ .insertSortByContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--white);
+  border-bottom: 2px solid var(--lightShade);
+  padding: 0 1rem;
+ }
+
+  .insertButtonContainer{
+    
+  }
+
+  .sortBy{
+    /* background-color: green; */
+    padding: 1rem;
+  }
+      .sortBy select{
+        /* background-color: green !important; */
+        width: 100px;
+      }
+
+
+
+
+
    
    /* This is the main container of the Component */
    .mainContainerAccordion{
       background-color: var(--white);
      }
- 
+     
+
  
      /* This is the container that contains the Accordian */
     .mobileContainer{
@@ -126,5 +155,48 @@
        transition-duration: 0.5s;
   }
 
+
+
+
+@media(max-width: 476px){
+
+
+   .insertSortByContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--white);
+  border-bottom: 2px solid var(--lightShade);
+  /* padding: 0 1rem; */
+ }
+
+  .insertButtonContainer{
+    box-sizing: border-box;
+    font-size: 12px;
+  }
+
+  .sortBy{
+    /* background-color: green; */
+    padding: 1rem;
+  }
+
+    .sortBy select{
+      background-color: var(--lightShade) !important;
+      width: 80px;
+      font-size: 14px;
+      border-radius: 8px;
+      padding: 0.1rem 1rem;
+    }
+
+      .sortBy option{
+        width: 180px;
+        padding: 0px !important;
+        background-color: var(--lightShade) !important;
+      }
+
+
+
+}
 
 

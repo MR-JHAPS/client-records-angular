@@ -1,28 +1,59 @@
+<!-- <p>
+    Demo Table with Table UI
+</p> -->
+ <!-- <div [ngClass]="{'buttonTabs':true, 'scroll':isScrolled}">
+        <app-button-tabs
+        [buttonTabsChild]="buttonTabList"
+        />
+    </div> -->
 
 
-<!-- <app-search-ui
-[searchFieldsChild]="searchFields"
-(searchEventEmitter)="searchClients($event)"
+<main class="demoContainer p-2 pt-0">
 
-/> -->
+   
+    <div class="searchContainer">
+        <app-search-ui
+        [searchFieldsChild]="searchFields"
+    />
+
+    </div>
+    
+
 
     @if (!isMobile) {
         <app-table-ui
-          
-            [tableColumnsChild]="tableColumns"
+            [tableColumnsChild]="clientTableColumns"
+            [includeButtons]="true"
+            [buttonListTable]="buttonList"
             [contents]="clientList"
             [includeCheckbox]="true"
-            [searchFieldsData]="searchFields"
-            (searchEventEmitter)="searchClients($event)"
-
+            [includeInsertButton]="true"            
+            (deleteMultipleEventEmitter)="deleteMultipleClients($event)"
+            (sortByEventEmitter)="sortClient($event)"
         />
     }
 
-    @else if(isMobile){
+
+    @else if (isMobile) {
         <app-accordion-ui
-        [tableConfig]="tableColumns"
-        [contents]="clientList"
-        [isLoading]="false"
-
+            [tableColumnsChild]="clientTableColumns"
+            [contents]="clientList"
+            [isSearchResultPresent]="isSearchResultPresent"
+            [isLoading]="isLoading"
+            (deleteCheckedIDEventEmitter)="deleteMultipleClients($event)"
+            [includeCheckbox]="true"
+            [includeInsertButton]="true"
+            [buttonList]="buttonList"
         />
     }
+
+
+    <app-pagination
+    (contentSize)="emittedContentSize($event)"
+    (pageUrl)="toSpecificPage($event)"
+    [pageLinks]="pageLinks"
+    />
+
+
+
+</main>

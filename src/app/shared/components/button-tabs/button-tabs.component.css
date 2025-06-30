@@ -53,7 +53,7 @@
 @media (max-width:650px){
 
 .list{
-    background-color: var(--lightShade);
+    /* background-color: var(--lightShade); */
     width: auto;
     text-align: center;
 }

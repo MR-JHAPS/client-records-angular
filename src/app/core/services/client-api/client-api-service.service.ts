@@ -165,6 +165,7 @@ export class ClientApiServiceService {
   // }
 
 
+  /* This is to get the specific page of the paginated Data like firstPage, lastPage, next, prev etc. */
   getRequiredPage(pageHref: string): Observable<ApiResponseModelPaginated<ClientResponse>>{
    /* if the url is provided directly */
    /* if(!pageHref){

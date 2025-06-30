@@ -5,14 +5,34 @@
 }
  */
 
-/* --------------------------------------DYNAMIC INSERT/DELETE-Multiple----------------------------------------------------------- */
+
+ .insertSortByContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--white);
+  border-bottom: 2px solid var(--lightShade);
+  padding: 1rem;
+ }
+
+/* --------------------------------------INSERT Button----------------------------------------------------------- */
 .insertButtonContainer{
-  width: fit-content;
-  margin: auto;
-  /* border: 2px solid var(--lightShade); */
-  border-radius: 8px;
-  margin-bottom: 1rem;
+  width: 75%;
+  /* background-color: blue; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
+
+.sortContainer{
+  width: 25%;
+  /* background-color: coral; */
+  
+}
+
+
 
 
 
@@ -58,7 +78,9 @@ th{
   min-width: max-content ;
 }
   
-
+tr{
+  height: 60px;
+}
 
 th:hover{
   cursor: pointer;

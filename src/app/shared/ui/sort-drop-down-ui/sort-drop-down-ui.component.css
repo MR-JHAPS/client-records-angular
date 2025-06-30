@@ -1,0 +1,28 @@
+.sortContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    /* background-color: green; */
+    width: 100%;
+    
+}
+
+    .sortBy{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        /* padding: 0.2rem 1rem; */
+    }
+    .sortBy select{
+        width: auto;
+        font-size: auto;
+    }
+
+    .sortDirection{
+         display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }

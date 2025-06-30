@@ -14,10 +14,16 @@ import { SearchUiComponent } from "../../../../shared/ui/search-ui/search-ui.com
 import { SearchRequest } from '../../../../core/models/request/searchRequest';
 import { SearchDataModel } from '../../../../core/uiModels/searchDataModel';
 import { AccordionUiComponent } from "../../../../shared/ui/accordion-ui/accordion-ui.component";
+import { ButtonTabsComponent } from "../../../../shared/components/button-tabs/button-tabs.component";
+import { ButtonDataModel } from '../../../../core/uiModels/buttonDataModel';
+import { ApiResponseModel } from '../../../../core/models/responseModel/apiResponseModel';
+import { NgClass } from '@angular/common';
+import { PaginationComponent } from "../../../../shared/components/pagination/pagination/pagination.component";
+import { SortRequest } from '../../../../core/models/request/sortRequest';
 
 @Component({
   selector: 'app-client-table-for-user',
-  imports: [TableUIComponent, AccordionUiComponent],
+  imports: [TableUIComponent, AccordionUiComponent, SearchUiComponent, ButtonTabsComponent, NgClass, PaginationComponent],
   templateUrl: './client-table-for-user.component.html',
   styleUrl: './client-table-for-user.component.css'
 })
@@ -36,25 +42,19 @@ export class ClientTableForUserComponent {
       clientList : Array<ClientResponse>;
       pageLinks : Array<ApiLinksDetails>; // this is for method : toSpecificPage(){} -->i.e: For pagination.
       selectedClients :BulkClientDeleteRequest = new BulkClientDeleteRequest();
-      isCheckBoxChecked = false; //for the dynamic insert/delete button.
+      // isCheckBoxChecked = false; //for the dynamic insert/delete button.
       isMobile = false; // this stores if the viewing device is mobile/laptop.
       isLoading = true;
       isSearchResultPresent = true; // this is to see if the searching contains no clients.
-    
-      isSortClicked = true;
-      isSortIdVisible = false;
-      isSortFirstNameVisible = false;
-      isSortLastNameVisible = false;
-      isSortDOBVisible = false;
-      isSortPostalCodeVisible = false;
+
+
   
   
-  
-      tableColumns : TableDataModel[] = [
+      clientTableColumns : TableDataModel[] = [
         { header: 'ID', contentKey: 'id' , isImportant : true},
         { header: 'First Name', contentKey: 'firstName', isImportant: true },
         { header: 'Last Name', contentKey: 'lastName' , isImportant: true},
-        { header: 'Date of Birth', contentKey: 'dateOfBirth', isDate: true },
+        { header: 'Date of Birth', contentKey: 'dateOfBirth' },
         { header: 'Postal Code', contentKey: 'postalCode' }
       ]
       
@@ -65,11 +65,20 @@ export class ClientTableForUserComponent {
             new SearchDataModel("Last Name", "lastName"),
             new SearchDataModel("Postal Code", "postalCode")
       ]
+
+      
+
+
+      /* These are the button of the table */
+      buttonList : ButtonDataModel[] = [
+        {buttonValue:"update", includeLabel:false},
+        {buttonValue:"delete", includeLabel:false}
+      ]
     
       ngOnInit(): void {
         this.getAllClients();
         this.pageLinks;
-        
+        this.onResize(); // to check the active window screen size.
     
         /* suscribing to the communicationService behaviour subj to see if client is updated and display alert accordingly.*/
         // this.updateSubscription = this._communicationService.isClientUpdated$.subscribe(
@@ -93,7 +102,38 @@ export class ClientTableForUserComponent {
             this.isMobile = window.innerWidth<700 ;
           }
 
-  
+    
+
+          
+     /* New Content size emitted from the app-pagination */     
+     emittedContentSize(contentSize : number) : number{
+      return contentSize;
+    }      
+
+
+
+    /* Sorting clients---- */
+    sortClient(sortRequest : SortRequest) : void {
+      this.getAllClients(undefined, undefined, sortRequest.getSortBy(), sortRequest.getDirection());
+    }
+
+
+
+
+    toSpecificPage( url : string):void{
+      this._clientService.getRequiredPage(url).subscribe({
+        next : (response : ApiResponseModelPaginated<ClientResponse>)=>{
+          console.log("Returning the selected paginated page first,last,next,prev page.");
+        },
+        error : (error) =>{
+          console.log("Error forwarding to the selected paginated request page.", error)
+        },
+        complete : ()=>{
+          console.log("Completed");
+        }
+      })
+    }
+
   
      getAllClients(pageNumber?:number, pageSize?: number,
         sortBy?: string, direction?: string ) : void {
@@ -146,6 +186,21 @@ export class ClientTableForUserComponent {
       })
     }
 
+
+
+    deleteMultipleClients(idList :number[]) : void {
+      this.selectedClients.idList=idList;
+      this._clientService.deleteMultipleClients(this.selectedClients).subscribe({
+        next : (response : ApiResponseModel<string>)=>{
+          console.log("Multiple clients deleted");
+          this._toastrService.success("Multiple clients deleted successfully.");
+        },
+        error: (error)=>{
+          console.log("Unable to delete multiple clients", error);
+          this._toastrService.warning("Failed to delete multiple clients");
+        }
+      })
+    }
 
 
 

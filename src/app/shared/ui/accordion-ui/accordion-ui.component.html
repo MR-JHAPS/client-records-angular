@@ -1,4 +1,36 @@
 
+<!-- This is the insert Button -->
+    <!-- <div class="insertButtonContainer shadow">
+        <app-buttons-ui
+        [buttonValue]="'insert'"
+        [includeButtonLabel]="true"
+        [buttonLabel]="'Insert Client'"
+        (buttonClickedEventEmitter)="verifyClickedButton($event)"
+        />
+    </div> -->
+
+    <div class="insertSortByContainer">
+        @if (includeInsertButton) {
+            <div class="insertButtonContainer ">
+                <app-buttons-ui
+                [buttonValue]="'insert'"
+                [includeButtonLabel]="true"
+                [buttonLabel]="'Insert Client'"
+                (buttonClickedEventEmitter)="verifyClickedButton($event)"
+                />
+            </div>
+        }
+
+        <div class="sortBy">
+           
+            <label for="sortBy" class="me-2">  <i class="fa-solid fa-arrow-up-wide-short me-2"></i>Sort </label>
+            <select name="sortBy" id="sortBy" (change)="emitSortBy($event)">
+                @for (column of tableColumnsChild; track $index) {
+                    <option value={{column.contentKey}} >{{column.header}}</option>
+                }
+            </select>
+        </div>
+    </div>
 
 
 <!-- MOBILE : This is Angular-Material-Accordian For smaller-Screen-------------------------------------------------------- -->
@@ -12,6 +44,7 @@
               <div class="spinner-border" role="status"></div>
           </div>
       </div>
+
 
 
         <!------------- If the page is loaded completely for mobile devices/small screen---------------  -->
@@ -33,7 +66,7 @@
                       </mat-panel-title>
                   }
 
-                  @for (column of tableConfig; track $index) {
+                  @for (column of tableColumnsChild; track $index) {
                       @if (column.isImportant) {
                         <mat-panel-title class="panelTitle"> 
                         @if (column.isImage) {
@@ -51,7 +84,7 @@
                 
                 <!-- BODY OF ACCORDION -->
                 <div class="contentContainer">
-                  @for (column of tableConfig; track $index) {
+                  @for (column of tableColumnsChild; track $index) {
                     @if (!column.isImage) {
                         <div class="firstContentdd">
                             <span class="label">
@@ -73,6 +106,7 @@
                       [buttonValue]="button.buttonValue"
                       [buttonLabel]="button.buttonLabel?? 'defaultLabel'"
                       [includeButtonLabel]="button.includeLabel ?? false"
+                      (buttonClickedEventEmitter)="verifyClickedButton($event)" 
                       />
                     }
                 </div>

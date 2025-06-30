@@ -1,15 +1,61 @@
 <!-- <main> -->
 
     <!-------------------------------------- This is to insert new client -------------------------------------->
-    <div class="insertButtonContainer shadow">
-        <app-buttons-ui
-        [buttonValue]="'insert'"
-        [includeButtonLabel]="true"
-        [buttonLabel]="'Insert Client'"
-        (buttonClickedEventEmitter)="verifyClickedButton($event)"
-        />
-    </div>
+   
+   <div class="insertSortByContainer">
+       
+        @if (includeInsertButton) {
+            <div class="insertButtonContainer ">
+                <app-buttons-ui
+                [buttonValue]="'insert'"
+                [includeButtonLabel]="true"
+                [buttonLabel]="'Insert Client'"
+                (buttonClickedEventEmitter)="verifyClickedButton($event)"
+                />
+            </div>
+        }
 
+        <div class="sortContainer">
+
+            <app-sort-drop-down-ui 
+                [tableColumns]="tableColumnsChild"
+                (sortByEventEmitter)="emitSortBy($event)"
+            />
+            <!-- <div class="sortBy">
+                <label for="sortBy" class="me-2">  <i class="fa-solid fa-arrow-up-wide-short me-2"></i>Sort </label>
+                <select name="sortBy" id="sortBy" (change)="setSortByValue($event)" [(ngModel)]="sortRequest.sortBy" >
+                    @for (column of tableColumnsChild; track $index) {
+                        <option value={{column.contentKey}} >
+                            {{column.header}}
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <div class="direction">
+                <label for="sortDirection">
+                    sortDirection
+                </label>
+                <select name="sortDirection" id="sortDirection" (change)="setSortDirectionValue($event)">
+                    <option [value]="Direction.Ascending"> Ascending </option>
+                    <option [value]="Direction.Descending"> Descending </option>
+                </select>
+
+            </div> -->
+        
+        </div>
+
+   </div>
+                <!-- <input type="radio" name="sortDirection" id="asc" [value]="Direction.Ascending" (click)="setSortDirectionValue($event)">
+                
+                <label for="desc">
+                    Descending
+                </label>
+                <input type="radio" name ="sortDirection" id="desc" [value]="Direction.Descending" (click)="setSortDirectionValue($event)">
+            </div>
+           {{sortDirection}} -->
+
+      
 
     <!-------------------------------------- This table is for Bigger-Screen/Desktop -------------------------------------->
     <div class="clientTable">
@@ -23,9 +69,7 @@
                     </th>
                     <!-- Dynamic Table Columns Header -->
                     @for (column of tableColumnsChild; track $index) {
-                        <th (mouseenter)="showSortIcon('id')"
-                            (mouseleave)="hideSortIcon()"
-                            (click)="onSortClick('id')">
+                        <th>
                             @if (column.highlightColumn) {
                                 <span class="highlightHeader"> {{column.header}}</span>
                             }@else{
@@ -72,11 +116,11 @@
                         <!-- Dynamic BUTTONS-UI FOR TABLE -->
                         @if (includeButtons) {
                             <td >
-                                <div class="d-flex gap-3 justify-content-start" >
+                                <div class="d-flex gap-3 justify-content-center" >
                                     @for (button of buttonListTable; track $index) {
                                         <app-buttons-ui
                                             [buttonValue]="button.buttonValue"
-                                            (buttonClickedEventEmitter)="verifyClickedButton($event)"
+                                            (buttonClickedEventEmitter)="verifyClickedButton($event, row.id)"
                                         />                               
                                     }
                                 </div>

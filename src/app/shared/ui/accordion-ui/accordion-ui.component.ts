@@ -21,16 +21,16 @@ export class AccordionUiComponent {
 
   @Output() deleteCheckedIDEventEmitter = new EventEmitter<number[]>();
 
-  @Input() tableConfig : TableDataModel[] = [];
+  @Input() tableColumnsChild : TableDataModel[] = [];
   @Input() contents : any[];
   @Input() isSearchResultPresent : boolean = true;
   @Input() isLoading : boolean;
   @Input() includeCheckbox : boolean;
   @Input() buttonList : ButtonDataModel[] ; //stores the buttons that is to be displayed. 
+  @Input() includeInsertButton : boolean ;
 
   checkedIds : number[] = []
   // importantHeader : TableDataModel[] = this.tableConfig.filter((column)=>column.isImportant);
-
 
 
 
@@ -71,10 +71,16 @@ export class AccordionUiComponent {
     }
 
  
-
+    verifyClickedButton(buttonValue: string):void{
+      
+    }
 
   
 
+    emitSortBy(event: Event) :void{
+      const selectedEvent = event.target as HTMLSelectElement;
+      console.log("SortBy selected Option : ", selectedEvent.value);
+    }
 
   //  emitCheckedIdList(idList : number[]):void{
   //   this.deleteCheckedIDEventEmitter.emit(idList);

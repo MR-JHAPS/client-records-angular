@@ -1,0 +1,24 @@
+    <div class="sortContainer">
+            <div class="sortBy">
+                <label for="sortBy" class="">  <i class="fa-solid fa-arrow-up-wide-short me-2"></i>Sort </label>
+                <select name="sortBy" id="sortBy" (change)="setSortByValue($event)" [(ngModel)]="sortRequest.sortBy" >
+                    @for (column of tableColumns; track $index) {
+                        <option value={{column.contentKey}} >
+                            {{column.header}}
+                        </option>
+                    }
+                </select>
+            </div>
+
+
+            <div class="sortDirection">
+                <label for="sortDirection">
+                    Direction
+                </label>
+                <select name="sortDirection" id="sortDirection" (change)="setSortDirectionValue($event)" [(ngModel)]="sortRequest.direction">
+                    <option [value]="Direction.Ascending"> Ascending </option>
+                    <option [value]="Direction.Descending"> Descending </option>
+                </select>
+            </div>
+        
+        </div>
