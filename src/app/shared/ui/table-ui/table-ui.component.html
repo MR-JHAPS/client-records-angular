@@ -6,12 +6,20 @@
        
         @if (includeInsertButton) {
             <div class="insertButtonContainer ">
-                <app-buttons-ui
+                <!-- <app-buttons-ui
                 [buttonValue]="'insert'"
                 [includeButtonLabel]="true"
                 [buttonLabel]="'Insert Client'"
                 (buttonClickedEventEmitter)="verifyClickedButton($event)"
-                />
+                /> -->
+                <app-buttons-ui
+                [size]="ButtonSize.MEDIUM"
+                [shape]="ButtonShape.RECTANGLE"
+                [variant]="ButtonVariant.LIGHT"
+                (buttonClicked)="verifyClickedButton('insert')"
+                >
+                <i class="fa-solid fa-plus"></i> INSERT
+                </app-buttons-ui>
             </div>
         }
 
@@ -114,20 +122,26 @@
                         }
                     
                         <!-- Dynamic BUTTONS-UI FOR TABLE -->
+                        
                         @if (includeButtons) {
                             <td >
                                 <div class="d-flex gap-3 justify-content-center" >
-                                    @for (button of buttonListTable; track $index) {
+                                     @for (button of buttonListTable; track $index) {
                                         <app-buttons-ui
-                                            [buttonValue]="button.buttonValue"
-                                            (buttonClickedEventEmitter)="verifyClickedButton($event, row.id)"
-                                        />                               
-                                    }
+                                            [shape]="ButtonShape.ROUND"
+                                            [size]="ButtonSize.LARGE"
+                                            [disabled]="false"
+                                            [variant]="button.variant?? ButtonVariant.PRIMARY"
+                                            (buttonClicked)="verifyClickedButton(button.action, row.id)"
+                                        >
+                                            <i [ngClass]="button.icon"></i>
+                                        </app-buttons-ui>
+                                    }<!-- ends button-for loop -->
                                 </div>
                             </td>
-                        }
+                        }<!-- ends if -->
                     </tr>
-                }
+                }<!-- for-loop -  contents -->
             </tbody>
 
 

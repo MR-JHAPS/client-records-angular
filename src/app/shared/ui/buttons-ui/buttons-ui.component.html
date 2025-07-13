@@ -1,19 +1,24 @@
     
 
+    <button [ngClass]="buttonClass" [disabled]="disabled" (click)="onClick()">
+        <ng-content></ng-content>
+    </button>
+
+
+
+
+
+
 
     
-    <div class="d-flex gap-3 justify-content-start">
+    <!-- <div class="d-flex gap-3 justify-content-start">
         <button [ngClass]="buttonClass" (click)="emitButtonClicked($event)">
             <i [ngClass]="buttonIcon" ></i>
-            <!-- <i [ngClass]="buttonIcon" style ="color:#ffffff"></i> -->
             @if (includeButtonLabel) {
                 <span class="ms-2">{{buttonLabel}}</span>
             }
         </button>
-
-
-
-    </div>
+    </div> -->
 
 
 

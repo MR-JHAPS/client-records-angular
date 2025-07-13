@@ -8,6 +8,9 @@ import { AvatarImgComponent } from "../avatar-img/avatar-img.component";
 import { DateConverterPipe } from '../../pipes/dateConverter/date-converter.pipe';
 import { ButtonsUiComponent } from "../buttons-ui/buttons-ui.component";
 import { ButtonDataModel } from '../../../core/uiModels/buttonDataModel';
+import { ButtonSize } from '../../../core/uiEnums/buttonSize';
+import { ButtonShape } from '../../../core/uiEnums/buttonShape';
+import { ButtonVariant } from '../../../core/uiEnums/buttonVariants';
 
 @Component({
   selector: 'app-accordion-ui',
@@ -28,6 +31,10 @@ export class AccordionUiComponent {
   @Input() includeCheckbox : boolean;
   @Input() buttonList : ButtonDataModel[] ; //stores the buttons that is to be displayed. 
   @Input() includeInsertButton : boolean ;
+
+  ButtonSize = ButtonSize;
+  ButtonShape = ButtonShape;
+  ButtonVariant = ButtonVariant;
 
   checkedIds : number[] = []
   // importantHeader : TableDataModel[] = this.tableConfig.filter((column)=>column.isImportant);
@@ -71,7 +78,8 @@ export class AccordionUiComponent {
     }
 
  
-    verifyClickedButton(buttonValue: string):void{
+    verifyClickedButton(buttonAction: string):void{
+      //buttonAction = "update" then execute the update.
       
     }
 

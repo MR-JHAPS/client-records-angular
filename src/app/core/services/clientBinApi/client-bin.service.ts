@@ -22,8 +22,8 @@ export class ClientBinService {
     let params = new HttpParams()
               .set("page", pageNumber? pageNumber : 0)
               .set("size", pageSize? pageSize : 10)
-              .set("sortBy", sortBy? sortBy: "")
-              .set("direction", direction? direction : "");
+              .set("sortBy", sortBy? sortBy: "id")
+              .set("direction", direction? direction : "desc");
     const url = `${this.apiBaseUrl+this.clientBinEndpoints.getAllClientBin}`;
     return this._httpClient.get<ApiResponseModelPaginated<clientBinResponse>>(url, {params});
   }

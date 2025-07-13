@@ -39,7 +39,8 @@ export class InsertClientModalComponent {
 
 
   onCancel(){
-    this.closeInsertClient.emit();
+    // this.closeInsertClient.emit();
+    this._modalService.hide();
   }
 
 

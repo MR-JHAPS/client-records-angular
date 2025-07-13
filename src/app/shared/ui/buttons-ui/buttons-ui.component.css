@@ -1,7 +1,106 @@
-/* 
-.buttonLabel{
+
+/* Basic button layout */
+.button{
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+/* BUTTON SIZES---------------------------- */
+
+.button-small{
+  font-size: 12px;
+  padding:6px 12px;
+}
+
+.button-medium{
+  font-size: 14px;
+  padding:8px 16px;
+}
+
+.button-large{
+  font-size: 16px;
+  padding:12px 24px;
+}
+
+/* BUTTON SHAPE ------------------- */
+
+.button-round{
+  border-radius: 50%;
+  padding : 10px 16px;
+}
+
+.button-rectangle{
+  border-radius: 4px;
+}
+
+/* Button Variant--------------- */
+
+.button-primary{
+  background-color: var(--primaryColor); 
   color: var(--lighterShade);
-} */
+  &:hover{
+    background-color: var(--secondaryColor);
+  }
+}
+
+.button-secondary{
+  background-color: var(--secondaryColor); 
+  color: var(--lighterShade);
+   &:hover{
+    background-color: var(--primaryColor);
+  }
+}
+
+.button-orange{
+  background-color: var(--orange); 
+  color: var(--lighterShade);
+   &:hover{
+    background-color: var(--mutedOrange);
+  }
+}
+
+.button-blue{
+  background-color: var(--updateButton); 
+  color: var(--lighterShade);
+  &:hover{
+    background-color: var(--secondaryColor);
+  }
+}
+
+.button-light{
+  background-color: var(--lighterShade); 
+  color: var(--secondaryColor);
+   &:hover{
+    background-color: var(--lightShade);
+  }
+}
+
+.button-danger{
+  background-color: var(--deleteButton); 
+  color: var(--white);
+}
+
+
+/* If the button is disabled */
+.button-disabled{
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

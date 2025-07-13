@@ -13,11 +13,11 @@
         @if (includeInsertButton) {
             <div class="insertButtonContainer ">
                 <app-buttons-ui
-                [buttonValue]="'insert'"
-                [includeButtonLabel]="true"
-                [buttonLabel]="'Insert Client'"
-                (buttonClickedEventEmitter)="verifyClickedButton($event)"
-                />
+                [size]="ButtonSize.MEDIUM"
+                [shape]="ButtonShape.RECTANGLE"
+                (buttonClicked)="verifyClickedButton('insert')"
+                >
+                </app-buttons-ui>
             </div>
         }
 
@@ -103,11 +103,13 @@
                 <div class="buttonTabs mt-3">
                     @for (button of buttonList; track $index) {
                       <app-buttons-ui
-                      [buttonValue]="button.buttonValue"
-                      [buttonLabel]="button.buttonLabel?? 'defaultLabel'"
-                      [includeButtonLabel]="button.includeLabel ?? false"
-                      (buttonClickedEventEmitter)="verifyClickedButton($event)" 
-                      />
+                      [shape]="ButtonShape.RECTANGLE"
+                      [size]="ButtonSize.SMALL"
+                      [variant]="button.variant??ButtonVariant.PRIMARY"
+                      (buttonClicked)="verifyClickedButton(button.action)" 
+                      >
+                      <i {{button.}}></i>
+                    </app-buttons-ui>
                     }
                 </div>
 

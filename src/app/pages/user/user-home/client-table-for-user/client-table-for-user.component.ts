@@ -20,6 +20,10 @@ import { ApiResponseModel } from '../../../../core/models/responseModel/apiRespo
 import { NgClass } from '@angular/common';
 import { PaginationComponent } from "../../../../shared/components/pagination/pagination/pagination.component";
 import { SortRequest } from '../../../../core/models/request/sortRequest';
+import { ButtonVariant } from '../../../../core/uiEnums/buttonVariants';
+import { InsertClientModalComponent } from '../../../../shared/components/modals/insert-client-modal/insert-client-modal.component';
+import { ClientUpdateComponent } from '../../client-update/client-update.component';
+import { DeleteClientModalComponent } from '../../../../shared/components/modals/delete-client-modal/delete-client-modal.component';
 
 @Component({
   selector: 'app-client-table-for-user',
@@ -66,13 +70,13 @@ export class ClientTableForUserComponent {
             new SearchDataModel("Postal Code", "postalCode")
       ]
 
-      
+      ButtonVariant = ButtonVariant;
 
-
+    
       /* These are the button of the table */
       buttonList : ButtonDataModel[] = [
-        {buttonValue:"update", includeLabel:false},
-        {buttonValue:"delete", includeLabel:false}
+        {action:"update", icon:"fa-solid fa-pen", buttonLabel:"Update", variant: ButtonVariant.BLUE},
+        {action:"delete", icon:"fa-solid fa-trash", buttonLabel:"Delete", variant: ButtonVariant.DANGER }
       ]
     
       ngOnInit(): void {
@@ -104,12 +108,65 @@ export class ClientTableForUserComponent {
 
     
 
-          
-     /* New Content size emitted from the app-pagination */     
-     emittedContentSize(contentSize : number) : number{
-      return contentSize;
-    }      
+          executeClickedButton(event : {buttonAction : string, rowId : number | null}) : void{
+            switch(event.buttonAction){
+              case "insert":
+                return this.openInsertModal();
+              
+              case "update":
+                return this.redirectToUpdateClientPage(event.rowId!);
 
+              case "delete":
+                return this.openDeleteSingleClientModal(event.rowId!);
+
+              default :"insert"
+            }
+          }
+
+
+
+          openInsertModal() : void {
+            this.bsModalRef = this._modalService.show(InsertClientModalComponent);
+            this.bsModalRef.content.isClientInserted.subscribe((isInserted : boolean)=>{
+              if(isInserted){
+                this._toastrService.success("Client created Successfully.");
+                this.getAllClients();
+                this._modalService.hide();
+              }else{
+                 this._toastrService.error("Error! Unable to Save the Client.")
+              }
+            })
+         
+          }
+
+          openDeleteSingleClientModal(clientId : number){
+            this.bsModalRef = this._modalService.show(DeleteClientModalComponent,{
+          initialState : {
+                       clientId : clientId , //passing the id to the deleteModalComponent. (modalVariable : paramId)
+                       isDeleteSingleClient : true
+            } 
+          });
+          //IF DELETED OR FAILED TO DELETE      
+          this.bsModalRef.content.isClientDeleted.subscribe((isDeleted : boolean)=>{
+            if(isDeleted){
+              this._toastrService.success("Client Deleted Successfully");
+              this.getAllClients();
+            }else{
+              this._toastrService.error("Error! Unable To Delete Client")
+            }
+          })      
+          //In case of cancelling delete with cancel button
+          this.bsModalRef.content.clientDeleteCancelled.subscribe(()=>{
+            this._toastrService.info("Client Delete cancelled");
+          })
+          }
+
+          redirectToUpdateClientPage(clientId : number): void {
+           this._router.navigate(["/user/client-update", clientId]);
+          }
+
+          
+    
 
 
     /* Sorting clients---- */
@@ -120,6 +177,8 @@ export class ClientTableForUserComponent {
 
 
 
+
+/* PAGINATION------------------------------------------ */    
     toSpecificPage( url : string):void{
       this._clientService.getRequiredPage(url).subscribe({
         next : (response : ApiResponseModelPaginated<ClientResponse>)=>{
@@ -133,6 +192,13 @@ export class ClientTableForUserComponent {
         }
       })
     }
+
+
+     /* New Content size emitted from the app-pagination */     
+     emittedContentSize(contentSize : number) : void{
+      this.getAllClients(1,contentSize,undefined,undefined);
+    }      
+
 
   
      getAllClients(pageNumber?:number, pageSize?: number,

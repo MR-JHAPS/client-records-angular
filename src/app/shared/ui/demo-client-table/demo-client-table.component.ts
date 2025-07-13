@@ -127,8 +127,8 @@ export class DemoClientTableComponent implements OnInit{
     ];
 
     buttonList : ButtonDataModel[] = [
-      {buttonLabel: "Update", buttonValue: "update", includeLabel:true},
-      {buttonLabel: "Delete", buttonValue: "delete", includeLabel:true}      
+      {buttonLabel: "Update", action: "update" },
+      {buttonLabel: "Delete", action: "delete"}      
     ];
 
     buttonTabList : ButtonTabs[] = [

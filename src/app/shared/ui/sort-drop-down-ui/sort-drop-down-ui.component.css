@@ -1,23 +1,39 @@
 .sortContainer{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: stretch;
     align-items: center;
-    /* background-color: green; */
-    width: 100%;
+    width: auto;
+    box-sizing: border-box;
+    overflow: auto;
+    
     
 }
+
+
+    label{
+        letter-spacing: 0.5px;
+        font-size: 15px;
+    }
 
     .sortBy{
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
-        /* padding: 0.2rem 1rem; */
+        /* background-color: coral; */
+        margin-right: 1rem;
     }
+
+
     .sortBy select{
-        width: auto;
+        width: min-content;
+        
         font-size: auto;
+        color: var(--secondaryColor);
+        background-color: var(--white);
+        font-size: 14px;
+        padding: 0.3rem 1rem;
     }
 
     .sortDirection{
@@ -25,4 +41,12 @@
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
+        /* background-color: aliceblue; */
     }
+
+        .sortDirection select{
+            color: var(--secondaryColor);
+            background-color: var(--white);
+            font-size: 14px;
+            padding: 0.3rem 1rem;
+        }

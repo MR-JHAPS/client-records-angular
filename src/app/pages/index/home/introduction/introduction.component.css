@@ -1,0 +1,172 @@
+.introContainer{
+  box-sizing: border-box;
+  overflow: auto;
+  background-color: var(--lightShade);
+  /* padding:30px; */
+  padding-top:40px;
+  margin-bottom: 50px;
+  display: grid;
+  gap:30px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "imageContainer detailsContainer";
+}
+
+  /* For Image-Container of first Container */
+  .introContainer>.imageContainer{
+    margin-left: 5rem;
+    margin-right: 50px;
+    width:350px;
+    min-width: 300px;
+    height: auto;
+    background-color: var(--darkBlue);
+    
+  }
+        /* Image */
+      .introContainer>.imageContainer>img{
+        width: 400px;
+        height: 450px;
+        position: relative;
+        object-fit: cover;
+        left: -25px;
+        top : -25px;
+      }
+
+  /* For Details-Container of first-Container */
+  .introContainer>.detailsContainer{
+    display: grid;
+    grid-template-rows: 0.1fr 0.3fr 0.2fr 0.1fr 0.3fr;
+    grid-template-areas: "language"
+    "`profession"
+    "description"
+    "aboutMe"
+    "cv";
+  }
+  
+      /* Language-div of details container */
+      .introContainer>.detailsContainer>.language{
+        color:var(--darkBlue);
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        padding:8px;
+      }
+      
+        .introContainer>.detailsContainer>.language>h5{
+          font-size: 16px;
+          font-weight: 600;
+          padding:inherit;
+        }
+
+      /* Adding flex to each div of details-Container */
+       .introContainer>.detailsContainer>.profession, .description ,.aboutMe, .cv{
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
+          padding:8px;
+      }
+
+      /* Language-div of details container */
+      .introContainer>.detailsContainer>.profession{
+        color:var(--orange);
+      }
+
+        .introContainer>.detailsContainer>.profession> h1{
+          font-weight: 600;
+          font-size: 42px;
+        }
+
+
+      /* Language-div of details container */
+      .introContainer>.detailsContainer>.description{
+        color:var(--primaryColor);
+
+        
+      }
+
+      /* Language-div of details container */
+      .introContainer>.detailsContainer>.aboutMe{
+        color:var(--primaryColor);
+
+        
+      }
+
+      /* Language-div of details container */
+      .introContainer>.detailsContainer>.cv{
+      }
+
+        .downloadCvButton{
+          background-color: var(--secondaryColor);
+          font-weight: bold;
+          border: none;
+          color: var(--white);
+          /* padding: 8px; */
+          border-radius: 10px;
+          opacity: 0.9;
+        }
+
+        .downloadCvButton:hover{
+          background-color: var(--secondaryColor);
+          transition-duration: 0.4s;
+          opacity: 1;
+        }
+
+
+
+
+@media(max-width : 650px) {
+
+  .introContainer{
+    padding:0px;
+    padding-top:40px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: "imageContainer"
+    "detailsContainer";
+  }
+
+    /* lowering the left-margin */
+    .introContainer>.imageContainer{
+        margin: auto;
+        width: auto;
+        max-width: 300px;
+        max-height: 300px;
+        border-radius: 50%;
+    }
+
+        .introContainer>.imageContainer>img{
+            width: 100%;
+            height: 400px;
+            max-width: 300px;
+            max-height: 300px;
+            /* position: relative; */
+            object-fit: cover;
+            /* left: -25px;
+            top : -25px; */
+            left: 0px;
+            top : 0px;
+            border-radius: 50%;
+        }
+
+
+      .introContainer>.detailsContainer{
+        display: grid;
+        grid-template-rows: 0.5fr 0.3fr 0.2fr 0.1fr 0.3fr;
+        grid-template-areas: "language"
+        "`profession"
+        "description"
+        "aboutMe"
+        "cv";
+      }
+
+      /* fonts for mobile */
+      .introContainer>.detailsContainer>.language>h5{
+        font-size: 13px;
+       
+      }
+
+
+      
+    }

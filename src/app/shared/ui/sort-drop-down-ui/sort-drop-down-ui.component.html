@@ -13,7 +13,8 @@
 
             <div class="sortDirection">
                 <label for="sortDirection">
-                    Direction
+                   <i class="fa-solid fa-arrow-down"></i>                  
+                   Order
                 </label>
                 <select name="sortDirection" id="sortDirection" (change)="setSortDirectionValue($event)" [(ngModel)]="sortRequest.direction">
                     <option [value]="Direction.Ascending"> Ascending </option>

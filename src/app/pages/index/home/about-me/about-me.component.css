@@ -1,0 +1,103 @@
+.aboutMeContainer{
+  background-color: var(--primaryColor);
+  padding:30px;
+  padding-top:40px;
+  margin-bottom: 10px;
+  
+  display: grid;
+  grid-template-columns: 1fr 0.6fr;
+  grid-template-areas: "detailsContainer imageContainer";
+}
+
+  .aboutMeContainer>.imageContainer{
+    /* margin-left: 100px; */
+    /* width: 400px; */
+    background-color: var(--orange);
+     margin-left: 4rem;
+    /* margin-right: 50px; */
+    width:350px;
+    min-width: 200px;
+    height: auto;
+  }
+
+      .aboutMeContainer>.imageContainer>img{
+        width: 350px;
+        min-width: 200px;
+        height: 500px;
+        position: relative;
+        object-fit: cover;
+        left: -25px;
+        top : -25px;
+      }
+
+  .aboutMeContainer>.detailsContainer{
+    display: grid;
+    grid-template-rows: 0.2fr 0.5fr;
+    grid-template-areas: "projectHeader"
+    "projectDescription";
+  }
+
+    .aboutMeContainer>.detailsContainer>.projectHeader{
+
+    }
+
+      .aboutMeContainer>.detailsContainer>.projectHeader>h2{
+        letter-spacing: 0.5px;
+        font-weight: bold;
+        color: var(--orange);
+      }
+    
+
+    .aboutMeContainer>.detailsContainer>.projectDescription{
+      color: var(--lightShade);
+    }
+
+
+
+
+    
+@media(max-width : 650px) {
+
+  .aboutMeContainer{
+    padding:10px;
+    padding-top:40px;
+    display: grid;
+    grid-template-rows: 1fr 0.6fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: "detailsContainer" "imageContainer";
+  }
+
+  .aboutMeContainer>.detailsContainer{
+    display: grid;
+    grid-template-rows: 0.3fr 0.5fr;
+    grid-template-areas: "projectHeader"
+    "projectDescription";
+  }
+  
+      
+.aboutMeContainer>.imageContainer{
+    width:auto;
+    margin: auto;
+    height: 350px;
+    border-radius: 4px;
+    border-top-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+  }
+
+  .aboutMeContainer>.imageContainer>img{
+    /* position: relative; */
+      /* height:400px; */
+      border-radius: 4px;
+      border-top-right-radius: 40px;
+      border-bottom-left-radius: 40px;
+      width: 300px;
+      height: 350px;
+      position: relative;
+      object-fit: cover;
+      left: -10px;
+      top : -10px;
+  }
+
+
+
+}

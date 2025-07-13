@@ -30,6 +30,7 @@
             [includeInsertButton]="true"            
             (deleteMultipleEventEmitter)="deleteMultipleClients($event)"
             (sortByEventEmitter)="sortClient($event)"
+            (clickedButtonEventEmitter)="executeClickedButton($event)"
         />
     }
 

@@ -9,27 +9,36 @@
  .insertSortByContainer{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background-color: var(--white);
   border-bottom: 2px solid var(--lightShade);
   padding: 1rem;
+  /* background-color: green; */
  }
 
 /* --------------------------------------INSERT Button----------------------------------------------------------- */
 .insertButtonContainer{
-  width: 75%;
-  /* background-color: blue; */
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  /* background-color: coral; */
+  width: 100%;
 }
 
 .sortContainer{
-  width: 25%;
-  /* background-color: coral; */
-  
+  /* background-color: green; */
+  display: block;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  /* max-width: 200px;
+  background-color: coral;
+  overflow: auto; */
+  width: fit-content;
+  /* min-width: 30%; */
 }
 
 
@@ -44,6 +53,7 @@
 
 .clickable-row:hover td {
   background-color: var(--lighterShade) !important;
+  transition: background 0.1s ease;
 }
   
 

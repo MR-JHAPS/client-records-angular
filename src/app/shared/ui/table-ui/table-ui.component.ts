@@ -1,29 +1,27 @@
 import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { MaterialModules } from '../../../material';
 import { CommonModule } from '@angular/common';
-import { BulkClientDeleteRequest } from '../../../core/models/request/bulkClientDeleteRequest';
 import { TableDataModel } from '../../../core/uiModels/tableDataModel';
-import { SearchUiComponent } from "../search-ui/search-ui.component";
-import { SearchRequest } from '../../../core/models/request/searchRequest';
-import { SearchDataModel } from '../../../core/uiModels/searchDataModel';
 import { FloatingButtonTabComponent } from "../floating-button-tab/floating-button-tab.component";
-import { CheckboxUiComponent } from "../checkbox-ui/checkbox-ui.component";
 import { DateConverterPipe } from '../../pipes/dateConverter/date-converter.pipe';
 import { AvatarImgComponent } from "../avatar-img/avatar-img.component";
 import { ButtonDataModel } from '../../../core/uiModels/buttonDataModel';
 import { ButtonsUiComponent } from "../buttons-ui/buttons-ui.component";
 import { LoaderUiComponent } from "../loader-ui/loader-ui.component";
-import { AccordionUiComponent } from "../accordion-ui/accordion-ui.component";
 import { FormsModule } from '@angular/forms';
 import { SortRequest, Direction} from '../../../core/models/request/sortRequest';
 import { SortDropDownUiComponent } from "../sort-drop-down-ui/sort-drop-down-ui.component";
+import { ButtonShape } from '../../../core/uiEnums/buttonShape';
+import { ButtonSize } from '../../../core/uiEnums/buttonSize';
+import { ButtonVariant } from '../../../core/uiEnums/buttonVariants';
 
 @Component({
   selector: 'app-table-ui',
   imports: [MaterialModules, CommonModule,
     FormsModule, FloatingButtonTabComponent,
     DateConverterPipe, AvatarImgComponent,
-    ButtonsUiComponent, LoaderUiComponent, SortDropDownUiComponent],
+    ButtonsUiComponent, LoaderUiComponent, SortDropDownUiComponent,
+    ],
   templateUrl: './table-ui.component.html',
   styleUrl: './table-ui.component.css'
 })
@@ -41,13 +39,18 @@ export class TableUIComponent {
   @Input() buttonListTable : ButtonDataModel[];
   @Input() includeInsertButton : boolean;
 
+  ButtonShape = ButtonShape;
+  ButtonSize = ButtonSize;
+  ButtonVariant = ButtonVariant;
+
+
   isSearchResultPresent : boolean = this.contents.length>0 ? false : true;
   sortDirection: string = "";
   
 
   @Output() deleteMultipleEventEmitter = new EventEmitter<number[]>();
   @Output() sortByEventEmitter = new EventEmitter<SortRequest>();
-  @Output() clickedButtonEventEmitter = new EventEmitter<{buttonAction:string, rowId:number |null}>();
+  @Output() clickedButtonEventEmitter = new EventEmitter<{buttonAction:string, rowId:number| null}>();
   
   /**
    * Emits the searchRequest obtained from <app-search-ui/>
@@ -128,6 +131,7 @@ export class TableUIComponent {
 /* ---------------------------------------------------------------------------------------- */
 
   navigateToUpdatePage(id: number){
+    
 
   }
 
