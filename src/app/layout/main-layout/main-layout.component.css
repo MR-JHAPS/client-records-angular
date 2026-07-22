@@ -1,5 +1,6 @@
 .mainLayoutContainer{
-  background-color: var(--lighterShade);
+  /* background-color: var(--lighterShade); */
+   background-color: rgb(237, 244, 255);
   /* min-height: 120svh; */
 }
 

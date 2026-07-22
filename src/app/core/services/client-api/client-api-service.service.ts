@@ -38,17 +38,17 @@ export class ClientApiServiceService {
 
   
   //Base GetAllClients:
-  getAllClients(pageNumber?: number, pageSize?: number, sortBy?:string, direction?: string) : Observable<ApiResponseModelPaginated<ClientResponse>>{
+  getAllClients(pageNumber?: number, pageSize?: number, sortByField?:string, sortDirection?: string) : Observable<ApiResponseModelPaginated<ClientResponse>>{
       const url = `${this.apiBaseUrl+this.clientEndpoint.getAllClients}`;
-      let size = pageSize ? pageSize : 10;
-      let number = pageNumber ? pageNumber : 0;
-      let sortingBy = sortBy ? sortBy : "";
-      let sortDirection = direction ? direction : "";
-      const params = new HttpParams()
-        .set("page" , number)
+      let size = pageSize ? pageSize : "10";
+      let page = pageNumber ? pageNumber : "0";
+      let sortBy = sortByField ? sortByField : "";
+      let direction = sortDirection ? sortDirection : "";
+      let params = new HttpParams()
         .set("size", size)
-        .set("sortBy", sortingBy)
-        .set("direction", sortDirection)
+        .set("page" , page)
+        .set("sortBy", sortBy)
+        .set("direction", direction)
       return this._httpClient.get<ApiResponseModelPaginated<ClientResponse>>(url, { params });  
   }
 

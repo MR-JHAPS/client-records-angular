@@ -6,7 +6,7 @@
   
   display: grid;
   grid-template-columns: 1fr 0.6fr;
-  grid-template-areas: "detailsContainer imageContainer";
+  grid-template-areas: "leftContainer imageContainer";
 }
 
   .aboutMeContainer>.imageContainer{
@@ -30,26 +30,39 @@
         top : -25px;
       }
 
-  .aboutMeContainer>.detailsContainer{
+  .aboutMeContainer>.leftContainer{
     display: grid;
     grid-template-rows: 0.2fr 0.5fr;
-    grid-template-areas: "projectHeader"
-    "projectDescription";
+    grid-template-areas: "headerContainer"
+    "descriptionContainer";
   }
 
-    .aboutMeContainer>.detailsContainer>.projectHeader{
+    .aboutMeContainer>.leftContainer>.headerContainer{
 
     }
 
-      .aboutMeContainer>.detailsContainer>.projectHeader>h2{
+      .aboutMeContainer>.leftContainer>.headerContainer>h2{
         letter-spacing: 0.5px;
         font-weight: bold;
         color: var(--orange);
       }
     
 
-    .aboutMeContainer>.detailsContainer>.projectDescription{
+    .aboutMeContainer>.leftContainer>.descriptionContainer{
       color: var(--lightShade);
+    }
+
+    .aboutMeContainer>.leftContainer>.descriptionContainer>p{
+      font-size: 14px;
+    }
+
+
+
+
+    .bold{
+        font-weight: bold;
+        font-size: 16px !important;
+        letter-spacing: 0.4px;
     }
 
 
@@ -64,14 +77,14 @@
     display: grid;
     grid-template-rows: 1fr 0.6fr;
     grid-template-columns: 1fr;
-    grid-template-areas: "detailsContainer" "imageContainer";
+    grid-template-areas: "leftContainer" "imageContainer";
   }
 
-  .aboutMeContainer>.detailsContainer{
+  .aboutMeContainer>.leftContainer{
     display: grid;
     grid-template-rows: 0.3fr 0.5fr;
-    grid-template-areas: "projectHeader"
-    "projectDescription";
+    grid-template-areas: "headerContainer"
+    "descriptionContainer";
   }
   
       

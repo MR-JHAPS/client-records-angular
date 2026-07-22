@@ -75,9 +75,10 @@ export class LoginComponent implements OnInit{
         error : (error: HttpErrorResponse) => {
           const customErrorResponse = error.error as ApiResponseModel<LoginFailureResponse>;
           console.log("error Type : " , error); //this works
-          this.remainingLoginAttempts = customErrorResponse.data.remainingAttempts;
-          console.log("Remaining Attempts : ", this.remainingLoginAttempts);
-          const status = error.status;
+          //2026-07-22 updated code
+          // this.remainingLoginAttempts = customErrorResponse.data.remainingAttempts;
+          // console.log("Remaining Attempts : ", this.remainingLoginAttempts);
+          const status = customErrorResponse.status;
           this.checkErrorStatus(status);
          
         },
@@ -97,7 +98,11 @@ closeRegistrationMessage(){
 
   checkErrorStatus(status : number) : any {
     if(status===401){
-      return this._toastrService.error(`Error! Wrong Credentials. ${this.remainingLoginAttempts} Attempts left.`);
+      if(this.remainingLoginAttempts===0){
+        return this._toastrService.error(`Error! Wrong Credentials.Your Account is Locked.`);
+      }else{
+        return this._toastrService.error(`Error! Wrong Credentials. ${this.remainingLoginAttempts} Attempts left.`);
+      }
     }else if(status===423){
       return this._toastrService.error("Error! Account locked");
     }else{
